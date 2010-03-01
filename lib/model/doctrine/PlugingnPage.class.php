@@ -17,5 +17,15 @@
  */
 abstract class PlugingnPage extends BasegnPage
 {
-
+  /**
+   * Undelete a soft deleted object.
+   *
+   * @param Doctrine_Connection $conn
+   * @return void
+   */
+  public function undelete(Doctrine_Connection $conn = null)
+  {
+    $this->setDeletedAt(null);
+    parent::save($conn);
+  }
 }

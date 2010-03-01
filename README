@@ -1,0 +1,19 @@
+= gnCorePlugin =
+
+The `gnCorePlugin` is the cetral and only required-by-all plugin for the Gumnut suite. It contains a set of common and required pieces, around which, all other Gumnut plugins are built.
+
+In summary these core features include:
+
+ * Search
+ * Helpers
+ * Models, and;
+ * A selection of modules.
+
+== Installation == 
+
+1. Download the `gnCorePlugin` into you plugins directory.
+
+2. Enable the plugin in your `ProjectConfiguration.class.php`
+
+... more details comming soon ...
+

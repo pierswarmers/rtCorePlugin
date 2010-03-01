@@ -1,0 +1,16 @@
+gnIndex:
+
+  columns:
+    keyword:                 string(100)
+    model_id:                integer
+    model:                   string(100)
+    lang:                    string(5)
+
+  indexes:
+    keyword:
+      fields:                [keyword]
+    model:
+      fields:                [model_id, model]
+
+  attributes:
+    export: [ all, constraints ] 

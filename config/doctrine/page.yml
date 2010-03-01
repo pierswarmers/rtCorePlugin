@@ -1,0 +1,33 @@
+gnPage:
+
+  actAs:
+    I18n:
+      fields: [title, content, description]
+      actAs:
+        Taggable:      {}
+        Timestampable: {}
+        Versionable:
+          fields:      [title, content, description]
+          auditLog:    true
+        Sluggable:
+          fields:      [title]
+          canUpdate:   true
+        GnSearchTemplate:
+          fields:      [title, content, description]
+    SoftDelete:        {}
+
+  columns:
+    title:            string(255)
+    content:          string
+    description:      string
+    profile:          string(255)
+    published:        boolean
+    published_from:   timestamp
+    published_to:     timestamp
+    comment_status:   { type: enum, default: open, values: ["open", "users", "closed"] }
+    comment_count:    { type: integer, default: 0 }
+    searchable:       { type: boolean, default: 1 }
+
+  options:
+    collate:   utf8_unicode_ci
+    charset:   utf8

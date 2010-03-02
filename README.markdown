@@ -58,39 +58,39 @@ If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePl
 
 3. You need a frontend application, if you don't already have one:
 
-    ./symfony generate:app frontend
+            ./symfony generate:app frontend
 
 4. Enable the required modules in your fontend `apps/frontend/config/app.yml`:
 
-    enabled_modules:
-      - gnSearch
-      - gnGuardAuth
-      - gnGuardForgotPassword
-      - gnGuardRegister
+            enabled_modules:
+              - gnSearch
+              - gnGuardAuth
+              - gnGuardForgotPassword
+              - gnGuardRegister
 
 5. While we're here, lets set up the email configuration in `factories.yml`:
 
-    all:
-      mailer:
-        class: sfMailer
-        param:
-          logging:           %SF_LOGGING_ENABLED%
-          charset:           %SF_CHARSET%
-          delivery_strategy: realtime
-          transport:
-            class: Swift_SmtpTransport
-            param:
-              host:       my.smtp.server.location.com
-              port:       485
-              encryption: ~
-              username:   no-reply@example.com.au
-              password:   123456
+            all:
+              mailer:
+                class: sfMailer
+                param:
+                  logging:           %SF_LOGGING_ENABLED%
+                  charset:           %SF_CHARSET%
+                  delivery_strategy: realtime
+                  transport:
+                    class: Swift_SmtpTransport
+                    param:
+                      host:       my.smtp.server.location.com
+                      port:       485
+                      encryption: ~
+                      username:   no-reply@example.com.au
+                      password:   123456
 
 6. You will now need to run a complete build on your project:
 
-      ./symfony doctrine:build --all
-      ./symfony cc
-      ./symfony plugin:publish-assets
+        ./symfony doctrine:build --all
+        ./symfony cc
+        ./symfony plugin:publish-assets
 
 7. You're done!
 

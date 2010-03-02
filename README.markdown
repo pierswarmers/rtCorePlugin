@@ -43,9 +43,8 @@ You'll also need to configure a database...
 
 If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePlugin), download them now.
 
-2. Enable the plugin in your `ProjectConfiguration.class.php`
+2. Enable the plugin in your `ProjectConfiguration.class.php`, The enabled plugins call will look something like this:
 
-    // The enabled plugins call will look something like this.
     $this->enablePlugins(
             'gnCorePlugin',
             'gnBlogPlugin',     // optional

@@ -46,15 +46,15 @@ If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePl
 2. Enable the plugin in your `ProjectConfiguration.class.php`, The enabled plugins call will look something like this:
 
     $this->enablePlugins(
-            'gnCorePlugin',
-            'gnBlogPlugin',     // optional
-            'gnSitePlugin',     // optional
-            'gnWikiPlugin',     // optional
-            'sfDoctrinePlugin',
-            'sfDoctrineActAsTaggablePlugin',
-            'sfDoctrineGuardPlugin',
-            'sfGeshiPlugin'
-            );
+      'gnCorePlugin',
+      'gnBlogPlugin',     // optional
+      'gnSitePlugin',     // optional
+      'gnWikiPlugin',     // optional
+      'sfDoctrinePlugin',
+      'sfDoctrineActAsTaggablePlugin',
+      'sfDoctrineGuardPlugin',
+      'sfGeshiPlugin'
+    );
 
 3. You need a frontend application, if you don't already have one:
 

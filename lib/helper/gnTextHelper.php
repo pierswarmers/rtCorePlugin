@@ -25,5 +25,5 @@
  */
 function markdown_to_html($markdown)
 {
-  return gnMarkdown::toHTML($markdown);
+  return gnMarkdownToolkit::toHTML($markdown);
 }

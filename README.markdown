@@ -35,30 +35,30 @@ You'll also need to configure a database...
 
 1. Download the `gnCorePlugin` into you plugins directory along with the followong plugins:
 
-    svn co http://svn.symfony-project.com/plugins/sfDoctrineActAsTaggablePlugin/trunk/ plugins/sfDoctrineActAsTaggablePlugin
-    svn co http://svn.symfony-project.com/plugins/sfThumbnailPlugin/trunk/ plugins/sfThumbnailPlugin
-    svn co http://svn.symfony-project.com/plugins/sfDoctrineGuardPlugin/trunk/ plugins/sfDoctrineGuardPlugin
-    svn co http://svn.symfony-project.com/plugins/sfFormExtraPlugin/branches/1.3/ plugins/sfFormExtraPlugin
-    svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk plugins/sfGeshiPlugin plugins/sfGeshiPlugin
+        svn co http://svn.symfony-project.com/plugins/sfDoctrineActAsTaggablePlugin/trunk/ plugins/sfDoctrineActAsTaggablePlugin
+        svn co http://svn.symfony-project.com/plugins/sfThumbnailPlugin/trunk/ plugins/sfThumbnailPlugin
+        svn co http://svn.symfony-project.com/plugins/sfDoctrineGuardPlugin/trunk/ plugins/sfDoctrineGuardPlugin
+        svn co http://svn.symfony-project.com/plugins/sfFormExtraPlugin/branches/1.3/ plugins/sfFormExtraPlugin
+        svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk plugins/sfGeshiPlugin plugins/sfGeshiPlugin
 
 If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePlugin), download them now.
 
 2. Enable the plugin in your `ProjectConfiguration.class.php`, The enabled plugins call will look something like this:
 
-    $this->enablePlugins(
-      'gnCorePlugin',
-      'gnBlogPlugin',     // optional
-      'gnSitePlugin',     // optional
-      'gnWikiPlugin',     // optional
-      'sfDoctrinePlugin',
-      'sfDoctrineActAsTaggablePlugin',
-      'sfDoctrineGuardPlugin',
-      'sfGeshiPlugin'
-    );
+        $this->enablePlugins(
+          'gnCorePlugin',
+          'gnBlogPlugin',     // optional
+          'gnSitePlugin',     // optional
+          'gnWikiPlugin',     // optional
+          'sfDoctrinePlugin',
+          'sfDoctrineActAsTaggablePlugin',
+          'sfDoctrineGuardPlugin',
+          'sfGeshiPlugin'
+        );
 
 3. You need a frontend application, if you don't already have one:
 
-            ./symfony generate:app frontend
+        ./symfony generate:app frontend
 
 4. Enable the required modules in your fontend `apps/frontend/config/app.yml`:
 

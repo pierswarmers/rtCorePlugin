@@ -25,8 +25,8 @@
           <?php if (isset($routes['gn_search'])): ?>
           <li class="right"><?php echo link_to(__('Search'), '@gn_search') ?></li>
           <?php endif; ?>
-          <?php if (isset($routes['gn_page_index'])): ?>
-              <li><?php echo link_to(__('Wiki'), 'gnPage/index') ?></li>
+          <?php if (isset($routes['gn_wiki_page_index'])): ?>
+              <li><?php echo link_to(__('Wiki'), 'gnWikiPage/index') ?></li>
           <?php endif; ?>
         </ul>
         <div id="gn-logo">

@@ -39,7 +39,7 @@ You'll also need to configure a database...
         svn co http://svn.symfony-project.com/plugins/sfThumbnailPlugin/trunk/ plugins/sfThumbnailPlugin
         svn co http://svn.symfony-project.com/plugins/sfDoctrineGuardPlugin/trunk/ plugins/sfDoctrineGuardPlugin
         svn co http://svn.symfony-project.com/plugins/sfFormExtraPlugin/branches/1.3/ plugins/sfFormExtraPlugin
-        svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk plugins/sfGeshiPlugin plugins/sfGeshiPlugin
+        svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk plugins/sfGeshiPlugin
 
     **Note:** If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePlugin), download them now.
 
@@ -60,13 +60,14 @@ You'll also need to configure a database...
 
         ./symfony generate:app frontend
 
-4. Enable the required modules in your fontend `apps/frontend/config/app.yml`:
+4. Enable the required modules in your fontend `apps/frontend/config/settings.yml`:
 
             enabled_modules:
               - gnSearch
               - gnGuardAuth
               - gnGuardForgotPassword
               - gnGuardRegister
+              - gnWikiPage
 
 5. While we're here, lets set up the email configuration in `factories.yml`:
 
@@ -86,13 +87,32 @@ You'll also need to configure a database...
                       username:   no-reply@example.com.au
                       password:   123456
 
-6. You will now need to run a complete build on your project:
+6. Symfony will now need to be told how user authentication should be handled.
+
+    In the `apps/frontend/lib/myUser.class.php`, change the exteded class:
+
+        <?php
+
+        class myUser extends sfGuardSecurityUser
+        {
+        }
+
+    Now we need to configure the user management modules in `apps/frontend/config/settings.yml`:
+
+        all:
+          .settings:
+            login_module:           gnGuardAuth
+            login_action:           signin
+            secure_module:          gnGuardAuth
+            secure_action:          secure
+
+7. You will now need to run a complete build on your project:
 
         ./symfony doctrine:build --all
         ./symfony cc
         ./symfony plugin:publish-assets
 
-7. You're done!
+8. You're done!
 
 ## Wrap-up
 

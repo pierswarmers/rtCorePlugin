@@ -52,6 +52,7 @@ You'll also need to configure a database...
           'gnWikiPlugin',     // optional
           'sfDoctrinePlugin',
           'sfDoctrineActAsTaggablePlugin',
+          'sfFormExtraPlugin',
           'sfDoctrineGuardPlugin',
           'sfGeshiPlugin'
         );

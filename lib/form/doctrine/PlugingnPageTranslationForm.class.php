@@ -17,4 +17,12 @@
  */
 abstract class PlugingnPageTranslationForm extends BasegnPageTranslationForm
 {
+  public function setup()
+  {
+    parent::setup();
+    unset($this['slug'], $this['version'], $this['created_at'], $this['updated_at']);
+    $this->setWidget('title',      new sfWidgetFormInputText(array(), array('class' => 'title')));
+    $this->setValidator('title',   new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'please enter a descriptive title.')));
+    $this->setValidator('content', new sfValidatorString(array('required' => true), array('required' => 'please enter some content.')));
+  }
 }

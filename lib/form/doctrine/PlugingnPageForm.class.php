@@ -17,4 +17,11 @@
  */
 abstract class PlugingnPageForm extends BasegnPageForm
 {
+  public function setup()
+  {
+    parent::setup();
+    unset($this['deleted_at']);
+    //$this->enableCSRFProtection();
+    $this->embedI18n(array('en'));
+  }
 }

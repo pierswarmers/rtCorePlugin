@@ -41,7 +41,7 @@ You'll also need to configure a database...
         svn co http://svn.symfony-project.com/plugins/sfFormExtraPlugin/branches/1.3/ plugins/sfFormExtraPlugin
         svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk plugins/sfGeshiPlugin plugins/sfGeshiPlugin
 
-If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePlugin), download them now.
+    **Note:** If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePlugin), download them now.
 
 2. Enable the plugin in your `ProjectConfiguration.class.php`, The enabled plugins call will look something like this:
 

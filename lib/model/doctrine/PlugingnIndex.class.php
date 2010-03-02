@@ -65,4 +65,18 @@ abstract class PlugingnIndex extends BasegnIndex
   {
     $this->_object = $object;
   }
+
+  /**
+   * Return the model value with translation suffix removed.
+   *
+   * @return string
+   */
+  public function getCleanModel()
+  {
+    if(substr($this['model'], -11) === 'Translation')
+    {
+      return substr($this['model'], 0, -11);
+    }
+    return $this['model'];
+  }
 }

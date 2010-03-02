@@ -88,11 +88,9 @@ If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePl
 
 6. You will now need to run a complete build on your project:
 
-    ./symfony doctrine:build --all
-
-    ./symfony doctrine:build --all
-    ./symfony cc
-    ./symfony plugin:publish-assets 
+      ./symfony doctrine:build --all
+      ./symfony cc
+      ./symfony plugin:publish-assets
 
 7. You're done!
 

@@ -13,8 +13,12 @@
 <?php if(isset($pager)): ?>
 <div class="gn-search-results">
   <p><?php echo count($pager) . ' ' . __('results found.') ?></p>
-  <?php foreach($pager->getResults() as $gn_index): ?>
-  <p><?php echo $gn_index->getModel() ?> <?php echo $gn_index->getModelId() ?> -- <strong><?php echo $gn_index->getObject()->getTitle() ?></strong></p>
-  <?php endforeach; ?>
+  <?php if(count($pager) > 0): ?>
+    <ul>
+    <?php foreach($pager->getResults() as $gn_index): ?>
+      <li><?php echo link_to($gn_index->getObject()->getTitle(), Doctrine_Inflector::tableize($gn_index->getCleanModel()).'_show', $gn_index->getObject()) ?></li>
+    <?php endforeach; ?>
+    </ul>
+  <?php endif; ?>
 </div>
 <?php endif; ?>

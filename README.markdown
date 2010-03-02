@@ -90,7 +90,7 @@ If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePl
 
     ./symfony doctrine:build --all
     ./symfony cc
-    ./symfony plugin:publish-assets
+    ./symfony plugin:publish-assets 
 
 7. You're done!
 

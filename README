@@ -1,4 +1,4 @@
-= gnCorePlugin =
+# gnCorePlugin
 
 The `gnCorePlugin` is the cetral and only required-by-all plugin for the Gumnut suite. It contains a set of common and required pieces, around which, all other Gumnut plugins are built.
 
@@ -9,7 +9,7 @@ In summary these core features include:
  * Models, and;
  * A selection of modules.
 
-== Pre-Installation ==
+## Pre-Installation
 
 You'll need to have an active Symfony 1.4 project before getting started with the installation.
 
@@ -31,7 +31,7 @@ You'll also need to configure a database...
           username: root
           password: myDbPassword
 
-== Installation == 
+## Installation
 
 1. Download the `gnCorePlugin` into you plugins directory along with the followong plugins:
 
@@ -63,7 +63,6 @@ If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePl
 
 4. Enable the required modules in your fontend `apps/frontend/config/app.yml`:
 
-    # Enable the plugin modules
     enabled_modules:
       - gnSearch
       - gnGuardAuth
@@ -96,7 +95,7 @@ If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePl
 
 7. You're done!
 
-== Wrap-up ==
+## Wrap-up
 
 You'll probably want to create a user now. Its simple to do from the cli using the following task:
 

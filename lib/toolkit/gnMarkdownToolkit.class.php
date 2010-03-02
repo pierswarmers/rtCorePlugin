@@ -90,7 +90,7 @@ class gnMarkdownToolkit extends MarkdownExtra_Parser
     $html = preg_replace('#<pre><code>http\://#s', '<pre class="url"><code>http://', $html);
 
     // syntax highlighting
-    $html = preg_replace_callback('#<pre><code>(.+?)</code></pre>#s', array('gnMarkdown', 'geshiHighlighter'), $html);
+    $html = preg_replace_callback('#<pre><code>(.+?)</code></pre>#s', array('gnMarkdownToolkit', 'geshiHighlighter'), $html);
 
     return $html;
   }

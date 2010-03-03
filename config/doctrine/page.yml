@@ -4,6 +4,7 @@ gnPage:
     Sluggable:
       fields:      [title]
       canUpdate:   true
+    gnAttachableTemplate: ~
     I18n:
       fields: [title, content, description]
       actAs:
@@ -12,7 +13,7 @@ gnPage:
         Versionable:
           fields:      [title, content, description]
           auditLog:    true
-        GnSearchTemplate:
+        gnSearchTemplate:
           fields:      [title, content, description]
     SoftDelete:        {}
 

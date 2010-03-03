@@ -20,7 +20,9 @@ abstract class PlugingnPageForm extends BasegnPageForm
   public function setup()
   {
     parent::setup();
-    unset($this['deleted_at']);
+    unset($this['deleted_at'], $this['published_from'], $this['published_to'], $this['comment_count']);
+    $this->widgetSchema['searchable']->setLabel('Make this page available to search engine robots');
+    $this->widgetSchema['slug']->setLabel('URL Slug');
     //$this->enableCSRFProtection();
     $this->embedI18n(array('en'));
   }

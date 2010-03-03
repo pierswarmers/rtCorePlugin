@@ -1,6 +1,9 @@
 gnPage:
 
   actAs:
+    Sluggable:
+      fields:      [title]
+      canUpdate:   true
     I18n:
       fields: [title, content, description]
       actAs:
@@ -9,9 +12,6 @@ gnPage:
         Versionable:
           fields:      [title, content, description]
           auditLog:    true
-        Sluggable:
-          fields:      [title]
-          canUpdate:   true
         GnSearchTemplate:
           fields:      [title, content, description]
     SoftDelete:        {}

@@ -18,9 +18,4 @@ require_once(dirname(__FILE__).'/../lib/BasegnSearchActions.class.php');
  */
 class gnSearchActions extends BasegnSearchActions
 {
-  public function preExecute()
-  {
-    parent::postExecute();
-    sfConfig::set('app_gn_node_title', 'Search');
-  }
 }

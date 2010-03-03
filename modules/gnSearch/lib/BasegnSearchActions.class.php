@@ -16,6 +16,12 @@
  */
 class BasegnSearchActions extends sfActions
 {
+  public function preExecute()
+  {
+    parent::postExecute();
+    sfConfig::set('app_gn_node_title', 'Search');
+  }
+  
   public function executeIndex(sfWebRequest $request)
   {
     $this->setPage($request->getParameter('page', 1));

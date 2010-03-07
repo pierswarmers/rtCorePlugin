@@ -2,23 +2,24 @@ gnAsset:
   
   actAs:
     I18n:
-      fields:         [title, description]
-      length:         6
-    Timestampable:    ~
+      fields:          [title, description]
+      length:          6
+    Timestampable:     ~
         
   columns:
-    model_id:         integer
-    model:            string(100)
-    title:            string(100)
-    description:      string
-    author:           string(255)
-    copyright:        string(255)
-    protected:        { type: boolean, default: true }
-    filename:         { type: string(255), notnull: true }
-    mime_type:        { type: string(50), notnull: true }
-    position:         integer(4)
-    filesize:         integer
+    model_id:          integer
+    model:             string(100)
+    title:             string(100)
+    description:       string
+    author:            string(255)
+    copyright:         string(255)
+    protected:         { type: boolean, default: false }
+    filename:          { type: string(255), notnull: true }
+    original_filename: { type: string(255), notnull: true }
+    mime_type:         { type: string(50), notnull: true }
+    position:          integer(4)
+    filesize:          integer
     type:
-      type:           enum
-      values:         [image, video, audio, document, application, link, model, custom, other]
-      default:        other
+      type:            enum
+      values:          [image, video, audio, document, application, link, model, custom, other]
+      default:         other

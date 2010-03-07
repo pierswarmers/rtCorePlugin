@@ -39,4 +39,12 @@ class gnAttachableTemplate extends Doctrine_Template
   {
     $this->addListener(new gnAttachableListener($this->_options));
   }
+
+  /**
+   * Fetch an collection of assets attached to this object.
+   */
+  public function getAssets()
+  {
+    return Doctrine::getTable('gnAsset')->getAssetsForObject(get_class($this->getInvoker()), $this->getInvoker()->getId());
+  }
 }

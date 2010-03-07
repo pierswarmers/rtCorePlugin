@@ -28,7 +28,6 @@ abstract class PlugingnPageTranslationForm extends BasegnPageTranslationForm
     $this->setValidator('title',   new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'please enter a descriptive title.')));
     $this->setValidator('content', new sfValidatorString(array('required' => true), array('required' => 'please enter some content.')));
     $this->setWidget('description',      new sfWidgetFormInputText(array(), array()));
-
     $this->widgetSchema->setHelp('description', 'As short description describing this page.');
   }
 }

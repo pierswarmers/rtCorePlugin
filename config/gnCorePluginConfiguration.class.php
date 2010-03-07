@@ -81,7 +81,10 @@ class gnCorePluginConfiguration extends sfPluginConfiguration
     $routing->prependRoute('sf_guard_signin', new sfRoute('/user/login', array('module' => 'gnGuardAuth', 'action' => 'signin')));
     $routing->prependRoute('sf_guard_signout', new sfRoute('/user/logout', array('module' => 'gnGuardAuth', 'action' => 'signout')));
     $routing->prependRoute('gn_search', new sfRoute('/search', array('module' => 'gnSearch', 'action' => 'index')));
-
+    $routing->prependRoute('gn_asset_upload', new sfRoute('/asset/upload.:sf_format', array('module' => 'gnAsset', 'action' => 'upload')));
+    $routing->prependRoute('gn_asset_request', new sfRoute('/uploads/private/:filename', array('module' => 'gnAsset', 'action' => 'delivery')));
+    $routing->prependRoute('gn_asset_reorder', new sfRoute('/asset/reorder.:sf_format', array('module' => 'gnAsset', 'action' => 'reorder')));
+    $routing->prependRoute('gn_asset_delete', new sfRoute('/asset/delete/:id.:sf_format', array('module' => 'gnAsset', 'action' => 'reorder')));
   }
 }
 ?>

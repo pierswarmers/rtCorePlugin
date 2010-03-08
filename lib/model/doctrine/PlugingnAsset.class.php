@@ -12,5 +12,14 @@
  */
 abstract class PlugingnAsset extends BasegnAsset
 {
+  public function isImage()
+  {
+    $ext = gnAssetToolkit::getExtension($this->getOriginalFilename());
 
+    if(in_array($ext, sfConfig::get('app_gn_web_image_extensions', array('gif','jpg','png'))))
+    {
+      return true;
+    }
+    return false;
+  }
 }

@@ -45,6 +45,6 @@ class gnAttachableTemplate extends Doctrine_Template
    */
   public function getAssets()
   {
-    return Doctrine::getTable('gnAsset')->getAssetsForObject(get_class($this->getInvoker()), $this->getInvoker()->getId());
+    return Doctrine::getTable('gnAsset')->getAssetsForObject($this->getInvoker());
   }
 }

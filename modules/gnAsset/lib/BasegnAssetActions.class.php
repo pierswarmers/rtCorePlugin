@@ -95,7 +95,8 @@ class BasegnAssetActions extends sfActions
   public function executeUpload(sfWebRequest $request)
   {
     $form = new gnAssetUploadForm();
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+    $request_params = $request->getParameter($form->getName());
+    $form->bind($request_params, $request->getFiles($form->getName()));
     $json_values = array();
     
     if ($form->isValid())
@@ -106,6 +107,16 @@ class BasegnAssetActions extends sfActions
         $form->getObject()->setOriginalFilename(gnAssetToolkit::cleanFilename($file['filename']['name']));
         $form->getObject()->setFilesize($file['filename']['size']);
         $form->getObject()->setMimeType($file['filename']['type']);
+
+        $assets = Doctrine::getTable('gnAsset')->getAssetsForModelAndId($request_params['model'], $request_params['model_id']);
+
+        $position = 1;
+        if($assets->count() > 0)
+        {
+          $position = $assets->getLast()->getPosition() + 1;
+        }
+        $form->getObject()->setPosition($position);
+
         $form->save();
         $json_values['status'] = 'success';
         $json_values['message'] = 'File uploaded!';

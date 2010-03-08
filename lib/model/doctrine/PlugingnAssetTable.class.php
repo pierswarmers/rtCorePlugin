@@ -8,7 +8,8 @@ class PlugingnAssetTable extends Doctrine_Table
     $q = $this->getQuery($q);
 
     $q->andWhere('a.model = ?', $model)
-      ->andWhere('a.model_id = ?', $model_id);
+      ->andWhere('a.model_id = ?', $model_id)
+      ->orderBy('a.position, a.id');
 
     return $q->execute();
   }

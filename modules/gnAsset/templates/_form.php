@@ -23,6 +23,7 @@
 $(document).ready(function() {
 
   var addDeleteAction = function(item) {
+    $(item).parent().fadeTo('fast', 0.5);
     $.ajax({
       dataType: 'json',
       data: {

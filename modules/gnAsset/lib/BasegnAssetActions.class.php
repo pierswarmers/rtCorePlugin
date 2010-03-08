@@ -50,7 +50,7 @@ class BasegnAssetActions extends sfActions
   {
     $asset = Doctrine::getTable('gnAsset')->findOneById($request->getParameter('id'));
     $asset->delete();
-    $json_values = array('status' => 'success');
+    $json_values = array('status' => 'success', 'id' => $request->getParameter('id'));
     return $this->returnJSONResponse($json_values, $request);
   }
 

@@ -141,8 +141,10 @@ dl.gn-meta-data dt, dl.gn-meta-data dd{display:inline;padding:0;margin:0 0.5em 0
 .gn-form-row {margin-bottom:0.5em;}
 
 
-.gn-core-upload-panel {background:#efefef;padding:5px;color:#555;list-style:none;margin-bottom:0.5em;}
+.gn-core-upload-panel {background:#efefef;padding:5px 5px 0;color:#555;list-style:none;margin-bottom:0.5em;}
 .gn-core-upload-panel form {display:none;}
-.gn-core-upload-item {background:#ccc;float:left;margin-right:5px;height:50px;vertical-align:middle;text-align:center;}
+.gn-core-upload-item {position:relative;background:#ccc;float:left;margin-right:5px;margin-bottom:5px;height:50px;vertical-align:middle;text-align:center;}
 .gn-core-upload-item img {height:50px;}
+.gn-core-upload-item .delete {width:20px;position:absolute;top:0;right:0;z-index:1000;cursor:pointer;color:#fff;background:rgb(0,0,0);background:rgba(0,0,0,.5);}
+
 

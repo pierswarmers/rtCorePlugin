@@ -7,7 +7,7 @@
 <div class="gn-form-row">
   <ul class="gn-core-upload-panel clearfix" id="gnCoreUploadPanel<?php echo $panel_suffix ?>">
     <?php foreach($object->getAssets() as $asset): ?>
-    <li id="<?php echo $asset->getId() ?>" class="gn-core-upload-item"><img src="<?php echo gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50)) ?>" /></li>
+    <li id="<?php echo $asset->getId() ?>" class="gn-core-upload-item"><span class="delete">&times;</span><img src="<?php echo gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50)) ?>" /></li>
     <?php endforeach; ?>
   </ul>
   <p>
@@ -21,7 +21,28 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+  var addDeleteAction = function(item) {
+    $.ajax({
+      dataType: 'json',
+      data: {
+        id : $(item).parent().attr('id')
+      },
+      url: '<?php echo url_for('@gn_asset_delete?sf_format=json') ?>',
+      success: function(data) {
+        if(data.status === 'success')
+        {
+          $('#'+data.id).hide();
+        }
+      }
+    });
+    return false;
+  }
+
 	$(function() {
+    $('#gnCoreUploadPanel<?php echo $panel_suffix ?> .delete').click(function() {
+      addDeleteAction(this);
+    });
 		$("#gnCoreUploadPanel<?php echo $panel_suffix ?>").sortable(
       {
         opacity      : 0.7,
@@ -32,9 +53,7 @@ $(document).ready(function() {
               order : $('#gnCoreUploadPanel<?php echo $panel_suffix ?>').sortable('toArray')
             },
             url: '<?php echo url_for('@gn_asset_reorder?sf_format=json') ?>',
-            success: function(data) {
-              //alert(data.say);
-            }
+            success: function(data) {}
           });
         }
       }
@@ -62,7 +81,10 @@ $(document).ready(function() {
       {
         $('<li id="'+ response.asset_id +'" class="gn-core-upload-item"></li>').appendTo(
           '#gnCoreUploadPanel<?php echo $panel_suffix ?>'
-        ).html('<img src="'+ response.location +'" />');
+        ).html('<span class="delete">&times;</span><img src="'+ response.location +'" />');
+        $('li#'+ response.asset_id +' span.delete').click(function() {
+          addDeleteAction(this);
+        });
       }
     }
   });

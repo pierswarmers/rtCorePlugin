@@ -45,6 +45,31 @@ class gnAttachableTemplate extends Doctrine_Template
    */
   public function getAssets()
   {
-    return Doctrine::getTable('gnAsset')->getAssetsForObject($this->getInvoker());
+    $holder = $this->getAssetsHolder();
+
+    if (!isset($holder) || !$holder->hasNamespace('saved_assets'))
+    {
+      $assets = Doctrine::getTable('gnAsset')->getAssetsForObject($this->getInvoker());
+
+      $holder->set('saved_assets', $assets);
+    }
+    
+    return $holder->get('saved_assets');
+  }
+
+  /**
+   * Get and/or set the parameter holder.
+   * 
+   * @return sfNamespacedParameterHolder
+   */
+  public function getAssetsHolder()
+  {
+    if ((!isset($object->_tags)) || ($object->_tags == null))
+    {
+      $object = $this->getInvoker();
+      $parameter_holder = new sfNamespacedParameterHolder;
+      $object->mapValue('_assets', new $parameter_holder());
+    }
+    return $object->_assets;
   }
 }

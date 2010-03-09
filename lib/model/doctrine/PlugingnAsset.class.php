@@ -12,6 +12,11 @@
  */
 abstract class PlugingnAsset extends BasegnAsset
 {
+  /**
+   * Is this asset an web image.
+   *
+   * @return boolean
+   */
   public function isImage()
   {
     $ext = gnAssetToolkit::getExtension($this->getOriginalFilename());
@@ -21,5 +26,38 @@ abstract class PlugingnAsset extends BasegnAsset
       return true;
     }
     return false;
+  }
+
+  public function getSystemPath()
+  {
+    return sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . $this->getFilename();
+  }
+
+  public function getWebPath()
+  {
+    $full_path = sfConfig::get('sf_upload_dir') . $this->getSubContainer() . DIRECTORY_SEPARATOR . $this->getFilename();
+
+    return str_replace(sfConfig::get('sf_web_dir'), '', $full_path);
+  }
+
+  public function getSubContainer()
+  {
+    $sub_container = '';
+
+    if($this->getProtected())
+    {
+      $sub_container = sfConfig::get('app_gn_asset_protected_dir', 'protected');
+    }
+    else
+    {
+      $sub_container = sfConfig::get('app_gn_asset_public_dir', '');
+    }
+
+    if($sub_container === '' || is_null($sub_container))
+    {
+      return '';
+    }
+
+    return DIRECTORY_SEPARATOR . $sub_container;
   }
 }

@@ -1,5 +1,5 @@
 /* Scrollable */
-.scrollable {position:relative;overflow:hidden;width:545px;height:120px;margin-bottom:1.5em;border:1px solid #ccc;background:url(images/h300.png) repeat-x;}
+.scrollable {position:relative;overflow:hidden;width:545px;height:120px;border:1px solid #ccc;background:url(images/h300.png) repeat-x;}
 .scrollable .items {width:20000em;position:absolute;}
 .scrollable img {margin:20px 5px 20px 21px;background-color:#fff;padding:2px;border:1px solid #ccc;cursor:pointer;width:100px;height:75px;-moz-border-radius:4px;-webkit-border-radius:4px;}
 .scrollable {float:left;}

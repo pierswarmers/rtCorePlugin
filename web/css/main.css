@@ -1,5 +1,6 @@
 
 /* general */
+.gn-inline-panel {margin-bottom:1.5em;}
 
 /* structure */
 #gn-page{background:url(../images/border.png) repeat-y 630px 0;padding:20px 0;}

@@ -100,7 +100,7 @@ function markup_galleries_in_text($matches)
     use_stylesheet('/gnCorePlugin/vendor/jquery/css/tools/jquery.tools.css');
     $rand = rand();
 
-    $string .= '<div class="clearfix">'."\n".'<a class="prevPage browse left"></a>' . "\n";
+    $string .= '<div class="clearfix gn-inline-panel">'."\n".'<a class="prevPage browse left"></a>' . "\n";
     $string .= '<div id="gnGalleryScrollable'.$rand.'" class="scrollable">'."\n".'<div id="gnGalleryScrollableTriggers'.$rand.'" class="items">' . "\n";
     foreach($assets as $asset)
     {
@@ -112,6 +112,7 @@ function markup_galleries_in_text($matches)
     $string .= "</div>\n";
     $string .= "</div>\n";
     $string .= '<a class="nextPage browse right"></a>'."\n";
+    $string .= "<div class=\"navi\"></div>\n";
     $string .= "</div>\n";
 
     $string .= <<<EOS
@@ -124,7 +125,7 @@ function markup_galleries_in_text($matches)
 
 <script type="text/javascript">
   $(function() {
-      $("#gnGalleryScrollable$rand").scrollable({size:4})
+      $("#gnGalleryScrollable$rand").scrollable({size:4, keyboard:false, }).mousewheel();
 
   $("#gnGalleryScrollableTriggers$rand a").overlay({
       target: '#gnGallery$rand',

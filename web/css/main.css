@@ -76,6 +76,10 @@ h3{font-size: 1.3em;}
 h1,legend{color:#858585;}
 a,h3{color:#D62006;}
 a, a:hover {outline:none;-moz-outline-style:none;}
+table, thead th, td {border:1px solid #ccc;}
+thead th, td {border-top:0; border-left:0;}
+table{border-bottom:0; border-right:0;}
+thead th {background:#ddd;color:#fff;}
 
 p img.right, p img.left {margin-top:0.5em;}
 .deleted{text-decoration:line-through;}

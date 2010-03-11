@@ -80,7 +80,7 @@ table, thead th, td {border:1px solid #ccc;}
 thead th, td {border-top:0; border-left:0;}
 table{border-bottom:0; border-right:0;}
 thead th {background:#ddd;color:#fff;}
-
+textarea{font-family:'andale mono', 'lucida console', monospace;font-size: 1.1em;}
 p img.right, p img.left {margin-top:0.5em;}
 .deleted{text-decoration:line-through;}
 
@@ -93,11 +93,13 @@ p img.right, p img.left {margin-top:0.5em;}
 
 .gn-core-upload-panel {background:#efefef;padding:5px 5px 0;color:#555;list-style:none;margin-bottom:0.5em;}
 .gn-core-upload-panel form {display:none;}
-.gn-core-upload-item {white-space:nowrap;position:relative;background:#ccc;float:left;margin-right:5px;margin-bottom:5px;height:50px;vertical-align:middle;}
+.gn-core-upload-item {white-space:nowrap;position:relative;background:#ccc;margin-right:5px;margin-bottom:5px;height:50px;vertical-align:middle;}
 .gn-core-upload-item.thumbnail img {height:50px;}
 .gn-core-upload-item.other {width:205px;line-height:50px; padding-left:10px;overflow:hidden;}
 .gn-core-upload-item.other img {position:relative; top:2px;}
-.gn-core-upload-item .delete {text-align:center;width:20px;height:20px;line-height:20px;position:absolute;top:0;right:0;z-index:1000;cursor:pointer;color:#fff;background:rgb(0,0,0);background:rgba(0,0,0,.5);}
+.gn-core-upload-item .delete, .gn-core-upload-item .insert {text-align:center;width:20px;height:20px;line-height:20px;position:absolute;right:0;z-index:1000;cursor:pointer;color:#fff;background:rgb(0,0,0);background:rgba(0,0,0,.5);}
+.gn-core-upload-item .delete {top:0;}
+.gn-core-upload-item .insert {bottom:0;background-color:rgb(0,0,0);background-color:rgba(0,0,0,.5); background-image: url(../images/link.png); background-position: 50% 50%; background-repeat: no-repeat;}
 
 /* profiles */
 

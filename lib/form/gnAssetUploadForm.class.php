@@ -33,10 +33,20 @@ class gnAssetUploadForm extends PlugingnAssetForm
       'model'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'filename'   => new sfValidatorFile(array(
       'path' => sfConfig::get('sf_upload_dir'),
-      'mime_types' => 'web_images'
+      'mime_types' => $this->getAllowedMimeTypes()
     )),
     ));
 
     $this->widgetSchema->setNameFormat('gn_asset[%s]');
+  }
+
+  /**
+   * Return a list of allowed mime-types allowed for upload.
+   *
+   * @return array
+   */
+  public function getAllowedMimeTypes()
+  {
+    return sfConfig::get('app_gn_asset_allowed_mime_types', gnAssetToolkit::getCommonMimeTypes());
   }
 }

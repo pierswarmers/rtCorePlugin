@@ -41,6 +41,59 @@ class gnAttachableTemplate extends Doctrine_Template
   }
 
   /**
+   * Return the first image found in the asset list.
+   *
+   * @return Doctrine_Record
+   */
+  public function getFirstImage()
+  {
+    foreach($this->getAssets() as $asset)
+    {
+      if($asset->isImage())
+      {
+        return $asset;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Return the images attached.
+   *
+   * @return Doctrine_Record
+   */
+  public function getImages()
+  {
+    $images = array();
+
+    foreach($this->getAssets() as $asset)
+    {
+      if($asset->isImage())
+      {
+        return $asset;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Return an asset for a given name.
+   *
+   * @return Doctrine_Record
+   */
+  public function getAssetByName($string)
+  {
+    foreach($this->getAssets() as $asset)
+    {
+      if($asset->getOriginalFilename() === trim($string))
+      {
+        return $asset;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Fetch an collection of assets attached to this object.
    */
   public function getAssets()

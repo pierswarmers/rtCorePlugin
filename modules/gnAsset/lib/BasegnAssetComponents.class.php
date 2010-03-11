@@ -20,4 +20,9 @@ class BasegnAssetComponents extends sfComponents
   {
     $this->form = new gnAssetUploadForm();
   }
+  
+  public function executePrimary()
+  {
+    
+  }
 }

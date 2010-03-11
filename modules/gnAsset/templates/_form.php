@@ -2,20 +2,27 @@
 <?php use_dynamic_javascript('/gnCorePlugin/vendor/ajaxupload/ajaxupload.js')?>
 <?php $panel_suffix = isset($panel_suffix) ? $panel_suffix : rand() ?>
 
-<h3><?php echo __('Asset Collection') ?></h3>
-
-<div class="gn-form-row">
-  <ul class="gn-core-upload-panel clearfix" id="gnCoreUploadPanel<?php echo $panel_suffix ?>">
-    <?php foreach($object->getAssets() as $asset): ?>
-    <li id="<?php echo $asset->getId() ?>" class="gn-core-upload-item"><span class="delete">&times;</span><img src="<?php echo gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50)) ?>" /></li>
-    <?php endforeach; ?>
-  </ul>
-  <p>
-    <button class="button" id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload a file') ?></button>
-    <span id="gnCoreUploadPanelMessage<?php echo $panel_suffix ?>"></span>
-  </p>
-</div>
-
+<fieldset>
+  <legend><?php echo __('Asset Collection') ?></legend>
+  <p><?php echo __('Files to be linked to this page can be added here. Once uploaded you can drag them to change the order they appear.') ?></p>
+    <ul class="gn-core-upload-panel clearfix" id="gnCoreUploadPanel<?php echo $panel_suffix ?>">
+      <?php foreach($object->getAssets() as $asset): ?>
+      <li id="<?php echo $asset->getId() ?>" class="gn-core-upload-item <?php echo ($asset->isImage()) ? 'thumbnail' : 'other' ?>">
+        <span class="delete">&times;</span>
+        <?php if($asset->isImage()): ?>
+          <img src="<?php echo gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50)) ?>" />
+        <?php else: ?>
+          <img src="<?php echo '/gnCorePlugin/images/mime-types/' . gnAssetToolkit::translateExtensionToBase($asset->getOriginalFilename()) . '.png' ?>" />
+          <?php echo $asset->getOriginalFilename(); ?>
+        <?php endif; ?>
+      </li>
+      <?php endforeach; ?>
+    </ul>
+    <p>
+      <button class="button" id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload a file') ?></button>
+      <span id="gnCoreUploadPanelMessage<?php echo $panel_suffix ?>"></span>
+    </p>
+</fieldset>
 <?php echo $form['_csrf_token']->render(); ?>
 <?php echo $form['model']->render(); ?>
 
@@ -80,9 +87,14 @@ $(document).ready(function() {
       message.addClass(response.status).text(response.message).fadeOut(4000);
       if(response.status === 'success')
       {
-        $('<li id="'+ response.asset_id +'" class="gn-core-upload-item"></li>').appendTo(
+        var name = '';
+        if(response.type === 'other')
+        {
+          name = ' ' + file;
+        }
+        $('<li id="'+ response.asset_id +'" class="gn-core-upload-item '+ response.type +'"></li>').appendTo(
           '#gnCoreUploadPanel<?php echo $panel_suffix ?>'
-        ).html('<span class="delete">&times;</span><img src="'+ response.location +'" />');
+        ).html('<span class="delete">&times;</span><img src="'+ response.location +'" />' + name);
         $('li#'+ response.asset_id +' span.delete').click(function() {
           addDeleteAction(this);
         });

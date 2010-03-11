@@ -121,8 +121,18 @@ class BasegnAssetActions extends sfActions
         $json_values['status'] = 'success';
         $json_values['message'] = 'File uploaded!';
         $json_values['asset_id'] = $form->getObject()->getId();
-        $this->logMessage($form->getObject()->getSystemPath() . ' return thumnail path ' . gnAssetToolkit::getThumbnailPath($form->getObject()->getSystemPath(), array('maxWidth' => 50, 'maxHeight' => 50)));
-        $json_values['location'] = gnAssetToolkit::getThumbnailPath($form->getObject()->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50));
+        $json_values['type'] = 'other';
+        
+        if($form->getObject()->isImage())
+        {
+          $json_values['location'] = gnAssetToolkit::getThumbnailPath($form->getObject()->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50));
+          $json_values['type'] = 'thumbnail';
+        }
+        else
+        {
+          $type = gnAssetToolkit::translateExtensionToBase($form->getObject()->getOriginalFilename());
+          $json_values['location'] = '/gnCorePlugin/images/mime-types/' . $type . '.png';
+        }
       }
       catch(Exception $e)
       {

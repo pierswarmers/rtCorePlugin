@@ -35,15 +35,18 @@ function render_form_row(sfFormField $widget, $options = array())
 
   $is_checkbox = get_class($widget->getWidget()) === 'sfWidgetFormInputCheckbox';
 
+  $label = $widget->renderLabel();
+
   if(!isset($options['format']))
   {
     if($is_checkbox)
     {
-      $options['format'] = '<div class="%1$s">%4$s %2$s %3$s %5$s</div>';
+      $options['format'] = '<div class="%1$s checkbox"><label>%4$s %2$s</label> %3$s %5$s</div>';
+      $label = $widget->renderLabelName();
     }
     else
     {
-      $options['format'] = '<div class="%1$s">%2$s %3$s %4$s %5$s</div>';
+      $options['format'] = '<div class="%1$s standard">%2$s %3$s %4$s %5$s</div>';
     }
   }
 
@@ -60,7 +63,7 @@ function render_form_row(sfFormField $widget, $options = array())
   $html = sprintf(
     $options['format'],
     $options['class'], // 1
-    $widget->renderLabel(),  // 2
+    $label,  // 2
     $widget->hasError() ? ' &rarr; '. $widget->renderError() : '',  // 3
     $widget->render(), // 4
     $widget->renderHelp()  // 5

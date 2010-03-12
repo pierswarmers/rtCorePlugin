@@ -16,7 +16,7 @@
     <div id="gn-header">
       <div class="container">
         <div id="gn-tagline">
-          <?php echo sfConfig::get('app_gn_title', $sf_response->getTitle()) ?> /
+          <?php echo sfConfig::get('app_gn_title', 'Gumnut') ?> / 
           <?php echo !is_null(sfConfig::get('app_gn_node_title')) ? sprintf('<span>%s</span>',sfConfig::get('app_gn_node_title')) : '' ?>
         </div>
         <ul id="gn-component-nav">

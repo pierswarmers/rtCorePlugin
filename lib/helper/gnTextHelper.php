@@ -25,9 +25,6 @@
  */
 function markdown_to_html($markdown, $object = null)
 {
-  $object->getAssets();
-  $object->getAssets();
-  $object->getAssets();
   if(!is_null($object))
   {
     gn_text_helper_object($object);

@@ -98,16 +98,15 @@ class gnAttachableTemplate extends Doctrine_Template
    */
   public function getAssets()
   {
-    $holder = $this->getAssetsHolder();
+    $holder = $this->getAssetsHolder($this->getInvoker());
 
     if (!isset($holder) || !$holder->hasNamespace('saved_assets'))
     {
       $assets = Doctrine::getTable('gnAsset')->getAssetsForObject($this->getInvoker());
-
-      $holder->set('saved_assets', $assets);
+      $holder->add($assets, 'saved_assets');
     }
-    
-    return $holder->get('saved_assets');
+
+    return $holder->getAll('saved_assets');
   }
 
   /**
@@ -115,11 +114,10 @@ class gnAttachableTemplate extends Doctrine_Template
    * 
    * @return sfNamespacedParameterHolder
    */
-  public function getAssetsHolder()
+  private function getAssetsHolder($object)
   {
-    if ((!isset($object->_tags)) || ($object->_tags == null))
+    if ((!isset($object->_assets)) || ($object->_assets == null))
     {
-      $object = $this->getInvoker();
       $parameter_holder = new sfNamespacedParameterHolder;
       $object->mapValue('_assets', new $parameter_holder());
     }

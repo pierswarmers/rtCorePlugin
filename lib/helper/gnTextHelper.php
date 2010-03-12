@@ -28,8 +28,7 @@ function markdown_to_html($markdown, $object = null)
   if(!is_null($object))
   {
     gn_text_helper_object($object);
-
-    global $object;
+    
     $patterns = array(
     '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\)/i' => 'markup_images_in_text',
     '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i' => 'markup_images_in_text',
@@ -42,7 +41,6 @@ function markdown_to_html($markdown, $object = null)
 
     foreach($patterns as $pattern => $user_func)
     {
-      //$markdown = preg_replace($pattern, "replaceImagesInText(\$array,$1,\$foo)", $markdown);
       $markdown =  preg_replace_callback($pattern, $user_func, $markdown);
     }
 
@@ -51,6 +49,12 @@ function markdown_to_html($markdown, $object = null)
   return gnMarkdownToolkit::toHTML($markdown);
 }
 
+/**
+ * Replace occurances of markdown image tag with html image tag pointing at attached asset.
+ *
+ * @param array $matches
+ * @return string
+ */
 function markup_images_in_text($matches)
 {
   $class = isset($matches[3]) ? $matches[3] : '';
@@ -62,6 +66,12 @@ function markup_images_in_text($matches)
   return '<small class="asst-link-error">[[asset:' . $matches[2] . ']]?</small>';
 }
 
+/**
+ * Replace occurances of markdown link tag with html link tag pointing at attached asset.
+ *
+ * @param array $matches
+ * @return string
+ */
 function markup_links_in_text($matches)
 {
   $asset = gn_text_helper_object()->getAssetByName($matches[2]);
@@ -72,6 +82,12 @@ function markup_links_in_text($matches)
   return '<small class="asst-link-error">[[asset:' . $matches[2] . ']]?</small>';
 }
 
+/**
+ * Replace occurances of gallery tag with list of attached assets.
+ *
+ * @param array $matches
+ * @return string
+ */
 function markup_galleries_in_text($matches)
 {
   $string = '';
@@ -141,6 +157,12 @@ EOS;
   return $string;
 }
 
+/**
+ * Replace occurances of docs tag with list of attached assets.
+ *
+ * @param array $matches
+ * @return string
+ */
 function markup_docs_in_text($matches)
 {
   $string = '';

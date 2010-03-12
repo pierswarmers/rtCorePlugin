@@ -26,9 +26,12 @@ class BasegnSearchActions extends sfActions
   {
     $this->setPage($request->getParameter('page', 1));
     $form = new gnSearchForm;
+    
 
     if($request->hasParameter('q'))
     {
+      $this->number_of__results = Doctrine::getTable('gnIndex')->getNumberOfMatchedResults($request->getParameter('q'), $this->getUser()->getCulture());
+
       $form->setDefault('q', $request->getParameter('q', ''));
       $query = Doctrine::getTable('gnIndex')->getBaseSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
       $pager = new sfDoctrinePager('gnIndex');

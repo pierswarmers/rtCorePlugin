@@ -125,20 +125,47 @@ class PlugingnIndexTable extends Doctrine_Table
    */
   public function getBaseSearchQuery($keywords, $lang = null, Doctrine_Query $q = null)
   {
+    $q = $this->getStandardSearchComponentInQuery($keywords, $lang, $q);
+    $q->select('i.model, model_id, lang, count(i.keyword) AS relevance');
+    $q->orderBy('relevance DESC');
+    return $q;
+  }
+
+  /**
+   * Return the most common and basic of the search query values.
+   * 
+   * @param string $keywords
+   * @param sting $lang
+   * @param Doctrine_Query $q
+   * @return Doctrine_Query
+   */
+  public function getStandardSearchComponentInQuery($keywords, $lang = null, Doctrine_Query $q = null)
+  {
     if(is_string($keywords))
     {
       $keywords = GnIndexToolkit::getStemmedWordsFromString($keywords, $this->getLang());
     }
-
     $q = $this->getQuery($q);
-    //$q->leftJoin('b.Keywords s');
-    $q->select('i.model, model_id, lang, count(i.keyword) AS relevance');
     $q->addGroupBy('i.model_id');
     $q->addGroupBy('i.model');
     $q->andWhere('i.lang = ?', $this->getLang($lang));
     $q->andWhereIn('i.keyword', $keywords);
-    $q->orderBy('relevance DESC');
     return $q;
+  }
+
+  /**
+   * Return the number of results a search would provide.
+   * 
+   * @param mixed $keywords
+   * @param Doctrine_Query $q
+   * @return integer
+   */
+  public function getNumberOfMatchedResults($keywords, $lang = null, Doctrine_Query $q = null)
+  {
+    $q = $this->getStandardSearchComponentInQuery($keywords, $lang, $q);
+    $q->select('count(DISTINCT i.model) AS count');
+    $r = $q->fetchArray();
+    return $r[0]['count'];
   }
 
   /**

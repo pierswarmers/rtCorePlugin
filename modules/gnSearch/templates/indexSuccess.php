@@ -8,7 +8,7 @@
 <?php include_partial('form', array('form' => $form)) ?>
 <?php if(isset($pager)): ?>
 <div class="gn-search-results">
-  <p><?php echo count($pager) . ' ' . __('results found.') ?></p>
+  <p><?php echo $number_of__results . ' ' . __('results found.') ?></p>
   <?php if(count($pager) > 0): ?>
     <ul>
     <?php foreach($pager->getResults() as $gn_index): ?>

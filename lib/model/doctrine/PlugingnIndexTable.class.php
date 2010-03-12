@@ -165,7 +165,7 @@ class PlugingnIndexTable extends Doctrine_Table
     $q = $this->getStandardSearchComponentInQuery($keywords, $lang, $q);
     $q->select('count(DISTINCT i.model) AS count');
     $r = $q->fetchArray();
-    return $r[0]['count'];
+    return count($r);
   }
 
   /**

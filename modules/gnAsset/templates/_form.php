@@ -11,10 +11,10 @@
       <li id="<?php echo $asset->getId() ?>" class="gn-core-upload-item <?php echo ($asset->isImage()) ? 'thumbnail' : 'other' ?>">
         <span class="delete">&times;</span>
         <?php if($asset->isImage()): ?>
-          <span class="insert" onclick="injectText('![<?php echo $description_text; ?>](asset:<?php echo $asset->getOriginalFilename() ?>|right)')">&nbsp;</span>
+          <span class="insert" onclick="injectTextIntoCurrent('![<?php echo $description_text; ?>](asset:<?php echo $asset->getOriginalFilename() ?>|right)')">&nbsp;</span>
           <img src="<?php echo gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50)) ?>" />
         <?php else: ?>
-          <span class="insert" onclick="injectText('[<?php echo $description_text; ?>](asset:<?php echo $asset->getOriginalFilename() ?>)')">&nbsp;</span>
+          <span class="insert" onclick="injectTextIntoCurrent('[<?php echo $description_text; ?>](asset:<?php echo $asset->getOriginalFilename() ?>)')">&nbsp;</span>
           <img src="<?php echo '/gnCorePlugin/images/mime-types/' . gnAssetToolkit::translateExtensionToBase($asset->getOriginalFilename()) . '.png' ?>" />
           <?php echo $asset->getOriginalFilename(); ?>
         <?php endif; ?>
@@ -91,10 +91,10 @@ $(document).ready(function() {
       if(response.status === 'success')
       {
         var name = '';
-          onclick = ' onclick="injectText(\'![<?php echo $description_text; ?>](asset:'+file+')\')"';
+          onclick = ' onclick="injectTextIntoCurrent(\'![<?php echo $description_text; ?>](asset:'+file+')\')"';
         if(response.type === 'other')
         {
-          onclick = ' onclick="injectText(\'[<?php echo $description_text; ?>](asset:'+file+')\')"';
+          onclick = ' onclick="injectTextIntoCurrent(\'[<?php echo $description_text; ?>](asset:'+file+')\')"';
           name = ' ' + file;
         }
         $('<li id="'+ response.asset_id +'" class="gn-core-upload-item '+ response.type +'"></li>').appendTo(

@@ -21,6 +21,55 @@ class BasegnSearchActions extends sfActions
     parent::postExecute();
     sfConfig::set('app_gn_node_title', 'Search');
   }
+
+  /**
+   * Return JSON response.
+   *
+   * @param array $json_values
+   * @param sfWebRequest $request
+   * @return string
+   */
+  private function returnJSONResponse($json_values, sfWebRequest $request)
+  {
+    $this->getResponse()->setContent(json_encode($json_values));
+    sfConfig::set('sf_web_debug', false);
+    return sfView::NONE;
+  }
+
+  public function executeAjaxSearch(sfWebRequest $request)
+  {
+    $query = Doctrine::getTable('gnIndex')->getBaseSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
+    $query->limit(100);
+    $gn_indexes = $query->execute();
+
+    $routes = $this->getContext()->getRouting()->getRoutes();
+
+    // sfContext::getInstance()->getController()->genUrl($internal_uri, false);
+    // link_to_if(isset($routes[Doctrine_Inflector::tableize($gn_index->getCleanModel()).'_show']),$gn_index->getObject()->getTitle(), Doctrine_Inflector::tableize($gn_index->getCleanModel()).'_show', $gn_index->getObject())
+    
+    $items = array();
+
+    foreach($gn_indexes as $gn_index)
+    {
+      $route = Doctrine_Inflector::tableize($gn_index->getCleanModel()).'_show';
+
+      $url = '';
+
+      if(isset($routes[Doctrine_Inflector::tableize($gn_index->getCleanModel()).'_show']))
+      {
+        $url = sfContext::getInstance()->getController()->genUrl(array('sf_route' => $route, 'sf_subject' => $gn_index->getObject()));
+        $url = str_replace('/frontend_dev.php', '', $url);
+      }
+
+      $items[] = array(
+        'title' => $gn_index->getObject()->getTitle(),
+        'link' => $url
+      );
+
+    }
+
+    return $this->returnJSONResponse(array('status' => 'success', 'items' => $items), $request);
+  }
   
   public function executeIndex(sfWebRequest $request)
   {

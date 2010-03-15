@@ -499,8 +499,8 @@ class gnAssetToolkit
     $options['maxHeight'] = isset($options['maxHeight']) ? $options['maxHeight'] : 150;
     $options['dir'] = isset($options['dir']) ? $options['dir'] : sfConfig::get('app_asset_thumbnail_dir', '/_thumbnail_cache');
     $options['scale'] = isset($options['scale']) ? $options['scale'] : true;
-    $options['inflate'] = isset($options['inflate']) ? $options['inflate'] : true;
-    $options['quality'] = isset($options['quality']) ? $options['quality'] : 75;
+    $options['inflate'] = isset($options['inflate']) ? $options['inflate'] : false;
+    $options['quality'] = isset($options['quality']) ? $options['quality'] : 80;
     $options['targetMime'] = isset($options['targetMime']) ? $options['targetMime'] : null;
     $options['adapterClass'] = isset($options['adapterClass']) ? $options['adapterClass'] : null;
     $options['adapterOptions'] = isset($options['adapterOptions']) ? $options['adapterOptions'] : array();

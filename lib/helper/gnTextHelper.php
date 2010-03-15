@@ -30,6 +30,8 @@ function markdown_to_html($markdown, $object = null)
     gn_text_helper_object($object);
     
     $patterns = array(
+    '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\|([0-9]+),([0-9]+)\)/i' => 'markup_images_in_text',
+    '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([0-9]+),([0-9]+)\)/i' => 'markup_images_in_text',
     '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\)/i' => 'markup_images_in_text',
     '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i' => 'markup_images_in_text',
     '/\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i' => 'markup_links_in_text',
@@ -57,13 +59,37 @@ function markdown_to_html($markdown, $object = null)
  */
 function markup_images_in_text($matches)
 {
-  $class = isset($matches[3]) ? $matches[3] : '';
-  $asset = gn_text_helper_object()->getAssetByName($matches[2]);
-  if($asset)
+  $class = '';
+  $resize_to = array('maxHeight' => sfConfig::get('app_gn_asset_inline_height', 600), 'maxWidth' => sfConfig::get('app_gn_asset_inline_width',590));
+
+  if(count($matches) == 6)
   {
-    return image_tag($asset->getWebPath(), array('class' => $class, 'alt' => $matches[1]));
+    // we have class and dimensions.
+    $class = $matches[3];
+    $resize_to = array('maxWidth' => $matches[4], 'maxHeight' => $matches[5]);
   }
-  return '<small class="asst-link-error">[[asset:' . $matches[2] . ']]?</small>';
+  elseif(count($matches) == 5)
+  {
+    // we have dimensions
+    $resize_to = array('maxWidth' => $matches[3], 'maxHeight' => $matches[4]);
+  }
+  elseif(count($matches) == 4)
+  {
+    // we have class only
+    $class = $matches[3];
+  }
+  
+  $asset = gn_text_helper_object()->getAssetByName($matches[2]);
+  
+  if($asset && $asset->isImage())
+  {
+    if(isset($matches[4]) && isset($matches[5]))
+    {
+      $resize_to = array('maxWidth' => $matches[4], 'maxHeight' => $matches[5]);
+    }
+    return image_tag(gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to), array('class' => $class, 'alt' => $matches[1]), array('alt' => $matches[1]));
+  }
+  return '<small class="asst-link-error">[asset:' . $matches[2] . ']?</small>';
 }
 
 /**
@@ -79,7 +105,7 @@ function markup_links_in_text($matches)
   {
     return link_to1($matches[1], $asset->getWebPath());
   }
-  return '<small class="asst-link-error">[[asset:' . $matches[2] . ']]?</small>';
+  return '<small class="asst-link-error">[asset:' . $matches[2] . ']?</small>';
 }
 
 /**
@@ -116,13 +142,16 @@ function markup_galleries_in_text($matches)
     use_stylesheet('/gnCorePlugin/vendor/jquery/css/tools/jquery.tools.css');
     $rand = rand();
 
-    $string .= '<div class="clearfix gn-inline-panel">'."\n".'<a class="prevPage browse left"></a>' . "\n";
+    $string .= '<div class="clearfix"></div><div class="clearfix gn-inline-panel">'."\n".'<a class="prevPage browse left"></a>' . "\n";
     $string .= '<div id="gnGalleryScrollable'.$rand.'" class="scrollable">'."\n".'<div id="gnGalleryScrollableTriggers'.$rand.'" class="items">' . "\n";
     foreach($assets as $asset)
     {
+      
       if($asset->isImage())
       {
-        $string .= link_to1(image_tag(gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => 100, 'maxWidth' => 400))), $asset->getWebPath())  . "\n";
+        $title = $asset->getTitle() ? $asset->getTitle() : $asset->getOriginalFilename();
+        $resize_to = array('maxHeight' => sfConfig::get('app_gn_asset_lightbox_expanded_height', 600), 'maxWidth' => sfConfig::get('app_gn_asset_lightbox_expanded_width',800));
+        $string .= '<a href="'. gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'">' . image_tag(gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => 100, 'maxWidth' => 400)), array('alt' => $title)) . '</a>' . "\n";
       }
     }
     $string .= "</div>\n";

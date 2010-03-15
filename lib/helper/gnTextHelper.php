@@ -141,7 +141,7 @@ function markup_galleries_in_text($matches)
 
 <script type="text/javascript">
   $(function() {
-      $("#gnGalleryScrollable$rand").scrollable({size:4, keyboard:false, }).mousewheel();
+      $("#gnGalleryScrollable$rand").scrollable({size:4, keyboard:false}).mousewheel();
 
   $("#gnGalleryScrollableTriggers$rand a").overlay({
       target: '#gnGallery$rand',

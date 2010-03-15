@@ -54,6 +54,7 @@ You'll also need to configure a database...
           'sfDoctrineActAsTaggablePlugin',
           'sfFormExtraPlugin',
           'sfDoctrineGuardPlugin',
+          'sfThumbnailPlugin',
           'sfGeshiPlugin'
         );
 
@@ -64,6 +65,7 @@ You'll also need to configure a database...
 4. Enable the required modules in your fontend `apps/frontend/config/settings.yml`:
 
             enabled_modules:
+              - gnAsset
               - gnSearch
               - gnGuardAuth
               - gnGuardForgotPassword

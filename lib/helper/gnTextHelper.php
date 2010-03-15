@@ -87,7 +87,10 @@ function markup_images_in_text($matches)
     {
       $resize_to = array('maxWidth' => $matches[4], 'maxHeight' => $matches[5]);
     }
-    return image_tag(gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to), array('class' => $class, 'alt' => $matches[1]), array('alt' => $matches[1]));
+    return image_tag(
+      gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to),
+      array('class' => $class, 'alt' => $matches[1])
+    );
   }
   return '<small class="asst-link-error">[asset:' . $matches[2] . ']?</small>';
 }

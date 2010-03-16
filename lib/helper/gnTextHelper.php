@@ -20,14 +20,16 @@
  * Converts a mardown string into HTML
  *
  * @see gnMarkdown::toHTML()
- * @param strinf $markdown
+ * @param strinf $text
  * @return string
  */
-function markdown_to_html($markdown, $object = null)
+function markdown_to_html($text, $object = null)
 {
   if(!is_null($object))
   {
     gn_text_helper_object($object);
+
+    $text = gnMathPublisherToolkit::transform($text);
     
     $patterns = array(
     '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\|([0-9]+),([0-9]+)\)/i' => 'markup_images_in_text',
@@ -43,12 +45,12 @@ function markdown_to_html($markdown, $object = null)
 
     foreach($patterns as $pattern => $user_func)
     {
-      $markdown =  preg_replace_callback($pattern, $user_func, $markdown);
+      $text =  preg_replace_callback($pattern, $user_func, $text);
     }
 
   }
 
-  return gnMarkdownToolkit::toHTML($markdown);
+  return gnMarkdownToolkit::transformBase($text);
 }
 
 /**

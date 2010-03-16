@@ -18,17 +18,15 @@
 class gnMarkdownToolkit extends MarkdownExtra_Parser
 {
   /**
-   * toHTML is a compliancy based method used in the filtering system.
+   * Return a string, after replacing Latex math sections with n image equivelant.
    *
-   * @param string $string
-   * @param array $options
-   * @return string
+   * @param   string  $text
+   * @return  string
    */
-  public static function toHTML($string, $options = array())
+  static public function transformBase($text, $options = array())
   {
     self::includeLibraries();
-    
-    return self::translateMarkdownToHTML($string, $options = array());
+    return self::translateMarkdownToHTML($text, $options = array());
   }
 
   /**

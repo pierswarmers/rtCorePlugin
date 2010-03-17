@@ -4,10 +4,13 @@
  * http://www.scottklarr.com
  */
 
+
+//inputCursorPositionStore = new Array();
+
 function injectTextIntoCurrent(text) {injectTextIntoID(text, document.getElementById($("textarea").attr("id")))}
 
 function injectTextIntoID(text, itemId) {
-  if(document.selection) {
+  if(document.selection) { // for ie
     if($("#gnLinkPanel").css("display") == "none") {
       $(itemId).focus();
     } else {
@@ -16,7 +19,7 @@ function injectTextIntoID(text, itemId) {
     }
     var sel   = document.selection.createRange();
     sel.text  = text;
-  } else if(itemId.selectionStart || itemId.selectionStart == '0') {
+  } else if(itemId.selectionStart || itemId.selectionStart == '0') { 
     getItemPositions(itemId, text);
   } else {
     if(itemId.value == undefined) {
@@ -28,12 +31,29 @@ function injectTextIntoID(text, itemId) {
     }
   }
 }
+
 function getItemPositions(id, txt) {
   var startPos  = id.selectionStart;
   var endPos    = id.selectionEnd;
   id.value      = id.value.substring(0, startPos) + txt + id.value.substring(endPos, id.value.length);
 }
 
+
+/*
+ * Inject a replacement token into a given dom element.
+ */
+setReplacementToken = function(itemId)
+{
+  injectTextIntoID('[-[-]-]', itemId);
+}
+
+/*
+ * Inject some text over a token.
+ */
+updateReplacementToken = function(text, itemId)
+{
+  $(itemId).val($(itemId).val().replace(/\[\-\[([a-zA-Z0-9\.\-_]+)\]\-\]/g, text));
+}
 
 /*
  * Enable the link panel.
@@ -62,7 +82,7 @@ function triggerLinkPanelLookup(inputId, updatePanel, updateUrl, targetTextField
     success: function(data) {
       $(updatePanel).html('');
       $.each(data.items, function(index, value) {
-        $('<li><a href="#" onclick="injectTextIntoID(\'['+value.title+']('+value.link+')\', \''+targetTextField+'\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+        $('<li><a href="#" onclick="updateReplacementToken(\'['+value.title+']('+value.link+')\', \''+targetTextField+'\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
       });
     }
   });

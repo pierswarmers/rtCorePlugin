@@ -1,6 +1,6 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
-<?php use_helper('I18N', 'GnForm') ?>
+<?php use_helper('I18N', 'gnForm') ?>
 <?php $routes = $sf_context->getRouting()->getRoutes() ?>
 
 <h1>Search</h1>

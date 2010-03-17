@@ -1,4 +1,4 @@
-<?php use_helper('I18N', 'GnForm') ?>
+<?php use_helper('I18N', 'gnForm') ?>
 <h1><?php echo __('Hello %name%', array('%name%' => $user->getName()), 'sf_guard') ?></h1>
 <p><?php echo __('Enter your new password in the form below.', null, 'sf_guard') ?></p>
 <?php include_partial('gnGuardAuth/flashes')?>

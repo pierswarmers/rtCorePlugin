@@ -1,4 +1,4 @@
-<?php use_helper('I18N', 'GnForm') ?>
+<?php use_helper('I18N', 'gnForm') ?>
 <h1><?php echo __('Forgot your password?', null, 'sf_guard') ?></h1>
 <p>
   <?php echo __('Do not worry, we can help you get back in to your account safely!', null, 'sf_guard') ?>

@@ -1,4 +1,4 @@
-<?php use_helper('I18N', 'GnForm') ?>
+<?php use_helper('I18N', 'gnForm') ?>
 <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
   <?php echo $form->renderHiddenFields() ?>
   <?php echo render_form_row($form['username']) ?>

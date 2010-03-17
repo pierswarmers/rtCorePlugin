@@ -32,7 +32,18 @@ function render_form_row(sfFormField $widget, $options = array())
   $options['wide'] = isset($options['wide']) ? $options['wide'] : true;
   $options['space'] = isset($options['space']) ? $options['wide'] : false;
   $options['class'] = isset($options['class']) ? $options['class'] : 'gn-form-row';
+  $options['markdown'] = isset($options['markdown']) ? $options['markdown'] : false;
 
+  $content = '';
+
+  if($options['markdown'])
+  {
+    ob_start();
+    include_partial('gnSearch/ajaxForm', array('form' => new gnSearchForm(), 'targetId' => 'gn_wiki_page_en_content'));
+    $content = ob_get_contents();
+    ob_end_clean();
+  }
+  
   $is_checkbox = get_class($widget->getWidget()) === 'sfWidgetFormInputCheckbox';
 
   $label = $widget->renderLabel();
@@ -41,12 +52,12 @@ function render_form_row(sfFormField $widget, $options = array())
   {
     if($is_checkbox)
     {
-      $options['format'] = '<div class="%1$s checkbox"><label>%4$s %2$s</label> %3$s %5$s</div>';
+      $options['format'] = '<div class="%1$s checkbox"><label>%4$s %6$s %2$s</label> %3$s %5$s</div>';
       $label = $widget->renderLabelName();
     }
     else
     {
-      $options['format'] = '<div class="%1$s standard">%2$s %3$s %4$s %5$s</div>';
+      $options['format'] = '<div class="%1$s standard">%2$s %6$s %3$s %4$s %5$s</div>';
     }
   }
 
@@ -66,7 +77,8 @@ function render_form_row(sfFormField $widget, $options = array())
     $label,  // 2
     $widget->hasError() ? ' &rarr; '. $widget->renderError() : '',  // 3
     $widget->render(), // 4
-    $widget->renderHelp()  // 5
+    $widget->renderHelp(),  // 5
+          $content// 6
   ) . "\n";
 
   return $html;

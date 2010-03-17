@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-require_once(dirname(__FILE__).'/listener/GnSearchListener.class.php');
+require_once(dirname(__FILE__).'/listener/gnSearchListener.class.php');
 
 /**
  * gnSearchListener defines some base helpers.

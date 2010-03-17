@@ -33,8 +33,8 @@ class gnMathPublisherToolkit
     }
     
     // relative from the sf_web_root
-    $dir  = sfConfig::get('app_gn_mathpublisher_cache_dir', '/_mathpublisher_cache');
-    $size = sfConfig::get('app_gn_mathpublisher_size', 14);
+    $dir  = sfConfig::get('app_gn_math_cache_dir', '/_math_cache');
+    $size = sfConfig::get('app_gn_math_mathpublisher_size', 14);
 
     if(!is_dir(sfConfig::get('sf_web_dir') . $dir))
     {

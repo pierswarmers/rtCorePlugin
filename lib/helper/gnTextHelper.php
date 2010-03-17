@@ -29,7 +29,14 @@ function markdown_to_html($text, $object = null)
   {
     gn_text_helper_object($object);
 
-    $text = gnMathPublisherToolkit::transform($text);
+    if(sfConfig::get('app_gn_text_support_latex_enabled', true))
+    {
+      $text = gnCodeCogsToolkit::transform($text);
+    }
+    else
+    {
+      $text = gnMathPublisherToolkit::transform($text);
+    }
     
     $patterns = array(
     '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\|([0-9]+),([0-9]+)\)/i' => 'markup_images_in_text',

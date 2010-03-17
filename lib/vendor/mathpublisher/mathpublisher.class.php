@@ -23,7 +23,7 @@ class mathPublisherConfig
 
   static public function getImageDir()
   {
-    return sfConfig::get('sf_web_dir').sfConfig::get('app_gn_mathpublisher_cache_dir', '/_mathpublisher_cache');
+    return sfConfig::get('sf_web_dir').sfConfig::get('app_gn_math_cache_dir', '/_math_cache');
   }
 
   static public function getSymbols()

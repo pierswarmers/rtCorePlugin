@@ -37,6 +37,7 @@ class gnAssetUploadForm extends PlugingnAssetForm
     )),
     ));
 
+    $this->enableCSRFProtection();
     $this->widgetSchema->setNameFormat('gn_asset[%s]');
   }
 

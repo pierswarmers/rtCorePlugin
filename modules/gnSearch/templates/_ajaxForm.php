@@ -1,8 +1,10 @@
 <?php use_javascript('/gnCorePlugin/js/main.js?id=234234') ?>
 <?php $rand = rand(); ?>
-<a href="#" id="gnLinkPanelTrigger<?php $rand = rand(); ?>"  class="button" onclick="setReplacementToken('#<?php echo $targetId ?>');return false;" rel="#gnLinkPanel<?php $rand = rand(); ?>">Insert Link</a>
-<a href="#" class="button" onclick="injectTextIntoCurrent('[gallery]');return false;">Insert Gallery</a>
-<a href="#" class="button" onclick="injectTextIntoCurrent('[docs]');return false;">Insert Docs</a>
+<ul class="gn-markdown-tools">
+  <li><a href="#" id="gnLinkPanelTrigger<?php $rand = rand(); ?>"  class="button" onclick="setReplacementToken('#<?php echo $targetId ?>');return false;" rel="#gnLinkPanel<?php $rand = rand(); ?>">Insert Link</a></li>
+  <li><a href="#" class="button" onclick="injectTextIntoCurrent('[gallery]');return false;">Insert Gallery</a></li>
+  <li><a href="#" class="button" onclick="injectTextIntoCurrent('[docs]');return false;">Insert Docs</a></li>
+</ul>
 <div class="gn-modal-panel" id="gnLinkPanel<?php $rand = rand(); ?>">
   <h2><?php echo __('Find a page to link to:') ?></h2>
   <div class="inner">

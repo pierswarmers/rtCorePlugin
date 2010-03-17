@@ -28,7 +28,8 @@ ul.gn-tools li{}
 dl.gn-meta-data{border-top:#CCC 1px solid;padding:1.5em 0 0;margin:0 0 1.5em;}
 dl.gn-meta-data dt, dl.gn-meta-data dd{display:inline;padding:0;margin:0 0.5em 0 0;}
 
-
+ul.gn-markdown-tools {list-style:none;margin:-2em 0 0 0;padding:0;text-align:right;}
+ul.gn-markdown-tools li {display:inline;}
 
 
 .gn-form-row.standard label{display:block;}
@@ -82,6 +83,7 @@ table{border-bottom:0; border-right:0;}
 thead th {background:#ddd;color:#fff;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size: 1.1em;}
 p img.right, p img.left {margin-top:0.5em;}
+iframe {margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}
 
 /*#gn-footer{background:url(../images/logo-full-small.png) 50% 50% no-repeat;height:100px;}*/

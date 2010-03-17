@@ -48,7 +48,15 @@ class gnCodeCogsToolkit
     {
       $base_uri = sfConfig::get('app_gn_math_codecogs_uri', 'http://latex.codecogs.com/png.latex?');
       $rendered_image = file_get_contents($full_uri);
-      file_put_contents($dir.DIRECTORY_SEPARATOR.$filename, $rendered_image);
+      if($rendered_image)
+      {
+        file_put_contents($dir.DIRECTORY_SEPARATOR.$filename, $rendered_image);
+      }
+      else
+      {
+        // if image rendering failed, gracefully return a blank string.
+        return '';
+      }
     }
     
     $web_path = sfConfig::get('app_gn_math_cache_dir', '/_math_cache') . '/' . $filename;

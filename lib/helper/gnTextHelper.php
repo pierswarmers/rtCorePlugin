@@ -161,9 +161,19 @@ function markup_galleries_in_text($matches)
       
       if($asset->isImage())
       {
+        $thumb_location_web = gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => 130, 'maxWidth' => 130));
+        $thumb_location_sys = sfConfig::get('sf_web_dir') . $thumb_location_web;
+
+        $image_data = getimagesize($thumb_location_sys);
+
+        $offset_left = (75-$image_data[0])/2;
+        $offset_top = (75-$image_data[1])/2;
+
+        $style = sprintf('left:%spx;top:%spx;', $offset_left,$offset_top);
+
         $title = $asset->getTitle() ? $asset->getTitle() : $asset->getOriginalFilename();
         $resize_to = array('maxHeight' => sfConfig::get('app_gn_asset_lightbox_expanded_height', 600), 'maxWidth' => sfConfig::get('app_gn_asset_lightbox_expanded_width',800));
-        $string .= '<a href="'. gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'">' . image_tag(gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => 100, 'maxWidth' => 400)), array('alt' => $title)) . '</a>' . "\n";
+        $string .= '<a href="'. gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'"><span>' . image_tag($thumb_location_web, array('alt' => $title,'style'=>$style)) . '</span></a>' . "\n";
       }
     }
     $string .= "</div>\n";
@@ -182,7 +192,7 @@ function markup_galleries_in_text($matches)
 
 <script type="text/javascript">
   $(function() {
-      $("#gnGalleryScrollable$rand").scrollable({size:4, keyboard:false}).mousewheel();
+      $("#gnGalleryScrollable$rand").scrollable({size:5, keyboard:false}).mousewheel();
 
   $("#gnGalleryScrollableTriggers$rand a").overlay({
       target: '#gnGallery$rand',

@@ -20,7 +20,6 @@ body {
 .markItUp  {
 	width:540px;
 	margin:5px 0 5px 0;
-	background:yellow;
 }
 .markItUpContainer  {
 	width:540px;
@@ -28,15 +27,17 @@ body {
 	background:#efefef;
 }
 .markItUpEditor {
-	font:12px 'Courier New', Courier, monospace;
+	
 	padding:5px;
-	margin:0px 11px 0px 11px;
-	width:510px;
+	margin:0;
+	width:540px;
 	height:320px;
 	clear:both; display:block;
 	line-height:18px;
 	overflow:auto;
-	border:0px solid white;
+	border:1px solid #ccc;
+  border-left:0;
+  border-right:0;
 }
 .markItUpPreviewFrame	{
 	overflow:auto;

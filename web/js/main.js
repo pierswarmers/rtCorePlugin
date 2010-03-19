@@ -50,9 +50,19 @@ setReplacementToken = function(itemId)
 /*
  * Inject some text over a token.
  */
-updateReplacementToken = function(text, itemId)
+updateReplacementToken = function(title,link, itemId)
 {
-  $(itemId).val($(itemId).val().replace(/\[\-\[([a-zA-Z0-9\.\-_]+)\]\-\]/g, text));
+  if(title == '' && link == '')
+  {
+    $(itemId).val($(itemId).val().replace(/\[\-\[/g, ''));
+    $(itemId).val($(itemId).val().replace(/[\-]+\]\-\]/g, ''));
+  }
+  else
+  {
+    $(itemId).val($(itemId).val().replace(/\[\-\[/g, '['));
+    $(itemId).val($(itemId).val().replace(/[\-]+\]\-\]/g, title+']('+link+')'));
+    $(itemId).val($(itemId).val().replace(/\]\-\]/g, ']('+link+')'));
+  }
 }
 
 /*
@@ -82,7 +92,8 @@ function triggerLinkPanelLookup(inputId, updatePanel, updateUrl, targetTextField
     success: function(data) {
       $(updatePanel).html('');
       $.each(data.items, function(index, value) {
-        $('<li><a href="#" onclick="updateReplacementToken(\'['+value.title+']('+value.link+')\', \''+targetTextField+'\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+        //$('<li><a href="#" onclick="updateReplacementToken(\'['+value.title+']('+value.link+')\', \''+targetTextField+'\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+        $('<li><a href="#" onclick="updateReplacementToken(\''+value.title+'\',\''+value.link+'\', \''+targetTextField+'\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
       });
     }
   });

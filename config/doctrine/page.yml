@@ -22,7 +22,7 @@ gnPage:
     content:          string
     description:      string
     profile:          string(255)
-    published:        boolean
+    published:        { type: boolean, default: 1 }
     published_from:   timestamp
     published_to:     timestamp
     comment_status:   { type: enum, default: open, values: ["open", "users", "closed"] }

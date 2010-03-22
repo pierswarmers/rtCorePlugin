@@ -28,4 +28,53 @@ abstract class PlugingnPage extends BasegnPage
     $this->setDeletedAt(null);
     parent::save($conn);
   }
+
+  /**
+   * Extends the base published check to include date range settings.
+   *
+   * @return  boolean
+   */
+  public function isPublished()
+  {
+    $published = $this->getPublished();
+
+    if($published)
+    {
+      $published = $this->isPublishedNow();
+    }
+
+    return $published;
+  }
+
+  /**
+   * Checks if a the published from and to dates are true for "now".
+   * 
+   * @return boolean
+   */
+  public function isPublishedNow()
+  {
+    $from_ok = false;
+
+    if ( is_null($this->getPublishedFrom()) || $this->getPublishedFrom() === '')
+    {
+      $from_ok = true;
+    }
+    else
+    {
+      $from_ok = time() > strtotime( $this->getPublishedFrom() ) ? true : false;
+    }
+
+    $to_ok = false;
+
+    if ( is_null($this->getPublishedTo()) || $this->getPublishedTo() === '')
+    {
+      $to_ok = true;
+    }
+    else
+    {
+      $to_ok = time() < strtotime( $this->getPublishedTo() ) ? true : false;
+    }
+
+    return ($from_ok && $to_ok);
+  }
 }

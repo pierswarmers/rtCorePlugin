@@ -1,0 +1,10 @@
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin_wiki]
+
+sfGuardPermission:
+  Permission_admin_wiki:
+    name:           admin_wiki
+    description:    Administrator permission for wiki

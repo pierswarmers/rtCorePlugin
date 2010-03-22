@@ -5,6 +5,9 @@
 <?php $description_text = __('Description goes here...') ?>
 <fieldset>
   <legend><?php echo __('Asset Collection') ?></legend>
+  <?php if($object->isNew()): ?>
+  <p><?php echo __('Please create page before adding assets.'); ?></p>
+  <?php else: ?>
   <p><?php echo __('Files to be linked to this page can be added here. Once uploaded you can drag them to change the order they appear.') ?></p>
     <ul class="gn-core-upload-panel clearfix" id="gnCoreUploadPanel<?php echo $panel_suffix ?>">
       <?php foreach($object->getAssets() as $asset): ?>
@@ -25,6 +28,7 @@
       <button class="button" id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload a file') ?></button>
       <span id="gnCoreUploadPanelMessage<?php echo $panel_suffix ?>"></span>
     </p>
+    <?php endif; ?>
 </fieldset>
 <?php echo $form['_csrf_token']->render(); ?>
 <?php echo $form['model']->render(); ?>

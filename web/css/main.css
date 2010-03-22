@@ -69,6 +69,11 @@ button img, a.button img{
   float:none;
 }
 
+/* errors */
+.gn-form-row .error {margin:0;padding:0;background:none;border:0;}
+ul.error_list, .error_list li {margin:0;padding:0;display:inline;list-style: none;font-weight:normal;}
+
+
 /* typography */
 
 h1{font-family:Georgia,"Times New Roman",serif;font-size: 2em;}

@@ -33,6 +33,7 @@
 <?php echo $form['_csrf_token']->render(); ?>
 <?php echo $form['model']->render(); ?>
 
+<?php if(!$object->isNew()): ?>
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -111,5 +112,5 @@ $(document).ready(function() {
     }
   });
 });
-
 </script>
+<?php endif; ?>

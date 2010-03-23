@@ -29,9 +29,9 @@ gnMarkdownSettings = {
         {
           name:'Internal Link',
           key:"L",
-          openWith:'[-[',
-          closeWith:']-]',
-          placeHolder:'-',
+          openWith:'',
+          closeWith:'',
+          placeHolder:'',
           beforeInsert:function(h) {
             //alert('You selected "'+h.selection+'" ... '+"with "+h.openWith+" and "+h.closeWith+".");
           },
@@ -40,10 +40,7 @@ gnMarkdownSettings = {
                 expose: {
                   color: '#000',
                   loadSpeed: 200,
-                  opacity: 0.4,
-                  onClose: function(event) {
-                    updateReplacementToken('', '','#'+$(h.textarea).attr('id'));
-                  }
+                  opacity: 0.4
                 },
                 api: true 
               }).load();

@@ -96,7 +96,7 @@ $(document).ready(function() {
       if(response.status === 'success')
       {
         var name = '';
-          onclick = ' onclick="injectTextIntoCurrent(\'![<?php echo $description_text; ?>](asset:'+file+')\')"';
+        var onclick = ' onclick="injectTextIntoCurrent(\'![<?php echo $description_text; ?>](asset:'+file+')\')"';
         if(response.type === 'other')
         {
           onclick = ' onclick="injectTextIntoCurrent(\'[<?php echo $description_text; ?>](asset:'+file+')\')"';

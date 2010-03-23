@@ -55,7 +55,7 @@ updateReplacementToken = function(title,link, itemId)
   if(title == '' && link == '')
   {
     $(itemId).val($(itemId).val().replace(/\[\-\[/g, ''));
-    $(itemId).val($(itemId).val().replace(/[\-]+\]\-\]/g, ''));
+    $(itemId).val($(itemId).val().replace(/\-\]\-\]/g, ''));
   }
   else
   {

@@ -98,15 +98,20 @@ iframe {margin-bottom:1.5em;}
 
 /* attachment panel */
 
-.gn-core-upload-panel {background:#efefef;padding:5px 5px 0;color:#555;list-style:none;margin-bottom:0.5em;}
+.gn-core-upload p, .gn-core-upload ul {border:none!important;margin:0!important;padding:0!important;}
+.gn-core-upload-panel {list-style:none;}
+.gn-core-upload-panel li {margin-bottom:5px;border-width: 1px!important;}
 .gn-core-upload-panel form {display:none;}
-.gn-core-upload-item {white-space:nowrap;position:relative;background:#ccc;margin-right:5px;margin-bottom:5px;height:50px;vertical-align:middle;}
-.gn-core-upload-item.thumbnail img {height:50px;}
-.gn-core-upload-item.other {width:205px;line-height:50px; padding-left:10px;overflow:hidden;}
-.gn-core-upload-item.other img {position:relative; top:2px;}
-.gn-core-upload-item .delete, .gn-core-upload-item .insert {text-align:center;width:20px;height:20px;line-height:20px;position:absolute;right:0;z-index:1000;cursor:pointer;color:#fff;background:rgb(0,0,0);background:rgba(0,0,0,.5);}
+.gn-core-upload-item {height:42px;position:relative;background:#efefef;vertical-align:middle;border:1px solid #ddd;}
+.gn-core-upload-item .gn-core-upload-thumb {background:#fff;border:1px solid rgb(190,190,190);position:absolute;left:5px;top:5px;width:30px;height:30px;}
+.gn-core-upload-item .gn-core-upload-thumb div {position:absolute;left:2px;top:2px;width:26px;height:26px;overflow:hidden;text-align:center;}
+.gn-core-upload-item .gn-core-upload-thumb img {margin:0 auto;}
+.gn-core-upload-item .gn-core-upload-metadata {font-size:0.8em;position:absolute;left:40px;top:5px;height:32px;width:165px;line-height:16px;overflow:hidden;}
+.gn-core-upload-item .gn-core-upload-metadata span {font-weight:normal;}
+.gn-core-upload-item.other img {position:relative; top:5px;}
+.gn-core-upload-item .delete, .gn-core-upload-item .insert {text-align:center;width:20px;height:19px;line-height:19px;position:absolute;right:0;z-index:1000;cursor:pointer;color:#333;background:rgb(170,170,170);}
 .gn-core-upload-item .delete {top:0;}
-.gn-core-upload-item .insert {bottom:0;background-color:rgb(0,0,0);background-color:rgba(0,0,0,.5); background-image: url(../images/link.png); background-position: 50% 50%; background-repeat: no-repeat;}
+.gn-core-upload-item .insert {bottom:0;background-color:rgb(170,170,170); background-image: url(../images/link.png); background-position: 50% 50%; background-repeat: no-repeat;}
 
 /* profiles */
 

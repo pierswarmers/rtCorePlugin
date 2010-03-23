@@ -63,6 +63,13 @@ class BasegnAssetActions extends sfActions
   public function executeReorder(sfWebRequest $request)
   {
     $ids = $request->getParameter('order');
+
+    // Clean the IDs
+    for($i = 0; $i < count($ids); $i++)
+    {
+      $ids[$i] = str_replace('gnAttachedAsset', '', $ids[$i]);
+    }
+
     $position = 1;
     
     foreach($ids as $id)
@@ -97,7 +104,10 @@ class BasegnAssetActions extends sfActions
     $form = new gnAssetUploadForm();
     $request_params = $request->getParameter($form->getName());
     $form->bind($request_params, $request->getFiles($form->getName()));
-    $json_values = array();
+
+    $this->setLayout(false);
+    sfConfig::set('sf_web_debug', false);
+    $error = '';
     
     if ($form->isValid())
     {
@@ -111,42 +121,30 @@ class BasegnAssetActions extends sfActions
         $assets = Doctrine::getTable('gnAsset')->getAssetsForModelAndId($request_params['model'], $request_params['model_id']);
 
         $position = 1;
+        
         if($assets->count() > 0)
         {
           $position = $assets->getLast()->getPosition() + 1;
         }
-        $form->getObject()->setPosition($position);
-
-        $form->save();
-        $json_values['status'] = 'success';
-        $json_values['message'] = 'File uploaded!';
-        $json_values['asset_id'] = $form->getObject()->getId();
-        $json_values['type'] = 'other';
         
-        if($form->getObject()->isImage())
-        {
-          $json_values['location'] = gnAssetToolkit::getThumbnailPath($form->getObject()->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50));
-          $json_values['type'] = 'thumbnail';
-        }
-        else
-        {
-          $type = gnAssetToolkit::translateExtensionToBase($form->getObject()->getOriginalFilename());
-          $json_values['location'] = '/gnCorePlugin/images/mime-types/' . $type . '.png';
-        }
+        $form->getObject()->setPosition($position);
+        $form->save();
+
+        $this->asset = $form->getObject();
+        return sfView::SUCCESS;
       }
       catch(Exception $e)
       {
-        $json_values['status'] = 'error';
-        $json_values['message'] = $e->getMessage();
+        $error = $e->getMessage();
         $this->logMessage($e->getMessage(), 'err');
       }
     }
     else
     {
-      $json_values['status'] = 'error';
-      $json_values['message'] = $form['filename']->getError()->getMessage();
+      $error =  $form['filename']->getError()->getMessage();
     }
 
-    return $this->returnJSONResponse($json_values, $request);
+    $this->error = $error;
+    return sfView::ERROR;
   }
 }

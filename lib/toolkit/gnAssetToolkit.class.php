@@ -18,6 +18,22 @@
 class gnAssetToolkit
 {
   /**
+   * Return a formated string using bytes, megabytes etc...
+   * @param string $bytes
+   * @param integer $precision
+   * @return string
+   */
+  static public function getFormattedBytes($bytes, $precision = 2)
+  {
+    $units = array('B', 'KB', 'MB', 'GB', 'TB');
+    $bytes = max($bytes, 0);
+    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+    $pow = min($pow, count($units) - 1);
+    $bytes /= pow(1024, $pow);
+    return round($bytes, $precision) . ' ' . $units[$pow];
+  }
+
+  /**
    * Create a new directory.
    *
    * This method creates a new directory at a given $location, then sets the permissions.

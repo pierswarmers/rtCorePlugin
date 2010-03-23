@@ -1,0 +1,1 @@
+<?php include_partial('gnAsset/asset_row', array('asset' => $asset)); ?>

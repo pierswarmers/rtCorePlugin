@@ -1,27 +1,17 @@
+<?php use_helper('I18N', 'Text') ?>
 <?php use_javascript('/gnCorePlugin/js/main.js') ?>
 <?php use_javascript('/gnCorePlugin/vendor/jquery/js/jquery-ui-1.8rc3.custom.min.js') ?>
 <?php use_javascript('/gnCorePlugin/vendor/ajaxupload/ajaxupload.js') ?>
 <?php $panel_suffix = isset($panel_suffix) ? $panel_suffix : rand() ?>
 <?php $description_text = __('Description goes here...') ?>
-<fieldset>
-  <legend><?php echo __('Asset Collection') ?></legend>
+<fieldset class="gn-core-upload">
+  <legend><?php echo __('Attached Files') ?></legend>
   <?php if($object->isNew()): ?>
   <p><?php echo __('Please create page before adding assets.'); ?></p>
   <?php else: ?>
-  <p><?php echo __('Files to be linked to this page can be added here. Once uploaded you can drag them to change the order they appear.') ?></p>
     <ul class="gn-core-upload-panel clearfix" id="gnCoreUploadPanel<?php echo $panel_suffix ?>">
       <?php foreach($object->getAssets() as $asset): ?>
-      <li id="<?php echo $asset->getId() ?>" class="gn-core-upload-item <?php echo ($asset->isImage()) ? 'thumbnail' : 'other' ?>">
-        <span class="delete">&times;</span>
-        <?php if($asset->isImage()): ?>
-          <span class="insert" onclick="injectTextIntoCurrent('![<?php echo $description_text; ?>](asset:<?php echo $asset->getOriginalFilename() ?>|right)')">&nbsp;</span>
-          <img src="<?php echo gnAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxWidth' => 150, 'maxHeight' => 50, 'minHeight' => 50, 'minWidth' => 50)) ?>" />
-        <?php else: ?>
-          <span class="insert" onclick="injectTextIntoCurrent('[<?php echo $description_text; ?>](asset:<?php echo $asset->getOriginalFilename() ?>)')">&nbsp;</span>
-          <img src="<?php echo '/gnCorePlugin/images/mime-types/' . gnAssetToolkit::translateExtensionToBase($asset->getOriginalFilename()) . '.png' ?>" />
-          <?php echo $asset->getOriginalFilename(); ?>
-        <?php endif; ?>
-      </li>
+        <?php include_partial('gnAsset/asset_row', array('asset' => $asset)); ?>
       <?php endforeach; ?>
     </ul>
     <p>
@@ -37,18 +27,20 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-  var addDeleteAction = function(item) {
-    $(item).parent().fadeTo('fast', 0.5);
+  deleteAsset = function(assetId)
+  {
+    var assetRowId = '#gnAttachedAsset'+assetId;
+    $(assetRowId).fadeTo('fast', 0.5);
     $.ajax({
       dataType: 'json',
       data: {
-        id : $(item).parent().attr('id')
+        id : assetId
       },
       url: '<?php echo url_for('@gn_asset_delete?sf_format=json') ?>',
       success: function(data) {
         if(data.status === 'success')
         {
-          $('#'+data.id).hide();
+          $(assetRowId).hide();
         }
       }
     });
@@ -56,9 +48,6 @@ $(document).ready(function() {
   }
 
 	$(function() {
-    $('#gnCoreUploadPanel<?php echo $panel_suffix ?> .delete').click(function() {
-      addDeleteAction(this);
-    });
 		$("#gnCoreUploadPanel<?php echo $panel_suffix ?>").sortable(
       {
         opacity      : 0.7,
@@ -78,7 +67,7 @@ $(document).ready(function() {
   var button = $('#uploadImageButton<?php echo $panel_suffix ?>');
   var message = $('#gnCoreUploadPanelMessage<?php echo $panel_suffix ?>');
   new AjaxUpload(button,{
-    action: '<?php echo url_for('@gn_asset_upload?sf_format=json') ?>',
+    action: '<?php echo url_for('@gn_asset_upload') ?>',
     name: 'gn_asset[filename]',
     data: {
       'gn_asset[model_id]'   : '<?php echo $object->getId() ?>',
@@ -91,24 +80,8 @@ $(document).ready(function() {
     },
     onComplete: function(file, response){
       this.enable();
-      var response = jQuery.parseJSON(response);
-      message.addClass(response.status).text(response.message).fadeOut(4000);
-      if(response.status === 'success')
-      {
-        var name = '';
-        var onclick = ' onclick="injectTextIntoCurrent(\'![<?php echo $description_text; ?>](asset:'+file+')\')"';
-        if(response.type === 'other')
-        {
-          onclick = ' onclick="injectTextIntoCurrent(\'[<?php echo $description_text; ?>](asset:'+file+')\')"';
-          name = ' ' + file;
-        }
-        $('<li id="'+ response.asset_id +'" class="gn-core-upload-item '+ response.type +'"></li>').appendTo(
-          '#gnCoreUploadPanel<?php echo $panel_suffix ?>'
-        ).html('<span class="delete">&times;</span><span class="insert" '+onclick+'>&nbsp;</span><img src="'+ response.location +'" />' + name);
-        $('li#'+ response.asset_id +' span.delete').click(function() {
-          addDeleteAction(this);
-        });
-      }
+      $("#gnCoreUploadPanel<?php echo $panel_suffix ?>").append(response);
+      message.text('<?php echo __('Upload complete') ?>').fadeOut(4000);
     }
   });
 });

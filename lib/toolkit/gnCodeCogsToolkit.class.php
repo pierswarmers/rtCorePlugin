@@ -59,13 +59,13 @@ class gnCodeCogsToolkit
       }
     }
     
-    $web_path = sfConfig::get('app_gn_math_cache_dir', '/_math_cache') . '/' . $filename;
+    $web_path = sfConfig::get('app_gn_math_cache_dir', '/uploads/_math_cache') . '/' . $filename;
     return sprintf('<img alt="%s" src="%s" />', $formula, $web_path);
   }
 
   static private function getCacheDir()
   {
-    $dir  = sfConfig::get('app_gn_math_cache_dir', '/_math_cache');
+    $dir  = sfConfig::get('app_gn_math_cache_dir', '/uploads/_math_cache');
 
     if(!is_dir(sfConfig::get('sf_web_dir') . $dir))
     {

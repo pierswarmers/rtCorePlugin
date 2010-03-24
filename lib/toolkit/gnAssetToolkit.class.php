@@ -513,7 +513,7 @@ class gnAssetToolkit
   {
     $options['maxWidth'] = isset($options['maxWidth']) ? $options['maxWidth'] : 150;
     $options['maxHeight'] = isset($options['maxHeight']) ? $options['maxHeight'] : 150;
-    $options['dir'] = isset($options['dir']) ? $options['dir'] : sfConfig::get('app_asset_thumbnail_dir', '/_thumbnail_cache');
+    $options['dir'] = isset($options['dir']) ? $options['dir'] : sfConfig::get('app_asset_thumbnail_dir', '/uploads/_thumbnail_cache');
     $options['scale'] = isset($options['scale']) ? $options['scale'] : true;
     $options['inflate'] = isset($options['inflate']) ? $options['inflate'] : false;
     $options['quality'] = isset($options['quality']) ? $options['quality'] : 80;

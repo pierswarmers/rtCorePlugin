@@ -21,7 +21,7 @@ $close = sprintf('](asset:%s)', $asset->getOriginalFilename());
 if($asset->isImage())
 {
   $open = '![';
-  $close = sprintf('](%s|right|200,400)', $asset->getOriginalFilename());
+  $close = sprintf('](asset:%s|right|200,400)', $asset->getOriginalFilename());
 }
 
 ?>

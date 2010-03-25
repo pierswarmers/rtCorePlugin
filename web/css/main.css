@@ -1,25 +1,19 @@
 
-/* general */
-.gn-inline-panel {margin-bottom:1.5em;}
-
 /* structure */
 #gn-page{background:url(../images/border.png) repeat-y 630px 0;padding:20px 0;}
-#gn-footer{background:#28CFCD;border-top:5px solid #CCC;border-bottom:5px solid #CCC;}
-#gn-header{background:#28CFCD;border-bottom:5px solid #CCC;}
+#gn-header, #gn-footer { border-color: #CCC; border-style:solid; }
+#gn-footer{text-align:center;border-top-width:5px;padding-top:1em;}
+#gn-footer a.gn-logo {margin-left:5px;vertical-align: middle;display:inline-block;text-indent:-1000px;text-align:left;overflow:hidden;height:15px;width:140px;background-image:url(../images/logo-full-small.png); background-position: 50% 50%; background-repeat:no-repeat;height:50px;}
+#gn-header{background:#28CFCD;border-bottom-width:5px;}
 #gn-component-nav{list-style:none;padding:1em 0 0;margin:0 0 1.5em 0;text-align:right;}
-#gn-component-nav a{text-decoration:none;color:rgb(255,255,255);padding:8px;-moz-border-radius:5px;-webkit-border-radius:5px;background:#1A908F;}
+#gn-component-nav a{text-decoration:none;color:#FFF;padding:8px;-moz-border-radius:5px;-webkit-border-radius:5px;background:url(../images/bg-trans-0-0-0-0_5.png);}
 #gn-component-nav li{display:inline;padding:0;margin:0 5px 0 0;}
 #gn-component-nav li.right{margin:0 0 0 5px;}
-.gn-inner{}
-#gn-content{}
-
-
 #gn-side .gn-search-form label{display:none;}
 #gn-side .gn-search-form input{width:150px}
 #gn-side ul, #gn-side p {margin-bottom:1.5em;padding-bottom:1.5em;border-bottom:2px solid #efefef;}
-
-
-#gn-tagline{float:left;line-height:2em;font-weight:bold;color:#FFF;text-shadow:1px 1px 1px #1A908F;font-size:2em;}
+#gn-tagline{float:left;line-height:2em;font-weight:bold;color:#FFF;text-shadow:1px 1px 1px #555;font-size:2em;}
+.gn-inline-panel {margin-bottom:1.5em;}
 
 /* tools */
 
@@ -27,16 +21,13 @@ ul.gn-tools{list-style:none;margin-left:0;margin-right:0;padding-left:0;}
 ul.gn-tools li{}
 dl.gn-meta-data{border-top:#CCC 1px solid;padding:1.5em 0 0;margin:0 0 1.5em;}
 dl.gn-meta-data dt, dl.gn-meta-data dd{display:inline;padding:0;margin:0 0.5em 0 0;}
-
 ul.gn-markdown-tools {list-style:none;margin:-2em 0 0 0;padding:0;text-align:right;}
 ul.gn-markdown-tools li {display:inline;}
-
-
 .gn-form-row.standard label{display:block;}
 .gn-form-row input[type=checkbox]{position:relative;top:0;}
 .gn-form-row textarea, .gn-form-row .title{width:530px}
 
-/* buttons */
+/* nice buttons */
 button.button, a.button, input.button{border:solid 1px rgb(153, 153, 153);display:inline-block;margin: 0.7em 0.5em 0.7em 0;padding:5px 10px 5px 7px;background:#222 url(../images/button-overlay.png) repeat-x;font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;font-size:100%;line-height:130%;text-decoration:none;font-weight:bold;color:#fff;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;-moz-box-shadow:0 1px 3px rgba(0,0,0,0.5);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);text-shadow:0 -1px 1px rgba(0,0,0,0.25);border-bottom:1px solid rgba(0,0,0,0.25);position:relative;}
 a.button:hover{color:#fff;}
 .small.button{font-size:80%;}
@@ -74,13 +65,14 @@ button img, a.button img{
 ul.error_list, .error_list li {margin:0;padding:0;display:inline;list-style: none;font-weight:normal;}
 
 
-/* typography */
+/* general typography enhancements */
 
-h1{font-family:Georgia,"Times New Roman",serif;font-size: 2em;}
-h2{font-size: 1.8em;color:#28CFCD;}
-h3{font-size: 1.3em;}
-h1,legend{color:#858585;}
-a,h3{color:#D62006;}
+h1{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 2em;padding-bottom:.5em;}
+h1,h2 {border-bottom:1px solid #CCC;font-weight:bold;}
+h2{font-size: 1.6em;color:#666;}
+h3{font-size: 1.3em;font-weight:bold;}
+h1,legend{color:#333;}
+a{color:#3366CC;}
 a, a:hover {outline:none;-moz-outline-style:none;}
 table, thead th, td {border:1px solid #ccc;}
 thead th, td {border-top:0; border-left:0;}
@@ -91,7 +83,7 @@ p img.right, p img.left {margin-top:0.5em;}
 iframe {margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}
 
-/*#gn-footer{background:url(../images/logo-full-small.png) 50% 50% no-repeat;height:100px;}*/
+
 
 .gn-form-row {margin-bottom:0.5em;}
 .gn-form-collapse legend{cursor:pointer;}

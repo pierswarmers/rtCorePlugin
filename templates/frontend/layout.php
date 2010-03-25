@@ -17,7 +17,7 @@
       <div class="container">
         <div id="gn-tagline">
           <?php echo sfConfig::get('app_gn_title', 'Gumnut') ?> / 
-          <?php echo !is_null(sfConfig::get('app_gn_node_title')) ? sprintf('<span>%s</span>',sfConfig::get('app_gn_node_title')) : '' ?>
+          <?php echo !is_null(sfConfig::get('app_gn_node_title')) ? sprintf('<span class="alt">%s</span>',sfConfig::get('app_gn_node_title')) : '' ?>
         </div>
         <ul id="gn-component-nav">
           <?php if (isset($routes['sf_guard_signin']) && isset($routes['sf_guard_signout'])): ?>
@@ -49,7 +49,7 @@
     </div>
     <div id="gn-footer">
       <div class="container">
-        &nbsp;
+        Powered by <a href="http://wranglers.com.au" class="gn-logo">Gumnut Core - A content editing and delivery system.</a>
       </div>
     </div>
   </body>

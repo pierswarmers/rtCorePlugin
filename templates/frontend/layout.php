@@ -8,7 +8,7 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php use_stylesheet('/gnCorePlugin/vendor/blueprint/screen.css', 'first') ?>
-    <?php use_stylesheet('/gnCorePlugin/css/main.css', 'last') ?>
+    <?php use_stylesheet('/gnCorePlugin/css/main.css', 'first') ?>
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>

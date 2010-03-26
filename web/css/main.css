@@ -13,6 +13,8 @@
 #gn-side ul, #gn-side p {margin-bottom:1.5em;padding-bottom:1.5em;border-bottom:2px solid #efefef;}
 #gn-tagline{float:left;line-height:70px;font-weight:bold;color:#FFF;text-shadow:1px 1px 1px #555;font-size:2em;}
 .gn-inline-panel {margin-bottom:1.5em;}
+.gn-version-comparison th {width:40%;}
+.gn-version-comparison th.name { width:10%;}
 
 /* tools */
 ul.gn-tools{list-style:none;margin-left:0;margin-right:0;padding-left:0;}
@@ -64,6 +66,7 @@ ul.error_list, .error_list li {margin:0;padding:0;display:inline;list-style: non
 
 /* general typography enhancements */
 
+body, * {font-family:Arial,sans-serif;}
 h1{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 2em;padding-bottom:.5em;}
 h1,h2 {border-bottom:1px solid #CCC;font-weight:bold;}
 h2{font-size: 1.6em;color:#666;}
@@ -72,8 +75,7 @@ h1,legend{color:#333;}
 a{color:#3366CC;}
 a, a:hover {outline:none;-moz-outline-style:none;}
 table, thead th, td {border:1px solid #ccc;}
-thead th, td {border-top:0; border-left:0;}
-.gn-version-comparison  td {vertical-align: top;}
+thead th, td {border-top:0; border-left:0;vertical-align: top;}
 table{border-bottom:0; border-right:0;}
 thead th {background:#ddd;color:#fff;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size: 1.1em;}

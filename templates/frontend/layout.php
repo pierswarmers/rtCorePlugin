@@ -16,22 +16,22 @@
     <div id="gn-header">
       <div class="container">
         <div id="gn-tagline">
-          <?php echo sfConfig::get('app_gn_title', 'Gumnut') ?> / 
-          <?php echo !is_null(sfConfig::get('app_gn_node_title')) ? sprintf('<span class="alt">%s</span>',sfConfig::get('app_gn_node_title')) : '' ?>
+          <span id="gn-tagline-name"><?php echo sfConfig::get('app_gn_title', 'Gumnut') ?></span> /
+          <?php echo !is_null(sfConfig::get('app_gn_node_title')) ? sprintf('<span id="gn-tagline-location">%s</span>',sfConfig::get('app_gn_node_title')) : '' ?>
         </div>
         <ul id="gn-component-nav">
-          <?php if (isset($routes['sf_guard_signin']) && isset($routes['sf_guard_signout'])): ?>
-          <?php if (!$sf_user->isAuthenticated()): ?>
-              <li><?php echo link_to(__('Login'), '@sf_guard_signin') ?></li>
-            <?php else: ?>
-              <li class="right"><?php echo link_to('&times; '.__('Logout'), '@sf_guard_signout') ?></li>
-            <?php endif; ?>
-          <?php endif; ?>
           <?php if (isset($routes['gn_search'])): ?>
           <li><?php echo link_to(__('Search'), '@gn_search') ?></li>
           <?php endif; ?>
           <?php if (isset($routes['gn_wiki_page_index'])): ?>
               <li><?php echo link_to(__('Wiki'), 'gnWikiPage/index') ?></li>
+          <?php endif; ?>
+          <?php if (isset($routes['sf_guard_signin']) && isset($routes['sf_guard_signout'])): ?>
+            <?php if (!$sf_user->isAuthenticated()): ?>
+              <li><?php echo link_to(__('Login'), '@sf_guard_signin') ?></li>
+            <?php else: ?>
+              <li><?php echo link_to('&times; '.__('Logout'), '@sf_guard_signout') ?></li>
+            <?php endif; ?>
           <?php endif; ?>
         </ul>
       </div>

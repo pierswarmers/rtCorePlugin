@@ -13,6 +13,7 @@
     <?php include_javascripts() ?>
   </head>
   <body>
+    <?php require_once(dirname(__FILE__).'/gn_admin_header.php'); ?>
     <div id="gn-header">
       <div class="container">
         <div id="gn-tagline">
@@ -47,10 +48,6 @@
         <?php endif; ?>
       </div>
     </div>
-    <div id="gn-footer">
-      <div class="container">
-        Powered by <a href="http://wranglers.com.au" class="gn-logo">Gumnut Core - A content editing and delivery system.</a>
-      </div>
-    </div>
+    <?php require_once(dirname(__FILE__).'/gn_footer.php'); ?>
   </body>
 </html>

@@ -45,6 +45,8 @@ span.loading { background-image: url(../images/loader.gif); }
 span.error { background-image: url(../images/cross.png); color: red; }
 span.success { background-image: url(../images/tick.png); color: green; }
 
+/* 404 page */
+.gn-default-404 dt, .gn-default-404 dd { margin:0; padding-bottom:1em; }
 
 button {
   width:auto;

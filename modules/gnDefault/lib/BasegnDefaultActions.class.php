@@ -16,6 +16,12 @@
  */
 class BasegnDefaultActions extends sfActions
 {
+  public function preExecute()
+  {
+    parent::preExecute();
+    sfConfig::set('app_gn_node_title', 'Error');
+  }
+  
   public function executeError404(sfWebRequest $request)
   {
 

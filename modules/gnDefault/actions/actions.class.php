@@ -19,9 +19,4 @@ require_once(dirname(__FILE__).'/../lib/BasegnDefaultActions.class.php');
  */
 class gnDefaultActions extends BasegnDefaultActions
 {
-  public function preExecute()
-  {
-    parent::postExecute();
-    sfConfig::set('app_gn_node_title', '404: Page not found');
-  }
 }

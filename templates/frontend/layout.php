@@ -17,7 +17,7 @@
       <div class="container">
         <div id="gn-tagline">
           <span id="gn-tagline-name"><?php echo sfConfig::get('app_gn_title', 'Gumnut') ?></span> /
-          <?php echo !is_null(sfConfig::get('app_gn_node_title')) ? sprintf('<span id="gn-tagline-location">%s</span>',sfConfig::get('app_gn_node_title')) : '' ?>
+          <span id="gn-tagline-module-title"><?php echo !is_null(sfConfig::get('app_gn_node_title')) ? sprintf('<span id="gn-tagline-location">%s</span>',sfConfig::get('app_gn_node_title')) : '' ?></span>
         </div>
         <ul id="gn-component-nav">
           <?php if (isset($routes['gn_search'])): ?>

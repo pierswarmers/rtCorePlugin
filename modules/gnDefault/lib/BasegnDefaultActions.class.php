@@ -41,8 +41,21 @@ class BasegnDefaultActions extends sfActions
         $title = sfContext::getInstance()->getI18N()->__($title);
         $message = sfContext::getInstance()->getI18N()->__($message);
       }
-
+      
       $message = sprintf('%s: %s', $message, $request->getGetParameter('url'));
+
+      $referer_message = '';
+
+      if($request->hasParameter('referer') && $request->getParameter('referer') !== '')
+      {
+        $referer_message = 'They appear to have been directed to that page from';
+
+        if(sfConfig::get('sf_i18n', false))
+        {
+          $referer_message = sfContext::getInstance()->getI18N()->__($referer_message);
+        }
+        $message = $message . "\n" . $referer_message . ': ' . $request->getGetParameter('referer');
+      }
 
       $mailer->composeAndSend(
         'no-reply@reditype.com',

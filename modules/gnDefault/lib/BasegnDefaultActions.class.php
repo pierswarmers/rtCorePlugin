@@ -1,0 +1,49 @@
+<?php
+/*
+ * This file is part of the gumnut package.
+ * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * BasegnSearchActions handles search functions.
+ *
+ * @package    gumnut
+ * @subpackage modules
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ */
+class BasegnDefaultActions extends sfActions
+{
+  public function executeError404(sfWebRequest $request)
+  {
+
+  }
+
+  public function executeNotify404(sfWebRequest $request)
+  {
+    if(sfConfig::has('app_gn_admin_email'))
+    {
+      $mailer = $this->getMailer();
+
+      $title = '404: Missing page found by user';
+      $message = 'A visitor to your site found a missing page';
+
+      if(sfConfig::get('sf_i18n', false))
+      {
+        $title = sfContext::getInstance()->getI18N()->__($title);
+        $message = sfContext::getInstance()->getI18N()->__($message);
+      }
+
+      $message = sprintf('%s: %s', $message, $request->getGetParameter('url'));
+
+      $mailer->composeAndSend(
+        'no-reply@reditype.com',
+        sfConfig::get('app_gn_admin_email'),
+        $title,
+        $message
+      );
+    }
+  }
+}

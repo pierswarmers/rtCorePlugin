@@ -39,6 +39,13 @@ a.button:hover{color:#fff;}
 .cancel.button{background-color:#ff5c00;}
 .shout.button{background-color:#ffb515;}
 
+/* simple feedback */
+span.error, span.success, span.loading { font-weight:bold; background-color:transparent; background-position: 0 50%; background-repeat: no-repeat; border:none; padding:0 0 0 20px; }
+span.loading { background-image: url(../images/loader.gif); }
+span.error { background-image: url(../images/cross.png); color: red; }
+span.success { background-image: url(../images/tick.png); color: green; }
+
+
 button {
   width:auto;
   overflow:visible;

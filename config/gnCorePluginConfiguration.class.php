@@ -30,9 +30,9 @@ class gnCorePluginConfiguration extends sfPluginConfiguration
     }
 
     // Set timezone for local app
-    if(sfConfig::has('gn_default_timezone'))
+    if(sfConfig::has('app_gn_default_timezone'))
     {
-      sfConfig::set('sf_default_timezone', sfConfig::get('gn_default_timezone'));
+      sfConfig::set('sf_default_timezone', sfConfig::get('app_gn_default_timezone'));
     }
   }
 

@@ -57,11 +57,7 @@ class gnCorePluginConfiguration extends sfPluginConfiguration
    */
   private function setTemplateDir()
   {
-    if(sfConfig::get('app_gn_set_template_dir', true))
-    {
-      $template_dir = sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'gnCorePlugin'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.sfConfig::get('sf_app');
-      sfConfig::set('sf_app_template_dir', sfConfig::get('app_gn_template_dir', $template_dir));
-    }
+    gnTemplateToolkit::setBackendTemplateDir();
   }
 
   /**
@@ -95,4 +91,3 @@ class gnCorePluginConfiguration extends sfPluginConfiguration
     $routing->prependRoute('gn_asset_delete', new sfRoute('/asset/delete.:sf_format', array('module' => 'gnAsset', 'action' => 'delete')));
   }
 }
-?>

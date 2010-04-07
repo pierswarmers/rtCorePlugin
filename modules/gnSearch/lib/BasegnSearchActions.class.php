@@ -73,10 +73,10 @@ class BasegnSearchActions extends sfActions
   
   public function executeIndex(sfWebRequest $request)
   {
+    gnTemplateToolkit::setFrontendTemplateDir();
     $this->setPage($request->getParameter('page', 1));
     $form = new gnSearchForm;
     
-
     if($request->hasParameter('q'))
     {
       $this->number_of__results = Doctrine::getTable('gnIndex')->getNumberOfMatchedResults($request->getParameter('q'), $this->getUser()->getCulture());

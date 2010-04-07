@@ -3,9 +3,8 @@
 <?php use_helper('I18N', 'gnForm') ?>
 <?php $routes = $sf_context->getRouting()->getRoutes() ?>
 
-<h1>Search</h1>
+<?php include_partial('form', array('form' => $form, array('heading_tag' => 'h1'))) ?>
 
-<?php include_partial('form', array('form' => $form)) ?>
 <?php if(isset($pager)): ?>
 <div class="gn-search-results">
   <p><?php echo $number_of__results . ' ' . __('results found.') ?></p>

@@ -3,8 +3,8 @@
 #gn-admin-header {display:none;}
 #gn-page{background:url(../images/border.png) repeat-y 630px 0;padding:20px 0;}
 #gn-header, #gn-footer { border-color: #CCC; border-style:solid; }
-#gn-footer{text-align:center;border-top-width:5px;padding-top:1em;}
-#gn-footer a.gn-logo {margin-left:5px;vertical-align: middle;display:inline-block;text-indent:-1000px;text-align:left;overflow:hidden;height:15px;width:93px;background-image:url(../images/logo-full-small.png); background-position: 50% 50%; background-repeat:no-repeat;height:50px;}
+#gn-footer{text-align:center;border-top-width:5px;padding:20px;}
+#gn-footer a {margin-left:5px;vertical-align: middle;display:inline-block;text-indent:-1000px;text-align:left;overflow:hidden;height:31px;width:100px;background:url(../images/logos/logo_reditype_dark.png) 50% 50% no-repeat;}
 #gn-header{background:#28CFCD;border-bottom-width:5px;line-height:70px;vertical-align: middle;}
 #gn-component-nav{list-style:none;padding:0;margin:0;text-align:right;}
 #gn-component-nav a{text-decoration:none;color:#FFF;padding:8px;-moz-border-radius:5px;-webkit-border-radius:5px;background:url(../images/bg-trans-0-0-0-0_5.png);}

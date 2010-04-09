@@ -22,6 +22,7 @@ ul.gn-tools{list-style:none;margin-left:0;margin-right:0;padding-left:0;}
 ul.gn-tools li{}
 dl.gn-meta-data{border-top:#CCC 1px solid;padding:1.5em 0 0;margin:0 0 1.5em;}
 dl.gn-meta-data dt, dl.gn-meta-data dd{display:inline;padding:0;margin:0 0.5em 0 0;}
+dl.gn-meta-data dd div {display:inline; }
 ul.gn-markdown-tools {list-style:none;margin:-2em 0 0 0;padding:0;text-align:right;}
 ul.gn-markdown-tools li {display:inline;}
 .gn-form-row.standard label{display:block;}

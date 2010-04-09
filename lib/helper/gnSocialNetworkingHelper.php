@@ -16,6 +16,29 @@
  * @author     Piers Warmers <piers@wranglers.com.au>
  */
 
+function get_social_networking_badge($options = null)
+{
+  if(sfConfig::get('app_gn_social_networking_service') === 'tweetmeme')
+  {
+    return get_tweetmeme_badge($options);
+  }
+
+  if(!sfConfig::has('app_gn_social_networking_service') || !sfConfig::has('app_gn_social_networking_service_username'))
+  {
+    return '';
+  }
+
+  if(sfConfig::get('app_gn_social_networking_service') === 'addthis')
+  {
+    return get_addthis_badge($options);
+  }
+
+  if(sfConfig::get('app_gn_social_networking_service') === 'sharethis')
+  {
+    return get_sharethis_badge($options);
+  }
+}
+
 /**
  * Returns the AddThis integration code snippet.
  *
@@ -24,15 +47,10 @@
  * @param string $username
  * @return string
  */
-function add_this_badge($options = null)
+function get_addthis_badge($options = null)
 {
-  if(!sfConfig::has('app_gn_addthis_username'))
-  {
-    return '';
-  }
-  
   $string = '';
-  $username = sfConfig::get('app_gn_addthis_username');
+  $username = sfConfig::get('app_gn_social_networking_service_username');
   $option_string = '';
   
   if(!is_null($options))
@@ -43,26 +61,76 @@ function add_this_badge($options = null)
     $option_string = sprintf(' addthis:url="%s" addthis:title="%s" addthis:description="%s" ', $options['url'], $options['title'], $options['description']);
   }
 
-  if(sfConfig::get('app_gn_addthis_as_button', true))
-  {
-    $string = <<< EOS
+  $string = <<< EOS
 <a class="addthis_button" $option_string href="http://www.addthis.com/bookmark.php?v=250&amp;username=$username"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0; float:left; margin-right:10px;"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=$username"></script>
 EOS;
-  }
-  else
+
+  return $string;
+}
+
+/**
+ * Returns the ShareThis integration code snippet.
+ *
+ * See: http://www.sharethis.com
+ *
+ * @return string
+ */
+function get_sharethis_badge($options = null)
+{
+  $string = '';
+  $username = sfConfig::get('app_gn_social_networking_service_username');
+  $option_string = '';
+  use_javascript('http://w.sharethis.com/button/sharethis.js#publisher='.$username);
+  
+  if(!is_null($options))
   {
+    $options['url'] = isset($options['url']) ? $options['url'] : '';
+    $options['title'] = isset($options['title']) ? $options['title'] : '';
+    $options['description'] = isset($options['description']) ? $options['description'] : '';
+    $option_string = sprintf(' url="%s", title="%s", summary="%s" ', $options['url'], $options['title'], $options['description']);
+    $option_string = sprintf('{ url: "%s", title: "%s", summary: "%s" }', $options['url'], $options['title'], $options['description']);
+  }
+
+  $string = <<< EOS
+<script language="javascript" type="text/javascript">
+	SHARETHIS.addEntry($option_string, {button:true} );
+</script>
+EOS;
+
+  return $string;
+}
+
+/**
+ * Returns the TweetMeme integration code snippet.
+ *
+ * Currently under development, will always return an empty string.
+ * 
+ * See: http://www.tweetmeme.com
+ *
+ * @return string
+ */
+function get_tweetmeme_badge($options = null)
+{
+  return '';
+  
+  $option_string = '';
+
+  $string = '';
+
+  if(isset($options['url']))
+  {
+    $url = $options['url'];
     $string = <<< EOS
-<div class="addthis_toolbox addthis_default_style">
-<a href="http://www.addthis.com/bookmark.php?v=250&amp;username=$username" style="text-decoration: none;" class="addthis_button_compact"$option_string>Share</a>
-<span class="addthis_separator">|</span>
-<a class="addthis_button_facebook"></a>
-<a class="addthis_button_myspace"></a>
-<a class="addthis_button_google"></a>
-<a class="addthis_button_twitter"></a>
-</div>
-<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=$username"></script>
+<script type="text/javascript">
+tweetmeme_url = '$url';
+tweetmeme_style = 'compact';
+</script>
 EOS;
   }
+
+  $string .= <<< EOS
+<script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+EOS;
 
   return $string;
 }

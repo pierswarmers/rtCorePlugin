@@ -81,6 +81,8 @@ class gnCorePluginConfiguration extends sfPluginConfiguration
     )));
     $routing->prependRoute('sf_default_notify_404', new sfRoute('/default/notify404.:sf_format', array('module' => 'gnDefault', 'action' => 'notify404')));
     $routing->prependRoute('sf_guard_register', new sfRoute('/user/register', array('module' => 'gnGuardRegister', 'action' => 'index')));
+    $routing->prependRoute('sf_guard_register_success', new sfRoute('/user/registration_pending', array('module' => 'gnGuardRegister', 'action' => 'pending')));
+    $routing->prependRoute('sf_guard_register_confirm', new sfRoute('/user/registration_confirm/:id', array('module' => 'gnGuardRegister', 'action' => 'confirm')));
     $routing->prependRoute('sf_guard_signin', new sfRoute('/user/login', array('module' => 'gnGuardAuth', 'action' => 'signin')));
     $routing->prependRoute('sf_guard_signout', new sfRoute('/user/logout', array('module' => 'gnGuardAuth', 'action' => 'signout')));
     $routing->prependRoute('gn_search', new sfRoute('/search', array('module' => 'gnSearch', 'action' => 'index')));

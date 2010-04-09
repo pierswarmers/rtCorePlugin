@@ -1,26 +1,22 @@
 <?php
 
 /*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
+ * This file is part of the gumnut package.
+ * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-require_once(dirname(__FILE__).'/../../../../sfDoctrineGuardPlugin/modules/sfGuardRegister/lib/BasesfGuardRegisterActions.class.php');
+require_once(dirname(__FILE__).'/../lib/BasegnGuardRegisterActions.class.php');
 
 /**
+ * gnGuardRegisterActions
  *
- * @package    symfony
- * @subpackage plugin
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: actions.class.php 23319 2009-10-25 12:22:23Z Kris.Wallsmith $
+ * @package    gnCorePlugin
+ * @subpackage modules
+ * @author     Piers Warmers <piers@wranglers.com.au>
  */
-class gnGuardRegisterActions extends BasesfGuardRegisterActions
+class gnGuardRegisterActions extends BasegnGuardRegisterActions
 {
-  public function preExecute() {
-    parent::postExecute();
-    sfConfig::set('app_gn_node_title', 'Users');
-  }
 }

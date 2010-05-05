@@ -2,9 +2,18 @@ sfGuardGroup:
   Group_admin:
     name:           admin
     description:    Administrator group
-    Permissions:    [Permission_admin_wiki]
+    Permissions:
+      - Permission_admin_wiki
+      - Permission_admin_blog
+      - Permission_admin_user
 
 sfGuardPermission:
   Permission_admin_wiki:
     name:           admin_wiki
+    description:    Administrator permission for wiki
+  Permission_admin_blog:
+    name:           admin_blog
+    description:    Administrator permission for wiki
+  Permission_admin_user:
+    name:           admin_user
     description:    Administrator permission for wiki

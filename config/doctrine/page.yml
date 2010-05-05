@@ -18,6 +18,7 @@ gnPage:
     SoftDelete:        {}
 
   columns:
+    site_id:          integer
     title:            string(255)
     content:          string
     description:      string
@@ -29,6 +30,12 @@ gnPage:
     comment_count:    { type: integer, default: 0 }
     searchable:       { type: boolean, default: 1 }
 
+  relations:
+    gnSite:
+      local: site_id
+      foreign: id
+      onDelete: CASCADE
+      
   options:
     collate:   utf8_unicode_ci
     charset:   utf8

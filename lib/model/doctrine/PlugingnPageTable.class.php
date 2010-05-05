@@ -17,22 +17,48 @@
  */
 class PlugingnPageTable extends Doctrine_Table
 {
+  /**
+   * Return all published pages.
+   * 
+   * @param Doctrine_Query $query
+   * @return Doctrine_Collection
+   */
   public function findAllPublished(Doctrine_Query $query = null)
   {
     $query = $this->addPublishedQuery($query);
+    $query = $this->addSiteQuery($query);
     return $query->andWhere('page.deleted_at IS NULL')->execute();
   }
-
+  
+  /**
+   * Return all pages pages which aren't deleted.
+   *
+   * @param Doctrine_Query $query
+   * @return Doctrine_Collection
+   */
   public function findAllPages(Doctrine_Query $query = null)
   {
-    return $this->addNotDeletedQuery()->execute();
+    $query = $this->addSiteQuery($query);
+    return $this->addNotDeletedQuery($query)->execute();
   }
 
+  /**
+   * Adds a check for pages which have no deleted_at value, i.e. aren't deleted.
+   *
+   * @param Doctrine_Query $query
+   * @return Doctrine_Query
+   */
   public function addNotDeletedQuery(Doctrine_Query $query = null)
   {
     return $this->getQuery($query)->andWhere('page.deleted_at IS NULL');
   }
-
+  
+  /**
+   * Adds a check for pages which have been published.
+   *
+   * @param Doctrine_Query $query
+   * @return Doctrine_Query
+   */
   public function addPublishedQuery(Doctrine_Query $query = null)
   {
     $query = $this->getQuery($query);
@@ -41,20 +67,41 @@ class PlugingnPageTable extends Doctrine_Table
     $query->andWhere('page.published = 1');
     return $query;
   }
+  
+  /**
+   * Adds a check for pages which belong to the current domain/site.
+   *
+   * Note: this will only be activated if the gn_enable_multi_site config value is set to true.
+   *
+   * @param Doctrine_Query $query
+   * @return Doctrine_Query
+   */
+  public function addSiteQuery(Doctrine_Query $query = null)
+  {
+    $query = $this->getQuery($query);
+    
+    if(gnSiteToolkit::isMultiSiteEnabled())
+    {
+      $query->leftJoin('page.gnSite site')
+            ->andWhere('site.domain = ?', gnSiteToolkit::getCurrentDomain());
+    }
+    
+    return $query;
+  }
 
   /**
    * Return a query object, creting a new one if needed.
    *
    * @param Doctrine_Query $query
-   * @param string $alias
    * @return Doctrine_Query
    */
   public function getQuery(Doctrine_Query $query = null)
   {
     if(is_null($query))
     {
-      return parent::createQuery('page');
+      $query = parent::createQuery('page');
     }
+
     return $query;
   }
 }

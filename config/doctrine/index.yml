@@ -5,12 +5,22 @@ gnIndex:
     model_id:                integer
     model:                   string(100)
     lang:                    string(5)
+    site_id:                 integer
+    published:        { type: boolean, default: 1 }
+    published_from:   timestamp
+    published_to:     timestamp
 
   indexes:
     keyword:
       fields:                [keyword]
     model:
       fields:                [model_id, model]
+
+  relations:
+    gnSite:
+      local: site_id
+      foreign: id
+      onDelete: CASCADE
 
   attributes:
     export: [ all, constraints ] 

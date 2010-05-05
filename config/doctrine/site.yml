@@ -1,0 +1,9 @@
+gnSite:
+  columns:
+    name:           string(255)
+    domain:         string(255)
+    is_primary:     { type: boolean, default: 0 }
+  indexes:
+    is_primary:
+      fields: [is_primary]
+      sorting: DESC

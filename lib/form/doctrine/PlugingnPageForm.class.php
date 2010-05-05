@@ -20,10 +20,41 @@ abstract class PlugingnPageForm extends BasegnPageForm
   public function setup()
   {
     parent::setup();
+    
     unset($this['deleted_at'], $this['published_from'], $this['published_to'], $this['comment_count']);
+
+    if(!gnSiteToolkit::isMultiSiteEnabled())
+    {
+      // Delete this widget unless we are in a multi-site installation.
+      unset($this['site_id']);
+    }
+    
     $this->widgetSchema['searchable']->setLabel('Make this page available to search engine robots');
     $this->widgetSchema['slug']->setLabel('URL Slug');
     $this->enableCSRFProtection();
     $this->embedI18n(array('en'));
+  }
+
+  /**
+   * Extends the default handling to include logic to handle
+   *
+   * @param array $defaults An array of default values
+   *
+   * @return sfForm The current form instance
+   */
+  public function setDefaults($defaults)
+  {
+    parent::setDefaults($defaults);
+
+    if(gnSiteToolkit::isMultiSiteEnabled())
+    {
+      $gn_site = Doctrine::getTable('gnSite')->findOneByDomain(gnSiteToolkit::getCurrentDomain());
+      if($gn_site)
+      {
+        $this->setDefault('site_id', $gn_site->getId());
+      }
+    }
+
+    return $this;
   }
 }

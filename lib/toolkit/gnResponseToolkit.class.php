@@ -29,7 +29,7 @@ class gnResponseToolkit
   {
     $data = array();
     $data['robots'] = $gn_page->getSearchable();
-    $data['keywords'] = $gn_page->Translation[$sf_user->getCulture()]->getTags();
+    $data['keywords'] = $gn_page->getTags();
     $data['title'] = $gn_page->getTitle();
     $data['description'] = $gn_page->getDescription();
     self::setCommonMetas($data, $sf_response);

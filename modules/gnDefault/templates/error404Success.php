@@ -1,5 +1,5 @@
 <?php use_helper('I18N') ?>
-<?php use_javascript('/gnCorePlugin/js/jquery-1.4.2.min.js') ?>
+<?php use_javascript('/gnCorePlugin/vendor/jquery/js/jquery.min.js') ?>
 <div class="gn-default-404">
 
   <h1><?php echo __('Oops! Page not found') ?></h1>

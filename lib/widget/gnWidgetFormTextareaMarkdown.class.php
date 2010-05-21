@@ -38,7 +38,7 @@ class gnWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
   public function getJavaScripts()
   {
     return array(
-      '/gnCorePlugin/js/jquery-1.4.2.min.js',
+      '/gnCorePlugin/vendor/jquery/js/jquery.min.js',
       '/gnCorePlugin/js/main.js',
       '/gnCorePlugin/vendor/markitup/jquery.markitup.pack.js',
       '/gnCorePlugin/js/markitup-settings.js'

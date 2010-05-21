@@ -126,7 +126,7 @@ class PlugingnIndexTable extends Doctrine_Table
   public function getBaseSearchQuery($keywords, $lang = null, Doctrine_Query $q = null)
   {
     $q = $this->getStandardSearchComponentInQuery($keywords, $lang, $q);
-    $q->select('i.model, model_id, lang, count(i.keyword) AS relevance');
+    $q->select('i.model, model_id, count(i.keyword) AS relevance');
     $q->orderBy('relevance DESC');
     return $q;
   }
@@ -148,7 +148,6 @@ class PlugingnIndexTable extends Doctrine_Table
     $q = $this->getQuery($q);
     $q->addGroupBy('i.model_id');
     $q->addGroupBy('i.model');
-    $q->andWhere('i.lang = ?', $this->getLang($lang));
     $q->andWhereIn('i.keyword', $keywords);
     return $q;
   }
@@ -250,10 +249,6 @@ class PlugingnIndexTable extends Doctrine_Table
 
     $q->andWhereIn('model', $class);
 
-    if(!is_null($lang))
-    {
-      $q->andWhere('lang = ?', $lang);
-    }
     $q->execute();
   }
 }

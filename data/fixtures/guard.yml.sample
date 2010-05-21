@@ -5,7 +5,13 @@ sfGuardGroup:
     Permissions:
       - Permission_admin_wiki
       - Permission_admin_blog
+      - Permission_admin_site
       - Permission_admin_user
+      - Permission_admin_group
+      - Permission_admin_permission
+      - Permission_admin_search
+      - Permission_admin_asset
+      - Permission_admin_tree
 
 sfGuardPermission:
   Permission_admin_wiki:
@@ -13,7 +19,25 @@ sfGuardPermission:
     description:    Administrator permission for wiki
   Permission_admin_blog:
     name:           admin_blog
-    description:    Administrator permission for wiki
+    description:    Administrator permission for blog
+  Permission_admin_site:
+    name:           admin_site
+    description:    Administrator permission for site
   Permission_admin_user:
     name:           admin_user
-    description:    Administrator permission for wiki
+    description:    Administrator permission for users
+  Permission_admin_group:
+    name:           admin_group
+    description:    Administrator permission for user groups
+  Permission_admin_permission:
+    name:           admin_permission
+    description:    Administrator permission for user permissions
+  Permission_admin_search:
+    name:           admin_search
+    description:    Administrator permission for search
+  Permission_admin_asset:
+    name:           admin_asset
+    description:    Administrator permission for asset
+  Permission_admin_tree:
+    name:           admin_tree
+    description:    Administrator permission for trees

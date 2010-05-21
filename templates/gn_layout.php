@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php use_stylesheet('/gnCorePlugin/vendor/blueprint/screen.css', 'first') ?>
     <?php use_stylesheet('/gnCorePlugin/css/main.css', 'first') ?>
+    <?php use_javascript('/gnCorePlugin/vendor/jquery/js/jquery.min.js') ?>
+    <?php use_javascript('/gnCorePlugin/vendor/jquery-ui/js/jquery-ui.min.js', 'last'); ?>
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>
@@ -49,8 +51,14 @@
         <?php if (isset($routes['gn_search']) && !has_slot('gn-side')): ?>
         <?php include_partial('gnSearch/form', array('form' => new gnSearchForm())) ?>
         <?php endif; ?>
+        <?php if(!has_slot('gn-site-page-navigation')): ?>
+        <?php include_component('gnSitePage', 'navigation')?>
+        <?php else: ?>
+        <?php echo get_slot('gn-site-page-navigation'); ?>
+        <?php endif; ?>
       </div>
     </div>
     <?php require_once(dirname(__FILE__).'/gn_footer.php'); ?>
+    <!--gn-admin-holder-->
   </body>
 </html>

@@ -1,9 +1,6 @@
 gnAsset:
   
   actAs:
-    I18n:
-      fields:          [title, description]
-      length:          6
     Timestampable:     ~
         
   columns:

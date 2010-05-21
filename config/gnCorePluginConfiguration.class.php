@@ -42,6 +42,12 @@ class gnCorePluginConfiguration extends sfPluginConfiguration
   private function runFrontendConfiguration()
   {
     $this->dispatcher->connect('routing.load_configuration', array($this, 'listenToRoutingLoadConfigurationFrontend'));
+    //$this->dispatcher->connect('view.cache.filter_content', array($this, 'configureWebDebugToolbar'));
+  }
+
+  public function configureWebDebugToolbar(sfEvent $event)
+  {
+    $user = $event->getSubject()->getContext()->getUser();
   }
 
   /**

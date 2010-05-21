@@ -50,7 +50,8 @@ class PlugingnPageTable extends Doctrine_Table
    */
   public function addNotDeletedQuery(Doctrine_Query $query = null)
   {
-    return $this->getQuery($query)->andWhere('page.deleted_at IS NULL');
+    return $query;
+//    return $this->getQuery($query)->andWhere('page.deleted_at IS NULL');
   }
   
   /**

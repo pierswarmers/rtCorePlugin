@@ -58,13 +58,37 @@ class gnSearchListener extends Doctrine_Record_Listener
       return;
     }
 
-    $values = array();
+    $columns = array();
+    $base_row = array();
+
+    $test_for = array('site_id', 'admin_only', 'published', 'published_from', 'published_to');
+
+    foreach($test_for as $test)
+    {
+      if(isset($object->$test) && !is_null($object->$test))
+      {
+        $columns[] = $test;
+        $base_row[$test] = $object->$test;
+      }
+    }
+    
+    $columns[] = 'model';
+    $base_row['model'] = get_class($object);
+    
+    $columns[] = 'model_id';
+    $base_row['model_id'] = $object->id;
+    
+    $columns[] = 'keyword';
+    
 
     foreach($words as $word) {
-      $values[] = sprintf('("%s", "%s", "%s", "%s")', $word, get_class($object), $object->id, $object->getLang());
+      $row = $base_row;
+      $row['keyword'] = $word;
+
+      $values[] = sprintf('("%s")', implode('", "', $row));
     }
 
-    $dbh->exec(sprintf('INSERT INTO %s (keyword, model, model_id, lang) VALUES %s', $table->getTableName(), implode(',', $values)));
+    $dbh->exec(sprintf('INSERT INTO %s (%s) VALUES %s', $table->getTableName(), implode(', ', $columns), implode(',', $values)));
   }
 
  /**

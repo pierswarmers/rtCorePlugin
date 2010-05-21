@@ -1,6 +1,6 @@
 <?php use_helper('I18N', 'Text') ?>
 <?php use_javascript('/gnCorePlugin/js/main.js') ?>
-<?php use_javascript('/gnCorePlugin/vendor/jquery/js/jquery-ui-1.8rc3.custom.min.js') ?>
+<?php use_javascript('/gnCorePlugin/vendor/jquery/js/jquery.ui.min.js') ?>
 <?php use_javascript('/gnCorePlugin/vendor/ajaxupload/ajaxupload.js') ?>
 <?php $panel_suffix = isset($panel_suffix) ? $panel_suffix : rand() ?>
 <?php $description_text = __('Description goes here...') ?>

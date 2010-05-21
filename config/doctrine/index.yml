@@ -1,11 +1,11 @@
 gnIndex:
 
   columns:
-    keyword:                 string(100)
-    model_id:                integer
-    model:                   string(100)
-    lang:                    string(5)
-    site_id:                 integer
+    keyword:          string(100)
+    model_id:         integer
+    model:            string(100)
+    site_id:          integer
+    admin_only:       { type: boolean, default: 1 }
     published:        { type: boolean, default: 1 }
     published_from:   timestamp
     published_to:     timestamp

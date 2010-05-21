@@ -5,17 +5,14 @@ gnPage:
       fields:      [title]
       canUpdate:   true
     gnAttachableTemplate: ~
-    I18n:
-      fields: [title, content, description]
-      actAs:
-        Taggable:      {}
-        Timestampable: {}
-        Versionable:
-          fields:      [title, content, description]
-          auditLog:    true
-        gnSearchTemplate:
-          fields:      [title, content, description]
-    SoftDelete:        {}
+    gnSearchTemplate:
+      fields:      [title, content, description]
+    Taggable:      {}
+    Timestampable: {}
+    Versionable:
+      fields:      [title, content, description]
+      auditLog:    true
+#    SoftDelete:        {}
 
   columns:
     site_id:          integer
@@ -26,6 +23,7 @@ gnPage:
     published:        { type: boolean, default: 1 }
     published_from:   timestamp
     published_to:     timestamp
+#    deleted_at:       timestamp
     comment_status:   { type: enum, default: open, values: ["open", "users", "closed"] }
     comment_count:    { type: integer, default: 0 }
     searchable:       { type: boolean, default: 1 }

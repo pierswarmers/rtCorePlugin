@@ -1,0 +1,21 @@
+/*
+
+Admin Toolbar
+
+*/
+div#gn-admin-toolbar{z-index:8000;position:fixed;top:0;left:0;width:30px;height:100%;background:url(../images/bg-admin.png) 100% 0 repeat-y;}
+div#gn-admin-toolbar.show, div#gn-admin-container div#gn-admin-toolbar{width:225px;}
+div#gn-admin-toolbar *{color:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;text-shadow:0 -1px 1px rgba(0,0,2,0.9);font-size:12px;text-decoration:none;border:0;list-style:none;padding:0;margin:0;}
+div#gn-admin-toolbar h1, div#gn-admin-toolbar h2, div#gn-admin-toolbar ul, div#gn-admin-toolbar-search{padding:0 10px;border:0!important;margin-bottom:10px;}
+div#gn-admin-toolbar ul{padding-left:20px;}
+div#gn-admin-toolbar-search form{padding-left:25px;height:22px;background:url(../images/bg-admin-search.png);}
+div#gn-admin-toolbar-search input, div#gn-admin-toolbar-search input:focus {border-width:0 !important;width:145px;height:22px;font-weight:normal;outline:none;background:transparent;}
+div#gn-admin-toolbar h1{line-height:38px;background:url(../images/bg-admin-h1.png);}
+div#gn-admin-toolbar-content{width:5px;height:100%;}
+div#gn-admin-toolbar.show div#gn-admin-toolbar-content, div#gn-admin-container div#gn-admin-toolbar-content {width:200px;}
+div#gn-admin-toolbar-menu, div#gn-admin-container div#gn-admin-toolbar-handle{display:none;}
+div#gn-admin-container div#gn-admin-toolbar-menu{display:block;}
+div#gn-admin-toolbar-handle{position:absolute;right:0;top:5px;width:25px;height:25px;text-indent:-2000px;cursor:pointer;background-image:url(../images/bg-tab.png);}
+div#gn-admin-toolbar.show div#gn-admin-toolbar-handle{background-position:0 -50px;}
+div#gn-admin-toolbar-handle:hover{background-position:0 -25px;}
+div#gn-admin-toolbar.show div#gn-admin-toolbar-handle:hover{background-position:0 -75px;}

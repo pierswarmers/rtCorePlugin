@@ -21,18 +21,33 @@ abstract class PlugingnPageForm extends BasegnPageForm
   {
     parent::setup();
     
-    unset($this['deleted_at'], $this['published_from'], $this['published_to'], $this['comment_count']);
+    unset($this['deleted_at'], $this['version'], $this['profile'], $this['created_at'], $this['updated_at'], $this['comment_count']);
 
     if(!gnSiteToolkit::isMultiSiteEnabled())
     {
       // Delete this widget unless we are in a multi-site installation.
       unset($this['site_id']);
     }
-    
-    $this->widgetSchema['searchable']->setLabel('Make this page available to search engine robots');
+    // set the widgets
+    $this->setWidget('title',       new sfWidgetFormInputText(array(), array('class' => 'title')));
+    $this->setWidget('content',     new gnWidgetFormTextareaMarkdown(array(), array()));
+    $this->setWidget('tags',        new sfWidgetFormInput(array(), array('class' => 'tag-input')));
+    $this->setWidget('description', new sfWidgetFormInputText(array(), array()));
+
+    // inject the tags into the default value
+    $this->setDefault('tags', implode(', ', $this->getObject()->getTags()));
+
+    // set the validators
+    $this->setValidator('tags',     new sfValidatorString(array('required' => false)));
+    $this->setValidator('title',    new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'please enter a descriptive title.')));
+    $this->setValidator('content',  new sfValidatorString(array('required' => true), array('required' => 'please enter some content.')));
+
+    $this->widgetSchema->setHelp('description', 'As short description describing this page.');
+    $this->widgetSchema['searchable']->setLabel('Searchable');
+    $this->widgetSchema->setHelp('searchable', 'Make this page available to search engine robots');
     $this->widgetSchema['slug']->setLabel('URL Slug');
     $this->enableCSRFProtection();
-    $this->embedI18n(array('en'));
+//    $this->embedI18n(array('en'));
   }
 
   /**

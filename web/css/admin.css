@@ -17,6 +17,10 @@ Form Layout
 ul.gn-markdown-tools{list-style:none;margin:-2em 0 0 0;padding:0;text-align:right;}
 ul.gn-markdown-tools li{display:inline;}
 ul.checkbox_list{list-style:none;padding:0;margin:0;}
+.gn-admin-toggle-panel-content{display:none;}
+.gn-admin-toggle-panel {margin-bottom:10px;border-bottom:3px solid #CCC;}
+.gn-admin-toggle-panel h2{background:#efefef;border:1px solid #CCC;font-size:1.2em;font-weight:bold;padding:5px;cursor:pointer;}
+
 /*
 
 List Layout
@@ -56,7 +60,7 @@ h1{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-
 h1 a, h2 a{text-decoration:none;}
 input{outline:none;}
 option{border-width:0;}
-input:focus{border:1px solid #555 !important;}
+.gn-admin-toggle-panel h2:hover, input:focus{border:1px solid #555 !important;}
 input[type=text]{-moz-border-radius:5px;-webkit-border-radius:5px;}
 td input[type=text]{width:95%}
 table, thead th, td{border:1px solid #ccc;}

@@ -1,4 +1,14 @@
 
+function enableTogglePanels()
+{
+  $('.gn-admin-toggle-panel h2').click(function(){
+    $(this).next('.gn-admin-toggle-panel-content').toggle('blind');
+  });
+}
+
+// gn-admin-toggle-panel
+
+
 
 /*
  * Enable the link panel.
@@ -33,3 +43,10 @@ function triggerLinkPanelLookup(inputId, updatePanel, updateUrl)
     }
   });
 }
+
+/*
+ * Run global methods.
+ */
+$(function() {
+  enableTogglePanels();
+});

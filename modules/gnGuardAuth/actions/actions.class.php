@@ -21,7 +21,8 @@ class gnGuardAuthActions extends BasesfGuardAuthActions
 {
   public function preExecute()
   {
-    parent::postExecute();
     sfConfig::set('app_gn_node_title', 'Users');
+    gnTemplateToolkit::setFrontendTemplateDir();
+    parent::preExecute();
   }
 }

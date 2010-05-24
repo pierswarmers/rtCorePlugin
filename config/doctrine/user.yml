@@ -1,0 +1,15 @@
+gnGuardUser:
+  actAs:
+    gnSearchTemplate:
+      fields:      [first_name, last_name, email_address, username]
+  columns:
+    date_of_birth: { type: date }
+    company:       { type: string(50) }    # User company - e.g. Acme Car Sales
+    phone:         { type: string(20) }    # User phone
+    mobile:        { type: string(20) }   # User mobile (optional)
+    fax:           { type: string(20) }   # User fax mobile (optional)
+    url:           { type: string(255) }  # User URL (optional) - e.g. http://acme-cars-sales.com
+
+  inheritance:
+    type:              simple
+    extends:           sfGuardUser

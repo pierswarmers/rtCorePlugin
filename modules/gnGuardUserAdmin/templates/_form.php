@@ -24,20 +24,6 @@
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
       <tr>
-        <th><?php echo $form['first_name']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['first_name']->renderError() ?>
-          <?php echo $form['first_name'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['last_name']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['last_name']->renderError() ?>
-          <?php echo $form['last_name'] ?>
-        </td>
-      </tr>
-      <tr>
         <th><?php echo $form['email_address']->renderLabel() ?></th>
         <td>
           <?php echo $form['email_address']->renderError() ?>
@@ -75,6 +61,63 @@
       </tr>
     </tbody>
   </table>
+  <div class="gn-admin-toggle-panel">
+    <h2><?php echo __('Profile Information') ?></h2>
+    <table class="gn-admin-toggle-panel-content">
+      <tbody>
+      <tr>
+        <th><?php echo $form['first_name']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['first_name']->renderError() ?>
+          <?php echo $form['first_name'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['last_name']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['last_name']->renderError() ?>
+          <?php echo $form['last_name'] ?>
+        </td>
+      </tr>
+        <tr>
+          <th><?php echo $form['date_of_birth']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['date_of_birth']->renderError() ?>
+            <?php echo $form['date_of_birth'] ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $form['phone']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['phone']->renderError() ?>
+            <?php echo $form['phone'] ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $form['fax']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['fax']->renderError() ?>
+            <?php echo $form['fax'] ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $form['mobile']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['mobile']->renderError() ?>
+            <?php echo $form['mobile'] ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $form['url']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['url']->renderError() ?>
+            <?php echo $form['url'] ?>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="gn-admin-toggle-panel">
     <h2><?php echo __('Permissions and Groups') ?></h2>
     <table class="gn-admin-toggle-panel-content">

@@ -19,14 +19,14 @@ class gnGuardUserAdminActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new gnGuardUserAdminForm();
+    $this->form = new gnGuardUserForm();
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new gnGuardUserAdminForm(new gnGuardUser());
+    $this->form = new gnGuardUserForm(new gnGuardUser());
 
     $this->processForm($request, $this->form);
 
@@ -36,14 +36,14 @@ class gnGuardUserAdminActions extends sfActions
   public function executeEdit(sfWebRequest $request)
   {
     $this->forward404Unless($sf_guard_user = Doctrine::getTable('gnGuardUser')->find(array($request->getParameter('id'))), sprintf('Object sf_guard_user does not exist (%s).', $request->getParameter('id')));
-    $this->form = new gnGuardUserAdminForm($sf_guard_user);
+    $this->form = new gnGuardUserForm($sf_guard_user);
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
     $this->forward404Unless($sf_guard_user = Doctrine::getTable('gnGuardUser')->find(array($request->getParameter('id'))), sprintf('Object sf_guard_user does not exist (%s).', $request->getParameter('id')));
-    $this->form = new gnGuardUserAdminForm($sf_guard_user);
+    $this->form = new gnGuardUserForm($sf_guard_user);
 
     $this->processForm($request, $this->form);
 

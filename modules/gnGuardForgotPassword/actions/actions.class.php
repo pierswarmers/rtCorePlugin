@@ -14,7 +14,8 @@ class gnGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 {
   public function preExecute()
   {
-    parent::postExecute();
     sfConfig::set('app_gn_node_title', 'Users');
+    gnTemplateToolkit::setFrontendTemplateDir();
+    parent::preExecute();
   }
 }

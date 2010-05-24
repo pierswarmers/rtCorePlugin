@@ -22,9 +22,11 @@ require_once(dirname(__FILE__).'/../../../../sfDoctrineGuardPlugin/modules/sfGua
  */
 class BasegnGuardRegisterActions extends BasesfGuardRegisterActions
 {
-  public function preExecute() {
-    parent::postExecute();
+  public function preExecute()
+  {
     sfConfig::set('app_gn_node_title', 'Users');
+    gnTemplateToolkit::setFrontendTemplateDir();
+    parent::preExecute();
   }
 
   /**

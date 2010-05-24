@@ -27,7 +27,7 @@ class PlugingnPageTable extends Doctrine_Table
   {
     $query = $this->addPublishedQuery($query);
     $query = $this->addSiteQuery($query);
-    return $query->andWhere('page.deleted_at IS NULL')->execute();
+    return $query->execute();
   }
   
   /**
@@ -39,19 +39,7 @@ class PlugingnPageTable extends Doctrine_Table
   public function findAllPages(Doctrine_Query $query = null)
   {
     $query = $this->addSiteQuery($query);
-    return $this->addNotDeletedQuery($query)->execute();
-  }
-
-  /**
-   * Adds a check for pages which have no deleted_at value, i.e. aren't deleted.
-   *
-   * @param Doctrine_Query $query
-   * @return Doctrine_Query
-   */
-  public function addNotDeletedQuery(Doctrine_Query $query = null)
-  {
-    return $query;
-//    return $this->getQuery($query)->andWhere('page.deleted_at IS NULL');
+    return $this->execute();
   }
   
   /**

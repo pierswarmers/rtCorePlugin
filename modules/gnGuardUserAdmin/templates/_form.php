@@ -1,5 +1,7 @@
 <?php use_helper('I18N') ?>
 
+<?php use_javascript('/gnCorePlugin/js/main.js') ?>
+
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
@@ -71,27 +73,34 @@
           <?php echo $form['is_active'] ?>
         </td>
       </tr>
-      <tr>
-        <th><?php echo $form['is_super_admin']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['is_super_admin']->renderError() ?>
-          <?php echo $form['is_super_admin'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['groups_list']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['groups_list']->renderError() ?>
-          <?php echo $form['groups_list'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['permissions_list']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['permissions_list']->renderError() ?>
-          <?php echo $form['permissions_list'] ?>
-        </td>
-      </tr>
     </tbody>
   </table>
+  <div class="gn-admin-toggle-panel">
+    <h2><?php echo __('Permissions and Groups') ?></h2>
+    <table class="gn-admin-toggle-panel-content">
+      <tbody>
+        <tr>
+          <th><?php echo $form['is_super_admin']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['is_super_admin']->renderError() ?>
+            <?php echo $form['is_super_admin'] ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $form['groups_list']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['groups_list']->renderError() ?>
+            <?php echo $form['groups_list'] ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $form['permissions_list']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['permissions_list']->renderError() ?>
+            <?php echo $form['permissions_list'] ?>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </form>

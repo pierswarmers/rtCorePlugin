@@ -5,7 +5,7 @@ General Layout
 */
 #gn-admin-content{margin:20px 280px 0 220px;}
 #gn-admin-content *{border-style:solid;border-color:#CCC;}
-#gn-admin-tools{width:240px;position:fixed;right:10px;top:20px;box-shadow: 3px 3px 7px #000;  }
+#gn-admin-tools{width:240px;position:fixed;right:10px;top:20px;}
 /*
 
 Form Layout
@@ -57,6 +57,8 @@ h1 a, h2 a{text-decoration:none;}
 input{outline:none;}
 option{border-width:0;}
 input:focus{border:1px solid #555 !important;}
+input[type=text]{-moz-border-radius:5px;-webkit-border-radius:5px;}
+td input[type=text]{width:95%}
 table, thead th, td{border:1px solid #ccc;}
 thead th, td{border-top:0;border-left:0;}
 form thead th, form td{vertical-align:top;}
@@ -64,6 +66,7 @@ table{border-bottom:0;border-right:0;}
 thead th{background:#ddd}
 tbody th{background:rgb(239, 239, 239)}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size:1.1em;}
+label{}
 p img.right, p img.left{margin-top:0.5em;}
 iframe{margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}

@@ -13,6 +13,10 @@
     <?php use_javascript('/gnCorePlugin/vendor/jquery-ui/js/jquery-ui.min.js', 'last'); ?>
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
+    <?php if (isset($routes['gn_blog_page_feed'])): ?>
+    <?php echo auto_discovery_link_tag('rss', '@gn_blog_page_feed?format=rss') ?>
+    <?php echo auto_discovery_link_tag('atom', '@gn_blog_page_feed?format=atom') ?>
+    <?php endif; ?>
   </head>
   <body>
     <?php require_once(dirname(__FILE__).'/gn_admin_header.php'); ?>

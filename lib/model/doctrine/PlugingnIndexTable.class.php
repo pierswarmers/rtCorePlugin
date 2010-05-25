@@ -25,9 +25,10 @@ class PlugingnIndexTable extends Doctrine_Table
    * @param string $lang
    * @return array
    */
-  public function getSearchResultsAsArray($keywords, $lang = null, Doctrine_Query $q = null)
+  public function getSearchResultsAsArray($keywords, $lang = null, Doctrine_Query $query = null)
   {
-    return $this->getBaseSearchQuery($keywords, $this->getLang(), $q)->fetchArray();
+    $query = $this->getQuery($query);
+    return $this->getBaseSearchQuery($keywords, $this->getLang(), $query)->fetchArray();
   }
 
   /**
@@ -38,9 +39,10 @@ class PlugingnIndexTable extends Doctrine_Table
    * @param string $lang
    * @return Doctrine_Collection
    */
-  public function getSearchResults($keywords, $lang = null, Doctrine_Query $q = null)
+  public function getSearchResults($keywords, $lang = null, Doctrine_Query $query = null)
   {
-    return $this->getBaseSearchQuery($this->getSearchKeywords($keywords), $this->getLang(), $q)->execute();
+    $query = $this->getQuery($query);
+    return $this->getBaseSearchQuery($this->getSearchKeywords($keywords), $this->getLang(), $query)->execute();
   }
 
   /**
@@ -120,15 +122,45 @@ class PlugingnIndexTable extends Doctrine_Table
    * Add a search query based on a set of keyword values.
    *
    * @param mixed $keywords
-   * @param Doctrine_Query $q
+   * @param Doctrine_Query $query
    * @return Doctrine_Query
    */
-  public function getBaseSearchQuery($keywords, $lang = null, Doctrine_Query $q = null)
+  public function getBasePublicSearchQuery($keywords, $lang = null, Doctrine_Query $query = null)
   {
-    $q = $this->getStandardSearchComponentInQuery($keywords, $lang, $q);
-    $q->select('i.model, model_id, count(i.keyword) AS relevance');
-    $q->orderBy('relevance DESC');
-    return $q;
+    $query = $this->getQuery($query);
+    $query = $this->getBaseSearchQuery($keywords, $lang, $query);
+    $query = $this->getPublishedQuery($query);
+    $query = $this->getPublicModelsQuery($query);
+    return $query;
+  }
+
+  /**
+   * Return a query with the public model restriction.
+   * 
+   * @param Doctrine_Query $query
+   * @return Doctrine_Query
+   */
+  public function getPublicModelsQuery(Doctrine_Query $query = null)
+  {
+    $query = $this->getQuery($query);
+    $query->andWhereIn('i.model', sfConfig::get('app_gn_search_public_models', array('gnBlogPage', 'gnSitePage', 'gnWikiPage')));
+    return $query;
+  }
+  
+  /**
+   * Add a search query based on a set of keyword values.
+   *
+   * @param mixed $keywords
+   * @param Doctrine_Query $query
+   * @return Doctrine_Query
+   */
+  public function getBaseSearchQuery($keywords, $lang = null, Doctrine_Query $query = null)
+  {
+    $query = $this->getQuery($query);
+    $query = $this->getStandardSearchComponentInQuery($keywords, $lang, $query);
+    $query->select('i.model, model_id, count(i.keyword) AS relevance');
+    $query->orderBy('relevance DESC');
+    return $query;
   }
 
   /**
@@ -136,34 +168,67 @@ class PlugingnIndexTable extends Doctrine_Table
    * 
    * @param string $keywords
    * @param sting $lang
-   * @param Doctrine_Query $q
+   * @param Doctrine_Query $query
    * @return Doctrine_Query
    */
-  public function getStandardSearchComponentInQuery($keywords, $lang = null, Doctrine_Query $q = null)
+  public function getStandardSearchComponentInQuery($keywords, $lang = null, Doctrine_Query $query = null)
   {
     if(is_string($keywords))
     {
       $keywords = GnIndexToolkit::getStemmedWordsFromString($keywords, $this->getLang());
     }
-    $q = $this->getQuery($q);
-    $q->addGroupBy('i.model_id');
-    $q->addGroupBy('i.model');
-    $q->andWhereIn('i.keyword', $keywords);
-    return $q;
+    $query = $this->getQuery($query);
+    $query->addGroupBy('i.model_id');
+    $query->addGroupBy('i.model');
+    $query->andWhereIn('i.keyword', $keywords);
+    return $query;
+  }
+
+  /**
+   * Adds a check for pages which have been published.
+   *
+   * @param Doctrine_Query $query
+   * @return Doctrine_Query
+   */
+  public function getPublishedQuery(Doctrine_Query $query = null)
+  {
+    $query = $this->getQuery($query);
+    $query->andWhere('(i.published_from < ? OR i.published_from IS NULL)', date('Y-m-d H:i:s', time()));
+    $query->andWhere('(i.published_to > ? OR i.published_to IS NULL)', date('Y-m-d H:i:s', time()));
+    $query->andWhere('i.published = 1');
+    return $query;
   }
 
   /**
    * Return the number of results a search would provide.
-   * 
+   *
    * @param mixed $keywords
-   * @param Doctrine_Query $q
+   * @param Doctrine_Query $query
    * @return integer
    */
-  public function getNumberOfMatchedResults($keywords, $lang = null, Doctrine_Query $q = null)
+  public function getNumberOfMatchedResults($keywords, $lang = null, Doctrine_Query $query = null)
   {
-    $q = $this->getStandardSearchComponentInQuery($keywords, $lang, $q);
-    $q->select('count(DISTINCT i.model) AS count');
-    $r = $q->fetchArray();
+    $query = $this->getQuery($query);
+    $query = $this->getStandardSearchComponentInQuery($keywords, $lang, $query);
+    $query->select('count(DISTINCT i.model) AS count');
+    $r = $query->fetchArray();
+    return count($r);
+  }
+
+  /**
+   * Return the number of results a search would provide.
+   *
+   * @param mixed $keywords
+   * @param Doctrine_Query $query
+   * @return integer
+   */
+  public function getNumberOfPublicMatchedResults($keywords, $lang = null, Doctrine_Query $query = null)
+  {
+    $query = $this->getQuery($query);
+    $query = $this->getStandardSearchComponentInQuery($keywords, $lang, $query);
+    $query = $this->getPublicModelsQuery($query);
+    $query->select('count(DISTINCT i.model) AS count');
+    $r = $query->fetchArray();
     return count($r);
   }
 
@@ -195,17 +260,17 @@ class PlugingnIndexTable extends Doctrine_Table
   /**
    * Returns a Doctrine_Query object.
    *
-   * @param Doctrine_Query $q
+   * @param Doctrine_Query $query
    * @return Doctrine_Query
    */
-  private function getQuery(Doctrine_Query $q = null)
+  private function getQuery(Doctrine_Query $query = null)
   {
-    if (is_null($q))
+    if (is_null($query))
     {
-      $q = $this->getQueryObject()->from($this->getComponentName() .' i');
+      $query = $this->getQueryObject()->from($this->getComponentName() .' i');
     }
 
-    return $q;
+    return $query;
   }
 
  /**

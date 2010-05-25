@@ -12,5 +12,8 @@
  */
 abstract class PlugingnGuardUser extends BasegnGuardUser
 {
-
+  public function getTypeNice()
+  {
+    return 'Person';
+  }
 }

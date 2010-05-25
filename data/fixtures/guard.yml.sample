@@ -14,6 +14,9 @@ sfGuardGroup:
       - Permission_admin_tree
 
 sfGuardPermission:
+
+  # Administrator Permissions
+
   Permission_admin_wiki:
     name:           admin_wiki
     description:    Administrator permission for wiki
@@ -41,3 +44,9 @@ sfGuardPermission:
   Permission_admin_tree:
     name:           admin_tree
     description:    Administrator permission for trees
+
+  # Visitor Permissions
+
+  Permission_visitor_blog:
+    name:           visitor_blog
+    description:    Visitor permission for private blogs

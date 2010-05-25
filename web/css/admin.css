@@ -61,8 +61,8 @@ h1 a, h2 a{text-decoration:none;}
 input{outline:none;}
 option{border-width:0;}
 .gn-admin-toggle-panel h2:hover, input:focus{border:1px solid #555 !important;}
-input[type=text]{-moz-border-radius:5px;-webkit-border-radius:5px;}
-td input[type=text]{width:95%}
+input[type=text], input[type=password]{-moz-border-radius:5px;-webkit-border-radius:5px;}
+td input[type=text], input[type=password]{width:95%}
 table, thead th, td{border:1px solid #ccc;}
 thead th, td{border-top:0;border-left:0;}
 form thead th, form td{vertical-align:top;}

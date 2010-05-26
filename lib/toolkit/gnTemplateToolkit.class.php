@@ -35,7 +35,14 @@ class gnTemplateToolkit
    */
   static public function getGnPluginTemplateDir($mode = 'frontend')
   {
-    return sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'gnCorePlugin'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$mode;
+    if(!sfConfig::has('app_gn_template_dir') || $mode == 'backend')
+    {
+      return sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'gnCorePlugin'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$mode;
+    }
+    else
+    {
+      return sfConfig::get('sf_root_dir').DIRECTORY_SEPARATOR.sfConfig::get('app_gn_template_dir');
+    }
   }
 
   /**

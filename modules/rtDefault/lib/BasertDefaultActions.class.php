@@ -18,8 +18,9 @@ class BasertDefaultActions extends sfActions
 {
   public function preExecute()
   {
-    parent::preExecute();
     sfConfig::set('app_rt_node_title', 'Error');
+    rtTemplateToolkit::setFrontendTemplateDir();
+    parent::preExecute();
   }
   
   public function executeError404(sfWebRequest $request)

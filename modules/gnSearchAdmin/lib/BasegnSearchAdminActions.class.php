@@ -39,7 +39,7 @@ class BasegnSearchAdminActions extends sfActions
 
   public function executeAjaxSearch(sfWebRequest $request)
   {
-    $query = Doctrine::getTable('gnIndex')->getBaseSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
+    $query = Doctrine::getTable('gnIndex')->getBasePublicSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
     $query->limit(100);
     $gn_indexes = $query->execute();
 

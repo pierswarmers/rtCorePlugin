@@ -23,7 +23,8 @@ class gnSiteCreateTask extends sfBaseTask
   protected function configure()
   {
     $this->addArguments(array(
-      new sfCommandArgument('domain', sfCommandArgument::REQUIRED, 'The domain - including subdomain (if other than www) and port (if other than 80), e.g. sub1.my-domain.com:8081')
+      new sfCommandArgument('domain', sfCommandArgument::REQUIRED, 'The domain - including subdomain (if other than www) and port (if other than 80), e.g. sub1.my-domain.com:8081'),
+      new sfCommandArgument('template_dir', sfCommandArgument::OPTIONAL, 'The template directory - relative to the project root, e.g. /plugins/myPlugin/templates')
     ));
 
     $this->addOptions(array(
@@ -57,6 +58,11 @@ EOF;
     {
       $gn_site = new gnSite();
       $gn_site->setDomain($arguments['domain']);
+
+      if(isset($arguments['template_dir']))
+      {
+        $gn_site->setDomain($arguments['template_dir']);
+      }
       $gn_site->save();
       $this->logSection('gn', sprintf('Created site "%s"', $arguments['domain']));
     }

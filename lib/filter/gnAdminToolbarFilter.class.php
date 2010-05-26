@@ -26,15 +26,23 @@ class gnAdminToolbarFilter extends sfFilter
       return;
     }
 
-    $css = '<link rel="stylesheet" type="text/css" media="screen" href="/gnCorePlugin/css/admin-toolbar.css" />';
-
     if (function_exists('use_helper'))
     {
+      $css = '<link rel="stylesheet" type="text/css" media="screen" href="/gnCorePlugin/css/admin-toolbar.css" />';
+      $js = '<script type="text/javascript" src="/gnCorePlugin/vendor/jquery/js/jquery.min.js" />';
+      $js .= '<script type="text/javascript" src="/gnCorePlugin/vendor/jquery-ui/js/jquery-ui.min.js" />';
+      
       use_helper('Partial', 'I18n');
+      
       $toolbar = get_component('gnAdmin', 'menu');
       $response = $this->getContext()->getResponse();
-      $response->setContent(str_ireplace('</body>', $toolbar.'</body>',$response->getContent()));
+      $response->setContent(str_ireplace('<!--gn-admin-holder-->', $toolbar,$response->getContent()));
       $response->setContent(str_ireplace('<body>', $css.'<body>',$response->getContent()));
+
+      if (!preg_match("/jquery/i", $response->getContent()))
+      {
+        $response->setContent(str_ireplace('<body>', $js.'<body>',$response->getContent()));
+      }
     }
   }
 }

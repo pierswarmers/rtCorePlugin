@@ -1,6 +1,6 @@
 gnSite:
   columns:
-    name:           string(255)
+    title:           string(255)
     domain:         string(255)
     template_dir:       string(255)
     is_primary:     { type: boolean, default: 0 }

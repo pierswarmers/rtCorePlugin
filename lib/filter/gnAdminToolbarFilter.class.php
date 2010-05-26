@@ -12,9 +12,17 @@ class gnAdminToolbarFilter extends sfFilter
     $filterChain->execute();
     $user = sfContext::getInstance()->getUser();
 
-    if(!$user->isAuthenticated())
+    $groups = $user->getGuardUser()->getGroups();
+
+    $groups_names = array();
+
+    foreach ($groups as $group)
     {
-      // TODO: Need to run credential check for admins only
+      $groups_names[] = $group->getName();
+    }
+
+    if(!$user->isAuthenticated() || !in_array(sfConfig::get('app_gn_admin_group', 'admin'), $groups_names))
+    {
       return;
     }
 

@@ -10,18 +10,22 @@ class gnAdminToolbarFilter extends sfFilter
   public function execute(sfFilterChain $filterChain)
   {
     $filterChain->execute();
+    
     $user = sfContext::getInstance()->getUser();
 
-    $groups = $user->getGuardUser()->getGroups();
+    if(!$user->isAuthenticated())
+    {
+      return;
+    }
 
     $groups_names = array();
 
-    foreach ($groups as $group)
+    foreach ($user->getGuardUser()->getGroups() as $group)
     {
       $groups_names[] = $group->getName();
     }
 
-    if(!$user->isAuthenticated() || !in_array(sfConfig::get('app_gn_admin_group', 'admin'), $groups_names))
+    if(!in_array(sfConfig::get('app_gn_admin_group', 'admin'), $groups_names))
     {
       return;
     }

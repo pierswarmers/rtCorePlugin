@@ -715,7 +715,7 @@ class Markdown_Parser {
 				  ([\'"])	# quote char = $6
 				  (.*?)		# Title = $7
 				  \6		# matching quote
-				  [ \n]*	# ignore any spaces/tabs between closing quote and )
+				  [ \n]*	# irtore any spaces/tabs between closing quote and )
 				)?			# title is optional
 			  \)
 			)
@@ -1501,7 +1501,7 @@ class Markdown_Parser {
 		
 		foreach ($chars as $key => $char) {
 			$ord = ord($char);
-			# Ignore non-ascii chars.
+			# Irtore non-ascii chars.
 			if ($ord < 128) {
 				$r = ($seed * (1 + $key)) % 100; # Pseudo-random function.
 				# roughly 10% raw, 45% hex, 45% dec
@@ -1812,7 +1812,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 	#
 	# Parse markdown text, calling _HashHTMLBlocks_InHTML for block tags.
 	#
-	# *   $indent is the number of space to be ignored when checking for code 
+	# *   $indent is the number of space to be irtored when checking for code 
 	#     blocks. This is important because if we don't take the indent into 
 	#     account, something like this (which looks right) won't work as expected:
 	#
@@ -2361,17 +2361,17 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		$underline	= preg_replace('/[|] *$/m', '', $underline);
 		$content	= preg_replace('/[|] *$/m', '', $content);
 		
-		# Reading alignement from header underline.
+		# Reading alirtement from header underline.
 		$separators	= preg_split('/ *[|] */', $underline);
 		foreach ($separators as $n => $s) {
-			if (preg_match('/^ *-+: *$/', $s))		$attr[$n] = ' align="right"';
-			else if (preg_match('/^ *:-+: *$/', $s))$attr[$n] = ' align="center"';
-			else if (preg_match('/^ *:-+ *$/', $s))	$attr[$n] = ' align="left"';
+			if (preg_match('/^ *-+: *$/', $s))		$attr[$n] = ' alirt="right"';
+			else if (preg_match('/^ *:-+: *$/', $s))$attr[$n] = ' alirt="center"';
+			else if (preg_match('/^ *:-+ *$/', $s))	$attr[$n] = ' alirt="left"';
 			else									$attr[$n] = '';
 		}
 		
 		# Parsing span elements, including code spans, character escapes, 
-		# and inline HTML tags, so that pipes inside those gets ignored.
+		# and inline HTML tags, so that pipes inside those gets irtored.
 		$head		= $this->parseSpan($head);
 		$headers	= preg_split('/ *[|] */', $head);
 		$col_count	= count($headers);
@@ -2391,7 +2391,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		$text .= "<tbody>\n";
 		foreach ($rows as $row) {
 			# Parsing span elements, including code spans, character escapes, 
-			# and inline HTML tags, so that pipes inside those gets ignored.
+			# and inline HTML tags, so that pipes inside those gets irtored.
 			$row = $this->parseSpan($row);
 			
 			# Split row by cell.
@@ -2815,7 +2815,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 	#
 		if ($this->abbr_word_re) {
 			// cannot use the /x modifier because abbr_word_re may 
-			// contain significant spaces:
+			// contain sirtificant spaces:
 			$text = preg_replace_callback('{'.
 				'(?<![\w\x1A])'.
 				'(?:'.$this->abbr_word_re.')'.
@@ -2861,7 +2861,7 @@ easy-to-write structured text format into HTML. Markdown's text format
 is most similar to that of plain text email, and supports features such
 as headers, *emphasis*, code blocks, blockquotes, and links.
 
-Markdown's syntax is designed not as a generic markup language, but
+Markdown's syntax is desirted not as a generic markup language, but
 specifically to serve as a front-end to (X)HTML. You can use span-level
 HTML tags anywhere in a Markdown document, and you can use block level
 HTML tags (like <div> and <table> as well).

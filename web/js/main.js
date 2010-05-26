@@ -1,12 +1,12 @@
 
 function enableTogglePanels()
 {
-  $('.gn-admin-toggle-panel h2').click(function(){
-    $(this).next('.gn-admin-toggle-panel-content').toggle('blind');
+  $('.rt-admin-toggle-panel h2').click(function(){
+    $(this).next('.rt-admin-toggle-panel-content').toggle('blind');
   });
 }
 
-// gn-admin-toggle-panel
+// rt-admin-toggle-panel
 
 
 
@@ -38,7 +38,7 @@ function triggerLinkPanelLookup(inputId, updatePanel, updateUrl)
     success: function(data) {
       $(updatePanel).html('');
       $.each(data.items, function(index, value) {
-        $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'[\',closeWith:\']('+value.link+')\',placeHolder:\''+value.title+'\' }); $(\'.gn-modal-panel\').overlay().close(); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+        $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'[\',closeWith:\']('+value.link+')\',placeHolder:\''+value.title+'\' }); $(\'.rt-modal-panel\').overlay().close(); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
       });
     }
   });

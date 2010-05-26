@@ -1,5 +1,0 @@
-<?php $admin_cred = sfConfig::get('app_gn_search_admin_credential', 'admin_search') . "\n" ?>
-
-all:
-  is_secure: true
-  credentials: <?php echo $admin_cred ?>

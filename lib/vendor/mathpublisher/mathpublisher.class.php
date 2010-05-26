@@ -5,7 +5,7 @@
  *   http://www.xm1math.net/phpmathpublisher/                              *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
+ *   it under the terms of the rtU General Public License as published by  *
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
@@ -23,7 +23,7 @@ class mathPublisherConfig
 
   static public function getImageDir()
   {
-    return sfConfig::get('sf_web_dir').sfConfig::get('app_gn_math_cache_dir', '/_math_cache');
+    return sfConfig::get('sf_web_dir').sfConfig::get('app_rt_math_cache_dir', '/_math_cache');
   }
 
   static public function getSymbols()
@@ -670,7 +670,7 @@ function parenthese($hauteur, $style)
   return $image;
 }
 
-function alignement2($image1,$base1,$image2,$base2)
+function alirtement2($image1,$base1,$image2,$base2)
 {
   $largeur1=imagesx($image1);
   $hauteur1=imagesy($image1);
@@ -691,7 +691,7 @@ function alignement2($image1,$base1,$image2,$base2)
   return $result;
 }
 
-function alignement3($image1,$base1,$image2,$base2,$image3,$base3)
+function alirtement3($image1,$base1,$image2,$base2,$image3,$base3)
 {
   $largeur1=imagesx($image1);
   $hauteur1=imagesy($image1);
@@ -1213,7 +1213,7 @@ class expression_math extends  expression
     ImageCopy($imggauche, $imgsymbole,($largeurgauche-$largeursymbole)/2, $hauteur2, 0, 0,$largeursymbole,$hauteursymbole);
     ImageCopy($imggauche, $img2,($largeurgauche-$largeur2)/2,0, 0, 0,$largeur2,$hauteur2);
     ImageCopy($imggauche, $img1,($largeurgauche-$largeur1)/2, $hauteur2+$hauteursymbole, 0, 0,$largeur1,$hauteur1);
-    $imgfin=alignement2($imggauche,$basesymbole+$hauteur2,$imgexp,$baseexp);
+    $imgfin=alirtement2($imggauche,$basesymbole+$hauteur2,$imgexp,$baseexp);
     $this->image=$imgfin;
     $this->base_verticale=max($basesymbole+$hauteur2,$baseexp+$hauteur2);
   }
@@ -1277,22 +1277,22 @@ class expression_math extends  expression
   function dessine_matrice($taille)
   {
     $padding=8;
-    $nbligne=$this->noeuds[1]->noeuds[0]->texte;
+    $nblirte=$this->noeuds[1]->noeuds[0]->texte;
     $nbcolonne=$this->noeuds[2]->noeuds[0]->texte;
     $largeur_case=0;
     $hauteur_case=0;
 
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
-      $hauteur_ligne[$ligne]=0;
-      $dessus_ligne[$ligne]=0;
+      $hauteur_lirte[$lirte]=0;
+      $dessus_lirte[$lirte]=0;
     }
     for($col = 0; $col <$nbcolonne; $col++)
     {
       $largeur_colonne[$col]=0;
     }
     $i=0;
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
       for($col = 0; $col <$nbcolonne; $col++)
       {
@@ -1301,10 +1301,10 @@ class expression_math extends  expression
           $this->noeuds[3]->noeuds[$i]->dessine($taille*0.9);
           $img[$i]=$this->noeuds[3]->noeuds[$i]->image;
           $base[$i]=$this->noeuds[3]->noeuds[$i]->base_verticale;
-          $dessus_ligne[$ligne] = max($base[$i],$dessus_ligne[$ligne]);
+          $dessus_lirte[$lirte] = max($base[$i],$dessus_lirte[$lirte]);
           $largeur[$i]=imagesx($img[$i]);
           $hauteur[$i]=imagesy($img[$i]);
-          $hauteur_ligne[$ligne]=max($hauteur_ligne[$ligne],$hauteur[$i]);
+          $hauteur_lirte[$lirte]=max($hauteur_lirte[$lirte],$hauteur[$i]);
           $largeur_colonne[$col]=max($largeur_colonne[$col],$largeur[$i]);
         }
         $i++;
@@ -1313,9 +1313,9 @@ class expression_math extends  expression
 
     $hauteurfin=0;
     $largeurfin=0;
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
-      $hauteurfin+=$hauteur_ligne[$ligne]+$padding;
+      $hauteurfin+=$hauteur_lirte[$lirte]+$padding;
     }
     for($col = 0; $col <$nbcolonne; $col++)
     {
@@ -1330,20 +1330,20 @@ class expression_math extends  expression
     ImageFilledRectangle($imgfin,0,0,$largeurfin-1,$hauteurfin-1,$blanc);
     $i=0;
     $h=$padding/2-1;
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
       $l=$padding/2-1;
       for($col = 0; $col <$nbcolonne; $col++)
       {
         if ($i< count($this->noeuds[3]->noeuds))
         {
-          ImageCopy($imgfin,$img[$i],$l+ceil($largeur_colonne[$col]-$largeur[$i])/2,$h+$dessus_ligne[$ligne]-$base[$i], 0, 0,$largeur[$i],$hauteur[$i]);
-          //ImageRectangle($imgfin,$l,$h,$l+$largeur_colonne[$col],$h+$hauteur_ligne[$ligne],$noir);
+          ImageCopy($imgfin,$img[$i],$l+ceil($largeur_colonne[$col]-$largeur[$i])/2,$h+$dessus_lirte[$lirte]-$base[$i], 0, 0,$largeur[$i],$hauteur[$i]);
+          //ImageRectangle($imgfin,$l,$h,$l+$largeur_colonne[$col],$h+$hauteur_lirte[$lirte],$noir);
         }
         $l+=$largeur_colonne[$col]+$padding;
         $i++;
       }
-      $h+=$hauteur_ligne[$ligne]+$padding;
+      $h+=$hauteur_lirte[$lirte]+$padding;
     }
 //ImageRectangle($imgfin,0,0,$largeurfin-1,$hauteurfin-1,$noir);
     $this->image=$imgfin;
@@ -1353,24 +1353,24 @@ class expression_math extends  expression
   function dessine_tableau($taille)
   {
     $padding=8;
-    $typeligne=$this->noeuds[1]->noeuds[0]->texte;
+    $typelirte=$this->noeuds[1]->noeuds[0]->texte;
     $typecolonne=$this->noeuds[2]->noeuds[0]->texte;
-    $nbligne=strlen($typeligne)-1;
+    $nblirte=strlen($typelirte)-1;
     $nbcolonne=strlen($typecolonne)-1;
     $largeur_case=0;
     $hauteur_case=0;
 
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
-      $hauteur_ligne[$ligne]=0;
-      $dessus_ligne[$ligne]=0;
+      $hauteur_lirte[$lirte]=0;
+      $dessus_lirte[$lirte]=0;
     }
     for($col = 0; $col <$nbcolonne; $col++)
     {
       $largeur_colonne[$col]=0;
     }
     $i=0;
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
       for($col = 0; $col <$nbcolonne; $col++)
       {
@@ -1379,10 +1379,10 @@ class expression_math extends  expression
           $this->noeuds[3]->noeuds[$i]->dessine($taille*0.9);
           $img[$i]=$this->noeuds[3]->noeuds[$i]->image;
           $base[$i]=$this->noeuds[3]->noeuds[$i]->base_verticale;
-          $dessus_ligne[$ligne] = max($base[$i],$dessus_ligne[$ligne]);
+          $dessus_lirte[$lirte] = max($base[$i],$dessus_lirte[$lirte]);
           $largeur[$i]=imagesx($img[$i]);
           $hauteur[$i]=imagesy($img[$i]);
-          $hauteur_ligne[$ligne]=max($hauteur_ligne[$ligne],$hauteur[$i]);
+          $hauteur_lirte[$lirte]=max($hauteur_lirte[$lirte],$hauteur[$i]);
           $largeur_colonne[$col]=max($largeur_colonne[$col],$largeur[$i]);
         }
         $i++;
@@ -1391,9 +1391,9 @@ class expression_math extends  expression
 
     $hauteurfin=0;
     $largeurfin=0;
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
-      $hauteurfin+=$hauteur_ligne[$ligne]+$padding;
+      $hauteurfin+=$hauteur_lirte[$lirte]+$padding;
     }
     for($col = 0; $col <$nbcolonne; $col++)
     {
@@ -1406,23 +1406,23 @@ class expression_math extends  expression
     ImageFilledRectangle($imgfin,0,0,$largeurfin-1,$hauteurfin-1,$blanc);
     $i=0;
     $h=$padding/2-1;
-    if (substr($typeligne,0,1)=="1") ImageLine($imgfin,0,0,$largeurfin-1,0,$noir);
-    for($ligne = 0; $ligne <$nbligne; $ligne++)
+    if (substr($typelirte,0,1)=="1") ImageLine($imgfin,0,0,$largeurfin-1,0,$noir);
+    for($lirte = 0; $lirte <$nblirte; $lirte++)
     {
       $l=$padding/2-1;
-      if (substr($typecolonne,0,1)=="1") ImageLine($imgfin,0,$h-$padding/2,0,$h+$hauteur_ligne[$ligne]+$padding/2,$noir);
+      if (substr($typecolonne,0,1)=="1") ImageLine($imgfin,0,$h-$padding/2,0,$h+$hauteur_lirte[$lirte]+$padding/2,$noir);
       for($col = 0; $col <$nbcolonne; $col++)
       {
         if ($i< count($this->noeuds[3]->noeuds))
         {
-          ImageCopy($imgfin,$img[$i],$l+ceil($largeur_colonne[$col]-$largeur[$i])/2,$h+$dessus_ligne[$ligne]-$base[$i], 0, 0,$largeur[$i],$hauteur[$i]);
-          if (substr($typecolonne,$col+1,1)=="1") ImageLine($imgfin,$l+$largeur_colonne[$col]+$padding/2,$h-$padding/2,$l+$largeur_colonne[$col]+$padding/2,$h+$hauteur_ligne[$ligne]+$padding/2,$noir);
+          ImageCopy($imgfin,$img[$i],$l+ceil($largeur_colonne[$col]-$largeur[$i])/2,$h+$dessus_lirte[$lirte]-$base[$i], 0, 0,$largeur[$i],$hauteur[$i]);
+          if (substr($typecolonne,$col+1,1)=="1") ImageLine($imgfin,$l+$largeur_colonne[$col]+$padding/2,$h-$padding/2,$l+$largeur_colonne[$col]+$padding/2,$h+$hauteur_lirte[$lirte]+$padding/2,$noir);
         }
         $l+=$largeur_colonne[$col]+$padding;
         $i++;
       }
-      if (substr($typeligne,$ligne+1,1)=="1") ImageLine($imgfin,0,$h+$hauteur_ligne[$ligne]+$padding/2,$largeurfin-1,$h+$hauteur_ligne[$ligne]+$padding/2,$noir);
-      $h+=$hauteur_ligne[$ligne]+$padding;
+      if (substr($typelirte,$lirte+1,1)=="1") ImageLine($imgfin,0,$h+$hauteur_lirte[$lirte]+$padding/2,$largeurfin-1,$h+$hauteur_lirte[$lirte]+$padding/2,$noir);
+      $h+=$hauteur_lirte[$lirte]+$padding;
     }
     $this->image=$imgfin;
     $this->base_verticale=imagesy($imgfin)/2;
@@ -1559,7 +1559,7 @@ class expression_math extends  expression
     ImageCopy($imgfin, $imglim,($largeur-$largeurlim)/2, 0, 0, 0,$largeurlim,$hauteurlim);
     ImageCopy($imgfin, $imginf,($largeur-$largeurinf)/2, $hauteurlim, 0, 0,$largeurinf,$hauteurinf);
 
-    $this->image=alignement2($imgfin,$baselim,$imgexp,$baseexp);
+    $this->image=alirtement2($imgfin,$baselim,$imgexp,$baseexp);
     $this->base_verticale=max($baselim,$baseexp);
   }
 
@@ -1581,7 +1581,7 @@ class expression_math extends  expression
       $imgdroit=parenthese($hauteurexp,$this->noeuds[3]->texte);
     }
     $basedroit=imagesy($imgdroit)/2;
-    $this->image=alignement3($imggauche,$basegauche,$imgexp,$baseexp,$imgdroit,$basedroit);
+    $this->image=alirtement3($imggauche,$basegauche,$imgexp,$baseexp,$imgdroit,$basedroit);
     $this->base_verticale=max($basegauche,$baseexp,$basedroit);
   }
 }
@@ -1591,7 +1591,7 @@ function detectimg($n)
 {
   /*
 Detects if the formula image already exists in the $dirimg cache directory.
-In that case, the function returns a parameter (recorded in the name of the image file) which allows to align correctly the image with the text.
+In that case, the function returns a parameter (recorded in the name of the image file) which allows to alirt correctly the image with the text.
   */
   $dirimg = mathPublisherConfig::getImageDir();
   $ret=0;
@@ -1630,8 +1630,8 @@ Creates the formula image (if the image is not in the cache) and returns the <im
     //1000+baseline ($v) is recorded in the name of the image
     ImagePNG($formula->image,$dirimg."/math_".$v."_".$nameimg);
   }
-  $valign=$v-1000;
-  return '<img src="'.$pathtoimg."math_".$v."_".$nameimg.'" style="vertical-align:'.$valign.'px;'.' display: inline-block ;" alt="'.$text.'" title="'.$text.'"/>';
+  $valirt=$v-1000;
+  return '<img src="'.$pathtoimg."math_".$v."_".$nameimg.'" style="vertical-alirt:'.$valirt.'px;'.' display: inline-block ;" alt="'.$text.'" title="'.$text.'"/>';
 }
 
 function mathfilter($text,$size,$pathtoimg)

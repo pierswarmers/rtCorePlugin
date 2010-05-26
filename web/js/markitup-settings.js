@@ -4,7 +4,7 @@
 // Copyright (C) 2008 Jay Salvat
 // http://markitup.jaysalvat.com/
 // ----------------------------------------------------------------------------
-gnMarkdownSettings = {
+rtMarkdownSettings = {
     nameSpace:          'markdown', // Useful to prevent multi-instances CSS conflict
     previewParserPath:  '~/sets/markdown/preview.php',
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},

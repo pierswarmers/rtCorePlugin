@@ -25,28 +25,28 @@ a.left.disabled:hover, a.right.disabled:hover {background-color:#efefef;cursor:i
 .info strong {display:block;}
 .progress {position:absolute;height:100%;width:100%;background:url(images/loading.gif) no-repeat 50% 50%;top:0;left:0;display:none;}
 .next, .prev, .info {background:#333 !important;background:rgba(0, 0, 0, 0.6);}
-/* gn-modal-panel  */
-.gn-modal-panel {
+/* rt-modal-panel  */
+.rt-modal-panel {
     display   : none;
 }
 
 
-.gn-modal-panel {
+.rt-modal-panel {
     border    : 2px solid #666;
     border    : 5px solid rgba(0,0,0,0.5);
     width:400px;
     background-color:#fff;
 }
-.gn-modal-panel div.inner {
+.rt-modal-panel div.inner {
     padding:10px;
 }
 
-.gn-modal-panel div.inner-panel {
+.rt-modal-panel div.inner-panel {
     border-top:1px solid #ddd;
     padding-top:10px;
 }
 
-.gn-modal-panel h2 {
+.rt-modal-panel h2 {
     margin-bottom:0px;
     color:#fff;
     background-color:#28CFCD;

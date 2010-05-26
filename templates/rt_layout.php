@@ -36,11 +36,11 @@
           <?php if (isset($routes['rt_wiki_page_index'])): ?>
               <li><?php echo link_to(__('Wiki'), 'rtWikiPage/index') ?></li>
           <?php endif; ?>
-          <?php if (isset($routes['sf_guard_sirtin']) && isset($routes['sf_guard_sirtout'])): ?>
+          <?php if (isset($routes['sf_guard_signin']) && isset($routes['sf_guard_signout'])): ?>
             <?php if (!$sf_user->isAuthenticated()): ?>
-              <li><?php echo link_to(__('Login'), '@sf_guard_sirtin') ?></li>
+              <li><?php echo link_to(__('Login'), '@sf_guard_signin') ?></li>
             <?php else: ?>
-              <li><?php echo link_to('&times; '.__('Logout'), '@sf_guard_sirtout') ?></li>
+              <li><?php echo link_to('&times; '.__('Logout'), '@sf_guard_signout') ?></li>
             <?php endif; ?>
           <?php endif; ?>
         </ul>

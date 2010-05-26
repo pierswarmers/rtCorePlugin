@@ -1,4 +1,4 @@
-gnIndex:
+rtIndex:
 
   columns:
     keyword:          string(100)
@@ -17,7 +17,7 @@ gnIndex:
       fields:                [model_id, model]
 
   relations:
-    gnSite:
+    rtSite:
       local: site_id
       foreign: id
       onDelete: CASCADE

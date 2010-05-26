@@ -1,11 +1,11 @@
-gnPage:
+rtPage:
 
   actAs:
     Sluggable:
       fields:      [title]
       canUpdate:   true
-    gnAttachableTemplate: ~
-    gnSearchTemplate:
+    rtAttachableTemplate: ~
+    rtSearchTemplate:
       fields:      [title, content, description]
     Taggable:      {}
     Timestampable: {}
@@ -29,7 +29,7 @@ gnPage:
     searchable:       { type: boolean, default: 1 }
 
   relations:
-    gnSite:
+    rtSite:
       local: site_id
       foreign: id
       onDelete: CASCADE

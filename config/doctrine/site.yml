@@ -1,4 +1,4 @@
-gnSite:
+rtSite:
   columns:
     title:           string(255)
     domain:         string(255)

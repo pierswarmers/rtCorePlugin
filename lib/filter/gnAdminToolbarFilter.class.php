@@ -33,7 +33,7 @@ class gnAdminToolbarFilter extends sfFilter
       use_helper('Partial', 'I18n');
       $toolbar = get_component('gnAdmin', 'menu');
       $response = $this->getContext()->getResponse();
-      $response->setContent(str_ireplace('<!--gn-admin-holder-->', $toolbar.'<!--gn-admin-holder-->',$response->getContent()));
+      $response->setContent(str_ireplace('</body>', $toolbar.'</body>',$response->getContent()));
       $response->setContent(str_ireplace('<body>', $css.'<body>',$response->getContent()));
     }
   }

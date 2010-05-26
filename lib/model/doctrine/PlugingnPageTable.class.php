@@ -41,6 +41,19 @@ class PlugingnPageTable extends Doctrine_Table
     $query = $this->addSiteQuery($query);
     return $this->execute();
   }
+
+  /**
+   * Return a published page by a given ID.
+   *
+   * @param Doctrine_Query $query
+   * @return Doctrine_Collection
+   */
+  public function findOnePublishedById($id, Doctrine_Query $query = null)
+  {
+    $query = $this->addSiteQuery($query);
+    $query = $this->addPublishedQuery($query);
+    return $this->findOneById($id);
+  }
   
   /**
    * Adds a check for pages which have been published.

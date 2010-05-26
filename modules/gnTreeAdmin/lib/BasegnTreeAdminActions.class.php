@@ -25,6 +25,8 @@
  * portions of the Software.
  */
 
+require_once(dirname(__FILE__).'/../../../../gnSitePlugin/lib/toolkit/gnSitePageCacheToolkit.class.php');
+
 /**
  * BasegnTreeAdminActions.
  *
@@ -63,6 +65,7 @@ class BasegnTreeAdminActions extends sfActions
 
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
+    gnSitePageCacheToolkit::clearCache();
   }
 
   public function executeAdd_root()
@@ -81,6 +84,7 @@ class BasegnTreeAdminActions extends sfActions
     $this->json = json_encode($root->toArray());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
+    gnSitePageCacheToolkit::clearCache();
   }
 
   public function executeEdit_field()
@@ -97,6 +101,7 @@ class BasegnTreeAdminActions extends sfActions
     $this->json = json_encode($record->toArray());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
+    gnSitePageCacheToolkit::clearCache();
   }
 
   public function executeDelete()
@@ -109,6 +114,7 @@ class BasegnTreeAdminActions extends sfActions
     $this->json = json_encode(array());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
+    gnSitePageCacheToolkit::clearCache();
   }
 
   public function executeMove()
@@ -121,6 +127,11 @@ class BasegnTreeAdminActions extends sfActions
     $record = Doctrine_Core::getTable($model)->find($id);
     $dest = Doctrine_Core::getTable($model)->find($to_id);
 
+    if(($movetype == 'before' || $movetype == 'after') && $dest->getNode()->isRoot())
+    {
+      throw new sfException('Can\'t move node to root.');
+    }
+    
     if( $movetype == 'inside' )
     {
       //$prev = $record->getNode()->getPrevSibling();
@@ -139,5 +150,7 @@ class BasegnTreeAdminActions extends sfActions
     $this->json = json_encode($record->toArray());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
+    gnSitePageCacheToolkit::clearCache();
   }
+
 }

@@ -45,7 +45,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
     );
 
     $this->widgetSchema['url']->setLabel('Website URL');
-    $this->setValidator('url', new sfValidatorUrl());
+    $this->setValidator('url', new sfValidatorUrl(array('required' => false)));
     $this->setWidget('date_of_birth',  new sfWidgetFormDate($options));
     $this->widgetSchema['password'] = new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off'));
     $this->widgetSchema['password_again'] = new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off'));

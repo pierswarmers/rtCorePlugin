@@ -1,6 +1,6 @@
-# gnCorePlugin
+# rtCorePlugin
 
-The `gnCorePlugin` is the cetral and only required-by-all plugin for the Gumnut suite. It contains a set of common and required pieces, around which, all other Gumnut plugins are built.
+The `rtCorePlugin` is the cetral and only required-by-all plugin for the Reditype suite. It contains a set of common and required pieces, around which, all other Reditype plugins are built.
 
 In summary these core features include:
 
@@ -33,7 +33,7 @@ You'll also need to configure a database...
 
 ## Installation
 
-1. Download the `gnCorePlugin` into you plugins directory along with the followong plugins:
+1. Download the `rtCorePlugin` into you plugins directory along with the followong plugins:
 
         svn co http://svn.symfony-project.com/plugins/sfDoctrineActAsTaggablePlugin/trunk/ plugins/sfDoctrineActAsTaggablePlugin
         svn co http://svn.symfony-project.com/plugins/sfThumbnailPlugin/trunk/ plugins/sfThumbnailPlugin
@@ -41,15 +41,15 @@ You'll also need to configure a database...
         svn co http://svn.symfony-project.com/plugins/sfFormExtraPlugin/branches/1.3/ plugins/sfFormExtraPlugin
         svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk plugins/sfGeshiPlugin
 
-    **Note:** If you intend to use othe Gumnut plugins (gnBlogPlugin, gnBlogPlugin or gnSitePlugin), download them now.
+    **Note:** If you intend to use othe Reditype plugins (rtBlogPlugin, rtBlogPlugin or rtSitePlugin), download them now.
 
 2. Enable the plugin in your `ProjectConfiguration.class.php`, The enabled plugins call will look something like this:
 
         $this->enablePlugins(
-          'gnCorePlugin',
-          'gnBlogPlugin',     // optional
-          'gnSitePlugin',     // optional
-          'gnWikiPlugin',     // optional
+          'rtCorePlugin',
+          'rtBlogPlugin',     // optional
+          'rtSitePlugin',     // optional
+          'rtWikiPlugin',     // optional
           'sfDoctrinePlugin',
           'sfDoctrineActAsTaggablePlugin',
           'sfFormExtraPlugin',
@@ -65,12 +65,12 @@ You'll also need to configure a database...
 4. Enable the required modules in your fontend `apps/frontend/config/settings.yml`:
 
             enabled_modules:
-              - gnAsset
-              - gnSearch
-              - gnGuardAuth
-              - gnGuardForgotPassword
-              - gnGuardRegister
-              - gnWikiPage
+              - rtAsset
+              - rtSearch
+              - rtGuardAuth
+              - rtGuardForgotPassword
+              - rtGuardRegister
+              - rtWikiPage
 
 5. While we're here, lets set up the email configuration in `factories.yml`:
 
@@ -104,9 +104,9 @@ You'll also need to configure a database...
 
         all:
           .settings:
-            login_module:           gnGuardAuth
-            login_action:           signin
-            secure_module:          gnGuardAuth
+            login_module:           rtGuardAuth
+            login_action:           sirtin
+            secure_module:          rtGuardAuth
             secure_action:          secure
 
 7. You will now need to run a complete build on your project:

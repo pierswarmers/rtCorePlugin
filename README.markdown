@@ -52,7 +52,7 @@ You'll also need to configure a database...
 
 2. Enable the plugin in your `ProjectConfiguration.class.php`, The enabled plugins call will look something like this:
 
-    $this->enablePlugins(
+        $this->enablePlugins(
             'rtCorePlugin',
             'rtBlogPlugin',
             'rtSitePlugin',

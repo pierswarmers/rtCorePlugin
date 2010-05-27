@@ -36,10 +36,10 @@ You'll also need to configure a database...
 1. Download the `rtCorePlugin` into you plugins directory along with the followong plugins:
 
         cd plugins
-        git clone git@github.com:pierswarmers/rtBlogPlugin.git
-        git clone git@github.com:pierswarmers/rtCorePlugin.git
-        git clone git@github.com:pierswarmers/rtSitePlugin.git
-        git clone git@github.com:pierswarmers/rtWikiPlugin.git
+        git clone git://github.com/pierswarmers/rtBlogPlugin.git
+        git clone git://github.com/pierswarmers/rtCorePlugin.git
+        git clone git://github.com/pierswarmers/rtSitePlugin.git
+        git clone git://github.com/pierswarmers/rtWikiPlugin.git
 
         svn co http://svn.symfony-project.com/plugins/sfDoctrineActAsTaggablePlugin/trunk/ sfDoctrineActAsTaggablePlugin
         svn co http://svn.symfony-project.com/plugins/sfDoctrineGuardPlugin/trunk/ sfDoctrineGuardPlugin

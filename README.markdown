@@ -53,18 +53,18 @@ You'll also need to configure a database...
 2. Enable the plugin in your `ProjectConfiguration.class.php`, The enabled plugins call will look something like this:
 
         $this->enablePlugins(
-            'rtCorePlugin',
-            'rtBlogPlugin',
-            'rtSitePlugin',
-            'rtWikiPlugin',
-            'sfDoctrinePlugin',
-            'sfDoctrineActAsTaggablePlugin',
-            'sfFormExtraPlugin',
-            'sfDoctrineGuardPlugin',
-            'sfGeshiPlugin',
-            'sfThumbnailPlugin',
-            'sfFeed2Plugin'
-            );
+        'rtCorePlugin',
+        'rtBlogPlugin',
+        'rtSitePlugin',
+        'rtWikiPlugin',
+        'sfDoctrinePlugin',
+        'sfDoctrineActAsTaggablePlugin',
+        'sfFormExtraPlugin',
+        'sfDoctrineGuardPlugin',
+        'sfGeshiPlugin',
+        'sfThumbnailPlugin',
+        'sfFeed2Plugin'
+        );
 
 3. You need a frontend application, if you don't already have one:
 

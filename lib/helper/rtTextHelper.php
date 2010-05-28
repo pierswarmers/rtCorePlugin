@@ -161,8 +161,8 @@ function markup_galleries_in_text($matches)
       
       if($asset->isImage())
       {
-        $thumb_height = sfConfig::get('app_rt_asset_scrollable_height', 500);
-        $thumb_width = sfConfig::get('app_rt_asset_scrollable_width', 400);
+        $thumb_height = sfConfig::get('app_rt_asset_scrollable_height', 130);
+        $thumb_width = sfConfig::get('app_rt_asset_scrollable_width', 130);
 
         
         $thumb_location_web = rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => $thumb_height, 'maxWidth' => $thumb_width));

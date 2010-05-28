@@ -161,13 +161,17 @@ function markup_galleries_in_text($matches)
       
       if($asset->isImage())
       {
-        $thumb_location_web = rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => 130, 'maxWidth' => 130));
+        $thumb_height = sfConfig::get('app_rt_asset_scrollable_height', 500);
+        $thumb_width = sfConfig::get('app_rt_asset_scrollable_width', 400);
+
+        
+        $thumb_location_web = rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => $thumb_height, 'maxWidth' => $thumb_width));
         $thumb_location_sys = sfConfig::get('sf_web_dir') . $thumb_location_web;
 
         $image_data = getimagesize($thumb_location_sys);
 
-        $offset_left = (75-$image_data[0])/2;
-        $offset_top = (75-$image_data[1])/2;
+        $offset_left = ($image_data[0]/2+10-$image_data[0])/2;
+        $offset_top = ($image_data[1]/2+10-$image_data[1])/2;
 
         $style = sprintf('left:%spx;top:%spx;', $offset_left,$offset_top);
 

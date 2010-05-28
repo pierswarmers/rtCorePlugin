@@ -33,10 +33,10 @@ class rtAdminToolbarFilter extends sfFilter
     if (function_exists('use_helper'))
     {
       $css = '<link rel="stylesheet" type="text/css" media="screen" href="/rtCorePlugin/css/admin-toolbar.css" />';
-      $js = '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.min.js" />';
-      $js .= '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery-ui/js/jquery-ui.min.js" />';
+      $js = '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.min.js"></script>';
+      $js .= '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery-ui/js/jquery-ui.min.js"></script>';
       
-      use_helper('Partial', 'I18n');
+      use_helper('Partial', 'I18N');
       
       $toolbar = get_component('rtAdmin', 'menu');
       $response = $this->getContext()->getResponse();

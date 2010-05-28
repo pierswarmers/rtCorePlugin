@@ -4,7 +4,7 @@
   <?php echo render_form_row($form['username']) ?>
   <?php echo render_form_row($form['password']) ?>
   <?php echo render_form_row($form['remember']) ?>
-  <button type="submit" class="button medium positive"><?php echo __('Sirtin', null, 'sf_guard') ?></button>
+  <button type="submit" class="button medium positive"><?php echo __('Sign in', null, 'sf_guard') ?></button>
   <?php $routes = $sf_context->getRouting()->getRoutes() ?>
   <?php if (isset($routes['sf_guard_forgot_password'])): ?>
     <a href="<?php echo url_for('@sf_guard_forgot_password') ?>"><?php echo __('Forgot your password?', null, 'sf_guard') ?></a>

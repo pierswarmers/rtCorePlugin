@@ -39,7 +39,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
   {
     if ($this->getUser()->isAuthenticated())
     {
-      $this->getUser()->setFlash('notice', 'You are already registered and sirted in!');
+      $this->getUser()->setFlash('notice', 'You are already registered and signed in!');
       $this->redirect('@homepage');
     }
 
@@ -59,7 +59,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
         }
         
         $user = $this->form->save();
-        $this->getUser()->sirtIn($user);
+        $this->getUser()->signIn($user);
         $this->redirect('@homepage');
       }
     }
@@ -100,7 +100,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
     $from = $user->getEmailAddress();
     $to = $this->getAdminEmail();
     $subject = sprintf('[%s] Registration request for: %s', $this->generateUrl('homepage', array(), true), $user->getName());
-    $body  = 'A new user has registered but will need to be activated before they can log in.' . "\n\n";
+    $body  = 'A new user has registered but will need to be activated before they can sign in.' . "\n\n";
     $body .= sprintf('The details they entered were: %s (%s)', $user->getName(),$user->getEmailAddress()) . "\n\n";
     $body .= 'If you wish to automatically activate this user, you can do so by simply clicking on this link:' . "\n";
     $body .= $this->generateUrl('sf_guard_register_confirm', array('id' => $user->getId()), true) . "\n";
@@ -118,8 +118,8 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
     $to = $user->getEmailAddress();
     $subject = sprintf('[%s] Registration confirmed!', $this->generateUrl('homepage', array(), true));
     $body  = 'Hi ' .  $user->getFirstName() . ",\n\n";
-    $body .= 'Your registration has been approved and you\'re now able to login:' . "\n";
-    $body .= $this->generateUrl('sf_guard_sirtin', array('id' => $user->getId()), true) . "\n";
+    $body .= 'Your registration has been approved and you\'re now able to sign in:' . "\n";
+    $body .= $this->generateUrl('sf_guard_signin', array('id' => $user->getId()), true) . "\n";
     $this->getMailer()->composeAndSend($from, $to, $subject, $body);
   }
 

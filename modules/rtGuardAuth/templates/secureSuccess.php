@@ -4,5 +4,5 @@
 <p><?php echo __('Oops! The page you asked for is secure and you don\'t have the required credentials.') ?></p>
 <?php else: ?>
 <p><?php echo __('Oops! The page you asked for is secure and you will need to login before accessing it.') ?></p>
-<?php include_partial('sirtin_form', array('form' => new sfGuardFormSirtin())) ?>
+<?php include_partial('signin_form', array('form' => new sfGuardFormSignin())) ?>
 <?php endif; ?>

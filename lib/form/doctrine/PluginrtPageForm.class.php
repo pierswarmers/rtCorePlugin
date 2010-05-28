@@ -47,7 +47,7 @@ abstract class PluginrtPageForm extends BasertPageForm
     $this->widgetSchema->setHelp('searchable', 'Make this page available to search engine robots');
 //    $this->widgetSchema['slug']->setLabel('URL Slug');
     $this->enableCSRFProtection();
-//    $this->embedI18n(array('en'));
+//    $this->embedI18N(array('en'));
   }
 
   /**

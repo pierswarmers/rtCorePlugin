@@ -149,7 +149,7 @@ function markup_galleries_in_text($matches)
 
   if(count($assets) > 0)
   {
-    use_javascript('/rtCorePlugin/vendor/jquery/js/jquery-1.4.2.min.js');
+    use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js');
     use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.tools.min.js', 'last');
     use_stylesheet('/rtCorePlugin/vendor/jquery/css/tools/jquery.tools.css');
     $rand = rand();

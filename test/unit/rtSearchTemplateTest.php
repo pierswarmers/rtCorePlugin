@@ -46,7 +46,7 @@ Doctrine_Core::createTablesFromArray(array('Tester'));
 
 //$t->is($tester->getLanguages(), false, '->getLanguages() returns false for non i18n doctrine models');
 
-class I18nTester extends Doctrine_Record
+class I18NTester extends Doctrine_Record
 {
     public function setTableDefinition()
     {
@@ -57,7 +57,7 @@ class I18nTester extends Doctrine_Record
     {
       parent::setUp();
       $search = new rtSearchTemplate(array('fields' =>array('title','content')));
-      $i18n = new Doctrine_Template_I18n(array('fields' => array('title','content')));
+      $i18n = new Doctrine_Template_I18N(array('fields' => array('title','content')));
       $i18n->addChild($search);
       $this->actAs(new rtSearchTemplate);
       $this->actAs($i18n);
@@ -66,16 +66,16 @@ class I18nTester extends Doctrine_Record
     public function delete(Doctrine_Connection $conn = null)
     {
       $configuration = ProjectConfiguration::getApplicationConfiguration( 'frontend', 'test', true);
-      sfContext::createInstance($configuration)->getLogger()->err('{I18nTester} delete() called!');
+      sfContext::createInstance($configuration)->getLogger()->err('{I18NTester} delete() called!');
       parent::delete($conn);
     }
 }
 
 $t->diag('Test a more complex I18N object.');
 
-Doctrine_Core::createTablesFromArray(array('I18nTester'));
+Doctrine_Core::createTablesFromArray(array('I18NTester'));
 
-$i18n_tester = new I18nTester();
+$i18n_tester = new I18NTester();
 
 $title = 'Hello, balloons are green blue and sometime red!';
 $content = 'It really doesn\'t do too much. Just a little bit of text to hold and save for testing.';

@@ -41,7 +41,7 @@ class rtTemplateToolkit
     }
     else
     {
-      return sfConfig::get('sf_root_dir').DIRECTORY_SEPARATOR.sfConfig::get('app_rt_template_dir');
+      return sfConfig::get('sf_root_dir').sfConfig::get('app_rt_template_dir');
     }
   }
 

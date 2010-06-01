@@ -3,7 +3,7 @@ rtPage:
   actAs:
     Sluggable:
       fields:      [title]
-      canUpdate:   true
+      canUpdate:   false
     rtAttachableTemplate: ~
     rtSearchTemplate:
       fields:      [title, content, description]

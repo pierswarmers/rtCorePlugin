@@ -3,7 +3,7 @@
   <?php echo $form->renderHiddenFields() ?>
   <p><?php echo $form['username']->renderLabel() ?> <?php echo $form['username'] ?></p>
   <p><?php echo $form['password']->renderLabel() ?> <?php echo $form['password'] ?></p>
-  <p><?php echo $form['remember'] ?> <?php echo $form['remember']->renderLabel() ?></p>
+  <p class="checkbox"><?php echo $form['remember'] ?> <?php echo $form['remember']->renderLabel() ?></p>
   <p>
   <button type="submit" class="button medium positive"><?php echo __('Sign in', null, 'sf_guard') ?></button>
   <?php $routes = $sf_context->getRouting()->getRoutes() ?>

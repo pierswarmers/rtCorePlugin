@@ -92,6 +92,9 @@ table, thead th, td {border:1px solid #ccc;}
 thead th, td {border-top:0; border-left:0;vertical-align: top;}
 table{border-bottom:0; border-right:0;}
 thead th {background:#ddd;color:#fff;}
+label{display:block;}
+p.checkbox label {display:inline;}
+form p {margin-bottom:0.5em;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size: 1.1em;}
 p img.right, p img.left {margin-top:0.5em;}
 iframe {margin-bottom:1.5em;}

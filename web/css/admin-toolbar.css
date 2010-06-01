@@ -3,11 +3,13 @@
 Admin Toolbar
 
 */
+div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar a, div#rt-admin-toolbar ul, div#rt-admin-toolbar li, div#rt-admin-toolbar form, div#rt-admin-toolbar input {margin:0;padding:0;border:0;background:none;color:#FFF;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;text-shadow:0 -1px 1px rgba(0,0,2,0.9);font-size:12px;text-decoration:none;list-style:none;}
+div#rt-admin-toolbar h1, div#rt-admin-toolbar h2 {font-weight:bold;}
 div#rt-admin-toolbar{z-index:8000;position:fixed;top:0;left:0;width:30px;height:100%;background:url(../images/bg-admin.png) 100% 0 repeat-y;}
 div#rt-admin-toolbar.show, div#rt-admin-container div#rt-admin-toolbar{width:225px;}
-div#rt-admin-toolbar *{color:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;text-shadow:0 -1px 1px rgba(0,0,2,0.9);font-size:12px;text-decoration:none;border:0;list-style:none;padding:0;margin:0;}
 div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar ul, div#rt-admin-toolbar-search{padding:0 10px;border:0!important;margin-bottom:10px;}
 div#rt-admin-toolbar ul{padding-left:20px;}
+div#rt-admin-toolbar li{background:none;}
 div#rt-admin-toolbar-search form{padding-left:25px;height:22px;background:url(../images/bg-admin-search.png);}
 div#rt-admin-toolbar-search input, div#rt-admin-toolbar-search input:focus {border-width:0 !important;width:145px;height:22px;font-weight:normal;outline:none;background:transparent;}
 div#rt-admin-toolbar h1{line-height:38px;background:url(../images/bg-admin-h1.png);}

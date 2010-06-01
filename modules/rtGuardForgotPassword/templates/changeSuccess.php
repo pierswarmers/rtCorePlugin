@@ -4,7 +4,7 @@
 <?php include_partial('rtGuardAuth/flashes')?>
 <form action="<?php echo url_for('@sf_guard_forgot_password_change?unique_key='.$sf_request->getParameter('unique_key')) ?>" method="POST">
   <?php echo $form->renderHiddenFields() ?>
-  <?php echo render_form_row($form['password']) ?>
-  <?php echo render_form_row($form['password_again']) ?>
-  <button type="submit" class="button medium positive"><?php echo __('Change', null, 'sf_guard') ?></button>
+  <p><?php echo $form['password']->renderLabel() ?> <?php echo $form['password'] ?></p>
+  <p><?php echo $form['password_again']->renderLabel() ?> <?php echo $form['password_again'] ?></p>
+  <p><button type="submit" class="button medium positive"><?php echo __('Change', null, 'sf_guard') ?></button></p>
 </form>

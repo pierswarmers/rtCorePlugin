@@ -12,6 +12,7 @@ sfGuardGroup:
       - Permission_admin_search
       - Permission_admin_asset
       - Permission_admin_tree
+      - Permission_admin_product
 
 sfGuardPermission:
 
@@ -44,3 +45,6 @@ sfGuardPermission:
   Permission_admin_tree:
     name:           admin_tree
     description:    Administrator permission for trees
+  Permission_admin_product:
+    name:           admin_product
+    description:    Administrator products in shop

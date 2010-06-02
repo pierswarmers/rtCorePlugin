@@ -1,3 +1,4 @@
+<?php $routes = sfContext::getInstance()->getRouting()->getRoutes(); ?>
 <div id="rt-admin-toolbar">
   <div id="rt-admin-toolbar-handle">+</div>
   <div id="rt-admin-toolbar-content">
@@ -20,6 +21,12 @@
         <li><a href="<?php echo url_for('rtGuardGroupAdmin/index') ?>"><?php echo __('Groups') ?></a></li>
         <li><a href="<?php echo url_for('rtGuardPermissionAdmin/index') ?>"><?php echo __('Permissions') ?></a></li>
       </ul>
+      <?php if(isset($routes['rt_shop_product_show'])): ?>
+      <h2><?php echo __('Shop and Products') ?></h2>
+      <ul>
+        <li><a href="<?php echo url_for('rtShopProductAdmin/index') ?>"><?php echo __('Products') ?></a></li>
+      </ul>
+      <?php endif; ?>
     </div>
   </div>
 </div>

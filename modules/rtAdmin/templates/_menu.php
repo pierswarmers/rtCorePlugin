@@ -6,7 +6,7 @@
       <h1><?php echo __('Administration Tools') ?></h1>
       <div id="rt-admin-toolbar-search">
         <form action="<?php echo url_for('rtSearchAdmin/index') ?>" method="get">
-          <input type="text" name="q" value="<?php echo $sf_request->getParameter('q') ?>" />
+          <input type="text" name="q" id="rtAdminSearch" value="<?php echo $sf_request->getParameter('q') ?>" />
         </form>
       </div>
       <h2><?php echo __('General Content') ?></h2>
@@ -33,22 +33,31 @@
 
 <script type="text/javascript">
   $(function() {
-    function toggleAdminContent(){
+    var searchDefault = "Search...";
+    var searchBox = $("#rtAdminSearch");
+    if(searchBox.attr("value") == "") searchBox.attr("value", searchDefault);
+    searchBox.focus(function(){
+      if($(this).attr("value") == searchDefault) $(this).attr("value", "");
+    });
+    searchBox.blur(function(){
+      if($(this).attr("value") == "") $(this).attr("value", searchDefault);
+    });
+    function rtToggleAdminContent(){
       var menu = $('#rt-admin-toolbar');
       if(!menu.hasClass('show')) {
         menu.addClass('show', 100);
-        toggleAdminMenu();
+        rtToggleAdminMenu();
       } else {
-        toggleAdminMenu();
+        rtToggleAdminMenu();
         menu.removeClass('show', 50);
       }
       return false;
     };
 
-    function toggleAdminMenu(){
+    function rtToggleAdminMenu(){
       $("#rt-admin-toolbar-menu").toggle();
     };
 
-    $("#rt-admin-toolbar-handle").click(function() { toggleAdminContent(); });
+    $("#rt-admin-toolbar-handle").click(function() { rtToggleAdminContent(); });
   });
 </script>

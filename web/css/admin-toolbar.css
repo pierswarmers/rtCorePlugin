@@ -11,7 +11,7 @@ div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar ul, div#r
 div#rt-admin-toolbar ul{padding-left:20px;}
 div#rt-admin-toolbar li{background:none;}
 div#rt-admin-toolbar-search form{padding-left:25px;height:22px;background:url(../images/bg-admin-search.png);}
-div#rt-admin-toolbar-search input, div#rt-admin-toolbar-search input:focus {border-width:0 !important;width:145px;height:22px;font-weight:normal;outline:none;background:transparent;}
+div#rt-admin-toolbar-search input, div#rt-admin-toolbar-search input:focus {font-style:italic;border-width:0 !important;width:145px;height:22px;font-weight:normal;outline:none;background:transparent;}
 div#rt-admin-toolbar h1{line-height:38px;background:url(../images/bg-admin-h1.png);}
 div#rt-admin-toolbar-content{width:5px;height:100%;}
 div#rt-admin-toolbar.show div#rt-admin-toolbar-content, div#rt-admin-container div#rt-admin-toolbar-content {width:200px;}

@@ -21,7 +21,7 @@ abstract class PluginrtPageForm extends BasertPageForm
   {
     parent::setup();
     
-    unset($this['deleted_at'], $this['version'], $this['profile'], $this['slug'], $this['created_at'], $this['updated_at'], $this['comment_count']);
+    unset($this['deleted_at'], $this['version'], $this['profile'], $this['created_at'], $this['updated_at'], $this['comment_count']);
 
     if(!rtSiteToolkit::isMultiSiteEnabled())
     {
@@ -45,7 +45,7 @@ abstract class PluginrtPageForm extends BasertPageForm
     $this->widgetSchema->setHelp('description', 'As short description describing this page.');
     $this->widgetSchema['searchable']->setLabel('Searchable');
     $this->widgetSchema->setHelp('searchable', 'Make this page available to search engine robots');
-//    $this->widgetSchema['slug']->setLabel('URL Slug');
+    $this->widgetSchema['slug']->setLabel('URL Slug');
     $this->enableCSRFProtection();
 //    $this->embedI18N(array('en'));
   }

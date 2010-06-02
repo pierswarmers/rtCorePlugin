@@ -20,7 +20,10 @@ ul.checkbox_list{list-style:none;padding:0;margin:0;}
 .rt-admin-toggle-panel-content{display:none;}
 .rt-admin-toggle-panel {margin-bottom:10px;border-bottom:3px solid #CCC;}
 .rt-admin-toggle-panel h2{background:#efefef;border:1px solid #CCC;font-size:1.2em;font-weight:bold;padding:5px;cursor:pointer;}
-
+ul.checkbox_list{margin-bottom:0;}
+ul.ui-sortable label{cursor:move;}
+div.help {padding-top:5px; font-style:italic;color:#555}
+.checkbox div.help, ul.checkbox_list label {display:inline;position:relative;top:3px;}
 /*
 
 List Layout

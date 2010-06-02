@@ -49,29 +49,31 @@ function render_form_row(sfFormField $widget, $options = array())
   $html = '';
 
   $widget->renderHelp();
-
+  $help = $widget->getParent()->getWidget()->getHelp($widget->getName());
+  
   if($is_checkbox)
   {
     $html = sprintf(
-      '<tr class="%1$s checkbox"><th><label for="%6$s">%2$s</label></th><td><label>%4$s %5$s</label> %3$s</td></tr>',
+      '<tr class="%1$s checkbox"><th><label for="%6$s">%2$s</label></th><td>%4$s <div class="help">%5$s</div> %3$s</td></tr>',
       $options['class'], // 1
       $widget->renderLabelName(),  // 2
       $widget->hasError() ? $widget->renderError() : '',  // 3
       $widget->render(), // 4
-      $widget->getParent()->getWidget()->getHelp($widget->getName()), // 5
+      $help, // 5
       $widget->renderId() // 6
     );
   }
   else
   {
+    
     $html = sprintf(
-      '<tr class="%1$s standard"><th><label for="%2$s">%3$s</label></th><td>%4$s %5$s %6$s %7$s</td></tr>',
+      '<tr class="%1$s standard"><th><label for="%2$s">%3$s</label></th><td>%4$s %5$s <div class="help">%6$s</div>%7$s</tr>',
       $options['class'], // 1
       $widget->renderId(), // 2
       $widget->renderLabelName(), // 3
       $widget->hasError() ? '<span class="error">' . $widget->renderError() . '</span>' : '', // 4
       $widget->render(), // 5
-      $widget->renderHelp(), // 6
+      $help, // 6
       $content // 7
     );
   }

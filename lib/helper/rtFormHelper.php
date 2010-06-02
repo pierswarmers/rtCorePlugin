@@ -48,29 +48,31 @@ function render_form_row(sfFormField $widget, $options = array())
 
   $html = '';
 
+  $widget->renderHelp();
+
   if($is_checkbox)
   {
     $html = sprintf(
-      '<div class="%1$s checkbox"><label>%4$s %6$s %2$s</label> %3$s %5$s</div>',
+      '<tr class="%1$s checkbox"><th><label for="%6$s">%2$s</label></th><td><label>%4$s %5$s</label> %3$s</td></tr>',
       $options['class'], // 1
-       $widget->renderLabelName(),  // 2
-      $widget->hasError() ? ' &rarr; '. $widget->renderError() : '',  // 3
+      $widget->renderLabelName(),  // 2
+      $widget->hasError() ? $widget->renderError() : '',  // 3
       $widget->render(), // 4
-      $widget->renderHelp(),  // 5
-      $content// 6
+      $widget->getParent()->getWidget()->getHelp($widget->getName()), // 5
+      $widget->renderId() // 6
     );
   }
   else
   {
     $html = sprintf(
-      '<div class="%s standard"><label for="%s">%s <span class="error">%s</span></label> %s %s %s</div>',
-      $options['class'],
-      $widget->renderId(),
-      $widget->renderLabelName(),
-      $widget->hasError() ? ' &rarr; '. $widget->renderError() : '',
-      $widget->render(),
-      $widget->renderHelp(),
-      $content
+      '<tr class="%1$s standard"><th><label for="%2$s">%3$s</label></th><td>%4$s %5$s %6$s %7$s</td></tr>',
+      $options['class'], // 1
+      $widget->renderId(), // 2
+      $widget->renderLabelName(), // 3
+      $widget->hasError() ? '<span class="error">' . $widget->renderError() . '</span>' : '', // 4
+      $widget->render(), // 5
+      $widget->renderHelp(), // 6
+      $content // 7
     );
   }
 

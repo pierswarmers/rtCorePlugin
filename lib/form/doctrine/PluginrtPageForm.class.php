@@ -42,10 +42,11 @@ abstract class PluginrtPageForm extends BasertPageForm
     $this->setValidator('title',    new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'please enter a descriptive title.')));
     $this->setValidator('content',  new sfValidatorString(array('required' => true), array('required' => 'please enter some content.')));
 
-    $this->widgetSchema->setHelp('description', 'As short description describing this page.');
+    $this->widgetSchema->setHelp('description', 'As short description of this item.');
     $this->widgetSchema['searchable']->setLabel('Searchable');
-    $this->widgetSchema->setHelp('searchable', 'Make this page available to search engine robots');
+    $this->widgetSchema->setHelp('searchable', 'Make this item available to search engine robots');
     $this->widgetSchema['slug']->setLabel('URL Slug');
+    $this->widgetSchema->setHelp('slug', 'The URL component of this item, in simple, lowercase, dash seperated ("my-page") values. ');
     $this->enableCSRFProtection();
 //    $this->embedI18N(array('en'));
   }

@@ -25,8 +25,6 @@
  * portions of the Software.
  */
 
-require_once(dirname(__FILE__).'/../../../../rtSitePlugin/lib/toolkit/rtSitePageCacheToolkit.class.php');
-
 /**
  * BasertTreeAdminActions.
  *
@@ -65,7 +63,7 @@ class BasertTreeAdminActions extends sfActions
 
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
-    rtSitePageCacheToolkit::clearCache();
+    $this->clearCache();
   }
 
   public function executeAdd_root()
@@ -84,7 +82,7 @@ class BasertTreeAdminActions extends sfActions
     $this->json = json_encode($root->toArray());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
-    rtSitePageCacheToolkit::clearCache();
+    $this->clearCache();
   }
 
   public function executeEdit_field()
@@ -101,7 +99,7 @@ class BasertTreeAdminActions extends sfActions
     $this->json = json_encode($record->toArray());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
-    rtSitePageCacheToolkit::clearCache();
+    $this->clearCache();
   }
 
   public function executeDelete()
@@ -114,7 +112,7 @@ class BasertTreeAdminActions extends sfActions
     $this->json = json_encode(array());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
-    rtSitePageCacheToolkit::clearCache();
+    $this->clearCache();
   }
 
   public function executeMove()
@@ -150,7 +148,25 @@ class BasertTreeAdminActions extends sfActions
     $this->json = json_encode($record->toArray());
     $this->getResponse()->setHttpHeader('Content-type', 'application/json');
     $this->setTemplate('json');
-    rtSitePageCacheToolkit::clearCache();
+    $this->clearCache();
   }
 
+  /**
+   * TODO:: This is particularly ugly. Need a more portable solution.
+   */
+  private function clearCache()
+  {
+    $model = $this->getRequestParameter('model');
+
+    if($model === 'rtSitePage')
+    {
+      require_once(dirname(__FILE__).'/../../../../rtSitePlugin/lib/toolkit/rtSitePageCacheToolkit.class.php');
+      rtSitePageCacheToolkit::clearCache();
+    }
+    elseif($model === 'rtShopCategory')
+    {
+      require_once(dirname(__FILE__).'/../../../../rtShopPlugin/lib/toolkit/rtShopCategoryCacheToolkit.class.php');
+      rtShopCategoryCacheToolkit::clearCache();
+    }
+  }
 }

@@ -25,6 +25,7 @@
       <h2><?php echo __('Shop and Products') ?></h2>
       <ul>
         <li><a href="<?php echo url_for('rtShopProductAdmin/index') ?>"><?php echo __('Products') ?></a></li>
+        <li><a href="<?php echo url_for('rtShopCategoryAdmin/index') ?>"><?php echo __('Categories') ?></a></li>
       </ul>
       <?php endif; ?>
     </div>

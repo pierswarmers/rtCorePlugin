@@ -26,6 +26,7 @@
       <ul>
         <li><a href="<?php echo url_for('rtShopProductAdmin/index') ?>"><?php echo __('Products') ?></a></li>
         <li><a href="<?php echo url_for('rtShopCategoryAdmin/index') ?>"><?php echo __('Categories') ?></a></li>
+        <li><a href="<?php echo url_for('rtShopAttributeAdmin/index') ?>"><?php echo __('Attributes') ?></a></li>
       </ul>
       <?php endif; ?>
     </div>

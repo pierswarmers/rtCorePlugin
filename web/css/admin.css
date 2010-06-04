@@ -32,14 +32,14 @@ List Layout
 */
 ul.rt-admin-tools{list-style:none;margin:0;padding:0;}
 ul.rt-admin-tools li{display:inline;}
-tr.rt-admin-tree  .rt-admin-title{background-image: url(../images/bg-admin-tree-steps.png);background-repeat:no-repeat;background-position:-125px 50%;}
+tr.rt-admin-tree  .rt-admin-title, span.rt-admin-tree {background-image: url(../images/bg-admin-tree-steps.png);background-repeat:no-repeat;background-position:-125px 50%;}
 tr.rt-admin-tree-level-0 td, tr.rt-admin-tree-level-0 .rt-admin-title {background:url(../images/bg-admin-alt-border.png) repeat-x 0 100%;}
-tr.rt-admin-tree-level-0 .rt-admin-title{font-weight:bold;}
-tr.rt-admin-tree-level-1 .rt-admin-title{padding-left:28px;background-position:-98px 50%;}
-tr.rt-admin-tree-level-2 .rt-admin-title{padding-left:53px;background-position:-73px 50%;}
-tr.rt-admin-tree-level-3 .rt-admin-title{padding-left:78px;background-position:-48px 50%;}
-tr.rt-admin-tree-level-4 .rt-admin-title{padding-left:103px;background-position:-23px 50%;}
-tr.rt-admin-tree-level-5 .rt-admin-title{padding-left:128px;background-position:2px 50%;}
+tr.rt-admin-tree-level-0 .rt-admin-title, span.rt-admin-tree-level-0 {font-weight:bold;}
+tr.rt-admin-tree-level-1 .rt-admin-title, span.rt-admin-tree-level-1 {padding-left:28px;background-position:-98px 50%;}
+tr.rt-admin-tree-level-2 .rt-admin-title, span.rt-admin-tree-level-2 {padding-left:53px;background-position:-73px 50%;}
+tr.rt-admin-tree-level-3 .rt-admin-title, span.rt-admin-tree-level-3 {padding-left:78px;background-position:-48px 50%;}
+tr.rt-admin-tree-level-4 .rt-admin-title, span.rt-admin-tree-level-4 {padding-left:103px;background-position:-23px 50%;}
+tr.rt-admin-tree-level-5 .rt-admin-title, span.rt-admin-tree-level-5 {padding-left:128px;background-position:2px 50%;}
 /*
 
 Icons

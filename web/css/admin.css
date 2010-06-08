@@ -41,6 +41,8 @@ tr.rt-admin-tree-level-2 .rt-admin-title, span.rt-admin-tree-level-2 {padding-le
 tr.rt-admin-tree-level-3 .rt-admin-title, span.rt-admin-tree-level-3 {padding-left:78px;background-position:-48px 50%;}
 tr.rt-admin-tree-level-4 .rt-admin-title, span.rt-admin-tree-level-4 {padding-left:103px;background-position:-23px 50%;}
 tr.rt-admin-tree-level-5 .rt-admin-title, span.rt-admin-tree-level-5 {padding-left:128px;background-position:2px 50%;}
+.compressed td, .compressed th {vertical-align: middle;}
+tr.batch-row td {background:#FFFFCF;}
 /*
 
 Icons
@@ -57,7 +59,7 @@ Icons
 Misc. Tags
 
 */
-body{background:url(../images/bg-admin-tools.png) no-repeat 100% 0;}
+body{background:url(../images/bg-admin-tools.png) no-repeat 100% 0 fixed;}
 a{color:#3366CC;}
 a, a:hover{outline:none;-moz-outline-style:none;}
 h1{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-x 0 100%;border:#C8C8C8 1px solid !important;margin-top:10px;padding:10px;font-size:1.8em;}
@@ -67,10 +69,11 @@ input{outline:none;}
 option{border-width:0;}
 .rt-admin-toggle-panel h2:hover, input:focus{border:1px solid #555 !important;}
 input[type=text], input[type=password]{-moz-border-radius:5px;-webkit-border-radius:5px;}
-td input[type=text], input[type=password]{width:95%}
-.compressed td input[type=text] {width:45px;}
+td input[type=text], th input[type=text], input[type=password]{width:95%}
+.compressed td input[type=text], .compressed th input[type=text] {width:45px;}
 .compressed td {padding-right:3px;}
 table, thead th, td{border:1px solid #ccc;}
+tfoot th{border-right:1px solid #ccc;}
 thead th, td{border-top:0;border-left:0;}
 form thead th, form td{vertical-align:top;}
 table{border-bottom:0;border-right:0;}

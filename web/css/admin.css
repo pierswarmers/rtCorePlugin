@@ -25,6 +25,7 @@ ul.checkbox_list{margin-bottom:0;}
 ul.ui-sortable label{cursor:move;}
 div.help {padding-top:5px; font-style:italic;color:#555}
 .checkbox div.help, ul.checkbox_list label {display:inline;position:relative;top:3px;}
+.advanced-panel {display:none;background:#efefef;}
 /*
 
 List Layout
@@ -67,6 +68,8 @@ option{border-width:0;}
 .rt-admin-toggle-panel h2:hover, input:focus{border:1px solid #555 !important;}
 input[type=text], input[type=password]{-moz-border-radius:5px;-webkit-border-radius:5px;}
 td input[type=text], input[type=password]{width:95%}
+.compressed td input[type=text] {width:45px;}
+.compressed td {padding-right:3px;}
 table, thead th, td{border:1px solid #ccc;}
 thead th, td{border-top:0;border-left:0;}
 form thead th, form td{vertical-align:top;}

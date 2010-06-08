@@ -41,11 +41,11 @@ class rtAdminToolbarFilter extends sfFilter
       $toolbar = get_component('rtAdmin', 'menu');
       $response = $this->getContext()->getResponse();
       $response->setContent(str_ireplace('<!--rt-admin-holder-->', $toolbar,$response->getContent()));
-      $response->setContent(str_ireplace('<body>', $css.'<body>',$response->getContent()));
+      $response->setContent(str_ireplace('</head>', $css.'</head>',$response->getContent()));
 
       if (!preg_match("/jquery/i", $response->getContent()))
       {
-        $response->setContent(str_ireplace('<body>', $js.'<body>',$response->getContent()));
+        $response->setContent(str_ireplace('</head>', $js.'</head>',$response->getContent()));
       }
     }
   }

@@ -13,7 +13,7 @@ Form Layout
 */
 #rt-admin-content ul.error_list{list-style:none;margin:0;padding:0;border-color:red;border-width:1px;color:rgb(10,10,80); padding:.8em;border:2px solid #ddd; background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
 #rt-admin-content form th, #rt-admin-content form td, #rt-admin-content tbody th {border-bottom-width:1px;}
-#rt-admin-content form th{width:150px;background:#efefef;vertical-align:top;padding-top:10px}
+#rt-admin-content form body th{width:150px;vertical-align:top;padding-top:10px}
 ul.rt-markdown-tools{list-style:none;margin:-2em 0 0 0;padding:0;text-align:right;}
 ul.rt-markdown-tools li{display:inline;}
 ul.checkbox_list{list-style:none;padding:0;margin:0;}
@@ -77,8 +77,8 @@ tfoot th{border-right:1px solid #ccc;}
 thead th, td{border-top:0;border-left:0;}
 form thead th, form td{vertical-align:top;}
 table{border-bottom:0;border-right:0;}
-thead th{background:#ddd}
-tbody th{background:rgb(239, 239, 239)}
+thead th, tbody th, tfoot th {background:#efefef;}
+tbody th {vertical-align: top;padding-top:10px;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size:1.1em;}
 label{}
 p img.right, p img.left{margin-top:0.5em;}

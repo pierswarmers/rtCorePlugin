@@ -66,6 +66,7 @@ h1{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-
 #rt-admin-tools h1{font-size:1.1em;}
 h1 a, h2 a{text-decoration:none;}
 input{outline:none;}
+input[type="file"] {border:0;}
 option{border-width:0;}
 .rt-admin-toggle-panel h2:hover, input:focus{border:1px solid #555 !important;}
 input[type=text], input[type=password]{-moz-border-radius:5px;-webkit-border-radius:5px;}

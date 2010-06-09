@@ -1,10 +1,4 @@
 
-<?php slot('rt-side') ?>
-<p>
-  <?php echo button_to(__('Cancel'),'rtSitePageAdmin/index', array('class' => 'button cancel')) ?>
-</p>
-<?php end_slot(); ?>
-
 <?php if( isset($records) && is_object($records) && count($records) > 0 ): ?>
     <div id="<?php echo strtolower($model);?>-nested-set">
         <ul class="nested_set_list">

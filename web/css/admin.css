@@ -45,7 +45,7 @@ tr.rt-admin-tree-level-5 .rt-admin-title, span.rt-admin-tree-level-5 {padding-le
 tr.batch-row td {background:#FFFFCF;}
 /*
 
-Icons
+Icons and Tools
 
 */
 .rt-admin-tools{white-space:nowrap;}
@@ -54,6 +54,22 @@ Icons
 .rt-admin-icon {}
 .rt-admin-icon-collapsed {}
 .rt-admin-icon-delete {}
+#rtPrimaryTools {padding:0 0 1.2em; border-bottom:2px dotted #efefef;}
+#rtPrimaryTools li {list-style:none;display:inline;padding:0;}
+#rtPrimaryTools button {margin-left:0;margin-top:10px;}
+
+.ui-button {-moz-box-shadow:0 1px 3px rgba(0,0,0,0.3);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.3);border: 1px solid #999;}
+td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #999;}
+.positive .ui-state-default { border: 1px solid #45930b; background: #4ca20b url(../vendor/jquery/css/ui/images/ui-bg_highlight-soft_60_4ca20b_1x100.png) 50% 50% repeat-x; font-weight: normal; color: #ffffff; }
+.positive .ui-state-hover { border: 1px solid #3F7F0F; background: #4eb305 url(../vendor/jquery/css/ui/images/ui-bg_highlight-soft_50_4eb305_1x100.png) 50% 50% repeat-x; font-weight: normal; color: #ffffff; }
+.positive .ui-icon { width: 16px; height: 16px; background-image: url(../vendor/jquery/css/ui/images/ui-icons_72b42d_256x240.png); }
+.positive .ui-widget-content .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_72b42d_256x240.png); }
+.positive .ui-widget-header .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_ffffff_256x240.png); }
+.positive .ui-state-default .ui-icon { background-image: url(../vendor/jquery/css/ui/images/ui-icons_ffffff_256x240.png); }
+.positive .ui-state-hover .ui-icon, .positive .ui-state-focus .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_ffffff_256x240.png); }
+.positive .ui-state-active .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_ffffff_256x240.png); }
+.positive .ui-state-highlight .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_4eb305_256x240.png); }
+.positive .ui-state-error .ui-icon, .positive .ui-state-error-text .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_cd0a0a_256x240.png); }
 /*
 
 Misc. Tags
@@ -79,7 +95,7 @@ thead th, td{border-top:0;border-left:0;}
 form thead th, form td{vertical-align:top;}
 table{border-bottom:0;border-right:0;}
 thead th, tbody th, tfoot th {background:#efefef;}
-tbody th {vertical-align: top;padding-top:10px;}
+tbody th {vertical-align: top;padding-top:10px;width:150px;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size:1.1em;}
 label{}
 p img.right, p img.left{margin-top:0.5em;}

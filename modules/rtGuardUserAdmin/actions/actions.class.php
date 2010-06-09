@@ -67,7 +67,15 @@ class rtGuardUserAdminActions extends sfActions
     {
       $sf_guard_user = $form->save();
 
+      $action = $request->getParameter('rt_post_save_action', 'index');
+
+      if($action == 'edit')
+      {
+        $this->redirect('rtGuardUserAdmin/edit?id='.$sf_guard_user->getId());
+      }
+
       $this->redirect('rtGuardUserAdmin/index');
+
     }
   }
 }

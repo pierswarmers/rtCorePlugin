@@ -24,6 +24,7 @@
       </div>
       <div id="rt-admin-tools">
         <h1><?php echo __('Actions') ?></h1>
+        <?php echo get_slot('rt-tools'); ?>
         <?php echo get_slot('rt-side'); ?>
       </div>
     </div>

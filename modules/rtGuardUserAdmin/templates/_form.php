@@ -5,14 +5,8 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<?php slot('rt-side') ?>
-<p>
-  <button type="submit" class="button positive" onclick="$('#rtAdminForm').submit()"><?php echo $form->getObject()->isNew() ? __('Create this user') : __('Save and close') ?></button>
-  <?php echo button_to(__('Cancel'),'rtGuardUserAdmin/index', array('class' => 'button cancel')) ?>
-  <?php if (!$form->getObject()->isNew()): ?>
-    <br /><?php echo __('Or') ?>, <?php echo link_to('delete this user', 'rtGuardUserAdmin/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
-  <?php endif; ?>
-</p>
+<?php slot('rt-tools') ?>
+<?php include_partial('rtAdmin/standard_modal_tools', array('object' => $form->getObject(), 'controller' => 'rtGuardUserAdmin'))?>
 <?php end_slot(); ?>
 
 <form id="rtAdminForm" action="<?php echo url_for('rtGuardUserAdmin/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
@@ -20,6 +14,7 @@
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
+<input type="hidden" name="rt_post_save_action" value="edit" />
   <table>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>

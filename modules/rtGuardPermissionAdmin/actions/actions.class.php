@@ -67,6 +67,13 @@ class rtGuardPermissionAdminActions extends sfActions
     {
       $sf_guard_permission = $form->save();
 
+      $action = $request->getParameter('rt_post_save_action', 'index');
+
+      if($action == 'edit')
+      {
+        $this->redirect('rtGuardPermissionAdmin/edit?id='.$sf_guard_permission->getId());
+      }
+
       $this->redirect('rtGuardPermissionAdmin/index');
     }
   }

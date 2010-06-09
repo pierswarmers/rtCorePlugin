@@ -1,11 +1,5 @@
 <?php use_helper('rtAdmin') ?>
 
-<?php slot('rt-side') ?>
-<p>
-  <?php echo button_to(__('Cancel'),'rtSitePageAdmin/index', array('class' => 'button cancel')) ?>
-</p>
-<?php end_slot(); ?>
-
   <table cellspacing="0">
     <thead>
       <tr>

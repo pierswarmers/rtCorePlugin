@@ -15,7 +15,7 @@
       <?php endforeach; ?>
     </ul>
     <p>
-      <button class="button" id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload a file') ?></button>
+      <button id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload a file') ?></button>
       <span id="rtCoreUploadPanelMessage<?php echo $panel_suffix ?>"></span>
     </p>
     <?php endif; ?>
@@ -26,6 +26,10 @@
 <?php if(!$object->isNew()): ?>
 <script type="text/javascript">
 $(document).ready(function() {
+
+  $('#uploadImageButton<?php echo $panel_suffix ?>').button({
+    icons: { primary: 'ui-icon-transfer-e-w' }
+  });
 
   deleteAsset = function(assetId)
   {

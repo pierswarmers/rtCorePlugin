@@ -34,7 +34,7 @@ class rtAdminToolbarFilter extends sfFilter
     {
       $css = '<link rel="stylesheet" type="text/css" media="screen" href="/rtCorePlugin/css/admin-toolbar.css" />';
       $js = '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.min.js"></script>';
-      $js .= '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery-ui/js/jquery-ui.min.js"></script>';
+      $js .= '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js"></script>';
       
       use_helper('Partial', 'I18N');
       

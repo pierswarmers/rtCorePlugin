@@ -27,6 +27,7 @@ ul.rt-markdown-tools li {display:inline;}
 .rt-form-row.standard label{display:block;}
 .rt-form-row input[type=checkbox]{position:relative;top:0;}
 .rt-form-row textarea, .rt-form-row .title{width:530px}
+.rt-admin-edit-tools-trigger {display:none;}
 /* navigation */
 .rt-site-page-navigation ul {border-bottom:0!important;margin-bottom:0!important;padding-bottom:0!important;}
 .rt-site-page-navigation li.in-path a {color:#3366CC;}

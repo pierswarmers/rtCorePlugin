@@ -10,7 +10,7 @@
     <?php use_stylesheet('/rtCorePlugin/vendor/blueprint/screen.css', 'first') ?>
     <?php use_stylesheet('/rtCorePlugin/css/main.css', 'first') ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js') ?>
-    <?php use_javascript('/rtCorePlugin/vendor/jquery-ui/js/jquery-ui.min.js', 'last'); ?>
+    <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js', 'last'); ?>
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
     <?php if (isset($routes['rt_blog_page_feed'])): ?>

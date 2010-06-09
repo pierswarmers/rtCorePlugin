@@ -56,6 +56,12 @@
       return false;
     };
 
+    $('.rt-admin-edit-tools-trigger').hover(function(){
+      $(this).parent('div.rt-admin-edit-tools-panel').addClass('highlight');
+    },function(){
+      $(this).parent('div.rt-admin-edit-tools-panel').removeClass('highlight');
+    }).click(function(){ $(this).parent('div.rt-admin-edit-tools-panel').removeClass('highlight'); });
+
     function rtToggleAdminMenu(){
       $("#rt-admin-toolbar-menu").toggle();
     };

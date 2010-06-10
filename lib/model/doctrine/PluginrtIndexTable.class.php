@@ -143,7 +143,7 @@ class PluginrtIndexTable extends Doctrine_Table
   public function getPublicModelsQuery(Doctrine_Query $query = null)
   {
     $query = $this->getQuery($query);
-    $query->andWhereIn('i.model', sfConfig::get('app_rt_search_public_models', array('rtBlogPage', 'rtSitePage', 'rtWikiPage')));
+    $query->andWhereIn('i.model', sfConfig::get('app_rt_search_public_models', array('rtShopProduct','rtShopCategory','rtBlogPage', 'rtSitePage', 'rtWikiPage')));
     return $query;
   }
   

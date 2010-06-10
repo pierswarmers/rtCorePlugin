@@ -13,32 +13,33 @@ if(isset($object))
 }
 $controller  = isset($controller) ? $controller : $model.'Admin';
 
-$mode        = isset($mode) ? $mode : 'cancel';
 $action      = $sf_request->getParameterHolder()->get('action');
 
-switch ($action)
+if(!isset($mode))
 {
-  case 'new':
-    $mode = 'save';
-  case 'create':
-    $mode = 'save';
-  case 'update':
-    $mode = 'save';
-    break;
-  case 'edit':
-    $mode = 'save';
-    break;
-  case 'versions':
-    $mode = 'versions';
-    break;
-  case 'index':
-    $mode = 'list';
-    break;
-  default:
-    $mode = 'cancel';
-    break;
+  switch ($action)
+  {
+    case 'new':
+      $mode = 'save';
+    case 'create':
+      $mode = 'save';
+    case 'update':
+      $mode = 'save';
+      break;
+    case 'edit':
+      $mode = 'save';
+      break;
+    case 'versions':
+      $mode = 'versions';
+      break;
+    case 'index':
+      $mode = 'list';
+      break;
+    default:
+      $mode = 'cancel';
+      break;
+  }
 }
-
 ?>
 
 <ul id="rtPrimaryTools">

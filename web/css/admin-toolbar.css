@@ -23,3 +23,4 @@ div#rt-admin-toolbar-handle:hover{background-position:0 -25px;}
 div#rt-admin-toolbar.show div#rt-admin-toolbar-handle:hover{background-position:0 -75px;}
 .rt-admin-edit-tools-trigger {display:block; float:right;padding:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background:url(../images/bg-trans-0-0-0-0_5.png);-moz-box-shadow:0 1px 3px rgba(0,0,0,0.5);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);text-shadow:0 -1px 1px rgba(0,0,0,0.25);color:#fff; text-decoration:none;}
 .highlight {background:#FFFFCF;}
+.rt-admin-edit-tools-panel{padding-bottom:1px;}

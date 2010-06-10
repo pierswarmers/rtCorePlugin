@@ -35,6 +35,7 @@
 
 <script type="text/javascript">
   $(function() {
+    /* Search Bar */
     var searchDefault = "Search...";
     var searchBox = $("#rtAdminSearch");
     if(searchBox.attr("value") == "") searchBox.attr("value", searchDefault);
@@ -44,14 +45,16 @@
     searchBox.blur(function(){
       if($(this).attr("value") == "") $(this).attr("value", searchDefault);
     });
+
+    
     function rtToggleAdminContent(){
       var menu = $('#rt-admin-toolbar');
       if(!menu.hasClass('show')) {
-        menu.addClass('show', 100);
+        menu.addClass('show');
         rtToggleAdminMenu();
       } else {
         rtToggleAdminMenu();
-        menu.removeClass('show', 50);
+        menu.removeClass('show');
       }
       return false;
     };

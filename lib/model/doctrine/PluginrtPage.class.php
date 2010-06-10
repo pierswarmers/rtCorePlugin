@@ -77,4 +77,14 @@ abstract class PluginrtPage extends BasertPage
 
     return ($from_ok && $to_ok);
   }
+
+  /**
+   * Return all attached string, imploded into a comma separated string.
+   * 
+   * @return string
+   */
+  public function getTagsAsString()
+  {
+    return implode(', ', $this->getTags());
+  }
 }

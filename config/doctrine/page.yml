@@ -6,7 +6,7 @@ rtPage:
       canUpdate:   false
     rtAttachableTemplate: ~
     rtSearchTemplate:
-      fields:      [title, content, description]
+      fields:      [title, content, description, tags_as_string]
     Taggable:      {}
     Timestampable: {}
     Versionable:

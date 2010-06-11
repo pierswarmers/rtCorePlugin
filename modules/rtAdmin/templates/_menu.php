@@ -27,6 +27,8 @@
         <li><a href="<?php echo url_for('rtShopProductAdmin/index') ?>"><?php echo __('Products') ?></a></li>
         <li><a href="<?php echo url_for('rtShopCategoryAdmin/index') ?>"><?php echo __('Categories') ?></a></li>
         <li><a href="<?php echo url_for('rtShopAttributeAdmin/index') ?>"><?php echo __('Attributes') ?></a></li>
+        <li><a href="<?php echo url_for('rtShopPromotionAdmin/index') ?>"><?php echo __('Promotions') ?></a></li>
+        <li><a href="<?php echo url_for('rtShopVoucherAdmin/index') ?>"><?php echo __('Vouchers') ?></a></li>
       </ul>
       <?php endif; ?>
     </div>

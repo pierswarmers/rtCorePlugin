@@ -58,6 +58,16 @@ class rtAttachableTemplate extends Doctrine_Template
   }
 
   /**
+   * @see rtAttachableTemplate::getFirstImage()
+   *
+   * @return Doctrine_Record
+   */
+  public function getPrimaryImage()
+  {
+    return $this->getFirstImage();
+  }
+
+  /**
    * Return the images attached.
    *
    * @return Doctrine_Record

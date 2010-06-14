@@ -55,10 +55,12 @@
         <?php if (isset($routes['rt_search']) && !has_slot('rt-side')): ?>
         <?php include_partial('rtSearch/form', array('form' => new rtSearchForm())) ?>
         <?php endif; ?>
-        <?php //include_component('rtSitePage', 'navigation', array('options' => array('include_root' => false, 'limit_lower' => 1, 'limit_upper' => 2))) ?>
         <?php include_component('rtSitePage', 'navigation') ?>
         <h2><?php echo __('Latest News') ?></h2>
         <?php include_component('rtBlogPage', 'latest') ?>
+        <?php if (isset($routes['rt_shop_category_index'])): ?>
+        <?php include_component('rtShopCategory', 'navigation') ?>
+        <?php endif; ?>
       </div>
     </div>
     <?php require_once(dirname(__FILE__).'/rt_footer.php'); ?>

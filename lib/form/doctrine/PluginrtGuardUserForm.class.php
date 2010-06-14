@@ -25,6 +25,8 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
       $this['algorithm']
     );
 
+    
+
     $this->widgetSchema['groups_list']->setLabel('Groups');
     $this->widgetSchema['permissions_list']->setLabel('Permissions');
 

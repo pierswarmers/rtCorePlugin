@@ -1,0 +1,21 @@
+#
+# Address Storage
+# ===============
+#
+# Describes the data captured for address data which can be attached to any model.
+#
+
+rtAddress:
+  actAs:
+    Timestampable: ~
+  columns:
+    model_id:    integer
+    model:       string(100)
+    type:        { type: enum, values: [billing, shipping], default: billing }
+    care_of:     { type: string(100) }    # User title to use with address
+    address_1:   { type: string(100), notblank: true }    # User address, part 1.
+    address_2:   { type: string(100), notblank: false }   # User address, part 2. (optional)
+    town:        { type: string(100), notblank: true }    # User town
+    state:       { type: string(100), notblank: true } # User state
+    postcode:    { type: string(10), notblank: true }    # User post/zip code
+    country:     { type: string(20), notblank: true }     # Country - e.g. AU, ES, FR etc..

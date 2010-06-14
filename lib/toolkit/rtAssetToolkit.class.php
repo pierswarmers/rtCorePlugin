@@ -511,6 +511,10 @@ class rtAssetToolkit
    */
   public static function getThumbnailPath($file_path, $options = array())
   {
+    if(is_null($file_path) || trim($file_path) === '')
+    {
+      return;
+    }
     $options['maxWidth'] = isset($options['maxWidth']) ? $options['maxWidth'] : 150;
     $options['maxHeight'] = isset($options['maxHeight']) ? $options['maxHeight'] : 150;
     $options['dir'] = isset($options['dir']) ? $options['dir'] : sfConfig::get('app_asset_thumbnail_dir', '/uploads/_thumbnail_cache');

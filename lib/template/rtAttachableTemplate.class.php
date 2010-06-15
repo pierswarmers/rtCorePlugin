@@ -70,7 +70,7 @@ class rtAttachableTemplate extends Doctrine_Template
   /**
    * Return the images attached.
    *
-   * @return Doctrine_Record
+   * @return array
    */
   public function getImages()
   {
@@ -80,10 +80,10 @@ class rtAttachableTemplate extends Doctrine_Template
     {
       if($asset->isImage())
       {
-        return $asset;
+        $images[] = $asset;
       }
     }
-    return false;
+    return $images;
   }
 
   /**

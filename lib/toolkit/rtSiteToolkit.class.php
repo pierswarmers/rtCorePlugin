@@ -72,4 +72,31 @@ class rtSiteToolkit
 
     return $string;
   }
+
+  /**
+   * A passing mechanism to provide site aware redirects.
+   *
+   * @param sfDoctrineRecord $object
+   * @param string $route
+   */
+  public static function siteRedirect(sfDoctrineRecord $object, $route = null)
+  {
+
+    $context = sfContext::getInstance();
+    
+    if(is_null($route))
+    {
+      $route = $object->getTable()->getTableName() . '_show';
+    }
+
+    if(!rtSiteToolkit::isMultiSiteEnabled() || !$object->rtSite || is_null($object->rtSite->getDomain()))
+    {
+      $context->getController()->redirect($route, $object);
+    }
+
+    $source = $context->getRequest()->isSecure() ? 'https://' : 'http://';
+    $source .= $object->rtSite->getDomain();
+    $source .= $context->getRouting()->generate($route,$object);
+    $context->getController()->redirect($source);
+  }
 }

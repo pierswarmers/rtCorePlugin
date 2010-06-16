@@ -96,7 +96,7 @@ if(!isset($mode))
     <?php if(isset($show_route_handle) && !$object->isNew()): ?>
     $("#rtPrimaryTools .show").button({
       icons: { primary: 'ui-icon-extlink' }
-    }).click(function(){ document.location.href='<?php echo url_for($show_route_handle, $object) ?>'; });
+    }).click(function(){ document.location.href='<?php echo $show_route_handle == 'admin' ? url_for($controller.'/show?id='.$object->getId()) : url_for($show_route_handle, $object) ?>'; });
     <?php endif; ?>
     
     <?php endif; ?>

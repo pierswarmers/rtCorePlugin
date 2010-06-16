@@ -57,6 +57,13 @@ class BasertTreeAdminActions extends sfActions
 
     $child = new $model;
     $child->set($field, $value);
+
+    try
+    {
+      $child->setSiteId($record->getSiteId());
+    }
+    catch (Exception $e) { }
+    
     $record->getNode()->addChild($child);
 
     $this->json = json_encode($child->toArray());

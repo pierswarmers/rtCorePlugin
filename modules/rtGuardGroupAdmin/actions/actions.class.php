@@ -76,5 +76,6 @@ class rtGuardGroupAdminActions extends sfActions
 
       $this->redirect('rtGuardGroupAdmin/index');
     }
+    $this->getUser()->setFlash('default_error', true, false);
   }
 }

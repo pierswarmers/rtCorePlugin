@@ -3,7 +3,7 @@ function enableTogglePanels()
 {
   $('.rt-admin-toggle-panel h2').click(function(){
     $(this).next('.rt-admin-toggle-panel-content').toggle('blind');
-  });
+  }).next('.rt-admin-toggle-panel-content').find('.error_list').parents('.rt-admin-toggle-panel-content').toggle();
 }
 
 // rt-admin-toggle-panel

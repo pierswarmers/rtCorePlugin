@@ -4,7 +4,6 @@ General Layout
 
 */
 #rt-admin-content{margin:20px 280px 0 220px;}
-#rt-admin-content *{border-style:solid;border-color:#CCC;}
 #rt-admin-tools{width:240px;position:fixed;right:10px;top:20px;}
 /*
 
@@ -84,7 +83,7 @@ h1 a, h2 a{text-decoration:none;}
 input{outline:none;}
 input[type="file"] {border:0;}
 option{border-width:0;}
-.rt-admin-toggle-panel h2:hover, input:focus{border:1px solid #555 !important;}
+.rt-admin-toggle-panel h2:hover, input:focus{border-color:#555 !important;}
 input[type=text], input[type=password]{-moz-border-radius:5px;-webkit-border-radius:5px;}
 td input[type=text], th input[type=text], input[type=password]{width:95%}
 .compressed td input[type=text], .compressed th input[type=text] {width:45px;}
@@ -95,7 +94,7 @@ thead th, td{border-top:0;border-left:0;}
 form thead th, form td{vertical-align:top;}
 table{border-bottom:0;border-right:0;}
 thead th, tbody th, tfoot th {background:#efefef;}
-tbody th {vertical-align: top;padding-top:10px;width:150px;}
+tbody th {vertical-align: top;padding-top:10px;width:150px;border-bottom:1px solid #CCC;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size:1.1em;}
 label{}
 p img.right, p img.left{margin-top:0.5em;}
@@ -128,7 +127,7 @@ Simple Feedback
 */
 span.error, span.success, span.loading{font-weight:bold;background-color:transparent;background-position:0 50%;background-repeat:no-repeat;border:none;padding:0 0 0 20px;}
 span.loading{background-image:url(../images/loader.gif);}
-span.error{background-image:url(../images/cross.png);color:red;}
+span.error{background-image:url(../images/cross.png);color:red;font-weight: normal;}
 span.success{background-image:url(../images/tick.png);color:green;}
 /*
 

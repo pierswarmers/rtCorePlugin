@@ -75,7 +75,7 @@ class rtGuardUserAdminActions extends sfActions
       }
 
       $this->redirect('rtGuardUserAdmin/index');
-
     }
+    $this->getUser()->setFlash('default_error', true, false);
   }
 }

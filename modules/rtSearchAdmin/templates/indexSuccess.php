@@ -5,6 +5,8 @@
 
 <h1><?php echo __('Search Results') ?></h1>
 
+<?php include_partial('rtAdmin/flashes') ?>
+
 <?php if(isset($pager)): ?>
   <?php if(count($pager) > 0): ?>
     <table>

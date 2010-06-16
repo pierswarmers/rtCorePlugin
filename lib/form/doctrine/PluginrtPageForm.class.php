@@ -28,6 +28,10 @@ abstract class PluginrtPageForm extends BasertPageForm
       // Delete this widget unless we are in a multi-site installation.
       unset($this['site_id']);
     }
+    else
+    {
+      $this->setValidator('site_id', new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('rtSite'), 'required' => true), array('required' => 'Please select a site for this item to be attached to.')));
+    }
     // set the widgets
     $this->setWidget('title',       new sfWidgetFormInputText(array(), array('class' => 'title')));
     $this->setWidget('content',     new rtWidgetFormTextareaMarkdown(array(), array()));
@@ -39,8 +43,8 @@ abstract class PluginrtPageForm extends BasertPageForm
 
     // set the validators
     $this->setValidator('tags',     new sfValidatorString(array('required' => false)));
-    $this->setValidator('title',    new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'please enter a descriptive title.')));
-    $this->setValidator('content',  new sfValidatorString(array('required' => false), array('required' => 'please enter some content.')));
+    $this->setValidator('title',    new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'Please enter a descriptive title.')));
+    $this->setValidator('content',  new sfValidatorString(array('required' => false), array('required' => 'Please enter some content.')));
 
     $this->widgetSchema->setHelp('description', 'A short description of this item.');
     $this->widgetSchema['searchable']->setLabel('Searchable');

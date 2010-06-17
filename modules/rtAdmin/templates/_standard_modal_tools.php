@@ -72,7 +72,7 @@ if(!isset($mode))
   <?php endif; ?>
 </ul>
 
-<?php if($mode == 'save' && !$object->isNew()): ?>
+<?php if($mode == 'save' && !$object->isNew() && false): ?>
 <p><?php echo __('Or') ?>, <?php echo link_to('delete this ' . $object_name, $controller.'/delete?id='.$object->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?></p>
 <?php endif; ?>
 

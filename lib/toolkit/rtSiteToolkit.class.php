@@ -91,7 +91,7 @@ class rtSiteToolkit
 
     if(!rtSiteToolkit::isMultiSiteEnabled() || !$object->rtSite || is_null($object->rtSite->getDomain()))
     {
-      $context->getController()->redirect($route, $object);
+      $context->getController()->redirect($context->getRouting()->generate($route,$object));
     }
 
     $source = $context->getRequest()->isSecure() ? 'https://' : 'http://';

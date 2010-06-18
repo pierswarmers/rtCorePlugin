@@ -55,9 +55,13 @@
         <?php if (isset($routes['rt_search']) && !has_slot('rt-side')): ?>
         <?php include_partial('rtSearch/form', array('form' => new rtSearchForm())) ?>
         <?php endif; ?>
+        <?php if (isset($routes['rt_site_page_index'])): ?>
         <?php include_component('rtSitePage', 'navigation') ?>
+        <?php endif; ?>
+        <?php if (isset($routes['rt_blog_page_index'])): ?>
         <h2><?php echo __('Latest News') ?></h2>
         <?php include_component('rtBlogPage', 'latest') ?>
+        <?php endif; ?>
         <?php if (isset($routes['rt_shop_category_index'])): ?>
         <?php include_component('rtShopCategory', 'navigation') ?>
         <?php endif; ?>

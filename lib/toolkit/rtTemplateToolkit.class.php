@@ -28,7 +28,7 @@ class rtTemplateToolkit
   }
 
   /**
-   * Get the rtCorePlugin template directory for a ginen mode.
+   * Get the rtCorePlugin template directory for a given mode.
    * 
    * @param string $mode should be either frontend or backend
    * @return string
@@ -41,7 +41,12 @@ class rtTemplateToolkit
     }
     else
     {
-      return sfConfig::get('sf_root_dir').sfConfig::get('app_rt_template_dir');
+      $base = sfConfig::get('sf_root_dir').sfConfig::get('app_rt_template_dir');
+      if(rtSiteToolkit::isMultiSiteEnabled() && is_dir($base.DIRECTORY_SEPARATOR.rtSiteToolkit::getCurrentDomain()))
+      {
+        return $base.DIRECTORY_SEPARATOR.rtSiteToolkit::getCurrentDomain();
+      }
+      return $base;
     }
   }
 

@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php use_stylesheet('/rtCorePlugin/vendor/blueprint/screen.css', 'first') ?>
     <?php use_stylesheet('/rtCorePlugin/css/main.css', 'first') ?>
+    <?php if(isset($routes['rt_shop_category_index'])) { use_stylesheet('/rtShopPlugin/css/main.css', 'last'); } ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js') ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js', 'last'); ?>
     <?php include_stylesheets() ?>

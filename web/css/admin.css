@@ -127,8 +127,8 @@ Simple Feedback
 */
 span.error, span.success, span.loading{font-weight:bold;background-color:transparent;background-position:0 50%;background-repeat:no-repeat;border:none;padding:0 0 0 20px;}
 span.loading{background-image:url(../images/loader.gif);}
-span.error{background-image:url(../images/cross.png);color:red;font-weight: normal;}
-span.success{background-image:url(../images/tick.png);color:green;}
+span.error{color:red;font-weight: normal;}
+span.success{color:green;}
 /*
 
 Attachment Panel

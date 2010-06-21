@@ -18,6 +18,7 @@ Structure
 .rt-inline-panel {margin-bottom:1.5em;}
 .rt-version-comparison th {width:40%;}
 .rt-version-comparison th.name { width:10%;}
+.rt-panel {border-top: #CCC 1px solid;padding-top:1.5em;}
 /*
 
 Tools
@@ -47,20 +48,7 @@ Navigation
 Nice buttons
 
 */
-button.button, a.button, input.button{border:solid 1px rgb(153, 153, 153);display:inline-block;margin: 0.7em 0.5em 0.7em 0;padding:5px 10px 5px 7px;background:#222 url(../images/button-overlay.png) repeat-x;font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;font-size:100%;line-height:130%;text-decoration:none;font-weight:bold;color:#fff;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;-moz-box-shadow:0 1px 3px rgba(0,0,0,0.5);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.5);text-shadow:0 -1px 1px rgba(0,0,0,0.25);border-bottom:1px solid rgba(0,0,0,0.25);position:relative;}
-a.button:hover{color:#fff;}
-.small.button{font-size:80%;}
-.medium.button{font-size:110%;}
-.large.button{font-size:130%;padding:8px 14px 9px;}
-.positive.button{background-color:#28CFCD;}
-.warning.button{background-color:#D62006;}
-.alternate.button{background-color:#a9014b;}
-.cancel.button{background-color:#ff5c00;}
-.shout.button{background-color:#ffb515;}
-button { width:auto; overflow:visible; padding:4px 10px 3px 7px; /* IE6 */ }
-button[type] { padding:4px 10px 4px 7px; /* Firefox */ line-height:17px; /* Safari */ }
-*:first-child+html button[type] { padding:4px 10px 3px 7px; /* IE7 */ }
-button img, a.button img { margin:0 3px -3px 0 !important; padding:0; border:none; width:16px; height:16px; float:none; }
+button, button.button, a.button, input.button{border:none;display:inline-block;padding:5px 10px;background:#333; font-size:100%;line-height:130%;text-decoration:none;font-weight:bold;color:#fff;cursor:pointer;-moz-border-radius:5px;-webkit-border-radius:5px;position:relative;}
 /*
 
 Simple feedback
@@ -90,7 +78,7 @@ General typography enhancements
 */
 body, * { font-family:Arial,sans-serif; }
 h1 { font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 2em;padding-bottom:.5em; }
-h1,h2 { border-bottom:1px solid #CCC;font-weight:bold; }
+h2 { border-bottom:1px solid #CCC;font-weight:bold; }
 h2 { font-size: 1.6em;color:#666; }
 h3 { font-size: 1.3em;font-weight:bold; }
 h1, legend { color:#333; }
@@ -101,18 +89,31 @@ table, thead th, td {border:1px solid #ccc;}
 thead th, td {border-top:0; border-left:0;vertical-align: top;}
 table{border-bottom:0; border-right:0;}
 thead th {background:#ddd;color:#fff;}
-form p {margin-bottom:0.5em;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size: 1.1em;}
 p img.right, p img.left {margin-top:0.5em;}
 iframe {margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}
 .rt-form-row {margin-bottom:0.5em;}
 .rt-form-collapse legend{cursor:pointer;}
+/*
 
+Blog
 
-/* Blog */
-
+*/
 ul.rt-blog-page-index-list, ul.rt-blog-page-index-list li { padding:0; margin-right:0; }
 ul.rt-blog-page-index-list li {list-style: none;}
 ul.rt-blog-page-index-list li {list-style: none;}
+/*
 
+Pager
+
+*/
+.rt-pager {text-align:center;}
+.rt-pager ul {list-style-type:none;margin:0;padding:0;}
+.rt-pager ul li, .rt-pager ul li ul {display:inline;}
+.rt-pager ul .pager-previous-page, .rt-pager ul .pager-first-page {float:left;}
+.rt-pager ul .pager-next-page, .rt-pager ul .pager-last-page {float:right;text-align:right;}
+.rt-pager a { margin:0 3px;text-decoration:none;}
+.rt-pager .pager-first-page a {margin-left:0;}
+.rt-pager .pager-last-page a {margin-right:0;}
+.rt-pager .here a {color:#CCC;text-decoration:none;cursor:default;}

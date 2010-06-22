@@ -151,7 +151,9 @@ function markup_galleries_in_text($matches)
   {
     use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js');
     use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.tools.min.js', 'last');
+    use_javascript('/rtCorePlugin/vendor/colorbox/js/jquery.colorbox-min.js');
     use_stylesheet('/rtCorePlugin/vendor/jquery/css/tools/jquery.tools.css');
+    use_stylesheet('/rtCorePlugin/vendor/colorbox/css/colorbox.css');
     $rand = rand();
 
     $string .= '<div class="clearfix"></div><div class="clearfix rt-inline-panel">'."\n".'<a class="prevPage browse left"></a>' . "\n";
@@ -177,7 +179,7 @@ function markup_galleries_in_text($matches)
 
         $title = $asset->getTitle() ? $asset->getTitle() : $asset->getOriginalFilename();
         $resize_to = array('maxHeight' => sfConfig::get('app_rt_asset_lightbox_expanded_height', 600), 'maxWidth' => sfConfig::get('app_rt_asset_lightbox_expanded_width',800));
-        $string .= '<a href="'. rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'"><span>' . image_tag($thumb_location_web, array('alt' => $title,'style'=>$style)) . '</span></a>' . "\n";
+        $string .= '<a href="'. rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'" rel="rt-gallery-group-'.$rand.'"><span>' . image_tag($thumb_location_web, array('alt' => $title,'style'=>$style)) . '</span></a>' . "\n";
       }
     }
     $string .= "</div>\n";
@@ -198,12 +200,15 @@ function markup_galleries_in_text($matches)
   $(function() {
       $("#rtGalleryScrollable$rand").scrollable({size:5, keyboard:false}).mousewheel();
 
-  $("#rtGalleryScrollableTriggers$rand a").overlay({
-      target: '#rtGallery$rand',
-      expose: '#f1f1f1'
-  }).gallery({
-      speed: 800
-  });
+
+  $('a[rel=rt-gallery-group-$rand]').colorbox({preloading : false});
+
+//  $("#rtGalleryScrollableTriggers$rand a").overlay({
+//      target: '#rtGallery$rand',
+//      expose: '#f1f1f1'
+//  }).gallery({
+//      speed: 800
+//  });
   });
 </script>
 EOS;

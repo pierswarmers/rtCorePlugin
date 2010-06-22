@@ -1,6 +1,6 @@
 /* 
 
-Structure
+Layout
 
 */
 #rt-admin-header {display:none;}
@@ -21,19 +21,11 @@ Structure
 .rt-panel {border-top: #CCC 1px solid;padding-top:1.5em;}
 /*
 
-Tools
+Template
 
 */
-ul.rt-tools{list-style:none;margin-left:0;margin-right:0;padding-left:0;}
-ul.rt-tools li{}
-dl.rt-meta-data{border-top:#CCC 1px solid;padding:1.5em 0 0;margin:0 0 1.5em;}
-dl.rt-meta-data dt, dl.rt-meta-data dd{display:inline;padding:0;margin:0 0.5em 0 0;}
-dl.rt-meta-data dd div {display:inline; }
-ul.rt-markdown-tools {list-style:none;margin:-2em 0 0 0;padding:0;text-align:right;}
-ul.rt-markdown-tools li {display:inline;}
-.rt-form-row.standard label{display:block;}
-.rt-form-row input[type=checkbox]{position:relative;top:0;}
-.rt-form-row textarea, .rt-form-row .title{width:530px}
+.rt-container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+.rt-container {display:block; border-top:1px solid #CCC; margin-bottom:1.5em; padding-top:1.5em;position:relative;}
 .rt-admin-edit-tools-trigger {display:none;}
 /*
 
@@ -43,6 +35,7 @@ Navigation
 .rt-site-page-navigation ul {border-bottom:0!important;margin-bottom:0!important;padding-bottom:0!important;}
 .rt-site-page-navigation li.in-path a {color:#3366CC;}
 .rt-site-page-navigation li.here a {font-weight:bold;}
+.rt-site-page-navigation li.here li a{color:#3366CC;font-weight:normal;}
 /*
 
 Nice buttons
@@ -69,7 +62,7 @@ span.success { background-image: url(../images/tick.png); color: green; }
 Errors
 
 */
-.rt-form-row .error { margin:0;padding:0;background:none;border:0; }
+.error { margin:0;padding:0;background:none;border:0; }
 ul.error_list, .error_list li { margin:0;padding:0;display:inline;list-style: none;font-weight:normal; }
 /*
 
@@ -82,7 +75,7 @@ h2 { border-bottom:1px solid #CCC;font-weight:bold; }
 h2 { font-size: 1.6em;color:#666; }
 h3 { font-size: 1.3em;font-weight:bold; }
 h1, legend { color:#333; }
-a, .rt-site-page-navigation li.here li a{color:#3366CC;font-weight:normal;}
+a{color:#3366CC;font-weight:normal;}
 a, a:hover {outline:none;-moz-outline-style:none;}
 h1 a, h2 a { text-decoration:none; }
 table, thead th, td {border:1px solid #ccc;}
@@ -93,8 +86,6 @@ textarea{font-family:'andale mono', 'lucida console', monospace;font-size: 1.1em
 p img.right, p img.left {margin-top:0.5em;}
 iframe {margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}
-.rt-form-row {margin-bottom:0.5em;}
-.rt-form-collapse legend{cursor:pointer;}
 /*
 
 Blog

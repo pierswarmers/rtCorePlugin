@@ -13,7 +13,7 @@ $arrows_rgt      = isset($arrows_rgt)      ? $arrows_rgt      : '&rang;';
 $info_enabled    = isset($info_enabled)    ? $info_enabled    : false;
 
 ?>
-<div class="rt-pager rt-panel clearfix">
+<div class="rt-pager rt-container">
   <?php if ($pager->haveToPaginate()): ?>
   <ul>
     <li class="pager-first-page<?php echo $pager->getPage() == $pager->getFirstPage() ? ' here' : '' ?>">

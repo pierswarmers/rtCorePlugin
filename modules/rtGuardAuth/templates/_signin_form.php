@@ -1,8 +1,8 @@
 <?php use_helper('I18N', 'rtForm') ?>
 <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
   <?php echo $form->renderHiddenFields() ?>
-  <p><?php echo $form['username']->renderLabel() ?> <?php echo $form['username'] ?></p>
-  <p><?php echo $form['password']->renderLabel() ?> <?php echo $form['password'] ?></p>
+  <p><?php echo $form['username']->renderLabel() ?><br /><?php echo $form['username'] ?></p>
+  <p><?php echo $form['password']->renderLabel() ?><br /><?php echo $form['password'] ?></p>
   <p class="checkbox"><?php echo $form['remember'] ?> <?php echo $form['remember']->renderLabel() ?></p>
   <p>
   <button type="submit" class="button medium positive"><?php echo __('Sign in', null, 'sf_guard') ?></button>

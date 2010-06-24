@@ -49,6 +49,7 @@
     </div>
     <div class="container" id="rt-page">
       <div id="rt-content" class="span-15 append-1">
+        <?php include_partial('rtAdmin/flashes_public') ?>
         <?php echo $sf_content ?>
       </div>
       <div id="rt-side" class="span-7 prepend-1 last">
@@ -62,6 +63,10 @@
         <?php if (isset($routes['rt_blog_page_index'])): ?>
         <h2><?php echo __('Latest News') ?></h2>
         <?php include_component('rtBlogPage', 'latest') ?>
+        <?php endif; ?>
+        <?php if (isset($routes['rt_shop_order_cart'])): ?>
+        <h2><?php echo __('Your Shopping Cart') ?></h2>
+        <?php include_partial('rtShopOrder/cart_mini') ?>
         <?php endif; ?>
         <?php if (isset($routes['rt_shop_category_index'])): ?>
         <?php include_component('rtShopCategory', 'navigation') ?>

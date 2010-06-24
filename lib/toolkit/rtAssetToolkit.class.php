@@ -520,7 +520,7 @@ class rtAssetToolkit
     $options['dir'] = isset($options['dir']) ? $options['dir'] : sfConfig::get('app_asset_thumbnail_dir', '/uploads/_thumbnail_cache');
     $options['scale'] = isset($options['scale']) ? $options['scale'] : true;
     $options['inflate'] = isset($options['inflate']) ? $options['inflate'] : false;
-    $options['quality'] = isset($options['quality']) ? $options['quality'] : 80;
+    $options['quality'] = isset($options['quality']) ? $options['quality'] : 90;
     $options['targetMime'] = isset($options['targetMime']) ? $options['targetMime'] : null;
     $options['adapterClass'] = isset($options['adapterClass']) ? $options['adapterClass'] : null;
     $options['adapterOptions'] = isset($options['adapterOptions']) ? $options['adapterOptions'] : array();

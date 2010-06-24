@@ -52,6 +52,10 @@ span.error, span.success, span.loading { font-weight:bold; background-color:tran
 span.loading { background-image: url(../images/loader.gif); }
 span.error { background-image: url(../images/cross.png); color: red; }
 span.success { background-image: url(../images/tick.png); color: green; }
+p.error, p.notice, p.success {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+p.error {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+p.notice {background:#FFF6BF;color:#514721;border-color:#FFD324;}
+p.success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
 /*
 
 404 page
@@ -85,8 +89,11 @@ table{border-bottom:0; border-right:0;}
 thead th {background:#ddd;color:#fff;}
 textarea{font-family:'andale mono', 'lucida console', monospace;font-size: 1.1em;}
 p img.right, p img.left {margin-top:0.5em;}
+input[type=text], input[type=password] {width:300px;padding:5px;border:1px solid #CCC;}
+textarea.minitext, input[type=text].minitext, input[type=password].minitext {width:40px;}
 iframe {margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}
+textarea.minitext, input[type=text].minitext, input[type=password].minitext {width:40px;}
 /*
 
 Blog

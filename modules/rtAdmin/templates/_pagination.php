@@ -13,8 +13,8 @@ $arrows_rgt      = isset($arrows_rgt)      ? $arrows_rgt      : '&rang;';
 $info_enabled    = isset($info_enabled)    ? $info_enabled    : false;
 
 ?>
+<?php if ($pager->haveToPaginate()): ?>
 <div class="rt-pager rt-container">
-  <?php if ($pager->haveToPaginate()): ?>
   <ul>
     <li class="pager-first-page<?php echo $pager->getPage() == $pager->getFirstPage() ? ' here' : '' ?>">
       <a href="<?php echo '?page=1'.$params ?>"><?php echo $arrows_enabled ? $arrows_lft.$arrows_lft : '' ?> <?php echo __($titles_first) ?></a>
@@ -56,5 +56,5 @@ $info_enabled    = isset($info_enabled)    ? $info_enabled    : false;
       <?php endif; ?>
     </span>
   </p>
-  <?php endif; ?>
 </div>
+<?php endif; ?>

@@ -104,6 +104,14 @@ ul.rt-blog-page-index-list li {list-style: none;}
 ul.rt-blog-page-index-list li {list-style: none;}
 /*
 
+Search
+
+*/
+.rt-search .rt-collection ul { margin:0 0 1.4em 0; padding:0;list-style:none; }
+.rt-search h2, .rt-search h2 a {font-size:1em;font-weight:bold;}
+.rt-search span.rt-site-badge {float:right;}
+/*
+
 Pager
 
 */

@@ -73,7 +73,51 @@ class rtSiteToolkit
     return $string;
   }
 
+  public static function checkSiteReference($object, $route, $redirect_always = false)
+  {
+    if(!rtSiteToolkit::isMultiSiteEnabled())
+    {
+      return;
+    }
+
+    $context = sfContext::getInstance();
+
+    if(is_null($route))
+    {
+      $route = $object->getTable()->getTableName() . '_show';
+      $route = $context->getRouting()->generate($route,$object);
+    }
+    
+    if(!$object->rtSite || is_null($object->rtSite->getDomain()))
+    {
+      if($redirect_always)
+      {
+        $context->getController()->redirect($route);
+      }
+      exit;
+    }
+    
+    if($object->rtSite->getDomain() !== self::getCurrentDomain())
+    {
+      $source = $context->getRequest()->isSecure() ? 'https://' : 'http://';
+      $source .= $object->rtSite->getDomain();
+      $source .= $route;
+      $context->getController()->redirect($source);
+      exit;
+    }
+    
+    if($redirect_always)
+    {
+      $context->getController()->redirect($route);
+      exit;
+    }
+  }
+
+
+
   /**
+   * Note: Deprecated in favour of rtSiteToolkit::checkSiteReference()
+   *
    * A passing mechanism to provide site aware redirects.
    *
    * @param sfDoctrineRecord $object
@@ -81,7 +125,6 @@ class rtSiteToolkit
    */
   public static function siteRedirect(sfDoctrineRecord $object, $route = null)
   {
-
     $context = sfContext::getInstance();
     
     if(is_null($route))

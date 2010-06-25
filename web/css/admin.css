@@ -4,7 +4,7 @@ General Layout
 
 */
 #rt-admin-content{margin:20px 280px 0 220px;}
-#rt-admin-tools{width:240px;position:fixed;right:10px;top:20px;}
+#rt-admin-tools{width:240px;position:absolute;right:10px;top:20px;}
 /*
 
 Form Layout

@@ -24,7 +24,9 @@ class rtSiteUpdateTask extends sfBaseTask
   {
     $this->addArguments(array(
       new sfCommandArgument('domain', sfCommandArgument::REQUIRED, 'The current domain - including subdomain (if other than www) and port (if other than 80), e.g. sub1.my-domain.com:8081'),
-      new sfCommandArgument('newdomain', sfCommandArgument::REQUIRED, 'The new domain - including subdomain (if other than www) and port (if other than 80), e.g. sub1.my-domain.com:8081')
+      new sfCommandArgument('newdomain', sfCommandArgument::REQUIRED, 'The new domain - including subdomain (if other than www) and port (if other than 80), e.g. sub1.my-domain.com:8081'),
+      new sfCommandArgument('title', sfCommandArgument::REQUIRED, 'The new title of the site, e.g. My Awesome Site'),
+      new sfCommandArgument('reference_key', sfCommandArgument::REQUIRED, 'The new key this site will be used to refer to, e.g. mysite1')
     ));
 
     $this->addOptions(array(
@@ -56,6 +58,8 @@ EOF;
     if($rt_site)
     {
       $rt_site->setDomain($arguments['newdomain']);
+      $rt_site->setTitle($arguments['title']);
+      $rt_site->setReferenceKey($arguments['reference_key']);
       $rt_site->save();
       $this->logSection('rt', sprintf('Updated site "%s" to new domain "%s"', $arguments['domain'], $arguments['newdomain']));
     }

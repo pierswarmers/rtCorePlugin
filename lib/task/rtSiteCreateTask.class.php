@@ -24,7 +24,8 @@ class rtSiteCreateTask extends sfBaseTask
   {
     $this->addArguments(array(
       new sfCommandArgument('domain', sfCommandArgument::REQUIRED, 'The domain - including subdomain (if other than www) and port (if other than 80), e.g. sub1.my-domain.com:8081'),
-      new sfCommandArgument('template_dir', sfCommandArgument::OPTIONAL, 'The template directory - relative to the project root, e.g. /plugins/myPlugin/templates')
+      new sfCommandArgument('title', sfCommandArgument::REQUIRED, 'The title of the site, e.g. My Awesome Site'),
+      new sfCommandArgument('reference_key', sfCommandArgument::REQUIRED, 'The key this site will be used to refer to, e.g. mysite1')
     ));
 
     $this->addOptions(array(
@@ -58,11 +59,8 @@ EOF;
     {
       $rt_site = new rtSite();
       $rt_site->setDomain($arguments['domain']);
-
-      if(isset($arguments['template_dir']))
-      {
-        $rt_site->setDomain($arguments['template_dir']);
-      }
+      $rt_site->setTitle($arguments['title']);
+      $rt_site->setReferenceKey($arguments['reference_key']);
       $rt_site->save();
       $this->logSection('rt', sprintf('Created site "%s"', $arguments['domain']));
     }

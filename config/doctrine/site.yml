@@ -1,9 +1,8 @@
 rtSite:
   columns:
-    title:           string(255)
+    title:          string(255)
     domain:         string(255)
-    template_dir:       string(255)
-    is_primary:     { type: boolean, default: 0 }
+    reference_key:            string(30)
   indexes:
     is_primary:
       fields: [is_primary]

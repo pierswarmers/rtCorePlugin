@@ -4,7 +4,7 @@ General Layout
 
 */
 #rt-admin-content{margin:20px 280px 0 220px;}
-#rt-admin-tools{width:240px;position:absolute;right:10px;top:20px;}
+#rt-admin-tools{width:240px;position:fixed;right:10px;top:20px;}
 /*
 
 Form Layout
@@ -74,7 +74,7 @@ td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #9
 Misc. Tags
 
 */
-body{background:url(../images/bg-admin-tools.png) no-repeat 100% 0 scroll;}
+body{background:url(../images/bg-admin-tools.png) no-repeat 100% 0 fixed;}
 a{color:#3366CC;}
 a, a:hover{outline:none;-moz-outline-style:none;}
 h1{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-x 0 100%;border:#C8C8C8 1px solid !important;margin-top:10px;padding:10px;font-size:1.8em;}
@@ -134,7 +134,10 @@ span.success{color:green;}
 Attachment Panel
 
 */
-.rt-core-upload p, .rt-core-upload ul{border:none!important;margin:0!important;padding:0!important;}
+.rt-core-upload{padding:5px;}
+.rt-core-upload p, .rt-core-upload ul{border:none;margin:0;padding:0;}
+#rt-admin-tools fieldset p{}
+.rt-core-upload ul{height:200px;overflow:auto;border-top:1px solid #CCC;border-bottom:1px solid #CCC;padding:5px 0; margin-bottom:5px;}
 .rt-core-upload-panel{list-style:none;}
 .rt-core-upload-panel li{margin-bottom:5px;border-width:1px!important;}
 .rt-core-upload-panel form{display:none;}

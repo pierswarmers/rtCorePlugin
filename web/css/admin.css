@@ -74,7 +74,7 @@ td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #9
 Misc. Tags
 
 */
-body{background:url(../images/bg-admin-tools.png) no-repeat 100% 0 fixed;}
+body{background:url(../images/bg-admin-tools.png) no-repeat 100% 0 scroll;}
 a{color:#3366CC;}
 a, a:hover{outline:none;-moz-outline-style:none;}
 h1{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-x 0 100%;border:#C8C8C8 1px solid !important;margin-top:10px;padding:10px;font-size:1.8em;}

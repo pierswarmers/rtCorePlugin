@@ -1,6 +1,9 @@
 <?php use_helper('I18N', 'rtForm') ?>
 <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
   <?php echo $form->renderHiddenFields() ?>
+  <?php if($form['username']->hasError()): ?>
+  <p class="error"><?php echo $form['username']->getError() ?></p>
+  <?php endif; ?>
   <p><?php echo $form['username']->renderLabel() ?><br /><?php echo $form['username'] ?></p>
   <p><?php echo $form['password']->renderLabel() ?><br /><?php echo $form['password'] ?></p>
   <p class="checkbox"><?php echo $form['remember'] ?> <?php echo $form['remember']->renderLabel() ?></p>

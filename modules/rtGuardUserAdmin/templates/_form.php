@@ -12,7 +12,7 @@
 <?php include_partial('rtAdmin/flashes') ?>
 
 <form id="rtAdminForm" action="<?php echo url_for('rtGuardUserAdmin/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-<?php echo $form->renderHiddenFields(false) ?>
+<?php echo $form->renderHiddenFields() ?>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
@@ -142,5 +142,15 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="rt-admin-toggle-panel">
+    <h2><?php echo __('Billing Address') ?></h2>
+    <?php include_partial('address_form', array('form' => $form['billing_address'])); ?>
+  </div>
+
+  <div class="rt-admin-toggle-panel">
+    <h2><?php echo __('Shipping Address') ?></h2>
+    <?php include_partial('address_form', array('form' => $form['shipping_address'])); ?>
   </div>
 </form>

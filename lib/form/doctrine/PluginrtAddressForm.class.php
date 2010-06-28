@@ -13,15 +13,62 @@ abstract class PluginrtAddressForm extends BasertAddressForm
   public function setup()
   {
     parent::setup();
-
     $object = $this->getOption('object');
+
+    unset($this['care_of'], $this['created_at'], $this['updated_at'], $this['model'], $this['model_id']);
 
     if (!$object)
     {
       throw new InvalidArgumentException('You must provide a parent object.');
     }
 
-    $this->setWidget('model', new sfWidgetFormInputHidden(array('default' => get_class($object))));
-    $this->setWidget('model_id', new sfWidgetFormInputHidden(array('default' => $object->getId())));
+    // Avert your eyes - nasty hack to remove regions from I18N country choices.
+    // 
+    // TODO: find better hack or at the very least, move this logic to a widget.
+    //
+    // start hack >>>
+    // $countries = new sfWidgetFormI18nChoiceCountry(array('add_empty' => '--'));
+    $c = new sfCultureInfo(sfContext::getInstance()->getUser()->getCulture());
+    $countries = $c->getCountries();
+
+    foreach($countries as $key => $value)
+    {
+      if(is_int($key))
+      {
+        unset($countries[$key]);
+      }
+    }
+
+    $countries = array('' => '--') + $countries;
+    $this->setWidget('country', new sfWidgetFormSelect(array('choices' => $countries)));
+    // <<< end hack
+
+    if(!$this->isNew())
+    {
+      if($this->getObject()->getCountry() == 'AU')
+      {
+        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
+      }
+      elseif($this->getObject()->getCountry() == 'US')
+      {
+        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
+      }
+    }
+
+    if($this->getOption('is_optional', false))
+    {
+      $this->setValidators(array(
+        'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+        'type'       => new sfValidatorChoice(array('choices' => array(0 => 'billing', 1 => 'shipping'), 'required' => false)),
+        'care_of'    => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+        'address_1'  => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+        'address_2'  => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+        'town'       => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+        'state'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+        'postcode'   => new sfValidatorString(array('max_length' => 10, 'required' => false)),
+        'country'    => new sfValidatorString(array('max_length' => 20, 'required' => false))
+      ));
+      $this->validatorSchema->setPostValidator(new rtAddressValidator());
+    }
   }
 }

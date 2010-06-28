@@ -25,8 +25,6 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
       $this['algorithm']
     );
 
-    
-
     $this->widgetSchema['groups_list']->setLabel('Groups');
     $this->widgetSchema['permissions_list']->setLabel('Permissions');
 
@@ -53,5 +51,52 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
     $this->widgetSchema['password_again'] = new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off'));
     $this->setWidget('groups_list', new sfWidgetFormDoctrineChoice(array('expanded' => true ,'multiple' => true, 'model' => 'sfGuardGroup')));
     $this->setWidget('permissions_list', new sfWidgetFormDoctrineChoice(array('expanded' => true, 'multiple' => true, 'model' => 'sfGuardPermission')));
+
+    $billing_address = new rtAddress;
+    $billing_address->setType('billing');
+    $billing_address->setModel('rtGuardUser');
+
+    $shipping_address = new rtAddress;
+    $shipping_address->setType('shipping');
+    $shipping_address->setModel('rtGuardUser');
+
+    if(!$this->isNew())
+    {
+      $tmp_address = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'shipping');
+      if($tmp_address)
+      {
+        $shipping_address = $tmp_address;
+      }
+      $tmp_address = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'billing');
+      if($tmp_address)
+      {
+        $billing_address = $tmp_address;
+      }
+      $billing_address->setModelId($this->object->getId());
+      $shipping_address->setModelId($this->object->getId());
+    }
+
+    $this->embedForm('billing_address', new rtAddressForm($billing_address, array('object' => $this->object, 'is_optional' => true)));
+    $this->embedForm('shipping_address', new rtAddressForm($shipping_address, array('object' => $this->object, 'is_optional' => true)));
+  }
+
+  public function saveEmbeddedForms($con = null, $forms = null)
+  {
+    if (null === $forms)
+    {
+      $forms = $this->embeddedForms;
+
+      foreach(array('billing_address', 'shipping_address') as $name)
+      {
+        $address = $this->getValue($name);
+
+        if (!isset($address['address_1']))
+        {
+          unset($forms[$name]);
+        }
+      }
+    }
+
+    return parent::saveEmbeddedForms($con, $forms);
   }
 }

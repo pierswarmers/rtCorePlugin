@@ -62,15 +62,15 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
     if(!$this->isNew())
     {
-      $tmp_address = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'shipping');
-      if($tmp_address)
+      $tmp_address_1 = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'shipping');
+      if($tmp_address_1)
       {
-        $shipping_address = $tmp_address;
+        $shipping_address = $tmp_address_1;
       }
-      $tmp_address = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'billing');
-      if($tmp_address)
+      $tmp_address_2 = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'billing');
+      if($tmp_address_2)
       {
-        $billing_address = $tmp_address;
+        $billing_address = $tmp_address_2;
       }
       $billing_address->setModelId($this->object->getId());
       $shipping_address->setModelId($this->object->getId());

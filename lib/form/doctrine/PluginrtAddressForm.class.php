@@ -15,7 +15,9 @@ abstract class PluginrtAddressForm extends BasertAddressForm
     parent::setup();
     $object = $this->getOption('object');
 
-    unset($this['care_of'], $this['created_at'], $this['updated_at'], $this['model'], $this['model_id']);
+    $this->setWidget('type', new sfWidgetFormInputHidden());
+
+    unset($this['care_of'], $this['created_at'], $this['updated_at'], $this['model_id']);
 
     if (!$object)
     {

@@ -137,7 +137,7 @@ Attachment Panel
 .rt-core-upload{padding:5px;}
 .rt-core-upload p, .rt-core-upload ul{border:none;margin:0;padding:0;}
 #rt-admin-tools fieldset p{}
-.rt-core-upload ul{height:200px;overflow:auto;border-top:1px solid #CCC;border-bottom:1px solid #CCC;padding:5px 0; margin-bottom:5px;}
+.rt-core-upload ul{position:relative;height:200px;overflow:auto;border-top:1px solid #CCC;border-bottom:1px solid #CCC;padding:5px 0; margin-bottom:5px;}
 .rt-core-upload-panel{list-style:none;}
 .rt-core-upload-panel li{margin-bottom:5px;border-width:1px!important;}
 .rt-core-upload-panel form{display:none;}

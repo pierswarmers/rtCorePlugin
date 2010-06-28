@@ -73,7 +73,7 @@ class rtSiteToolkit
     return $string;
   }
 
-  public static function checkSiteReference($object, $route, $redirect_always = false)
+  public static function checkSiteReference($object, $route = null, $redirect_always = false)
   {
     if(!rtSiteToolkit::isMultiSiteEnabled())
     {

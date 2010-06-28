@@ -39,6 +39,8 @@ abstract class PluginrtAddressForm extends BasertAddressForm
       }
     }
 
+    unset($countries['ZZ']);
+
     $countries = array('' => '--') + $countries;
     $this->setWidget('country', new sfWidgetFormSelect(array('choices' => $countries)));
     // <<< end hack

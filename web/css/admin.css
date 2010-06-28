@@ -25,6 +25,7 @@ ul.ui-sortable label{cursor:move;}
 div.help {padding-top:5px; font-style:italic;color:#555}
 .checkbox div.help, ul.checkbox_list label {display:inline;position:relative;top:3px;}
 .advanced-panel {display:none;background:#efefef;}
+#rtAdminForm {overflow-x:auto;overflow-y:hidden;}
 /*
 
 List Layout

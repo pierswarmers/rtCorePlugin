@@ -43,7 +43,6 @@ $info_enabled    = isset($info_enabled)    ? $info_enabled    : false;
       </ul>
     </li>
   </ul>
-  <?php endif; ?>
   <?php if($info_enabled): ?>
   <p class="rt-pager-information">
     <span class="rt-pager-items">
@@ -56,5 +55,6 @@ $info_enabled    = isset($info_enabled)    ? $info_enabled    : false;
       <?php endif; ?>
     </span>
   </p>
+  <?php endif; ?>
 </div>
 <?php endif; ?>

@@ -17,6 +17,11 @@ abstract class PluginrtAddressForm extends BasertAddressForm
 
     $this->setWidget('type', new sfWidgetFormInputHidden());
 
+    if(!$this->getOption('use_names', false))
+    {
+      unset($this['first_name'], $this['last_name']);
+    }
+    
     unset($this['care_of'], $this['created_at'], $this['updated_at'], $this['model_id']);
 
     if (!$object)
@@ -59,6 +64,11 @@ abstract class PluginrtAddressForm extends BasertAddressForm
       }
     }
 
+    $this->setWidget('instructions', new sfWidgetFormInput());
+    $this->setWidget('model', new sfWidgetFormInputHidden());
+
+    $this->widgetSchema->moveField('country', 'before', 'state');
+
     if($this->getOption('is_optional', false))
     {
       $this->setValidators(array(
@@ -70,7 +80,11 @@ abstract class PluginrtAddressForm extends BasertAddressForm
         'town'       => new sfValidatorString(array('max_length' => 100, 'required' => false)),
         'state'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
         'postcode'   => new sfValidatorString(array('max_length' => 10, 'required' => false)),
-        'country'    => new sfValidatorString(array('max_length' => 20, 'required' => false))
+        'country'    => new sfValidatorString(array('max_length' => 20, 'required' => false)),
+        'model'      => new sfValidatorString(array('max_length' => 20, 'required' => false)),
+        'instructions'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+        'first_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+        'last_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false))
       ));
       $this->validatorSchema->setPostValidator(new rtAddressValidator());
     }

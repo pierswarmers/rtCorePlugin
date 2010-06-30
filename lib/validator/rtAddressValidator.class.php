@@ -25,7 +25,7 @@ class rtAddressValidator extends sfValidatorBase
   protected function doClean($values)
   {
     $errorSchema = new sfValidatorErrorSchema($this);
-    
+
     if (!$this->isEmpty($values['address_1']))
     {
       // Run check on all required fields.
@@ -44,6 +44,17 @@ class rtAddressValidator extends sfValidatorBase
       if($this->isEmpty($values['postcode']))
       {
         $errorSchema->addError(new sfValidatorError($this, 'required'), 'postcode');
+      }
+      if(isset($values['first_name']))
+      {
+        if($this->isEmpty($values['first_name']))
+        {
+          $errorSchema->addError(new sfValidatorError($this, 'required'), 'first_name');
+        }
+        if($this->isEmpty($values['last_name']))
+        {
+          $errorSchema->addError(new sfValidatorError($this, 'required'), 'last_name');
+        }
       }
     }
     else

@@ -16,6 +16,7 @@ class PluginrtSnippetTable extends Doctrine_Table
   public function findAllPublishedByCollection($collection, $limit = 1, Doctrine_Query $query = null)
   {
     $query = $this->addPublishedQuery($query);
+    $query = $this->addSiteQuery($query);
     $query->andWhere('snippet.collection =?', $collection)
           ->orderBy('snippet.position')
           ->limit($limit);

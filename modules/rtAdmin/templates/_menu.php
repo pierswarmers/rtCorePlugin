@@ -14,6 +14,7 @@
         <li><a href="<?php echo url_for('rtSitePageAdmin/index') ?>"><?php echo __('Site Pages') ?></a></li>
         <li><a href="<?php echo url_for('rtBlogPageAdmin/index') ?>"><?php echo __('Blog Posts') ?></a></li>
         <li><a href="<?php echo url_for('rtWikiPageAdmin/index') ?>"><?php echo __('Wiki Pages') ?></a></li>
+        <li><a href="<?php echo url_for('rtSnippetAdmin/index') ?>"><?php echo __('Snippets') ?></a></li>
       </ul>
       <h2><?php echo __('Users And Security') ?></h2>
       <ul>

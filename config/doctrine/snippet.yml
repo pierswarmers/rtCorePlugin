@@ -1,0 +1,30 @@
+rtSnippet:
+
+  actAs:
+    rtAttachableTemplate: ~
+    rtSearchTemplate:
+      fields:      [title, content, collection]
+    Timestampable: {}
+    Versionable:
+      fields:      [title, content]
+      auditLog:    true
+
+  columns:
+    site_id:          integer
+    title:            string(255)
+    content:          string
+    collection:       string(255)
+    position:         integer
+    published:        { type: boolean, default: 1 }
+    published_from:   timestamp
+    published_to:     timestamp
+
+  relations:
+    rtSite:
+      local: site_id
+      foreign: id
+      onDelete: CASCADE
+
+  options:
+    collate:   utf8_unicode_ci
+    charset:   utf8

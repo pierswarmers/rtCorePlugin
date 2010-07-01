@@ -10,22 +10,11 @@ class rtAdminToolbarFilter extends sfFilter
   public function execute(sfFilterChain $filterChain)
   {
     $filterChain->execute();
-    
     $user = sfContext::getInstance()->getUser();
 
-    if(!$user->isAuthenticated())
-    {
-      return;
-    }
-
-    $groups_names = array();
-
-    foreach ($user->getGuardUser()->getGroups() as $group)
-    {
-      $groups_names[] = $group->getName();
-    }
-
-    if(!in_array(sfConfig::get('app_rt_admin_group', 'admin'), $groups_names))
+    if (
+      !$user->isAuthenticated() ||
+      !$user->hasPermission(sfConfig::get('app_rt_admin_menu_credential', 'show_admin_menu')))
     {
       return;
     }
@@ -33,8 +22,7 @@ class rtAdminToolbarFilter extends sfFilter
     if (function_exists('use_helper'))
     {
       $css = '<link rel="stylesheet" type="text/css" media="screen" href="/rtCorePlugin/css/admin-toolbar.css" />';
-      $js = '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.min.js"></script>';
-      //$js .= '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js"></script>';
+      $js  = '<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.min.js"></script>';
       
       use_helper('Partial', 'I18N');
       

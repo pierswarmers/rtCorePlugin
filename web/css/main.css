@@ -64,6 +64,15 @@ p.success {background:#E6EFC2;color:#264409;border-color:#C6D880;}
 .rt-default-404 dt, .rt-default-404 dd { margin:0; padding-bottom:1em; }
 /*
 
+Forms
+
+*/
+.rt-container label { display: block; padding: 0 1em 3px 0; float: left; text-align: left; width: 8em; }
+.rt-container ul label, .rt-container td label { display: inline; float: none !important; }
+.rt-container .help { padding-left: 9em; color: #aaa; }
+.rt-container td .help { padding-left: 0; }
+/*
+
 Errors
 
 */

@@ -1,6 +1,6 @@
 <?php use_helper('I18N') ?>
 
-<?php use_javascript('/rtCorePlugin/js/main.js') ?>
+
 
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>

@@ -19,7 +19,7 @@ class rtAddressValidator extends sfValidatorBase
 {
   public function configure($options = array(), $messages = array())
   {
-
+    $this->addOption('use_names', false);
   }
 
   protected function doClean($values)
@@ -45,7 +45,7 @@ class rtAddressValidator extends sfValidatorBase
       {
         $errorSchema->addError(new sfValidatorError($this, 'required'), 'postcode');
       }
-      if(isset($values['first_name']))
+      if($this->getOption('use_names', false))
       {
         if($this->isEmpty($values['first_name']))
         {
@@ -53,7 +53,7 @@ class rtAddressValidator extends sfValidatorBase
         }
         if($this->isEmpty($values['last_name']))
         {
-          $errorSchema->addError(new sfValidatorError($this, 'required'), 'last_name');
+          $errorSchema->addError(new sfValidatorError($this, 'required'), 'first_name');
         }
       }
     }

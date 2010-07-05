@@ -86,7 +86,7 @@ abstract class PluginrtAddressForm extends BasertAddressForm
         'first_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
         'last_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false))
       ));
-      $this->validatorSchema->setPostValidator(new rtAddressValidator());
+      $this->validatorSchema->setPostValidator(new rtAddressValidator(array('use_names' => $this->getOption('use_names', false))));
     }
   }
 }

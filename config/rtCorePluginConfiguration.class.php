@@ -87,6 +87,7 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
     )));
     $routing->prependRoute('sf_default_notify_404', new sfRoute('/default/notify404.:sf_format', array('module' => 'rtDefault', 'action' => 'notify404')));
     $routing->prependRoute('sf_guard_register', new sfRoute('/user/register', array('module' => 'rtGuardRegister', 'action' => 'index')));
+    $routing->prependRoute('rt_guard_account', new sfRoute('/user/account', array('module' => 'rtGuardUser', 'action' => 'edit')));
     $routing->prependRoute('sf_guard_register_success', new sfRoute('/user/registration_pending', array('module' => 'rtGuardRegister', 'action' => 'pending')));
     $routing->prependRoute('sf_guard_register_confirm', new sfRoute('/user/registration_confirm/:id', array('module' => 'rtGuardRegister', 'action' => 'confirm')));
     $routing->prependRoute('sf_guard_signin', new sfRoute('/user/login', array('module' => 'rtGuardAuth', 'action' => 'signin')));

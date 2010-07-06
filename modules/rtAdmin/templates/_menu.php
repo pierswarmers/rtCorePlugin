@@ -6,6 +6,7 @@
       <h1>
         <span>RediType - A fully managed content editing and delivery system</span>
         <?php echo link_to('&times;', 'sf_guard_signout', array(), array('class' => 'rt-admin-toolbar-signout')) ?>
+        <?php echo link_to(__('Clear Cache'), 'homepage', array(), array('class' => 'rt-admin-toolbar-clear-cache')) ?>
         <?php echo link_to(__('Site Homepage'), 'homepage', array(), array('class' => 'rt-admin-toolbar-homepage')) ?>
       </h1>
       <div id="rt-admin-toolbar-search">

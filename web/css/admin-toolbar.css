@@ -7,10 +7,10 @@ div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar a, div#rt
 div#rt-admin-toolbar h1, div#rt-admin-toolbar h2 {font-weight:bold;}
 div#rt-admin-toolbar h1 {line-height:38px;background:url(../images/bg-admin-h1.png);}
 div#rt-admin-toolbar h1 a {display:inline-block;height:38px;width:20px;text-indent:-10000px;vertical-align:middle;float:right;}
-div#rt-admin-toolbar h1 a.rt-admin-toolbar-homepage {background:transparent url(../images/icon-admin-toolbar-homepage.png) no-repeat 100% 50%;}
-div#rt-admin-toolbar h1 a.rt-admin-toolbar-signout {background:transparent url(../images/icon-admin-toolbar-signout.png) no-repeat 100% 50%;}
-div#rt-admin-toolbar h1 a.rt-admin-toolbar-homepage:hover {background-image:url(../images/icon-admin-toolbar-homepage-hover.png);}
-div#rt-admin-toolbar h1 a.rt-admin-toolbar-signout:hover {background-image:url(../images/icon-admin-toolbar-signout-hover.png);}
+div#rt-admin-toolbar h1 a.rt-admin-toolbar-homepage {background:transparent url(../images/icon-admin-toolbar-homepage.png) no-repeat 0px 15px;}
+div#rt-admin-toolbar h1 a.rt-admin-toolbar-signout {background:transparent url(../images/icon-admin-toolbar-signout.png) no-repeat 0px 15px;}
+div#rt-admin-toolbar h1 a.rt-admin-toolbar-homepage:hover {background-position: 0px -26px;}
+div#rt-admin-toolbar h1 a.rt-admin-toolbar-signout:hover {background-position: 0px -26px;}
 div#rt-admin-toolbar{text-align:left;z-index:8000;position:fixed;top:0;left:0;width:30px;height:100%;background:url(../images/bg-admin.png) 100% 0 repeat-y;}
 div#rt-admin-toolbar.show, div#rt-admin-container div#rt-admin-toolbar{width:225px;}
 div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar ul, div#rt-admin-toolbar-search{padding:0 10px;border:0!important;margin-bottom:10px;}

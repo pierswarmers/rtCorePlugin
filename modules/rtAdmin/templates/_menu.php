@@ -3,7 +3,11 @@
   <div id="rt-admin-toolbar-handle">+</div>
   <div id="rt-admin-toolbar-content">
     <div id="rt-admin-toolbar-menu">
-      <h1><?php echo __('Administration Tools') ?></h1>
+      <h1>
+        <?php echo __('Reditype Tools') ?>
+        <a href="<?php echo url_for('@homepage') ?>" class="rt-admin-toolbar-homepage">Homepage</a>
+        <?php echo link_to('&times;', 'sf_guard_signout', array(), array('class' => 'rt-admin-toolbar-signout')) ?>
+      </h1>
       <div id="rt-admin-toolbar-search">
         <form action="<?php echo url_for('rtSearchAdmin/index') ?>" method="get">
           <input type="text" name="q" id="rtAdminSearch" value="<?php echo $sf_request->getParameter('q') ?>" />

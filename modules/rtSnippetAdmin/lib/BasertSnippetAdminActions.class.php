@@ -32,6 +32,7 @@ class BasertSnippetAdminActions extends sfActions
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new rtSnippetForm();
+    $this->form->setDefault('collection', $request->getParameter('collection'));
   }
 
   public function executeCreate(sfWebRequest $request)

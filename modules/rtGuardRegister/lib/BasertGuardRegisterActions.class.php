@@ -43,7 +43,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
       $this->redirect('@homepage');
     }
 
-    $this->form = new sfGuardRegisterForm();
+    $this->form = new rtGuardRegisterForm();
 
     if ($request->isMethod('post'))
     {
@@ -60,8 +60,17 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
         
         $user = $this->form->save();
         $this->getUser()->signIn($user);
-        $this->redirect('@homepage');
+        $this->getUser()->setFlash('notice', 'You are registered and signed in!');
+        $this->getUser()->setFlash('registration_success', true);
+        
+        $signinUrl = sfConfig::get('app_sf_guard_plugin_success_register_url', $this->getUser()->getReferer($request->getReferer()));
+
+        return $this->redirect('' != $signinUrl ? $signinUrl : '@homepage');
       }
+    }
+    else
+    {
+      $this->getUser()->setReferer($this->getContext()->getActionStack()->getSize() > 1 ? $request->getUri() : $request->getReferer());
     }
   }
 

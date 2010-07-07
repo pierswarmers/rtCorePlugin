@@ -112,7 +112,8 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
     $body  = 'A new user has registered but will need to be activated before they can sign in.' . "\n\n";
     $body .= sprintf('The details they entered were: %s (%s)', $user->getName(),$user->getEmailAddress()) . "\n\n";
     $body .= 'If you wish to automatically activate this user, you can do so by simply clicking on this link:' . "\n";
-    $body .= $this->generateUrl('sf_guard_register_confirm', array('id' => $user->getId()), true) . "\n";
+    $body .= $this->generateUrl('sf_guard_register_confirm', array('id' => $user->getId()), true) . "\n\n";
+    $body .= 'Please note: you will need to be signed in to complete this action.' . "\n";
     $this->getMailer()->composeAndSend($from, $to, $subject, $body);
   }
   

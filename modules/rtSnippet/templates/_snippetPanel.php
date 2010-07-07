@@ -1,6 +1,6 @@
 <?php use_helper('I18N', 'Date', 'rtText', 'rtForm', 'rtDate', 'rtSite') ?>
 <?php if ($snippets): ?>
-  <div class="rt-nippet rt-show rt-primary-container rt-admin-edit-tools-panel">
+  <div class="rt-snippet rt-show rt-primary-container rt-admin-edit-tools-panel">
     <?php if($snippets->count()): ?>
       <?php foreach($snippets as $snippet): ?>
         <?php echo link_to(__('Edit'), 'rtSnippetAdmin/edit?id='.$snippet->getId(), array('class' => 'rt-admin-edit-tools-trigger')) ?>

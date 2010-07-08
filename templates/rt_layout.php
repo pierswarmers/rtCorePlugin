@@ -58,7 +58,7 @@
         <?php include_partial('rtSearch/form', array('form' => new rtSearchForm())) ?>
         <?php endif; ?>
         <?php if (isset($routes['rt_site_page_index'])): ?>
-        <?php include_component('rtSitePage', 'navigation') ?>
+        <?php include_component('rtSitePage', 'navigation', array('options' => array('render_full' => false))) ?>
         <?php endif; ?>
         <?php if (isset($routes['rt_blog_page_index'])): ?>
         <h2><?php echo __('Latest News') ?></h2>

@@ -42,29 +42,53 @@ class rtAttachableTemplate extends Doctrine_Template
 
   /**
    * Return the first image found in the asset list.
-   *
+   * 
+   * @param string $match
    * @return Doctrine_Record
    */
-  public function getFirstImage()
+  public function getFirstImage($match = null)
   {
+    $first_image_asset = null;
+    
     foreach($this->getAssets() as $asset)
     {
       if($asset->isImage())
       {
-        return $asset;
+        if(is_null($match))
+        {
+          // no further tests to run.
+          return $asset;
+        }
+
+        if(preg_match($match, $asset->getOriginalFilename()))
+        {
+          return $asset;
+        }
+        elseif(is_null($first_image_asset))
+        {
+          $first_image_asset = $asset;
+        }
       }
     }
+
+    if(!is_null($first_image_asset))
+    {
+      return $first_image_asset;
+    }
+
     return false;
   }
 
   /**
+   * Proxy for getFirstImage().
+   * 
    * @see rtAttachableTemplate::getFirstImage()
-   *
+   * @param string $match
    * @return Doctrine_Record
    */
-  public function getPrimaryImage()
+  public function getPrimaryImage($match = null)
   {
-    return $this->getFirstImage();
+    return $this->getFirstImage($match);
   }
 
   /**

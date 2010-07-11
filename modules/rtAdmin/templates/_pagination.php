@@ -12,6 +12,11 @@ $arrows_lft      = isset($arrows_lft)      ? $arrows_lft      : '&lang;';
 $arrows_rgt      = isset($arrows_rgt)      ? $arrows_rgt      : '&rang;';
 $info_enabled    = isset($info_enabled)    ? $info_enabled    : false;
 
+if($sf_request->hasParameter('show_more'))
+{
+  $params = $params . '&show_more=';
+}
+
 ?>
 <?php if ($pager->haveToPaginate()): ?>
 <div class="rt-pager rt-container">
@@ -34,12 +39,13 @@ $info_enabled    = isset($info_enabled)    ? $info_enabled    : false;
           foreach ($pager->getLinks() as $page):
             $class = 'page-'.$page;
             $class .= $pager->getPage() == $page ? ' here' : '';
-            $class .= $pager->getLastPage() == $page ? ' last' : '';
+            //$class .= $pager->getLastPage() == $page ? ' last' : '';
           ?>
           <li class="<?php echo $class ?>">
             <a href="<?php echo '?page='.$page.$params ?>"><?php echo $page ?></a>
           </li>
         <?php endforeach; ?>
+          <li class="last"><a href="<?php echo '?page='.$pager->getPage() . ($sf_request->hasParameter('show_more') ? '' : '&show_more=') ?>"><?php echo $sf_request->hasParameter('show_more') ? __('show less') : __('show more') ?></a></li>
       </ul>
     </li>
   </ul>

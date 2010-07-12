@@ -33,4 +33,4 @@ div#rt-admin-toolbar.show div#rt-admin-toolbar-handle:hover{background-position:
 .rt-admin-edit-tools-trigger:hover {text-decoration:none;color:#fff!important;}
 .rt-admin-edit-tools-panel-small .rt-admin-edit-tools-trigger:hover {background-position: 0 0}
 .highlight {background:#FFFFCF;min-height:20px;}
-.rt-admin-edit-tools-panel{padding-bottom:1px;}
+.rt-admin-edit-tools-panel {padding-bottom:1px;zoom:1;}

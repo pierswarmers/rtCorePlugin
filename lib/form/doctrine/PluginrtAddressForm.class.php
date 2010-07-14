@@ -60,7 +60,7 @@ abstract class PluginrtAddressForm extends BasertAddressForm
       }
       elseif($this->getObject()->getCountry() == 'US')
       {
-        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
+        $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
       }
     }
 

@@ -71,27 +71,6 @@
           </td>
         </tr>
         <tr>
-          <th><?php echo $form['phone']->renderLabel() ?></th>
-          <td>
-            <?php echo $form['phone']->renderError() ?>
-            <?php echo $form['phone'] ?>
-          </td>
-        </tr>
-        <tr>
-          <th><?php echo $form['fax']->renderLabel() ?></th>
-          <td>
-            <?php echo $form['fax']->renderError() ?>
-            <?php echo $form['fax'] ?>
-          </td>
-        </tr>
-        <tr>
-          <th><?php echo $form['mobile']->renderLabel() ?></th>
-          <td>
-            <?php echo $form['mobile']->renderError() ?>
-            <?php echo $form['mobile'] ?>
-          </td>
-        </tr>
-        <tr>
           <th><?php echo $form['url']->renderLabel() ?></th>
           <td>
             <?php echo $form['url']->renderError() ?>

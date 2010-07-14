@@ -63,6 +63,18 @@ abstract class PluginrtAddressForm extends BasertAddressForm
         $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
       }
     }
+    elseif(!$this->isValid())
+    {
+      $address = sfContext::getInstance()->getRequest()->getParameter('rt_address_'.$this->getObject()->getType());
+      if($address['country'] == 'AU')
+      {
+        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
+      }
+      elseif($address['country'] == 'US')
+      {
+        $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
+      }
+    }
 
     $this->setWidget('instructions', new sfWidgetFormInput());
     $this->setWidget('model', new sfWidgetFormInputHidden());

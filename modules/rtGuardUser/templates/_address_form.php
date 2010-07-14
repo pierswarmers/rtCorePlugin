@@ -24,7 +24,7 @@
         data: ({
           country : $(this).find('option:selected').attr('value'),
           id      : 'rt_guard_user_<?php echo $form->getName()?>_state',
-          name    : 'rt_guard_user_[<?php echo $form->getName()?>][state]'
+          name    : 'rt_guard_user[<?php echo $form->getName()?>][state]'
         }),
         dataType: "html",
         success: function(data) {

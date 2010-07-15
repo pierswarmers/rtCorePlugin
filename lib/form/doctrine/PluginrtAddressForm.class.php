@@ -54,26 +54,15 @@ abstract class PluginrtAddressForm extends BasertAddressForm
 
     if(!$this->isNew())
     {
-      if($this->getObject()->getCountry() == 'AU')
-      {
-        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
-      }
-      elseif($this->getObject()->getCountry() == 'US')
-      {
-        $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
-      }
-    }
-    elseif(!$this->isValid())
-    {
-      $address = sfContext::getInstance()->getRequest()->getParameter('rt_address_'.$this->getObject()->getType());
-      if($address['country'] == 'AU')
-      {
-        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
-      }
-      elseif($address['country'] == 'US')
-      {
-        $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
-      }
+//      if($this->getObject()->getCountry() == 'AU')
+//      {
+//        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
+//      }
+//      elseif($this->getObject()->getCountry() == 'US')
+//      {
+//        $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
+//      }
+//      $this->setStateWidget($this->getObject()->getCountry());
     }
 
     $this->setWidget('instructions', new sfWidgetFormInput());
@@ -100,6 +89,18 @@ abstract class PluginrtAddressForm extends BasertAddressForm
         'phone'        => new sfValidatorString(array('max_length' => 20, 'required' => false))
       ));
       $this->validatorSchema->setPostValidator(new rtAddressValidator(array('use_names' => $this->getOption('use_names', false))));
+    }
+  }
+
+  public function setStateWidget($country)
+  {
+    if($country == 'AU')
+    {
+      $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
+    }
+    elseif($country == 'US')
+    {
+      $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
     }
   }
 }

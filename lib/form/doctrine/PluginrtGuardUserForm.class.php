@@ -99,4 +99,14 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
     return parent::saveEmbeddedForms($con, $forms);
   }
+
+//  public function bind(array $taintedValues = null, array $taintedFiles = null)
+//  {
+//    parent::bind($taintedValues, $taintedFiles);
+//
+//    foreach(array('billing_address', 'shipping_address') as $name)
+//    {
+//      $form = $this->getEmbeddedForm($name)->setStateWidget($taintedValues[$name]['country']);
+//    }
+//  }
 }

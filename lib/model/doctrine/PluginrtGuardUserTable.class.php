@@ -7,13 +7,45 @@
  */
 class PluginrtGuardUserTable extends sfGuardUserTable
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object PluginrtGuardUserTable
-     */
-    public static function getInstance()
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object PluginrtGuardUserTable
+   */
+  public static function getInstance()
+  {
+    return Doctrine_Core::getTable('PluginrtGuardUser');
+  }
+
+   /**
+   * Return a query with birthday condition
+   *
+   * @param  date            $from   Start date of birthday range
+   * @param  date            $to     End date of birthday range
+   * @param  Doctrine_Query  $query  an optional query object
+   * @return Doctrine_Query
+   */
+  public function getBirthdayRestrictionQuery($from, $to, Doctrine_Query $q = null)
+  {
+    $q = $this->getQuery($q);
+    $q->andWhere('(u.date_of_birth >= ?)', $from);
+    $q->andWhere('(u.date_of_birth <= ?)', $to);
+    return $q;
+  }
+
+  /**
+   * Returns a Doctrine_Query object.
+   *
+   * @param Doctrine_Query $q
+   * @return Doctrine_Query
+   */
+  public function getQuery(Doctrine_Query $q = null)
+  {
+    if (is_null($q))
     {
-        return Doctrine_Core::getTable('PluginrtGuardUser');
+      $q = $this->getQueryObject()->from($this->getComponentName() .' u');
     }
+
+    return $q;
+  }
 }

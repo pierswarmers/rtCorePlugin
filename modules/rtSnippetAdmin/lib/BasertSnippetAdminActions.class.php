@@ -24,9 +24,17 @@ class BasertSnippetAdminActions extends sfActions
 
   public function executeIndex(sfWebRequest $request)
   {
-    $this->rt_snippets = Doctrine::getTable('rtSnippet')
-      ->createQuery('a')
-      ->execute();
+    $query = Doctrine::getTable('rtSnippet')->getQuery();
+    $query->orderBy('snippet.created_at DESC');
+
+    $this->pager = new sfDoctrinePager(
+      'rtSnippet',
+      sfConfig::get('app_rt_snippet_max_per_page', 50)
+    );
+
+    $this->pager->setQuery($query);
+    $this->pager->setPage($request->getParameter('page', 1));
+    $this->pager->init();
   }
 
   public function executeNew(sfWebRequest $request)

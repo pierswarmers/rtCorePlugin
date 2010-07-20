@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($rt_snippets as $rt_snippet): ?>
+    <?php foreach ($pager->getResults() as $rt_snippet): ?>
     <tr>
       <td><a href="<?php echo url_for('rtSnippetAdmin/edit?id='.$rt_snippet->getId()) ?>"><?php echo $rt_snippet->getTitle() ?></a></td>
       <td><?php echo $rt_snippet->getCollection() ?></td>
@@ -37,3 +37,5 @@
     <?php endforeach; ?>
   </tbody>
 </table>
+
+<?php include_partial('rtAdmin/pagination', array('pager' => $pager)); ?>

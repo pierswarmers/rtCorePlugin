@@ -7,6 +7,7 @@
     <?php echo render_form_row($form['country']); ?>
     <?php echo render_form_row($form['state']); ?>
     <?php echo render_form_row($form['postcode']); ?>
+    <?php echo render_form_row($form['phone']); ?>
     <?php echo render_form_row($form['instructions']); ?>
   </tbody>
 </table>

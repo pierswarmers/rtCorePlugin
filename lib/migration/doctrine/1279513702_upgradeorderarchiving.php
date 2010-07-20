@@ -5,8 +5,11 @@ class Upgradeorderarchiving extends Doctrine_Migration_Base
   public function preUp()
   {
     parent::preUp();
-    $query = Doctrine::getTable('rtShopOrder')->getQueryObject();
-    $query->delete()->execute();
+    if(class_exists('rtShopOrder'))
+    {
+      $query = Doctrine::getTable('rtShopOrder')->getQueryObject();
+      $query->delete()->execute();
+    }
   }
 
   public function up()

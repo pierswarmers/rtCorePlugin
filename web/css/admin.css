@@ -172,6 +172,20 @@ Tree Admin.
 #jstree-contextmenu .edit  ins {background-position : 0 0;}
 /*
 
+Pager
+
+*/
+.rt-pager {text-align:center;}
+.rt-pager ul {list-style-type:none;margin:0;padding:0;}
+.rt-pager ul li, .rt-pager ul li ul {display:inline;}
+.rt-pager ul .pager-previous-page, .rt-pager ul .pager-first-page {float:left;}
+.rt-pager ul .pager-next-page, .rt-pager ul .pager-last-page {float:right;text-align:right;}
+.rt-pager a { margin:0 3px;text-decoration:none;}
+.rt-pager .pager-first-page a {margin-left:0;}
+.rt-pager .pager-last-page a {margin-right:0;}
+.rt-pager .here a {color:#CCC;text-decoration:none;cursor:default;}
+/*
+
 IE Bugfix
 
 */

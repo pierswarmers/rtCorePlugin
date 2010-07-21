@@ -1,20 +1,35 @@
 <?php
+/*
+ * This file is part of the reditype package.
+ * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
- * rtGuardUserAdmin actions.
+ * rtGuardUserAdminActions
  *
- * @package    symfony
- * @subpackage rtGuardUserAdmin
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ * @package    rtShopPlugin
+ * @subpackage modules
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
  */
 class rtGuardUserAdminActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->sf_guard_users = Doctrine::getTable('rtGuardUser')
-      ->createQuery('a')
-      ->execute();
+    $query = Doctrine::getTable('rtGuardUser')->createQuery('a');
+    $query->orderBy('a.created_at DESC');
+
+    $this->pager = new sfDoctrinePager(
+      'rtGuardUser',
+      sfConfig::get('app_rt_admin_pagination_limit', 50)
+    );
+
+    $this->pager->setQuery($query);
+    $this->pager->setPage($request->getParameter('page', 1));
+    $this->pager->init();
   }
 
   public function executeNew(sfWebRequest $request)

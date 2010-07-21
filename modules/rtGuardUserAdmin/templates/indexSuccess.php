@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($sf_guard_users as $sf_guard_user): ?>
+    <?php foreach ($pager->getResults() as $sf_guard_user): ?>
     <tr>
       <td><a href="<?php echo url_for('rtGuardUserAdmin/edit?id='.$sf_guard_user->getId()) ?>"><?php echo $sf_guard_user ?></a></td>
       <td><?php echo $sf_guard_user->getEmailAddress() ?></td>
@@ -35,3 +35,5 @@
     <?php endforeach; ?>
   </tbody>
 </table>
+
+<?php include_partial('rtAdmin/pagination', array('pager' => $pager)); ?>

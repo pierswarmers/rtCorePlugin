@@ -45,8 +45,8 @@ You'll also need to configure a database...
         svn co http://svn.symfony-project.com/plugins/sfDoctrineGuardPlugin/trunk/ sfDoctrineGuardPlugin
         svn co http://svn.symfony-project.com/plugins/sfFeed2Plugin/branches/1.2/ sfFeed2Plugin
         svn co http://svn.symfony-project.com/plugins/sfFormExtraPlugin/branches/1.3/ sfFormExtraPlugin
-        svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk sfGeshiPlugin
-        svn co http://svn.symfony-project.com/plugins/sfThumbnailPlugin/trunk/ sfThumbnailPlugin
+        svn co http://svn.symfony-project.com/plugins/sfGeshiPlugin/trunk/ sfGeshiPlugin
+        svn co http://svn.symfony-project.org/plugins/sfThumbnailPlugin/branches/1.3/ sfThumbnailPlugin
         ls -lash
         cd ..
 

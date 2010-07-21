@@ -1,12 +1,19 @@
 <?php
+/*
+ * This file is part of the reditype package.
+ * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
- * rtGuardGroupAdmin actions.
+ * rtGuardGroupAdminActions
  *
- * @package    symfony
- * @subpackage rtGuardGroupAdmin
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ * @package    rtShopPlugin
+ * @subpackage modules
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
  */
 class rtGuardGroupAdminActions extends sfActions
 {

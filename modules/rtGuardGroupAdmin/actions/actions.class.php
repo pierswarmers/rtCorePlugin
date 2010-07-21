@@ -24,12 +24,23 @@ class rtGuardGroupAdminActions extends sfActions
 
     $this->pager = new sfDoctrinePager(
       'sfGuardGroup',
-      sfConfig::get('app_rt_admin_pagination_limit', 50)
+      $this->getCountPerPage($request)
     );
 
     $this->pager->setQuery($query);
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
+  }
+
+  private function getCountPerPage(sfWebRequest $request)
+  {
+    $count = sfConfig::get('app_rt_admin_pagination_limit', 50);
+    if($request->hasParameter('show_more'))
+    {
+      $count = sfConfig::get('app_rt_admin_pagination_per_page_multiple', 2) * $count;
+    }
+
+    return $count;
   }
 
   public function executeNew(sfWebRequest $request)

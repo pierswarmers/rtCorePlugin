@@ -12,9 +12,17 @@ class rtGuardGroupAdminActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->sf_guard_groups = Doctrine::getTable('sfGuardGroup')
-      ->createQuery('a')
-      ->execute();
+    $query = Doctrine::getTable('sfGuardGroup')->createQuery('a');
+    $query->orderBy('a.created_at DESC');
+
+    $this->pager = new sfDoctrinePager(
+      'sfGuardGroup',
+      sfConfig::get('app_rt_admin_pagination_limit', 50)
+    );
+
+    $this->pager->setQuery($query);
+    $this->pager->setPage($request->getParameter('page', 1));
+    $this->pager->init();
   }
 
   public function executeNew(sfWebRequest $request)

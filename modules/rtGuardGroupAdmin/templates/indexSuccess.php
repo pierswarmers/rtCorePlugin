@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($sf_guard_groups as $sf_guard_group): ?>
+    <?php foreach ($pager->getResults() as $sf_guard_group): ?>
     <tr>
       <td><a href="<?php echo url_for('rtGuardGroupAdmin/edit?id='.$sf_guard_group->getId()) ?>"><?php echo $sf_guard_group->getName() ?></a></td>
       <td><?php echo $sf_guard_group->getDescription() ?></td>
@@ -33,3 +33,5 @@
     <?php endforeach; ?>
   </tbody>
 </table>
+
+<?php include_partial('rtAdmin/pagination', array('pager' => $pager)); ?>

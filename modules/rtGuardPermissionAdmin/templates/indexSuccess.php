@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($sf_guard_permissions as $sf_guard_permission): ?>
+    <?php foreach ($pager->getResults() as $sf_guard_permission): ?>
     <tr>
       <td><a href="<?php echo url_for('rtGuardPermissionAdmin/edit?id='.$sf_guard_permission->getId()) ?>"><?php echo $sf_guard_permission->getName() ?></a></td>
       <td><?php echo $sf_guard_permission->getDescription() ?></td>
@@ -33,3 +33,5 @@
     <?php endforeach; ?>
   </tbody>
 </table>
+
+<?php include_partial('rtAdmin/pagination', array('pager' => $pager)); ?>

@@ -175,7 +175,7 @@ Tree Admin.
 Pager
 
 */
-.rt-pager {text-align:center;}
+.rt-pager {text-align:center;margin-bottom:20px;}
 .rt-pager ul {list-style-type:none;margin:0;padding:0;}
 .rt-pager ul li, .rt-pager ul li ul {display:inline;}
 .rt-pager ul .pager-previous-page, .rt-pager ul .pager-first-page {float:left;}

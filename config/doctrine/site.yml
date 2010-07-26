@@ -4,6 +4,6 @@ rtSite:
     domain:         string(255)
     reference_key:            string(30)
   indexes:
-    is_primary:
-      fields: [is_primary]
+    domain:
+      fields: [domain]
       sorting: DESC

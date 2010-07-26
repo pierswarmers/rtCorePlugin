@@ -3,6 +3,7 @@ sfGuardGroup:
     name:           admin
     description:    Administrator group
     Permissions:
+      - Permission_admin_menu
       - Permission_admin_wiki
       - Permission_admin_blog
       - Permission_admin_site
@@ -20,6 +21,9 @@ sfGuardPermission:
 
   # Administrator Permissions
 
+  Permission_admin_menu:
+    name:           show_admin_menu
+    description:    Administration menu to be displayed
   Permission_admin_wiki:
     name:           admin_wiki
     description:    Administrator permission for wiki

@@ -8,6 +8,8 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php use_stylesheet('/rtCorePlugin/vendor/blueprint/screen.css') ?>
+    <?php use_stylesheet('/rtCorePlugin/vendor/blueprint/print.css', '', array('media' => 'print')) ?>
+    <?php use_stylesheet('/rtCorePlugin/css/admin-print.css', '', array('media' => 'print')) ?>
     <?php use_stylesheet('/rtCorePlugin/vendor/jquery/css/ui/jquery.ui.css') ?>
     <?php use_stylesheet('/rtCorePlugin/css/admin.css') ?>
     <?php use_stylesheet('/rtCorePlugin/css/admin-toolbar.css') ?>

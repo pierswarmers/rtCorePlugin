@@ -1,0 +1,7 @@
+#rt-admin-toolbar,#rt-admin-tools {display:none;}
+table {border-collapse: collapse;border:1px solid #000;border-bottom:0; width:100%;margin-bottom:20px;}
+table th, table td {border:1pt solid #000;padding:5px;}
+table td{vertical-align: top;}
+table th{text-align: left;}
+table td{vertical-align: top;}
+a:link:after, a:visited:after {content:"";}

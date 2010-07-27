@@ -79,6 +79,7 @@ body{background:url(../images/bg-admin-tools.png) no-repeat 100% 0 fixed;}
 a{color:#3366CC;}
 a, a:hover{outline:none;-moz-outline-style:none;}
 h1{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-x 0 100%;border:#C8C8C8 1px solid !important;margin-top:10px;padding:10px;font-size:1.8em;}
+h2,h3,h4{color:#555;font-size:1.4em;padding:10px;border-top:#C8C8C8 1px solid !important;}
 #rt-admin-tools h1{font-size:1.1em;}
 h1 a, h2 a{text-decoration:none;}
 input{outline:none;}

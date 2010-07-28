@@ -17,6 +17,97 @@
  */
 class rtGuardUserAdminActions extends sfActions
 {
+  /**
+   * Create user report
+   *
+   * Formats are: web, csv, xml and json
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeUserReport(sfWebRequest $request)
+  {
+    $fields = 'u.id,u.first_name,u.last_name,u.email_address,u.username,u.is_active,u.is_super_admin,u.last_login,u.date_of_birth,u.company,u.url,u.created_at,u.updated_at';
+    $fieldnames = preg_replace('/[\$.]/', '_', $fields);
+    $this->key_order = explode(',', $fieldnames);
+    $q = Doctrine_Query::create()->from('rtGuardUser u');
+    $q->select($fields)
+      ->orderBy('u.created_at, u.last_name');
+    $users = $q->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+    $this->users = $users;
+
+    // Prepare user data for xml and json
+    if($this->getRequest()->getParameter('sf_format') === 'xml' || $this->getRequest()->getParameter('sf_format') === 'json')
+    {
+      $query = Doctrine_Query::create()->from('rtAddress a');
+      $query->select('a.*')
+        ->andWhere('a.model = ?', 'rtGuardUser');
+      $user_addresses = $query->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+
+      $clean_users = array();
+      $clean_addresses = array();
+
+      foreach($this->users as $user)
+      {
+        $clean_users[$user['u_id']] = $user;
+      }
+      foreach($user_addresses as $address)
+      {
+        $clean_addresses[$address['a_model_id']][] = $address;
+      }
+
+      $users_with_addresses = array();
+      foreach($clean_users as $ukey => $user)
+      {
+        $users_with_addresses[$ukey] = $user;
+        if(isset($clean_addresses[$ukey]))
+        {
+          foreach($clean_addresses[$ukey] as $akey => $address)
+          {
+            $users_with_addresses[$ukey]['u_addresses'][$address['a_type']] = $address;
+          }
+        }
+      }
+      $this->users = $users_with_addresses;
+    }
+    
+    // CSV header
+    if($this->getRequest()->getParameter('sf_format') === 'csv')
+    {
+      // Clean first and last name
+      $this->users = array();
+      foreach($users as $key => $user)
+      {
+        $this->users[$key] = $user;
+        $this->users[$key]['u_first_name'] = preg_replace('/[^a-zA-Z_ -]/s', '', $user['u_first_name']);
+        $this->users[$key]['u_last_name'] = preg_replace('/[^a-zA-Z_ -]/s', '', $user['u_last_name']);
+      }
+      
+      $response = $this->getResponse();
+      $response->setHttpHeader('Last-Modified', date('r'));
+      $response->setContentType("application/octet-stream");
+      $response->setHttpHeader('Cache-Control','no-store, no-cache');
+      if (strstr($_SERVER['HTTP_USER_AGENT'], "MSIE"))
+      {
+        $response->setHttpHeader('Content-Disposition','inline; filename="order_report.csv"');
+      }
+      else
+      {
+        $response->setHttpHeader('Content-Disposition','attachment; filename="order_report.csv"');
+      }
+
+      $this->setLayout(false);
+    }
+
+    // Pager
+    $this->pager = new sfDoctrinePager(
+      'rtGuardUser',
+      $this->getCountPerPage($request)
+    );
+    $this->pager->setQuery($q);
+    $this->pager->setPage($request->getParameter('page', 1));
+    $this->pager->init();
+  }
+
   public function executeIndex(sfWebRequest $request)
   {
     $query = Doctrine::getTable('rtGuardUser')->createQuery('a');

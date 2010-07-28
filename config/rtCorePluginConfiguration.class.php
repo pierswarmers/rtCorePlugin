@@ -85,6 +85,12 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
       'model' => 'sfGuardForgotPassword',
       'type' => 'object'
     )));
+
+    $routing->prependRoute(
+      'rt_guard_user_report_download',
+       new sfRoute('/rtGuardUserAdmin/userReport/user_report.:sf_format', array('module' => 'rtGuardUserAdmin', 'action' => 'userReport'))
+    );
+
     $routing->prependRoute('sf_default_notify_404', new sfRoute('/default/notify404.:sf_format', array('module' => 'rtDefault', 'action' => 'notify404')));
     $routing->prependRoute('sf_guard_register', new sfRoute('/user/register', array('module' => 'rtGuardRegister', 'action' => 'index')));
     $routing->prependRoute('rt_guard_account', new sfRoute('/user/account', array('module' => 'rtGuardUser', 'action' => 'edit')));

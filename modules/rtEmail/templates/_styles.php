@@ -23,4 +23,16 @@
   .container {
     padding: 40px;
   }
+
+  th {
+    text-align: left 
+  }
+
+  td, th {
+    padding:10px; border:1px solid #CCC;
+  }
+
+  table {
+    border-collapse: collapse; border:1px solid #CCC; width:650px; margin-bottom:10px;
+  }
 </style>

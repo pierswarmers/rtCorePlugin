@@ -23,10 +23,24 @@
  * @param strinf $text
  * @return string
  */
-function markdown_to_html($text, $object = null)
+function markdown_to_html($text, $object = null, $summary = false)
 {
   if(!is_null($object))
   {
+    if($summary)
+    {
+      $sections = explode(sfConfig::get('app_rt_content_section_delimiter', '////'), $text);
+
+      if(isset($sections[0]))
+      {
+        $text = $sections[0];
+      }
+    }
+    else
+    {
+      $text = str_replace(sfConfig::get('app_rt_content_section_delimiter', '////'), '', $text);
+    }
+
     rt_text_helper_object($object);
 
     if(sfConfig::get('app_rt_text_support_latex_enabled', true))

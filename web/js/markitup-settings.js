@@ -47,7 +47,9 @@ rtMarkdownSettings = {
           }
         },
         {name:'Gallery', key:"G", openWith:'[gallery]'},
-        {name:'Docs', key:"D", openWith:'[docs]'}
+        {name:'Docs', key:"D", openWith:'[docs]'},
+        {separator:'---------------' },
+        {name:'Separator', openWith:'\n////\n'}
     ]
 }
 

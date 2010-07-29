@@ -61,7 +61,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
         $user = $this->form->save();
         $this->getUser()->signIn($user);
         $this->getUser()->setFlash('notice', 'You are registered and signed in!');
-        $this->getUser()->setFlash('registration_success', true);
+        $this->getUser()->setAttribute('registration_success', true);
         $this->notifyUser($user, $this->form->getValue('password'));
         
         $signinUrl = sfConfig::get('app_sf_guard_plugin_success_register_url', $this->getUser()->getReferer($request->getReferer()));

@@ -62,6 +62,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
         $this->getUser()->signIn($user);
         $this->getUser()->setFlash('notice', 'You are registered and signed in!');
         $this->getUser()->setFlash('registration_success', true);
+        $this->notifyUser($user, $this->form->getValue('password'));
         
         $signinUrl = sfConfig::get('app_sf_guard_plugin_success_register_url', $this->getUser()->getReferer($request->getReferer()));
 
@@ -122,15 +123,29 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
    *
    * @param sfGuardUser $user
    */
-  function notifyUser(sfGuardUser $user)
+  function notifyUser(sfGuardUser $user, $password = null)
   {
-    $from = $this->getAdminEmail();;
-    $to = $user->getEmailAddress();
-    $subject = sprintf('[%s] Registration confirmed!', $this->generateUrl('homepage', array(), true));
-    $body  = 'Hi ' .  $user->getFirstName() . ",\n\n";
-    $body .= 'Your registration has been approved and you\'re now able to sign in:' . "\n";
-    $body .= $this->generateUrl('sf_guard_signin', array('id' => $user->getId()), true) . "\n";
-    $this->getMailer()->composeAndSend($from, $to, $subject, $body);
+    $vars = array('user' => $user);
+
+    if(isset($password))
+    {
+      $vars['password'] = $password;
+    }
+
+    $message_html = $this->getPartial('rtGuardRegister/email_registration_success_html', $vars);
+    $message_html = $this->getPartial('rtEmail/layout_html', array('content' => $message_html));
+    
+    $message_plain = $this->getPartial('rtGuardRegister/email_registration_success_plain', $vars);
+    $message_plain = $this->getPartial('rtEmail/layout_plain', array('content' => html_entity_decode($message_plain)));
+
+    $message = Swift_Message::newInstance()
+            ->setFrom($this->getAdminEmail())
+            ->setTo($user->getEmailAddress())
+            ->setSubject(sprintf('[%s] Registration confirmed!', $this->generateUrl('homepage', array(), true)))
+            ->setBody($message_html, 'text/html')
+            ->addPart($message_plain, 'text/plain');
+
+    $this->getMailer()->send($message);
   }
 
   /**
@@ -140,7 +155,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
    */
   private function getAdminEmail()
   {
-    return sfConfig::get('app_rt_registration_admin_email', sfConfig::get('app_rt_admin_email'));;
+    return sfConfig::get('app_rt_registration_admin_email', sfConfig::get('app_rt_admin_email'));
   }
 
   public function formatMessageBody($body)

@@ -2,13 +2,13 @@
   body {
     margin: 0px;
     padding: 0px;
-    background-color: #FFFFFF;
+    background-color: #EFEFEF;
     font-family: helvetica, arial, sans-serif;
     font-size: 14px;
   }
 
   p {
-    margin: 0 0 1.6em 0;
+    margin: 0 0 10px 0;
   }
 
   div {
@@ -19,8 +19,14 @@
   img {
     border: 0px;
   }
-  
-  .container {
-    padding: 40px;
+
+  .content {
+    padding: 20px 10px 10px;
+    background-color: #FFFFFF;
+  }
+
+  .footer {
+    border-top:1px dotted #CCCCCC;
+    padding: 10px;
   }
 </style>

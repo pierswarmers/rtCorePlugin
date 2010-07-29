@@ -1,4 +1,4 @@
 <?php use_helper('I18N') ?>
-<?php if (sfConfig::has('email_signature')): ?>
-<p><?php echo sfConfig::get('email_signature', '') ?></p>
+<?php if (sfConfig::has('app_rt_email_signature_html')): ?>
+<p><?php echo sfConfig::get('app_rt_email_signature_html', '') ?></p>
 <?php endif; ?>

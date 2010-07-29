@@ -10,4 +10,10 @@
 
 <?php echo __('Username') ?>: <?php echo $user->getUsername() ?> 
 <?php echo __('Password') ?>: <?php echo $password ?>
+<?php endif; ?> 
+
+<?php if($voucher): ?>
+<?php echo __('Welcome voucher worth') ?> <?php echo $voucher->getReductionValueFormatted() ?>:
+
+<?php echo __('Your welcome voucher has been created and can be used with the following code') ?>: #<?php echo $voucher->getCode() ?>
 <?php endif; ?>

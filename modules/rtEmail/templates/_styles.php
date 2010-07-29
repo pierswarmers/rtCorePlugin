@@ -11,6 +11,16 @@
     margin: 0 0 10px 0;
   }
 
+  ul {
+    margin: 0 0 10px 0;
+    padding: 0 0 0 30px;
+  }
+
+  li {
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+
   div {
     margin: 0px;
     padding: 0px;
@@ -26,7 +36,7 @@
   }
 
   .footer {
-    border-top:1px dotted #CCCCCC;
+    border-top: 1px dotted #CCCCCC;
     padding: 20px 10px;
   }
 
@@ -35,10 +45,14 @@
   }
 
   td, th {
-    padding:10px; border:1px solid #CCC;
+    padding: 10px;
+    border: 1px solid #CCC;
   }
 
   table {
-    border-collapse: collapse; border:1px solid #CCC; width:650px; margin-bottom:10px;
+    border-collapse: collapse; 
+    border: 1px solid #CCC;
+    width: 650px;
+    margin-bottom: 10px;
   }
 </style>

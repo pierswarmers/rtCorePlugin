@@ -8,3 +8,7 @@
   <?php echo __('Password') ?>: <code><?php echo $password ?></code>
 </p>
 <?php endif; ?>
+<?php if($voucher): ?>
+<p><strong><?php echo __('Welcome voucher worth') ?> <?php echo $voucher->getReductionValueFormatted() ?></strong>:</p>
+<p><?php echo __('Your welcome voucher has been created and can be used with the following code') ?>: #<?php echo $voucher->getCode() ?></p>
+<?php endif; ?>

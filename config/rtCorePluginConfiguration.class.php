@@ -76,7 +76,7 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
     $routing = $event->getSubject();
 
     $routing->prependRoute('sf_guard_forgot_password', new sfRoute('/user/forgot_password', array('module' => 'rtGuardForgotPassword', 'action' => 'index')));
-    $routing->prependRoute('sf_guard_forgot_password_change', new sfDoctrineRoute('/user/forgot_password/:unique_key', array(
+    $routing->prependRoute('sf_guard_forgot_password_change', new sfDoctrineRoute('/user/change_password/:unique_key', array(
       'module' => 'rtGuardForgotPassword',
       'action' => 'change'
     ), array(

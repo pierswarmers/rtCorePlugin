@@ -123,7 +123,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
    *
    * @param sfGuardUser $user
    */
-  function notifyUser(sfGuardUser $user, $password = null)
+  private function notifyUser(sfGuardUser $user, $password = null)
   {
     $vars = array('user' => $user);
 
@@ -141,7 +141,8 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
     $message = Swift_Message::newInstance()
             ->setFrom($this->getAdminEmail())
             ->setTo($user->getEmailAddress())
-            ->setSubject(sprintf('[%s] Registration confirmed!', $this->generateUrl('homepage', array(), true)))
+            //->setSubject(sprintf('[%s] Registration confirmed!', $this->generateUrl('homepage', array(), true)))
+            ->setSubject('Registration confirmed!')
             ->setBody($message_html, 'text/html')
             ->addPart($message_plain, 'text/plain');
 

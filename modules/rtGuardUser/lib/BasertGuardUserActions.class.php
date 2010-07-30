@@ -35,7 +35,7 @@ class BasertGuardUserActions extends sfActions
   {
     $id = $this->getUser()->getGuardUser()->getId();
     $this->forward404Unless($rt_guard_user = Doctrine::getTable('rtGuardUser')->find(array($id)), sprintf('Object rt_guard_user does not exist (%s).', $id));
-    $this->form = new rtGuardUserPublicForm($rt_guard_user);
+    $this->form = $this->getForm($rt_guard_user);
   }
 
   /**
@@ -49,6 +49,7 @@ class BasertGuardUserActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
     $this->forward404Unless($rt_guard_user = Doctrine::getTable('rtGuardUser')->find(array($id)), sprintf('Object rt_guard_user does not exist (%s).', $id));
     $this->form = new rtGuardUserPublicForm($rt_guard_user);
+    $this->form = $this->getForm($rt_guard_user);
     $this->processForm($request, $this->form);
     $this->setTemplate('edit');
   }
@@ -79,7 +80,7 @@ class BasertGuardUserActions extends sfActions
    * @param sfGuardUser $user
    * @return rtGuardUserPublicForm
    */
-  protected function getForm(sfGuardUser $user)
+  protected function getForm(sfGuardUser $rt_guard_user)
   {
     return new rtGuardUserPublicForm($rt_guard_user);
   }

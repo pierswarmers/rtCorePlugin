@@ -54,6 +54,7 @@
         <td>
           <?php echo $form['first_name']->renderError() ?>
           <?php echo $form['first_name'] ?>
+            <?php echo $form['first_name']->renderHelp() ?>
         </td>
       </tr>
       <tr>
@@ -61,6 +62,7 @@
         <td>
           <?php echo $form['last_name']->renderError() ?>
           <?php echo $form['last_name'] ?>
+            <?php echo $form['first_name']->renderHelp() ?>
         </td>
       </tr>
         <tr>
@@ -68,6 +70,7 @@
           <td>
             <?php echo $form['date_of_birth']->renderError() ?>
             <?php echo $form['date_of_birth'] ?>
+            <?php echo $form['date_of_birth']->renderHelp() ?>
           </td>
         </tr>
         <tr>

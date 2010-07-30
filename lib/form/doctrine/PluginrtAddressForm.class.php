@@ -88,8 +88,10 @@ abstract class PluginrtAddressForm extends BasertAddressForm
         'last_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
         'phone'        => new sfValidatorString(array('max_length' => 20, 'required' => false))
       ));
+
       $this->validatorSchema->setPostValidator(new rtAddressValidator(array('use_names' => $this->getOption('use_names', false))));
     }
+    $this->widgetSchema->setHelp('phone', 'Please include your area code.');
   }
 
   public function setStateWidget($country)

@@ -39,13 +39,6 @@
           <?php echo $form['permissions_list'] ?>
         </td>
       </tr>
-      <tr>
-        <th><?php echo $form['users_list']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['users_list']->renderError() ?>
-          <?php echo $form['users_list'] ?>
-        </td>
-      </tr>
     </tbody>
   </table>
 </form>

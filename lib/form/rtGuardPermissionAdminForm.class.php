@@ -16,7 +16,7 @@ class rtGuardPermissionAdminForm extends BasesfGuardPermissionForm
   public function setup()
   {
     parent::setup();
-    unset($this['created_at'], $this['updated_at']);
+    unset($this['created_at'], $this['updated_at'], $this['users_list']);
     $this->setWidget('description', new sfWidgetFormInputText());
     $this->setValidator('name', new sfValidatorString(array('max_length' => 255, 'required' => true)));
     $this->setWidget('groups_list', new sfWidgetFormDoctrineChoice(array('expanded' => true ,'multiple' => true, 'model' => 'sfGuardGroup')));

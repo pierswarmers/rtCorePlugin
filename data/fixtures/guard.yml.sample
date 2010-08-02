@@ -17,6 +17,9 @@ sfGuardGroup:
       - Permission_admin_shop_product
       - Permission_admin_shop_category
       - Permission_admin_shop_attribute
+      - Permission_admin_shop_order
+      - Permission_admin_shop_promotion
+      - Permission_admin_shop_voucher
 
 sfGuardPermission:
 
@@ -64,3 +67,12 @@ sfGuardPermission:
   Permission_admin_shop_attribute:
     name:           admin_shop_attribute
     description:    Administrator attributes and variations in shop
+  Permission_admin_shop_order:
+    name:           admin_shop_order
+    description:    Administrator orders in shop
+  Permission_admin_shop_promotion:
+    name:           admin_shop_promotion
+    description:    Administrator promotions in shop
+  Permission_admin_shop_voucher:
+    name:           admin_shop_voucher
+    description:    Administrator vouchers in shop

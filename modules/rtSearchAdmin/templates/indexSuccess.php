@@ -1,4 +1,4 @@
-<?php use_stylesheets_for_form($form) ?>
+  <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 <?php use_helper('I18N', 'rtAdmin') ?>
 <?php $routes = $sf_context->getRouting()->getRoutes() ?>
@@ -22,6 +22,12 @@
         <?php
 
         $title = $rt_index->getObject();
+
+        if(!$title)
+        {
+          continue;
+        }
+
         $type = '';
         $link = $rt_index->getCleanModel() . 'Admin/edit?id='.$rt_index->getModelId();
 

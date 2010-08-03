@@ -108,6 +108,30 @@ class rtGuardUserAdminActions extends sfActions
     $this->pager->init();
   }
 
+  /**
+   * Prepare user selection for dropdown populations
+   *
+   * @param sfWebRequest $request
+   * @return json
+   */
+  public function executeUserSelect(sfWebRequest $request)
+  {
+    $this->getResponse()->setContentType('application/json');
+
+    $query = Doctrine::getTable('rtIndex')->getBaseSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
+    $query->andWhere('i.model = ?', 'rtGuardUser');
+    $query->limit($request->getParameter('limit'));
+    $users_raw = $query->execute();
+
+    $users = array();
+    foreach ($users_raw as $user)
+    {
+      $users[$user->getModelId()] = (string) $user;
+    }
+
+    return $this->renderText(json_encode($users));
+  }
+
   public function executeIndex(sfWebRequest $request)
   {
     $query = Doctrine::getTable('rtGuardUser')->createQuery('a');

@@ -25,6 +25,16 @@ abstract class PluginrtIndex extends BasertIndex
   private $_object;
 
   /**
+   * Return object as string
+   *
+   * @return object Object as string
+   */
+  public function  __toString()
+  {
+    return (string) $this->getObject();
+  }
+
+  /**
    * Retrieves the attached object and hydrates the $_object var with it.
    *
    * @return void

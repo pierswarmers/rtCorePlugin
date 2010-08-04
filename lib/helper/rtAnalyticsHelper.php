@@ -32,12 +32,20 @@ function analytics($web_property_id = null)
   }
 
   $web_property_id = is_null($web_property_id) ? sfConfig::get('app_rt_analytics_web_property_id') : $web_property_id;
-  
+
+  $domain = '';
+
+  if(sfConfig::has('app_rt_analytics_web_property_domain'))
+  {
+    $domain = "_gaq.push(['_setDomainName', '".sfConfig::get('app_rt_analytics_web_property_domain')."']);";
+  }
+
   $string = <<< EOS
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '$web_property_id']);
+  $domain
   _gaq.push(['_trackPageview']);
 
   (function() {

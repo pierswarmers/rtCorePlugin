@@ -187,6 +187,12 @@ Pager
 .rt-pager .here a {color:#CCC;text-decoration:none;cursor:default;}
 /*
 
+Graphs
+
+*/
+.rt-graph-holder {margin-bottom:10px;}
+/*
+
 IE Bugfix
 
 */

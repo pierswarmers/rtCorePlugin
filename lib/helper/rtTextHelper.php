@@ -71,7 +71,15 @@ function markdown_to_html($text, $object = null, $summary = false)
 
   }
 
-  return rtMarkdownToolkit::transformBase($text);
+  $md_parser = new MarkdownExtra_Parser();
+
+  $text = $md_parser->transform(html_entity_decode($text));
+
+  $text = sfGeshi::parse_mixed($text);
+
+  return $text;
+
+  //return rtMarkdownToolkit::transformBase($text);
 }
 
 /**

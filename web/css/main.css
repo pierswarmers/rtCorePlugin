@@ -92,7 +92,7 @@ h1, legend { color:#333; }
 a{color:#3366CC;font-weight:normal;}
 code {background:#ededed;font-family: courier, monospace !important;}
 a, a:hover {outline:none;-moz-outline-style:none;}
-pre.php, pre.html, pre.xhtml, pre.css, pre.js { background:#efefef; border:1px dotted #CCC!important; font-size: 1em; line-height:1.5em; padding:1.5em 1em 0; font-family: courier, monospace !important; overflow:auto; }
+pre { background:#efefef; border:1px dotted #CCC!important; font-size: 1em; line-height:1.5em; padding:1.5em 1em 0; font-family: courier, monospace !important; overflow:auto; }
 h1 a, h2 a { text-decoration:none; }
 table, thead th, td {border:1px solid #ccc;}
 thead th, td {border-top:0; border-left:0;vertical-align: top;}

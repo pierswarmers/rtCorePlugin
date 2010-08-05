@@ -71,15 +71,14 @@ function markdown_to_html($text, $object = null, $summary = false)
 
   }
 
-  $md_parser = new MarkdownExtra_Parser();
+//  $text = sfGeshi::parse_mixed(html_entity_decode($text, ENT_QUOTES));
+//
+//  $md_parser = new MarkdownExtra_Parser();
+//
+//  $text = $md_parser->transform($text);
+//  return $text;
 
-  $text = $md_parser->transform(html_entity_decode($text));
-
-  $text = sfGeshi::parse_mixed($text);
-
-  return $text;
-
-  //return rtMarkdownToolkit::transformBase($text);
+  return rtMarkdownToolkit::transformBase($text);
 }
 
 /**

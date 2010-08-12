@@ -45,6 +45,7 @@ $(document).ready(function() {
         if(data.status === 'success')
         {
           $(assetRowId).hide();
+          $(assetRowId).remove();
         }
       }
     });
@@ -79,6 +80,7 @@ $(document).ready(function() {
       'rt_asset[_csrf_token]': '<?php echo $form['_csrf_token']->getValue(); ?>'
     },
     onSubmit : function(file, ext){
+      $("#rtCoreUploadPanel<?php echo $panel_suffix ?> li.error").remove();
       message.text('<?php echo __('Uploading') ?>').fadeIn(0);
       this.disable();
     },

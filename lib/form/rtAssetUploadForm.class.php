@@ -48,6 +48,10 @@ class rtAssetUploadForm extends PluginrtAssetForm
    */
   public function getAllowedMimeTypes()
   {
+    if($this->getOption('allowed_mime_types'))
+    {
+      return $this->getOption('allowed_mime_types');
+    }
     return sfConfig::get('app_rt_asset_allowed_mime_types', rtAssetToolkit::getCommonMimeTypes());
   }
 }

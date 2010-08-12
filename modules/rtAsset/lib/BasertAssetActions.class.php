@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the gumnut package.
+ * This file is part of the reditype package.
  * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -10,7 +10,7 @@
 /**
  * BasertAssetActions handles search functions.
  *
- * @package    gumnut
+ * @package    reditype
  * @subpackage modules
  * @author     Piers Warmers <piers@wranglers.com.au>
  */
@@ -101,7 +101,7 @@ class BasertAssetActions extends sfActions
    */
   public function executeUpload(sfWebRequest $request)
   {
-    $form = new rtAssetUploadForm();
+    $form = $this->getForm();
     $request_params = $request->getParameter($form->getName());
     $form->bind($request_params, $request->getFiles($form->getName()));
 
@@ -146,5 +146,15 @@ class BasertAssetActions extends sfActions
 
     $this->error = $error;
     return sfView::ERROR;
+  }
+
+  /**
+   * Returns a form object.
+   *
+   * @return rtAssetUploadForm
+   */
+  protected function getForm()
+  {
+    return new rtAssetUploadForm();
   }
 }

@@ -45,7 +45,7 @@ if($sf_request->hasParameter('show_more'))
             <a href="<?php echo '?page='.$page.$params ?>"><?php echo $page ?></a>
           </li>
         <?php endforeach; ?>
-          <li class="last"><a href="<?php echo '?page='.$pager->getPage() . ($sf_request->hasParameter('show_more') ? '' : '&show_more=') ?>"><?php echo $sf_request->hasParameter('show_more') ? __('show less') : __('show more') ?></a></li>
+          <li class="last"><a href="<?php echo '?page='.$pager->getPage() . ($sf_request->hasParameter('show_more') ? '' : $params.'&show_more=') ?>"><?php echo $sf_request->hasParameter('show_more') ? __('show less') : __('show more') ?></a></li>
       </ul>
     </li>
   </ul>

@@ -60,4 +60,16 @@ abstract class PluginrtAsset extends BasertAsset
 
     return DIRECTORY_SEPARATOR . $sub_container;
   }
+
+  /**
+   * Retrieve the attached parent object.
+   *
+   * @return Doctrine_Record returns the parent object
+   */
+  public function getObject()
+  {
+    $object = Doctrine::getTable($this->getModel())->findOneById($this->getModelId());
+
+    return $object;
+  }
 }

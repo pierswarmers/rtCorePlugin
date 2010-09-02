@@ -13,16 +13,6 @@
 abstract class PluginrtAsset extends BasertAsset
 {
   /**
-   * Return object
-   *
-   * @return object
-   */
-  public function getObject()
-  {
-    return Doctrine::getTable($this->getModel())->find($this->getModelId());
-  }
-
-  /**
    * Is this asset an web image.
    *
    * @return boolean

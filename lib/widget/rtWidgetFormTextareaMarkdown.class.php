@@ -82,18 +82,45 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
     $uri = sfContext::getInstance()->getController()->genUrl('@rt_search_ajax?sf_format=json');
 
     $js = sprintf(<<<EOF
-<div class="rt-modal-panel $id" id="rtLinkPanel$rand">
-  <h2>Find a page to link to:</h2>
-  <div class="inner">
-    <p>
+<div id="rtLinkPanel$rand" class="rt-modal-panel $id rtLinkPanel"  title="Create a new link">
+
+  <fieldset><legend>Build your own link to any URL</legend>
+  <p class="inline-text-form-row inline-text-form-row-simple">
+    [ <input type="text" name="linkText" id="linkText$rand" value="Your links text" /> ]
+    ( <input type="text" name="linkUrl" id="linkUrl$rand" value="http://example.com/" /> )
+    <button class="rtLinkPanelInsertButton">Insert Link</button>
+  </p>
+  </fieldset>
+  <fieldset style="margin-bottom:none;"><legend>Or, find an existing page to link to</legend>
+  <p class="inline-text-form-row"><strong>Enter search Terms:</strong>
       <input type="text" name="q" id="rtLinkPanelQuery$rand" value="" />
-      <button type="submit" class="button" id="rtLinkPanelId$rand">Search</button>
-    </p>
-    <ul id="rtLinkPanelResults$rand" class="inner-panel">&nbsp;</ul>
-  </div>
+      <button type="submit" class="rtLinkPanelSearchButton" id="rtLinkPanelId$rand">Search</button>
+  </p>
+  <ul id="rtLinkPanelResults$rand" class="inner-panel results-panel">&nbsp;</ul>
+  </fieldset>
 </div>
+
 <script type="text/javascript">
   $(document).ready(function() {
+
+    $('.rtLinkPanelInsertButton').button({
+      icons: {
+        primary: 'ui-icon-link'
+      }
+    });
+
+    $('.rtLinkPanelInsertButton').click(function(){
+      $.markItUp({openWith: '[',closeWith:']('+ $("#linkUrl$rand").val() +')',placeHolder:''+ $("#linkText$rand").attr('value') +'' });
+      $('.rt-modal-panel').dialog('close');
+      return false;
+    });
+
+    $('.rtLinkPanelSearchButton').button({
+      icons: {
+        primary: 'ui-icon-search'
+      }
+    });
+
     enableLinkPanel(
       '#rtLinkPanelQuery$rand',
       '#rtLinkPanelId$rand',

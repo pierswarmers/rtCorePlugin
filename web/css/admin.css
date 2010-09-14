@@ -58,8 +58,6 @@ Icons and Tools
 #rtPrimaryTools li {list-style:none;display:inline;padding:0;}
 #rtPrimaryTools button {margin-left:0;margin-top:10px;}
 
-.ui-button {-moz-box-shadow:0 1px 3px rgba(0,0,0,0.3);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.3);border: 1px solid #999;}
-td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #999;}
 .positive .ui-state-default { border: 1px solid #45930b; background: #4ca20b url(../vendor/jquery/css/ui/images/ui-bg_highlight-soft_60_4ca20b_1x100.png) 50% 50% repeat-x; font-weight: normal; color: #ffffff; }
 .positive .ui-state-hover { border: 1px solid #3F7F0F; background: #4eb305 url(../vendor/jquery/css/ui/images/ui-bg_highlight-soft_50_4eb305_1x100.png) 50% 50% repeat-x; font-weight: normal; color: #ffffff; }
 .positive .ui-icon { width: 16px; height: 16px; background-image: url(../vendor/jquery/css/ui/images/ui-icons_72b42d_256x240.png); }
@@ -159,10 +157,17 @@ Modal Panels
 
 */
 .rt-modal-panel{display:none;}
-.rt-modal-panel{border:2px solid #666;border:5px solid rgba(0,0,0,0.5);width:400px;background-color:#fff;}
-.rt-modal-panel div.inner{padding:10px;}
-.rt-modal-panel div.inner-panel{border-top:1px solid #ddd;padding-top:10px;}
-.rt-modal-panel h2{margin-bottom:0px;color:#fff;background-color:#28CFCD;padding:5px 10px;}
+.rt-modal-panel{ width:400px;background-color:#fff; -moz-border-radius:5px;-webkit-border-radius:5px;}
+.rt-modal-panel div.inner{padding:10px 10px 0;}
+.rt-modal-panel p, .rt-modal-panel li {margin-bottom:10px;}
+.rt-modal-panel ul {margin-bottom:0;padding-bottom:0;}
+.rt-modal-panel h2{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-x 0 100%;border:#C8C8C8 1px solid !important;margin-bottom:0px;padding:10px;}
+/*
+
+Link Panel
+
+*/
+.rtLinkPanel {}
 /*
 
 Tree Admin.
@@ -197,3 +202,28 @@ IE Bugfix
 
 */
 #rtStockTable input[type=checkbox] {position:static;}
+/*
+
+Advanced Forms
+
+*/
+.inline-text-form-row { font-weight:bold; }
+.inline-text-form-row input[type=text] { width:150px; }
+.inline-text-form-row-simple input[type=text] { font-style: italic; border:0; border-bottom:1px dashed #CCC !important; -moz-border-radius:0;-webkit-border-radius:0; }
+.results-panel { height: 90px; padding:10px 40px; margin-right:0; overflow:auto; border:1px solid  #CCC;}
+/*
+
+Line breaks
+
+*/
+div.rt-admin-break { text-align:center; font-style:italic; font-weight:bold; background:#EFEFEF; color:#CCC; line-height:1em; margin-bottom:1.5em; }
+div.rt-admin-break span { background:#FFF; padding:0 0.5em; }
+/*
+
+jQuery UI
+
+*/
+.ui-dialog .ui-widget-header { background:#CCC; }
+.ui-button {font-weight:normal !important;-moz-box-shadow:0 1px 3px rgba(0,0,0,0.3);-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.3);border: 1px solid #999;padding-top:0px !important;padding-bottom:0px !important;font-weight:normal;}
+td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #999;}
+.ui-dialog .ui-dialog-content { padding: 1.5em 1em 0; }

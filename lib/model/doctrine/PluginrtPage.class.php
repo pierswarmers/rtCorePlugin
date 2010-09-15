@@ -17,6 +17,16 @@
  */
 abstract class PluginrtPage extends BasertPage
 {
+  public function construct()
+  {
+    parent::construct();
+
+    if($this->isNew())
+    {
+      $this->setPublishedFrom(date('Y-m-d H:i:s'));
+    }
+  }
+
   /**
    * Undelete a soft deleted object.
    *

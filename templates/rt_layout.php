@@ -63,6 +63,8 @@
         <?php if (isset($routes['rt_blog_page_index'])): ?>
         <h2><?php echo __('Latest News') ?></h2>
         <?php include_component('rtBlogPage', 'latest') ?>
+        <h2><?php echo __('Archive') ?></h2>
+        <?php include_component('rtBlogPage', 'archive') ?>
         <?php endif; ?>
         <?php if (isset($routes['rt_shop_order_cart'])): ?>
         <h2><?php echo __('Your Shopping Cart') ?></h2>

@@ -64,8 +64,10 @@
         <h2><?php echo __('Latest News') ?></h2>
         <?php include_component('rtBlogPage', 'latest') ?>
         <h2><?php echo __('Archive') ?></h2>
-        <?php include_component('rtBlogPage', 'archive') ?>
+        <?php include_component('rtBlogPage', 'archive') ?>        
         <?php endif; ?>
+        <h2><?php echo __('Tag Cloud') ?></h2>
+        <?php include_component('rtTag', 'cloud', array('options' => array('limit' => 10))) ?>
         <?php if (isset($routes['rt_shop_order_cart'])): ?>
         <h2><?php echo __('Your Shopping Cart') ?></h2>
         <?php include_partial('rtShopOrder/cart_mini') ?>

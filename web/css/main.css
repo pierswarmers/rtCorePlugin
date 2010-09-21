@@ -89,6 +89,7 @@ h2 { border-bottom:1px solid #CCC;font-weight:bold; }
 h2 { font-size: 1.6em;color:#666; }
 h3 { font-size: 1.3em;font-weight:bold; }
 h1, legend { color:#333; }
+h1 span { float:right; color:#CCC }
 a{color:#3366CC;font-weight:normal;}
 code {background:#ededed;font-family: courier, monospace !important;}
 a, a:hover {outline:none;-moz-outline-style:none;}

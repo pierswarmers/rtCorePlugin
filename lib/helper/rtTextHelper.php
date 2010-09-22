@@ -90,7 +90,7 @@ function markdown_to_html($text, $object = null, $summary = false)
 function markup_images_in_text($matches)
 {
   $class = '';
-  $resize_to = array('maxHeight' => sfConfig::get('app_rt_asset_inline_height', 600), 'maxWidth' => sfConfig::get('app_rt_asset_inline_width',590));
+  $resize_to = array('maxHeight' => sfConfig::get('app_rt_asset_max_height', 600), 'maxWidth' => sfConfig::get('app_rt_asset_max_width',590));
 
   if(count($matches) == 6)
   {
@@ -149,8 +149,22 @@ function markup_links_in_text($matches)
  */
 function markup_galleries_in_text($matches)
 {
-  $string = '';
+//  img_preview: { max_width: 800, max_height: 500 }
+//  img_full: { max_width: 800, max_height: 500 }
+//  javascripts: [/myCustomPlugin/js/gallery.js]
+//  stylesheets: [/myCustomPlugin/css/gallery.css]
 
+  $config = sfConfig::get('app_rt_gallery');
+  
+  if(isset($config['img_preview']))
+  {
+    
+  }
+
+
+  $string = '';
+  $rand = rand();
+  
   $assets = rt_text_helper_object()->getAssets();
 
   if(isset($matches[2]))
@@ -171,21 +185,18 @@ function markup_galleries_in_text($matches)
   if(count($assets) > 0)
   {
     use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js');
-    use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.tools.min.js', 'last');
     use_javascript('/rtCorePlugin/vendor/colorbox/js/jquery.colorbox-min.js');
-    use_stylesheet('/rtCorePlugin/vendor/jquery/css/tools/jquery.tools.css');
     use_stylesheet('/rtCorePlugin/vendor/colorbox/css/colorbox.css');
     $rand = rand();
 
-    $string .= '<div class="clearfix"></div><div class="clearfix rt-inline-panel">'."\n".'<a class="prevPage browse left"></a>' . "\n";
-    $string .= '<div id="rtGalleryScrollable'.$rand.'" class="scrollable">'."\n".'<div id="rtGalleryScrollableTriggers'.$rand.'" class="items">' . "\n";
+    $string .= '<ul class="rt-gallery">'."\n";
     foreach($assets as $asset)
     {
       
       if($asset->isImage())
       {
-        $thumb_height = sfConfig::get('app_rt_asset_scrollable_height', 130);
-        $thumb_width = sfConfig::get('app_rt_asset_scrollable_width', 130);
+        $thumb_height = sfConfig::get('app_rt_asset_scrollable_height', 100);
+        $thumb_width = sfConfig::get('app_rt_asset_scrollable_width', 100);
 
         
         $thumb_location_web = rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => $thumb_height, 'maxWidth' => $thumb_width));
@@ -199,40 +210,12 @@ function markup_galleries_in_text($matches)
         $style = sprintf('left:%spx;top:%spx;', $offset_left,$offset_top);
 
         $title = $asset->getTitle() ? $asset->getTitle() : $asset->getOriginalFilename();
-        $resize_to = array('maxHeight' => sfConfig::get('app_rt_asset_lightbox_expanded_height', 600), 'maxWidth' => sfConfig::get('app_rt_asset_lightbox_expanded_width',800));
-        $string .= '<a href="'. rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'" rel="rt-gallery-group-'.$rand.'"><span>' . image_tag($thumb_location_web, array('alt' => $title,'style'=>$style)) . '</span></a>' . "\n";
+        $resize_to = array('maxHeight' => sfConfig::get('app_rt_asset_lightbox_expanded_height', 600), 'maxWidth' => sfConfig::get('app_rt_asset_lightbox_expanded_width',1000));
+        $string .= '<li><a href="'. rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'" rel="gallery-group-' . $rand . '">' . image_tag($thumb_location_web, array('alt' => $title,'style'=>$style)) . '</a></li>' . "\n";
       }
     }
-    $string .= "</div>\n";
-    $string .= "</div>\n";
-    $string .= '<a class="nextPage browse right"></a>'."\n";
-    $string .= "<div class=\"navi\"></div>\n";
-    $string .= "</div>\n";
+    $string .= "</ul>\n";
 
-    $string .= <<<EOS
-<div class="simple_overlay" id="rtGallery$rand">
-    <a class="prev">prev</a>
-    <a class="next">next</a>
-    <div class="info"></div>
-    <div class="progress"></div>
-</div>
-
-<script type="text/javascript">
-  $(function() {
-      $("#rtGalleryScrollable$rand").scrollable({size:5, keyboard:false}).mousewheel();
-
-
-  $('a[rel=rt-gallery-group-$rand]').colorbox({preloading : false});
-
-//  $("#rtGalleryScrollableTriggers$rand a").overlay({
-//      target: '#rtGallery$rand',
-//      expose: '#f1f1f1'
-//  }).gallery({
-//      speed: 800
-//  });
-  });
-</script>
-EOS;
   }
 
   return $string;

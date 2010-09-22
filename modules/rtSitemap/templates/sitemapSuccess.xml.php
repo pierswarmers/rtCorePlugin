@@ -18,11 +18,14 @@
 
 <?php if(isset($routes['rt_blog_page_index'])): ?>
   <?php foreach($blog_pages as $blog_page): ?>
-  <url>
-    <loc><?php echo url_for('rt_blog_page_show', array('id' => $blog_page['id'], 'slug' => $blog_page['slug']), true) ?></loc>
-    <changefreq>daily</changefreq>
-    <lastmod><?php echo $blog_page['updated_at'] ?></lastmod>
-  </url>
+    <?php $published_from = $blog_page['published_from']; ?>
+    <?php if(!is_null($published_from) && $published_from != '' && $published_from != 0): ?>
+      <url>
+        <loc><?php echo url_for('rt_blog_page_show', array('id' => $blog_page['id'], 'slug' => $blog_page['slug'], 'year' => date('Y',strtotime($published_from)), 'month' => date('m',strtotime($published_from)), 'day' => date('d',strtotime($published_from))), true) ?></loc>
+        <changefreq>daily</changefreq>
+        <lastmod><?php echo $blog_page['updated_at'] ?></lastmod>
+      </url>
+    <?php endif; ?>
   <?php endforeach; ?>
 <?php endif; ?>
 

@@ -55,6 +55,43 @@ class BasertAssetActions extends sfActions
   }
 
   /**
+   * Execute edit of an asset
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeEdit(sfWebRequest $request)
+  {
+    sfConfig::set('sf_web_debug',false);
+    $this->forward404Unless($asset = Doctrine::getTable('rtAsset')->findOneById($request->getParameter('id')));
+    $data = array('id' => $request->getParameter('id'),'title' => $request->getParameter('title'),'description' => $request->getParameter('description'));
+    if($request->isMethod(sfRequest::POST))
+    {
+      $this->redirect('rtAsset/update?data='.serialize($data));
+    }
+
+    $this->setLayout(false);
+  }
+
+  /**
+   * Execute update of an asset
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeUpdate(sfWebRequest $request)
+  {
+    sfConfig::set('sf_web_debug',false);
+    $this->forward404Unless($request->getParameter('data'));
+    $data = unserialize($request->getParameter('data'));
+    $this->forward404Unless($asset = Doctrine::getTable('rtAsset')->findOneById($data['id']));
+
+    $asset->setTitle($data['title']);
+    $asset->setDescription($data['description']);
+    $asset->save();
+
+    $this->setLayout(false);
+  }
+
+  /**
    * Execute a reorder of assets, communicating the success or failure via an ajax response.
    * 
    * @param sfWebRequest $request

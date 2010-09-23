@@ -63,12 +63,7 @@ class BasertAssetActions extends sfActions
   {
     sfConfig::set('sf_web_debug',false);
     $this->forward404Unless($asset = Doctrine::getTable('rtAsset')->findOneById($request->getParameter('id')));
-    $data = array('id' => $request->getParameter('id'),'title' => $request->getParameter('title'),'description' => $request->getParameter('description'));
-    if($request->isMethod(sfRequest::POST))
-    {
-      $this->redirect('rtAsset/update?data='.serialize($data));
-    }
-
+    $this->asset = $asset;
     $this->setLayout(false);
   }
 
@@ -80,12 +75,11 @@ class BasertAssetActions extends sfActions
   public function executeUpdate(sfWebRequest $request)
   {
     sfConfig::set('sf_web_debug',false);
-    $this->forward404Unless($request->getParameter('data'));
-    $data = unserialize($request->getParameter('data'));
-    $this->forward404Unless($asset = Doctrine::getTable('rtAsset')->findOneById($data['id']));
-
-    $asset->setTitle($data['title']);
-    $asset->setDescription($data['description']);
+    $this->forward404Unless($asset = Doctrine::getTable('rtAsset')->findOneById($request->getParameter('id')));
+    $asset->setTitle($request->getParameter('title'));
+    $asset->setDescription($request->getParameter('description'));
+    $asset->setCopyright($request->getParameter('copyright'));
+    $asset->setAuthor($request->getParameter('author'));
     $asset->save();
 
     $this->setLayout(false);

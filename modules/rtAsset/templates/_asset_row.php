@@ -11,7 +11,10 @@
   </div>
   <div class="rt-core-upload-metadata">
     <?php echo truncate_text($asset->getOriginalFilename(),30); ?><br />
-    <span><?php echo rtAssetToolkit::getFormattedBytes($asset->getFilesize()); ?></span>
+    <span>
+      <?php echo rtAssetToolkit::getFormattedBytes($asset->getFilesize()); ?> - 
+      <a href="#" class="edit-button" onclick="editAsset('<?php echo $asset->getId() ?>', '<?php echo $asset->getOriginalFilename() ?>')">edit</a>
+    </span>
   </div>
 <?php
 
@@ -26,5 +29,5 @@ if($asset->isImage())
 
 ?>
   <span class="delete" onclick="deleteAsset('<?php echo $asset->getId() ?>')">&times;</span>
-  <span onclick="$.markItUp({openWith: '<?php echo $open ?>',closeWith:'<?php echo $close ?>',placeHolder:'Description goes here...' });" class="insert" >&nbsp;</span>
+  <span onclick="$.markItUp({openWith: '<?php echo $open ?>',closeWith:'<?php echo $close ?>',placeHolder:'<?php echo ($asset->getTitle() !== '') ? $asset->getTitle() : __('Description goes here') . '...' ?>' });" class="insert" >&nbsp;</span>
 </li>

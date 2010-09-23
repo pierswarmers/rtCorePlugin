@@ -1,29 +1,20 @@
 <?php use_helper('I18N', 'rtAdmin'); ?>
-<script type="text/javascript" src="/rtCorePlugin/vendor/jquery/js/jquery.min.js"></script>
-<h2><?php echo __('Edit Asset') ?></h2>
-<form id="rtAssetEdit" class="rt-asset" method="post">
-  <input type="hidden" name="id" value="<?php echo ($sf_request->hasParameter('id')) ? $sf_request->getParameter('id') : '' ?>" id="id" />
+<form>
+  <input type="hidden" name="id" value="<?php echo $asset->getId() ?>" id="rt-asset-edit-id" />
   <p>
-    <label for="title"><?php echo __('Title') ?>:</label><br />
-    <input class="text" type="text" name="title" id="rt_asset_form_title" />
+    <label  for="rt-asset-edit-title"><?php echo __('Title') ?>:</label><br />
+    <input class="text" type="text" name="title" id="rt-asset-edit-title" value="<?php echo $asset->getTitle() ?>" />
   </p>
   <p>
-    <label for="description"><?php echo __('Description') ?>:</label><br />
-    <textarea rows="3" cols="30" class="short" name="description" id="rt_asset_form_description"></textarea>
+    <label for="rt-asset-edit-description"><?php echo __('Description') ?>:</label><br />
+    <textarea name="description"  id="rt-asset-edit-description"><?php echo $asset->getDescription() ?></textarea>
   </p>
-  <span class="error" style="display:none;"></span>
-  <p><button type="submit" class="button medium positive"><?php echo __('Save') ?></button></p>
+  <p>
+    <label  for="rt-asset-edit-copyright"><?php echo __('Copyright') ?>:</label><br />
+    <input class="text" type="text" name="copyright" id="rt-asset-edit-copyright" value="<?php echo $asset->getCopyright() ?>" />
+  </p>
+  <p>
+    <label  for="rt-asset-edit-author"><?php echo __('Author') ?>:</label><br />
+    <input class="text" type="text" name="author" id="rt-asset-edit-author" value="<?php echo $asset->getAuthor() ?>" />
+  </p>
 </form>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('button').click(function() {
-      $('#rtAssetEdit').submit(function() {
-        if ($(".text").val() != "" && $(".short").val() != "") {
-          return true;
-        }
-        $("span.error").text("Please provide a title and a description.").show().fadeOut(3000);
-        return false;
-      });
-    });
-  });
-</script>

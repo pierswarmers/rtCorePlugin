@@ -1,9 +1,11 @@
 <?php use_helper('I18N', 'Text') ?>
-<?php use_javascript('/rtCorePlugin/js/main.js') ?>
+<?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js') ?>
 <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js') ?>
 <?php use_javascript('/rtCorePlugin/vendor/ajaxupload/ajaxupload.js') ?>
+<?php use_javascript('/rtCorePlugin/js/main.js') ?>
 <?php $panel_suffix = isset($panel_suffix) ? $panel_suffix : rand() ?>
 <?php $description_text = __('Description goes here...') ?>
+<div id="rt-asset-edit-window" style="display:none;"></div>
 <fieldset class="rt-core-upload">
   <legend><?php echo __('Attached Files') ?></legend>
   <?php if($object->isNew()): ?>
@@ -30,6 +32,53 @@ $(document).ready(function() {
   $('#uploadImageButton<?php echo $panel_suffix ?>').button({
     icons: { primary: 'ui-icon-transfer-e-w' }
   });
+
+  editAsset = function(assetId, assetOriginalFilename)
+  {
+    
+    var url = '<?php echo url_for('rtAsset/edit') ?>';
+    var dialog = $('<div style="display:hidden" title="<?php echo __('Editing') ?>: ' + assetOriginalFilename + '"></div>').appendTo('body');
+
+    dialog.load(
+              url,
+              {
+                id : assetId
+              },
+              function (responseText, textStatus, XMLHttpRequest) {
+                dialog.html(responseText);
+                      dialog.dialog({
+                        resizable: false,
+                        height:400,
+                        width: 550,
+                        modal: true,
+                        buttons: {
+                          Cancel: function() {
+                            dialog.dialog('destroy');
+                          },
+                          Save: function() {
+                            $.ajax({
+                                  url: "<?php echo url_for('rtAsset/update') ?>",
+                                  type: "POST",
+                                  data: ({
+                                    id : dialog.find('input[name=id]').val(),
+                                    title : dialog.find('input[name=title]').val(),
+                                    description : dialog.find('textarea[name=description]').val(),
+                                    copyright : dialog.find('input[name=copyright]').val(),
+                                    author : dialog.find('input[name=author]').val()
+                                  }),
+                                  dataType: "html",
+                                  success: function(msg){
+                                    dialog.dialog('destroy');
+                                  }
+                               }
+                            );
+                          }
+                        }
+                      });
+              }
+      );
+  return false;
+  }
 
   deleteAsset = function(assetId)
   {

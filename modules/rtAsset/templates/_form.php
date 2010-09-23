@@ -68,7 +68,6 @@ $(document).ready(function() {
                                   dataType: "html",
                                   success: function(msg){
                                     dialog.dialog('destroy');
-                                    location.reload();
                                   }
                                }
                             );

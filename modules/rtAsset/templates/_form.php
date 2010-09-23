@@ -63,12 +63,12 @@ $(document).ready(function() {
                                     id : dialog.find('input[name=id]').val(),
                                     title : dialog.find('input[name=title]').val(),
                                     description : dialog.find('textarea[name=description]').val(),
-                                    copyright : dialog.find('input[name=copyright]').val(),
-                                    author : dialog.find('input[name=author]').val()
+                                    filename : dialog.find('input[name=filename]').val()
                                   }),
                                   dataType: "html",
                                   success: function(msg){
                                     dialog.dialog('destroy');
+                                    location.reload();
                                   }
                                }
                             );

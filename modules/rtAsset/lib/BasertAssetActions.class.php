@@ -78,8 +78,9 @@ class BasertAssetActions extends sfActions
     $this->forward404Unless($asset = Doctrine::getTable('rtAsset')->findOneById($request->getParameter('id')));
     $asset->setTitle($request->getParameter('title'));
     $asset->setDescription($request->getParameter('description'));
-    $asset->setCopyright($request->getParameter('copyright'));
-    $asset->setAuthor($request->getParameter('author'));
+    $asset->setOriginalFilename($request->getParameter('filename'));
+    //$asset->setCopyright($request->getParameter('copyright'));
+    //$asset->setAuthor($request->getParameter('author'));
     $asset->save();
 
     $this->setLayout(false);

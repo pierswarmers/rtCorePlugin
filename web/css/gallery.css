@@ -49,4 +49,9 @@
 
 */
 .rt-gallery { list-style:none;margin-left:0; }
+.rt-gallery div { display: none; }
 .rt-gallery li { padding:0 10px 0 0; margin:0; display: inline; }
+.qtip h3{ margin: 0; font-size: 16px; }
+.qtip p { overflow: hidden !important; margin-bottom:5px; padding:0 }
+.rt-docs a { font-weight:bold; }
+.rt-docs p { margin-bottom:0; }

@@ -149,19 +149,12 @@ function markup_links_in_text($matches)
  */
 function markup_galleries_in_text($matches)
 {
-//  img_preview: { max_width: 800, max_height: 500 }
-//  img_full: { max_width: 800, max_height: 500 }
-//  javascripts: [/myCustomPlugin/js/gallery.js]
-//  stylesheets: [/myCustomPlugin/css/gallery.css]
-
   $config = sfConfig::get('app_rt_gallery');
   
   if(!isset($config['javascripts']))
   {
-    $config['javascripts'] = array(
-        '/rtCorePlugin/vendor/jquery/js/jquery.min.js',
-        '/rtCorePlugin/js/gallery.js'
-    );
+    $config['javascripts'] = array('/rtCorePlugin/vendor/jquery/js/jquery.min.js',
+                                   '/rtCorePlugin/js/gallery.js');
   }
 
   foreach ($config['javascripts'] as $file)
@@ -214,22 +207,30 @@ function markup_galleries_in_text($matches)
         $img_preview_height = isset($config['img_preview']['max_height']) ? $config['img_preview']['max_height'] : 100;
         $img_preview_height_width = isset($config['img_preview']['max_width']) ? $config['img_preview']['max_width'] : 400;
 
-        $img_full_height = isset($config['img_full']['max_height']) ? $config['img_full']['max_height'] : 800;
+        $img_full_height = isset($config['img_full']['max_height']) ? $config['img_full']['max_height'] : 600;
         $img_full_height_width = isset($config['img_full']['max_width']) ? $config['img_full']['max_width'] : 1000;
 
         
         $thumb_location_web = rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => $img_preview_height, 'maxWidth' => $img_preview_height_width));
         $thumb_location_sys = sfConfig::get('sf_web_dir') . $thumb_location_web;
 
-        $image_data = getimagesize($thumb_location_sys);
-
+//        $image_data = getimagesize($thumb_location_sys);
 //        $offset_left = ($image_data[0]/2+10-$image_data[0])/2;
 //        $offset_top = ($image_data[1]/2+10-$image_data[1])/2;
 
         $title = $asset->getTitle() ? $asset->getTitle() : '';
         
         $resize_to = array('maxHeight' => $img_full_height, 'maxWidth' => $img_full_height_width);
-        $string .= '<li><a href="'. rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to) .'" title="'.$title.'" rel="gallery-group-' . $rand . '">' . image_tag($thumb_location_web, array('alt' => $title)) . '</a></li>' . "\n";
+
+        $string .= sprintf(
+                     '<li><a href="%s" title="%s" rel="gallery-group-%s">%s</a><div><h3>%s</h3>%s</div></li>',
+                     rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to),
+                     $title,
+                     $rand,
+                     image_tag($thumb_location_web, array('alt' => $title)),
+                     $title,
+                     $asset->getDescription() === '' ? '' : rtMarkdownToolkit::transformBase($asset->getDescription())
+                   );
       }
     }
     $string .= "</ul>\n";
@@ -268,12 +269,20 @@ function markup_docs_in_text($matches)
 
   if(count($assets) > 0)
   {
-    $string .= '<ul class="rt-docs-listing">';
+    $string .= '<ul class="rt-docs">';
     foreach($assets as $asset)
     {
       if(!$asset->isImage())
       {
-        $string .= '<li>'.link_to1($asset->getOriginalFilename(),$asset->getWebPath()).'</li>';
+        $description = '';
+        if($asset->getDescription() !== '')
+        {
+          $description = rtMarkdownToolkit::transformBase($asset->getDescription());
+        }
+        $string .= sprintf('<li><p>%s</p>%s</li>',
+                     link_to($asset->getTitle() !== '' ? $asset->getTitle() : $asset->getOriginalFilename(),$asset->getWebPath()),
+                     $description
+                   );
       }
     }
     $string .= '</ul>';

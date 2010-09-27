@@ -222,14 +222,25 @@ function markup_galleries_in_text($matches)
         
         $resize_to = array('maxHeight' => $img_full_height, 'maxWidth' => $img_full_height_width);
 
+        $info = '';
+
+        if(trim($asset->getTitle()) != '')
+        {
+          $info = sprintf('<h3>%s</h3>', $asset->getTitle());
+        }
+
+        if(trim($asset->getDescription()) != '')
+        {
+          $info .= rtMarkdownToolkit::transformBase($asset->getDescription());
+        }
+
         $string .= sprintf(
-                     '<li><a href="%s" title="%s" rel="gallery-group-%s">%s</a><div><h3>%s</h3>%s</div></li>',
+                     '<li><a href="%s" title="%s" rel="gallery-group-%s">%s</a><div>%s</div></li>',
                      rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to),
                      $title,
                      $rand,
                      image_tag($thumb_location_web, array('alt' => $title)),
-                     $title,
-                     $asset->getDescription() === '' ? '' : rtMarkdownToolkit::transformBase($asset->getDescription())
+                     $info
                    );
       }
     }

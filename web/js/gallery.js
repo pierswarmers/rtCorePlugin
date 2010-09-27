@@ -33,25 +33,28 @@ $(function(){
 $(function(){
   $("ul.rt-gallery a").each(function(){
     var content = $(this).siblings('div').first().html();
-    $(this).qtip({
-       content: {
-         text: content
-       },
-       position: {
-          corner: {
-             target: 'bottomMiddle',
-             tooltip: 'topMiddle'
-          }
-       },
-       style: {
-        background: '#EFEFEF',
-        border: {
-           radius: 2,
-           color: '#CCC'
-        },
-        name: 'light',
-        tip: 'topMiddle'
-       }
-    });
+    if(content !== '')
+    {
+      $(this).qtip({
+         content: {
+           text: content
+         },
+         position: {
+            corner: {
+               target: 'bottomMiddle',
+               tooltip: 'topMiddle'
+            }
+         },
+         style: {
+          background: '#EFEFEF',
+          border: {
+             radius: 2,
+             color: '#CCC'
+          },
+          name: 'light',
+          tip: 'topMiddle'
+         }
+      });
+    }
   });
 });

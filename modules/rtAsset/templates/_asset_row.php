@@ -24,10 +24,10 @@ $close = sprintf('](asset:%s)', $asset->getOriginalFilename());
 if($asset->isImage())
 {
   $open = '![';
-  $close = sprintf('](asset:%s|right|200,400)', $asset->getOriginalFilename());
+  $close = sprintf('](asset:%s%s)', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_image_link_suffix', '|right|200,400'));
 }
 
 ?>
   <span class="delete" onclick="deleteAsset('<?php echo $asset->getId() ?>')">&times;</span>
-  <span onclick="$.markItUp({openWith: '<?php echo $open ?>',closeWith:'<?php echo $close ?>',placeHolder:'<?php echo ($asset->getTitle() !== '') ? $asset->getTitle() : __('Description goes here') . '...' ?>' });" class="insert" >&nbsp;</span>
+  <span onclick="$.markItUp({openWith: '<?php echo $open ?>',closeWith:'<?php echo $close ?>',placeHolder:'<?php echo (trim($asset->getTitle()) !== '') ? $asset->getTitle() : __('Description goes here') . '...' ?>' });" class="insert" >&nbsp;</span>
 </li>

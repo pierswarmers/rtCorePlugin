@@ -16,6 +16,12 @@
  * @author     Piers Warmers <piers@wranglers.com.au>
  */
 
+function markdown_to_html_safe($text)
+{
+  $text = strip_tags($text);
+  return rtMarkdownToolkit::transformBase($text);
+}
+
 /**
  * Converts a mardown string into HTML
  *

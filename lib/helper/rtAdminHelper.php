@@ -61,6 +61,17 @@ function rt_button_edit($target)
 }
 
 /**
+ * Displays a pretty boolean button.
+ *
+ * @param string $target
+ * @return string
+ */
+function rt_button_boolean($target,$title = 'enable')
+{
+  return rt_ui_button($title, $target, 'check');
+}
+
+/**
  * Displays a pretty show button.
  *
  * @param string $target

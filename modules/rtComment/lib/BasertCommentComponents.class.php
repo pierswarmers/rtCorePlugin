@@ -17,16 +17,21 @@
  */
 class BasertCommentComponents extends sfComponents
 {
-  public function executeComments(sfWebRequest $request)
+  public function executeForm(sfWebRequest $request)
   {
-    $model = 'rtBlogPage';
-    $model_id = 1;
-
-    //Use model and model_id to get comments
-    $this->comments = Doctrine::getTable('rtComment')->getCommentsForModelAndId($model,$model_id);    
-
-    // Form
-    $comment = new rtComment;
-    $this->form = new rtCommentPublicForm($comment, array());
+    if(!isset($this->form))
+    {
+      $comment = new rtComment;
+      $comment->setModel($this->model);
+      $comment->setModelId($this->model_id);
+      $this->form = new rtCommentPublicForm($comment, array());
+    }
   }
+
+  public function executeList(sfWebRequest $request)
+  {
+    $this->comments = Doctrine::getTable('rtComment')->getCommentsForModelAndId($this->model,$this->model_id);
+  }
+
+
 }

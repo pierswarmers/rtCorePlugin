@@ -1,4 +1,7 @@
 rtComment:
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
   actAs:
     Timestampable: ~
   columns:
@@ -6,38 +9,31 @@ rtComment:
     model_id:          { type: integer }
     model:             { type: string(100) }
     user_id:           { type: integer }
-    child_id:          { type: integer }
-    author_name:       { type: string(255), notnull: true }
+    comment_id:        { type: integer }
+    author_name:       { type: string(255) }
     author_email:      { type: string(255) }
     author_website:    { type: string(255), extra: link }
     content:           { type: string }
     moderator_note:    { type: string }
-    reply:             { type: boolean, default: true }
-  options:
-    collate: utf8_unicode_ci
-    charset: utf8
   relations:
-    User:
-      class: sfGuardUser
+    sfGuardUser:
+      alias: User
       local: user_id
+      type: one
       foreign: id
-    Parents:
+      foreignType: many
+      foreignAlias: Comments
+    Comment:
       class: rtComment
-      local: child_id
-      foreign: parent_id
-      refClass: rtCommentReference
-      foreignAlias: Children
-
-rtCommentReference:
-  columns:
-    parent_id:         { type: integer, primary: true }
-    child_id:          { type: integer, primary: true }
+      local: comment_id
+      foreign: id
+      foreignAlias: Comments
 
 rtCommentReport:
   actAs:
     Timestampable: ~
   columns:
-    reason:          { type: string }
+    reason:          { type: clob }
     referer:         { type: string(255) }
     status:          { type: enum, values: ["valid","invalid","untreated"], default: untreated }
     comment_id:      { type: integer, notnull: true }

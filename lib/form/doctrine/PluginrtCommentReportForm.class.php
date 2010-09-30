@@ -1,19 +1,12 @@
 <?php
-/*
- * This file is part of the reditype package.
- * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 /**
- * PluginrtCommentReportForm
+ * PluginrtCommentReport form.
  *
- * @package    reditype
+ * @package    ##PROJECT_NAME##
  * @subpackage form
- * @author     Piers Warmers <piers@wranglers.com.au>
- * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @author     ##AUTHOR_NAME##
+ * @version    SVN: $Id: sfDoctrineFormPluginTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 abstract class PluginrtCommentReportForm extends BasertCommentReportForm
 {

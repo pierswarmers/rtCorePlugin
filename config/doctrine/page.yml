@@ -5,6 +5,7 @@ rtPage:
       fields:      [title]
       canUpdate:   false
     rtAttachableTemplate: ~
+    rtCommentTemplate: ~
     rtSearchTemplate:
       fields:      [title, content, description, tags_as_string]
     Taggable:      {}

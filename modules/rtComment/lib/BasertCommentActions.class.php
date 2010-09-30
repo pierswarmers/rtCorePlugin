@@ -35,7 +35,7 @@ class BasertCommentActions extends sfActions
   {
     $this->model = $request->getParameter('model');
     $this->model_id = $request->getParameter('model_id');
-    $this->object = Doctrine::getTable($this->model)->find($this->model_id);
+    $this->object = Doctrine::getTable($this->model)->findOneById($this->model_id);
   }
 
   /**
@@ -67,7 +67,7 @@ class BasertCommentActions extends sfActions
         if(sfConfig::get('app_rt_comment_moderation', false) && !$this->getUser()->isAuthenticated())
         {
           $form->save();
-          $this->notifyAdministrator($comment);
+          $this->notifyAdministrator($form->getObject());
         }
         else
         {
@@ -88,11 +88,9 @@ class BasertCommentActions extends sfActions
             }
 
             $this->redirect($this->getContext()->getRouting()->generate($route_name, $target_object));
-            new sfDoctrineRoute();
           }
         }
-        
-        $this->redirect(sprintf('rtComment/saved?model=%s&model_id=%s', $form->getObject()->getModel(),$form->getObject()));
+        $this->redirect(sprintf('rtComment/saved?model=%s&model_id=%s', $form->getObject()->getModel(),$form->getObject()->getModelId()));
       }
       else
       {
@@ -111,7 +109,7 @@ class BasertCommentActions extends sfActions
    */
   protected function notifyAdministrator($comment)
   {
-    if(!sfConfig::has('app_rt_comment_admin_email'))
+    if(!sfConfig::has('app_rt_comment_moderation_email'))
     {
       return;
     }

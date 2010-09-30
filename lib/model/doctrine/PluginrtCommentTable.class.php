@@ -51,7 +51,8 @@ class PluginrtCommentTable extends Doctrine_Table
   public function getCommentsForModelAndId($model, $model_id, Doctrine_Query $q = null)
   {
     $q = $this->getQueryForModelAndId($model, $model_id, $q);
-    $q->orderBy('c.created_at DESC');
+    $q->andWhere('is_active = ? ', true);
+    $q->orderBy('c.created_at ASC');
     return $q->execute();
   }
 

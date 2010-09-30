@@ -43,6 +43,6 @@ class rtCommentPublicForm extends PluginrtCommentForm
     $this->setValidator('author_name', new sfValidatorString(array('required' => true,'max_length' => 255),array('max_length' => 'Author name is too long (%max_length% characters max.)')));
     $this->setValidator('author_email', new sfValidatorEmail(array('required' => true)));
 
-    $this->enableCSRFProtection();
+    $this->disableCSRFProtection();
   }
 }

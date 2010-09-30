@@ -16,6 +16,12 @@
  * @author     Piers Warmers <piers@wranglers.com.au>
  */
 
+/**
+ * Return a string with Markdown formatting... all HTML tags removed.
+ *
+ * @param string $text
+ * @return string
+ */
 function markdown_to_html_safe($text)
 {
   $text = strip_tags($text);

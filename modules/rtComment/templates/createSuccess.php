@@ -8,6 +8,6 @@
 
   <div class="rt-collection">
     <h3><?php echo __('Comments') ?></h3>
-    <?php include_component('rtComment', 'comments', array()) ?>
+    <?php include_component('rtComment', 'form', array('form' => $form)) ?>
   </div>
 </div>

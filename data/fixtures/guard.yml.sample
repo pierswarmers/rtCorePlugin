@@ -20,6 +20,7 @@ sfGuardGroup:
       - Permission_admin_shop_order
       - Permission_admin_shop_promotion
       - Permission_admin_shop_voucher
+      - Permission_admin_comment
 
 sfGuardPermission:
 
@@ -76,3 +77,6 @@ sfGuardPermission:
   Permission_admin_shop_voucher:
     name:           admin_shop_voucher
     description:    Administrator vouchers in shop
+  Permission_admin_comment:
+    name:           admin_comment
+    description:    Administrator permission for comments

@@ -26,57 +26,96 @@ class BasertCommentActions extends sfActions
     rtTemplateToolkit::setFrontendTemplateDir();
   }
 
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->redirect('rtComment/new');
-  }
-
   /**
-   * Executes the new page
+   * Display comment success message
    *
    * @param sfWebRequest $request
    */
-  public function executeNew(sfWebRequest $request)
+  public function executeSaved(sfWebRequest $request)
   {
-    $comment = new rtComment;
-    $this->form = new rtCommentPublicForm($comment, array());
+    $this->model = $request->getParameter('model');
+    $this->model_id = $request->getParameter('model_id');
+    $this->object = Doctrine::getTable($this->model)->findOneById($this->model_id);
+  }
+
+  /**
+   * Display comment form incase of validation issues
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeCreate(sfWebRequest $request)
+  {
+    $form = $this->getForm();
 
     if($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT))
     {
-      $this->form->bind($request->getParameter($this->form->getName()));
+      $request_params = $request->getParameter($form->getName());
 
-      if($this->form->isValid()) {
-        $this->form->save();
+      if(sfConfig::get('app_rt_comment_recaptcha_enabled', false))
+      {
+        $captcha = array(
+          'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
+          'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
+        );
+        $request_params['captcha'] = $captcha;
       }
-      $this->getUser()->setFlash('default_error', true, false);
+
+      $form->bind($request_params);
+
+      if($form->isValid())
+      {
+        if(sfConfig::get('app_rt_comment_moderation', false) && !$this->getUser()->isAuthenticated())
+        {
+          $form->save();
+          $this->notifyAdministrator($form->getObject());
+        }
+        else
+        {
+          $form->getObject()->setIsActive(true);
+          $form->save();
+          
+          $routes = $this->getContext()->getRouting()->getRoutes();
+          $route_name = Doctrine_Inflector::tableize($form->getObject()->getModel()).'_show';
+          
+          if(isset($routes[$route_name]))
+          {
+            $target_object = $form->getObject()->getObject();
+            $cache_class = $form->getObject()->getModel() . 'CacheToolkit';
+
+            if(class_exists($cache_class))
+            {
+              $cache_class::clearCache($target_object);
+            }
+
+            $this->redirect($this->getContext()->getRouting()->generate($route_name, $target_object));
+          }
+        }
+        $this->redirect(sprintf('rtComment/saved?model=%s&model_id=%s', $form->getObject()->getModel(),$form->getObject()->getModelId()));
+      }
+      else
+      {
+        $this->getUser()->setFlash('default_error', true, false);
+      }
     }
-    //$this->setLayout(false);
-  }
 
-  public function executeCreate(sfWebRequest $request)
-  {
-    // JSON
-
-    // Send mail to admin
-
-    return false;
+    $this->form = $form;
   }
 
   /**
    * Notify the administrator about new classified
    *
    * @param sfGuardUser $user
-   * @param bdClassified $classified
+   * @param rtComment $comment
    */
-  protected function notifyAdministrator(sfGuardUser $user, $comment)
+  protected function notifyAdministrator($comment)
   {
-    if(!sfConfig::has('app_rt_comment_admin_email'))
+    return;
+    if(!sfConfig::has('app_rt_comment_moderation_email'))
     {
       return;
     }
 
-    $vars = array('user' => $user);
-    $vars['comment'] = $comment;
+    $vars = array('comment' => $comment);
 
     $message_html = $this->getPartial('rtComment/email_newcomment_admin_html', $vars);
     $message_html = $this->getPartial('rtEmail/layout_html', array('content' => $message_html));
@@ -84,7 +123,7 @@ class BasertCommentActions extends sfActions
     $message_plain = $this->getPartial('rtComment/email_newcomment_admin_plain', $vars);
     $message_plain = $this->getPartial('rtEmail/layout_plain', array('content' => html_entity_decode($message_plain)));
 
-    $admin_address = sfConfig::get('app_rt_comment_admin_email', 'from@noreply.com');
+    $admin_address = sfConfig::get('app_rt_comment_moderation_email', 'from@noreply.com');
 
     $message = Swift_Message::newInstance()
             ->setFrom($admin_address)
@@ -94,5 +133,13 @@ class BasertCommentActions extends sfActions
             ->addPart($message_plain, 'text/plain');
 
     $this->getMailer()->send($message);
+  }
+
+  /**
+   * @return rtCommentForm
+   */
+  protected function getForm()
+  {
+    return new rtCommentPublicForm(new rtComment);
   }
 }

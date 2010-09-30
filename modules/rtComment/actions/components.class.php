@@ -19,8 +19,4 @@ require_once(dirname(__FILE__).'/../lib/BasertCommentComponents.class.php');
  */
 class rtCommentComponents extends BasertCommentComponents
 {
-  public function executeForm()
-  {
-    $this->form = new rtCommentForm();
-  }
 }

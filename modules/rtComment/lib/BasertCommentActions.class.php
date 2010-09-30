@@ -109,6 +109,7 @@ class BasertCommentActions extends sfActions
    */
   protected function notifyAdministrator($comment)
   {
+    return;
     if(!sfConfig::has('app_rt_comment_moderation_email'))
     {
       return;

@@ -4,10 +4,7 @@
 
 <?php include_partial('rtAdmin/flashes_public') ?>
 
-<div class="rt-container short">
-
-  <div class="rt-collection">
-    <h3><?php echo __('Comments') ?></h3>
-    <?php include_component('rtComment', 'form', array('form' => $form)) ?>
-  </div>
+<div class="rt-container rt-comment">
+  <h1><?php echo __('Comments') ?></h1>
+  <?php include_component('rtComment', 'form', array('form' => $form)) ?>
 </div>

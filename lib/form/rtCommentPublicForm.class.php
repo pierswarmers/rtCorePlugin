@@ -20,7 +20,9 @@ class rtCommentPublicForm extends PluginrtCommentForm
   public function setup()
   {
     parent::setup();
-    
+
+    $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
+
     $this->useFields(array('author_name', 'author_email', 'author_website', 'content', 'model', 'model_id'));
 
     if(sfConfig::get('app_rt_comment_recaptcha_enabled', false))
@@ -31,18 +33,30 @@ class rtCommentPublicForm extends PluginrtCommentForm
       ));
       $this->validatorSchema['captcha'] = new sfValidatorReCaptcha(array(
         'private_key' => sfConfig::get('app_recaptcha_private_key')
-      ));
+      ), array('captcha' => 'The captcha you entered didn\'t pass validation, please try again.'));
+      $this->widgetSchema->setLabel('content', 'Your Comment');
     }
 
     $this->setWidget('model', new sfWidgetFormInputHidden);
     $this->setWidget('model_id', new sfWidgetFormInputHidden);
 
     $this->setValidator('model', new sfValidatorString(array('required' => true)));
-    $this->setValidator('model_id', new sfValidatorInteger(array('required' => true)));
+    $this->setValidator('model_id', new sfValidatorInteger(array('required' => true), array()));
+    $this->setValidator('author_name', new sfValidatorString(array('required' => true,'max_length' => 100),array('max_length' => 'Author name is too long (%max_length% characters max.)')));
+    $this->setValidator('content', new sfValidatorString(array('required' => true),array('required' => 'Please enter a comment.')));
+    $this->setValidator('author_email', new sfValidatorEmail(array('required' => true), array('invalid' => 'Please enter a valid email address.')));
+    $this->setValidator('author_website', new sfValidatorUrl(array('required' => false), array('invalid' => 'Please enter a valid website address.')));
 
-    $this->setValidator('author_name', new sfValidatorString(array('required' => true,'max_length' => 255),array('max_length' => 'Author name is too long (%max_length% characters max.)')));
-    $this->setValidator('author_email', new sfValidatorEmail(array('required' => true)));
+    // Custom messages and labels
+    $this->widgetSchema->setLabel('content', 'Comment');
+    $this->widgetSchema->setHelp('author_name', 'Required');
+    $this->widgetSchema->setLabel('author_name', 'Name');
+    $this->widgetSchema->setHelp('author_email', 'Required, will not be published');
+    $this->widgetSchema->setLabel('author_email', 'Email');
+    $this->widgetSchema->setHelp('author_website', 'Must start with: http:// or https://');
+    $this->widgetSchema->setLabel('author_website', 'Website');
 
+    // This interferes with the caching of pages.
     $this->disableCSRFProtection();
   }
 }

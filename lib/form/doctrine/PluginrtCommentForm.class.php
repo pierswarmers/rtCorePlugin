@@ -17,4 +17,15 @@
  */
 abstract class PluginrtCommentForm extends BasertCommentForm
 {
+  public function setup()
+  {
+    parent::setup();
+
+    unset($this['created_at'], 
+          $this['updated_at'],
+          $this['model_id'],
+          $this['model'],
+          $this['user_id'],
+          $this['comment_id']);
+  }
 }

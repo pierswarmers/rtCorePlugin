@@ -67,7 +67,6 @@ class BasertCommentAdminActions extends sfActions
       $this->forward404Unless($this->parent_model = Doctrine::getTable($rt_comment->getModel())->findOneById($rt_comment->getModelId()));
     }
     $this->form = new rtCommentForm($rt_comment);
-    //$this->setLayout(false);
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -105,6 +104,14 @@ class BasertCommentAdminActions extends sfActions
     $this->getUser()->setFlash('notice', 'Comment was enabled.',false);
 
     $this->redirect('rtCommentAdmin/edit?id='.$rt_comment->getId());
+  }
+
+  public function executeToggle(sfWebRequest $request)
+  {
+    $this->forward404Unless($rt_comment = Doctrine_Core::getTable('rtComment')->find(array($request->getParameter('id'))), sprintf('Object rt_comment does not exist (%s).', $request->getParameter('id')));
+    $rt_comment->setIsActive(!$rt_comment->getIsActive());
+    $this->status = $rt_comment->getIsActive() ? 'activated' : 'deactivated';
+    $rt_comment->save();
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)

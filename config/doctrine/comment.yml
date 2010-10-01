@@ -5,7 +5,7 @@ rtComment:
   actAs:
     Timestampable: ~
   columns:
-    is_active:         { type: boolean }
+    is_active:         { type: boolean, default: false }
     model_id:          { type: integer }
     model:             { type: string(100) }
     user_id:           { type: integer }

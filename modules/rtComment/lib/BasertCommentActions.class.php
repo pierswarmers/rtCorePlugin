@@ -104,35 +104,26 @@ class BasertCommentActions extends sfActions
   /**
    * Notify the administrator about new classified
    *
-   * @param sfGuardUser $user
    * @param rtComment $comment
    */
   protected function notifyAdministrator($comment)
-  {
-    return;
+  {    
     if(!sfConfig::has('app_rt_comment_moderation_email'))
     {
       return;
     }
-
-    $vars = array('comment' => $comment);
-
-    $message_html = $this->getPartial('rtComment/email_newcomment_admin_html', $vars);
-    $message_html = $this->getPartial('rtEmail/layout_html', array('content' => $message_html));
-
-    $message_plain = $this->getPartial('rtComment/email_newcomment_admin_plain', $vars);
-    $message_plain = $this->getPartial('rtEmail/layout_plain', array('content' => html_entity_decode($message_plain)));
-
-    $admin_address = sfConfig::get('app_rt_comment_moderation_email', 'from@noreply.com');
-
-    $message = Swift_Message::newInstance()
-            ->setFrom($admin_address)
-            ->setTo($admin_address)
-            ->setSubject("RediType: A new comment was added")
-            ->setBody($message_html, 'text/html')
-            ->addPart($message_plain, 'text/plain');
-
-    $this->getMailer()->send($message);
+    
+    $from = $comment->getAuthorEmail();
+    $to = sfConfig::get('app_rt_comment_moderation_email', 'from@noreply.com');
+    $subject = sprintf('Activation request for new comment: %s', $comment->getCreatedAt());
+    $body  = 'A new comment has been added but will need to be activated before is can be shown.' . "\n\n";
+    $body .= sprintf('The details they entered were: %s (%s)', $comment->getAuthorName(),$comment->getAuthorEmail()) . "\n";
+    $body .= 'The content of the comment was:'."\n";
+    $body .= strip_tags($comment->getContent()) . "\n\n";
+    $body .= 'If you wish to automatically activate this comment, you can do so by simply clicking on this link:' . "\n";
+    $body .= $this->generateUrl('rt_comment_enable', array('id' => $comment->getId()), true) . "\n\n";
+    $body .= 'Please note: you will need to be signed in to complete this action.' . "\n";
+    $this->getMailer()->composeAndSend($from, $to, $subject, $body);
   }
 
   /**

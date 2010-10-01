@@ -105,5 +105,8 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
     $routing->prependRoute('rt_asset_reorder', new sfRoute('/asset/reorder.:sf_format', array('module' => 'rtAsset', 'action' => 'reorder')));
     $routing->prependRoute('rt_asset_delete', new sfRoute('/asset/delete.:sf_format', array('module' => 'rtAsset', 'action' => 'delete')));
     $routing->prependRoute('rt_sitemap', new sfRoute('/sitemap.:sf_format', array('module' => 'rtSitemap', 'action' => 'index', 'sf_format' => 'html')));
+
+    // Comments
+    $routing->prependRoute('rt_comment_enable', new sfRoute('/comment/enable', array('module' => 'rtCommentAdmin', 'action' => 'enable')));
   }
 }

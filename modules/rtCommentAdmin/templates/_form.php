@@ -20,20 +20,9 @@
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
       <?php if(isset($parent_model)): ?>
-        <?php
-          $title = '';
-          if($parent_model->getTitle())
-          {
-            $title = $parent_model->getTitle();
-          }
-          elseif($parent_model)
-          {
-            $title = $parent_model;
-          }
-        ?>
         <tr>
           <th><?php echo __('Attached to') ?></th>
-          <td><?php echo ($title != '') ? link_to($parent_model,$form->getObject()->getModel().'Admin/edit?id='.$parent_model->getId()) : __('...') ?></td>
+          <td><?php echo ($parent_model != '') ? link_to($parent_model,$form->getObject()->getModel().'Admin/edit?id='.$parent_model->getId()) : __('...') ?></td>
         </tr>
       <?php endif; ?>
       <?php echo render_form_row($form['is_active']); ?>

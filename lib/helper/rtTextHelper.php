@@ -303,7 +303,7 @@ function markup_docs_in_text($matches)
           $description = rtMarkdownToolkit::transformBase($asset->getDescription());
         }
         $string .= sprintf('<li><p>%s</p>%s</li>',
-                     link_to($asset->getTitle() !== '' ? $asset->getTitle() : $asset->getOriginalFilename(),$asset->getWebPath()),
+                     link_to(trim($asset->getTitle()) !== '' ? $asset->getTitle() : $asset->getOriginalFilename(),$asset->getWebPath()),
                      $description
                    );
       }

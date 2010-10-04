@@ -22,10 +22,12 @@ abstract class PluginrtCommentForm extends BasertCommentForm
     parent::setup();
 
     unset($this['created_at'], 
-          $this['updated_at'],
-          $this['model_id'],
-          $this['model'],
-          $this['user_id'],
-          $this['comment_id']);
+          $this['updated_at']);
+    
+    // Widgets
+    $this->setWidget('user_id', new sfWidgetFormInputHidden);
+    $this->setWidget('comment_id', new sfWidgetFormInputHidden);
+    $this->setWidget('model', new sfWidgetFormInputHidden);
+    $this->setWidget('model_id', new sfWidgetFormInputHidden);
   }
 }

@@ -115,14 +115,13 @@ class BasertCommentActions extends sfActions
     
     $from = $comment->getAuthorEmail();
     $to = sfConfig::get('app_rt_comment_moderation_email', 'from@noreply.com');
-    $subject = sprintf('Activation request for new comment: %s', $comment->getCreatedAt());
-    $body  = 'A new comment has been added but will need to be activated before is can be shown.' . "\n\n";
-    $body .= sprintf('The details they entered were: %s (%s)', $comment->getAuthorName(),$comment->getAuthorEmail()) . "\n";
-    $body .= 'The content of the comment was:'."\n";
+    $subject = 'New comment requires activation!';
+    $body  = sprintf('A new comment was created by %s (%s)', $comment->getAuthorName(),$comment->getAuthorEmail()) . ":\n\n";
+    $body .= '--'."\n\n";
     $body .= strip_tags($comment->getContent()) . "\n\n";
-    $body .= 'If you wish to automatically activate this comment, you can do so by simply clicking on this link:' . "\n";
-    $body .= $this->generateUrl('rt_comment_enable', array('id' => $comment->getId()), true) . "\n\n";
-    $body .= 'Please note: you will need to be signed in to complete this action.' . "\n";
+    $body .= '--'."\n\n";
+    $body .= 'Click here if you would like to activate this comment:' . "\n";
+    $body .= $this->generateUrl('rt_comment_enable', array('id' => $comment->getId()), true);
     $this->getMailer()->composeAndSend($from, $to, $subject, $body);
   }
 

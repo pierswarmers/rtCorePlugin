@@ -17,6 +17,28 @@
  */
 abstract class PluginrtComment extends BasertComment
 {
+  public function __toString() 
+  {
+    $string = strip_tags($this->getContent());
+
+    $mbstring = extension_loaded('mbstring');
+    if($mbstring)
+    {
+     @mb_internal_encoding(mb_detect_encoding($string));
+    }
+
+    $substr = ($mbstring) ? 'mb_substr' : 'substr';
+
+    $truncate_text = $substr($string, 0, 100);
+    
+    return $truncate_text . '... [' . strip_tags($this->getAuthorName()) . ']' ;
+  }
+  
+  public function getTypeNice()
+  {
+    return 'Comment';
+  }
+
   /**
    * Retrieve the attached parent object.
    *

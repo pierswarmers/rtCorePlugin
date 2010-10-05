@@ -85,6 +85,9 @@ class BasertCommentAdminActions extends sfActions
     $request->checkCSRFProtection();
 
     $this->forward404Unless($rt_comment = Doctrine_Core::getTable('rtComment')->find(array($request->getParameter('id'))), sprintf('Object rt_comment does not exist (%s).', $request->getParameter('id')));
+
+    $this->clearObjectCache($rt_comment);
+
     $rt_comment->delete();
 
     $this->redirect('rtCommentAdmin/index');
@@ -100,9 +103,8 @@ class BasertCommentAdminActions extends sfActions
     $this->forward404Unless($rt_comment = Doctrine_Core::getTable('rtComment')->find(array($request->getParameter('id'))), sprintf('Object rt_comment does not exist (%s).', $request->getParameter('id')));
     $rt_comment->setIsActive(true);
     $rt_comment->save();
-
-    $this->getUser()->setFlash('notice', 'Comment was enabled.',false);
-
+    $this->clearObjectCache($rt_comment);
+    $this->getUser()->setFlash('notice', 'Comment was enabled.');
     $this->redirect('rtCommentAdmin/edit?id='.$rt_comment->getId());
   }
 
@@ -112,6 +114,16 @@ class BasertCommentAdminActions extends sfActions
     $rt_comment->setIsActive(!$rt_comment->getIsActive());
     $this->status = $rt_comment->getIsActive() ? 'activated' : 'deactivated';
     $rt_comment->save();
+    $this->clearObjectCache($rt_comment);
+  }
+
+  public function executeShow(sfWebRequest $request)
+  {
+    $this->forward404Unless($rt_comment = Doctrine::getTable('rtComment')->find(array($request->getParameter('id'))), sprintf('Object rt_comment does not exist (%s).', $request->getParameter('id')));
+
+    $object = Doctrine::getTable($rt_comment->getModel())->find($rt_comment->getModelId());
+
+    rtSiteToolkit::siteRedirect($object);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -121,16 +133,34 @@ class BasertCommentAdminActions extends sfActions
     {
       $rt_comment = $form->save();
 
+      $this->clearObjectCache($form->getObject());
+
       $action = $request->getParameter('rt_post_save_action', 'index');
 
       if($action == 'edit')
       {
         $this->redirect('rtCommentAdmin/edit?id='.$rt_comment->getId());
       }
+      elseif($action == 'show')
+      {
+        $object = Doctrine::getTable($form->getObject()->getModel())->find($form->getObject()->getModelId());
+
+        rtSiteToolkit::siteRedirect($object);
+      }
 
       $this->redirect('rtCommentAdmin/index');
     }
 
     $this->getUser()->setFlash('default_error', true, false);
+  }
+
+  protected function clearObjectCache(rtComment $rt_comment)
+  {
+    $cache_class = $rt_comment->getModel() . 'CacheToolkit';
+
+    if(class_exists($cache_class))
+    {
+      $cache_class::clearCache($rt_comment->getObject());
+    }
   }
 }

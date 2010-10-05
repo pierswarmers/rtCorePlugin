@@ -85,6 +85,7 @@ class BasertCommentActions extends sfActions
             if(class_exists($cache_class))
             {
               $cache_class::clearCache($target_object);
+              call_user_func($cache_class.'::clearCache', $target_object);
             }
 
             $this->redirect($this->getContext()->getRouting()->generate($route_name, $target_object));

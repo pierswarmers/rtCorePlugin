@@ -160,7 +160,7 @@ class BasertCommentAdminActions extends sfActions
 
     if(class_exists($cache_class))
     {
-      $cache_class::clearCache($rt_comment->getObject());
+      call_user_func($cache_class.'::clearCache', $rt_comment->getObject());
     }
   }
 }

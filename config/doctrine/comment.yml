@@ -4,6 +4,8 @@ rtComment:
     charset: utf8
   actAs:
     Timestampable: ~
+    rtSearchTemplate:
+      fields:      [author_name, author_email, author_website, content, moderator_note]
   columns:
     is_active:         { type: boolean, default: false }
     model_id:          { type: integer }

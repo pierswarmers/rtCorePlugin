@@ -29,7 +29,7 @@ class rtCommentPublicForm extends PluginrtCommentForm
     {
       $this->widgetSchema['captcha'] = new sfWidgetFormReCaptcha(array(
         'public_key' => sfConfig::get('app_recaptcha_public_key'),
-        'theme' => sfConfig::get('app_recaptcha_public_theme', 'clean')
+        'theme' => sfConfig::get('app_recaptcha_theme', 'clean')
       ));
       $this->validatorSchema['captcha'] = new sfValidatorReCaptcha(array(
         'private_key' => sfConfig::get('app_recaptcha_private_key')
@@ -37,10 +37,11 @@ class rtCommentPublicForm extends PluginrtCommentForm
       $this->widgetSchema->setLabel('content', 'Your Comment');
     }
 
-    $this->setWidget('model', new sfWidgetFormInputHidden);
     $this->setWidget('model_id', new sfWidgetFormInputHidden);
-
-    $this->setValidator('model', new sfValidatorString(array('required' => true)));
+    $this->setValidator('model', new sfValidatorChoice(array(
+      'required' => true,
+      'choices' => sfConfig::get('app_rt_comment_models', array('rtBlogPage'))
+    )));
     $this->setValidator('model_id', new sfValidatorInteger(array('required' => true), array()));
     $this->setValidator('author_name', new sfValidatorString(array('required' => true,'max_length' => 100),array('max_length' => 'Author name is too long (%max_length% characters max.)')));
     $this->setValidator('content', new sfValidatorString(array('required' => true),array('required' => 'Please enter a comment.')));

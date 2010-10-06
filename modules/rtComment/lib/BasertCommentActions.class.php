@@ -22,6 +22,11 @@ class BasertCommentActions extends sfActions
    */
   public function preExecute()
   {
+    if(!sfConfig::get('app_rt_comment_active', true))
+    {
+      throw new sfException('Comment module can\'t be used unless configured to be active i.e. app_rt_comment_active = true');
+    }
+    
     sfConfig::set('app_rt_node_title', 'Comment');
     rtTemplateToolkit::setFrontendTemplateDir();
   }

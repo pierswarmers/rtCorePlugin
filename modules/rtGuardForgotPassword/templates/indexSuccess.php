@@ -1,14 +1,15 @@
 <?php use_helper('I18N', 'rtForm') ?>
-<h1><?php echo __('Forgot your password?', null, 'sf_guard') ?></h1>
-<div class="rt-container">
-<p>
-  <?php echo __('Do not worry, we can help you get back in to your account safely!', null, 'sf_guard') ?>
-  <?php echo __('Fill out the form below to request an e-mail with information on how to reset your password.', null, 'sf_guard') ?>
-</p>
-<?php include_partial('rtAdmin/flashes_public')?>
+<?php slot('rt-title') ?>
+<?php echo __('Forgot your password?', null, 'sf_guard') ?>
+<?php end_slot(); ?>
+<?php include_component('rtSnippet','snippetPanel', array('collection' => 'rt-guard-forgot-password-prefix','sf_cache_key' => 'rt-guard-forgot-password-prefix', 'default' => 'Do not worry, we can help you get back in to your account safely! Fill out the form below to request an e-mail with information on how to reset your password.')); ?>
 <form action="<?php echo url_for('@sf_guard_forgot_password') ?>" method="post">
   <?php echo $form->renderHiddenFields() ?>
-  <p><?php echo $form['email_address']->renderLabel() ?> <?php echo $form['email_address'] ?></p>
-  <p><button type="submit" class="button medium positive"><?php echo __('Request', null, 'sf_guard') ?></button></p>
+  <fieldset>
+  <legend><?php echo __('Request new password') ?></legend>
+    <ul class="rt-form-schema">
+      <li class="rt-form-row"><?php echo $form['email_address']->renderLabel() ?><div class="rt-form-field"><?php echo $form['email_address'] ?></div></li>
+    </ul>
+  </fieldset>
+  <p class="rt-form-tools"><button><?php echo __('Request', null, 'sf_guard') ?></button></p>
 </form>
-</div>

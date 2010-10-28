@@ -10,11 +10,11 @@
  */
 class rtGuardRegisterForm extends sfGuardRegisterForm
 {
-  /**
-   * @see sfForm
-   */
-  public function configure()
+  public function setup()
   {
+    parent::setup();
+
+    $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
   }
 
   public function getModelName()

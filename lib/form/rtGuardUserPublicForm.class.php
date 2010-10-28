@@ -35,7 +35,7 @@ class rtGuardUserPublicForm extends rtGuardUserForm
     $this->widgetSchema->setHelp('username', 'Required');
 
 
-    $this->widgetSchema->setHelp('password', 'Required - at least 6 characters long');
+    $this->widgetSchema->setHelp('password', 'Must be at least 6 characters long');
     $this->setValidator('password', new sfValidatorString(array('required' => false, 'min_length' => 6)));
     $this->widgetSchema->setHelp('password_again', 'Once again, just to be sure');
 

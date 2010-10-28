@@ -6,10 +6,13 @@
 <form action="<?php echo url_for('@sf_guard_forgot_password') ?>" method="post">
   <?php echo $form->renderHiddenFields() ?>
   <fieldset>
-  <legend><?php echo __('Request new password') ?></legend>
+  <legend><?php echo __('Reset your password') ?></legend>
     <ul class="rt-form-schema">
       <li class="rt-form-row"><?php echo $form['email_address']->renderLabel() ?><div class="rt-form-field"><?php echo $form['email_address'] ?></div></li>
     </ul>
   </fieldset>
-  <p class="rt-form-tools"><button><?php echo __('Request', null, 'sf_guard') ?></button></p>
+  <p class="rt-form-tools">
+    <button><?php echo __('Reset password', null, 'sf_guard') ?></button>
+     <?php echo __('If you already know your password, you can') ?> <?php echo link_to(__('sign in here', null, 'sf_guard'), '@sf_guard_signin') ?>.
+  </p>
 </form>

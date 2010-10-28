@@ -70,6 +70,8 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
 
         return $this->redirect('' != $signinUrl ? $signinUrl : '@homepage');
       }
+
+      $this->getUser()->setFlash('default_error', true, false);
     }
     else
     {

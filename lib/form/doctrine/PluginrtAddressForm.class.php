@@ -13,6 +13,9 @@ abstract class PluginrtAddressForm extends BasertAddressForm
   public function setup()
   {
     parent::setup();
+
+    $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
+
     $object = $this->getOption('object');
 
     $this->setWidget('type', new sfWidgetFormInputHidden());

@@ -17,8 +17,6 @@ class rtGuardUserPublicForm extends rtGuardUserForm
 
     $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
 
-    //$this->widgetSchema->setHelp('email_address', 'Email address');
-
     unset(
       $this['is_active'],
       $this['is_super_admin'],

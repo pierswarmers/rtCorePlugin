@@ -69,6 +69,8 @@ class BasertGuardUserActions extends sfActions
 
       $action = $request->getParameter('rt_post_save_action', 'index');
 
+      $this->getUser()->setFlash('notice', 'Your account has been updated.');
+
       $this->redirect('rt_guard_account');
     }
     $this->getUser()->setFlash('default_error', true, false);

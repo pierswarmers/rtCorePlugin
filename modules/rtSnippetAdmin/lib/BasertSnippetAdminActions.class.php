@@ -51,6 +51,11 @@ class BasertSnippetAdminActions extends sfActions
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new rtSnippetForm();
+
+    $title = str_replace(array('-', '-'), ' ', $request->getParameter('collection'));
+    $title = ucwords($title);
+    
+    $this->form->setDefault('title', $title);
     $this->form->setDefault('collection', $request->getParameter('collection'));
   }
 

@@ -16,18 +16,10 @@ abstract class PluginrtSnippetForm extends BasertSnippetForm
 
     unset($this['version'], $this['created_at'], $this['updated_at']);
 
-    $choices = sfConfig::get('app_rt_snippets');
-
-    if(is_array($choices))
-    {
-      $choices = array('' => '--') + $choices;
-      
-      $this->setWidget('collection', new sfWidgetFormChoice(array('choices' => $choices)));
-    }
-
     $this->widgetSchema->setHelp('collection', 'The collection decides where this snippet should be displayed.');
     $this->widgetSchema->setHelp('position', 'Optional position value to set the order for collections of snippets.');
 
+    $this->setValidator('title', new sfValidatorString(array('max_length' => 255, 'required' => true)));
     $this->setValidator('collection', new sfValidatorString(array('max_length' => 255, 'required' => true)));
 
     if(!rtSiteToolkit::isMultiSiteEnabled())

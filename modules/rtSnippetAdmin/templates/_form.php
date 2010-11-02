@@ -19,10 +19,7 @@
   <table>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
-        <?php echo render_form_row($form['title']); ?>
         <?php echo render_form_row($form['content']); ?>
-        <?php echo render_form_row($form['collection']); ?>
-        <?php echo render_form_row($form['position']); ?>
     </tbody>
   </table>
 
@@ -38,13 +35,25 @@
   </div>
 
   <?php if(isset($form['site_id'])): ?>
+    <div class="rt-admin-toggle-panel">
+      <h2><?php echo __('Location and Referencing') ?></h2>
+      <table class="rt-admin-toggle-panel-content">
+        <tbody>
+          <?php echo render_form_row($form['site_id']); ?>
+        </tbody>
+      </table>
+    </div>
+  <?php endif; ?>
+
   <div class="rt-admin-toggle-panel">
-    <h2><?php echo __('Location and Referencing') ?></h2>
+    <h2><?php echo __('Advanced Options') ?></h2>
     <table class="rt-admin-toggle-panel-content">
       <tbody>
-        <?php echo render_form_row($form['site_id']); ?>
+        <?php echo render_form_row($form['title']); ?>
+        <?php echo render_form_row($form['collection']); ?>
+        <?php echo render_form_row($form['position']); ?>
       </tbody>
     </table>
   </div>
-  <?php endif; ?>
+
 </form>

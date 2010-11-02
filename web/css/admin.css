@@ -4,7 +4,7 @@ General Layout
 
 */
 #rt-admin-content{margin:20px 280px 0 220px;}
-#rt-admin-tools{width:240px;position:fixed;right:10px;top:20px;}
+#rt-admin-tools{width:240px;position:fixed;right:10px;top:20px;color:#555}
 /*
 
 Form Layout
@@ -45,6 +45,18 @@ tr.rt-admin-tree-level-5 .rt-admin-title, span.rt-admin-tree-level-5 {padding-le
 tr.batch-row td {background:#FFFFCF;}
 /*
 
+  Summary Panel
+
+*/
+dl.rt-admin-summary-panel { text-align: right; }
+dl.rt-admin-summary-panel dt, dl.rt-admin-summary-panel dd {line-height: 25px;}
+dl.rt-admin-summary-panel dt { float:left; font-weight: normal;}
+dl.rt-admin-summary-panel dd { font-size: 1.2em; }
+dl.rt-admin-summary-panel dt.rt-admin-primary, dl.rt-admin-summary-panel dd.rt-admin-primary {line-height: 30px !important;}
+dl.rt-admin-summary-panel dt.rt-admin-primary { font-weight: bold; }
+dl.rt-admin-summary-panel dd.rt-admin-primary { font-size: 1.6em; }
+/*
+
 Icons and Tools
 
 */
@@ -54,7 +66,7 @@ Icons and Tools
 .rt-admin-icon {}
 .rt-admin-icon-collapsed {}
 .rt-admin-icon-delete {}
-#rtPrimaryTools {padding:0 0 1.2em; border-bottom:2px dotted #efefef;}
+#rtPrimaryTools {padding:0 0 1.2em;}
 #rtPrimaryTools li {list-style:none;display:inline;padding:0;}
 #rtPrimaryTools button {margin-left:0;margin-top:10px;}
 
@@ -79,6 +91,7 @@ a, a:hover{outline:none;-moz-outline-style:none;}
 h1{color:#555;background:#DFDFDF url(../images/bg-admin-h1-gradient.png) repeat-x 0 100%;border:#C8C8C8 1px solid !important;margin-top:10px;padding:10px;font-size:1.8em;}
 h2,h3,h4{color:#555;font-size:1.4em;padding:10px;border-top:#C8C8C8 1px solid !important;}
 #rt-admin-tools h1{font-size:1.1em;}
+#rt-admin-tools h2 { padding:0 0 5px;; border:0!important; font-size:1.2em; border-bottom:2px dotted #efefef !important; }
 h1 a, h2 a{text-decoration:none;}
 input{outline:none;}
 input[type="file"] {border:0;}

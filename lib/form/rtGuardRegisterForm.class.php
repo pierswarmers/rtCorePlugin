@@ -16,7 +16,14 @@ class rtGuardRegisterForm extends sfGuardRegisterForm
 
     $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
 
+    $years = range(date('Y') - sfConfig::get('app_rt_user_age_year_buffer', 100), date('Y'));
 
+    $options = array(
+      'format' => '%day%/%month%/%year%',
+      'years' => array_combine($years, $years)
+    );
+
+    $this->setWidget('date_of_birth',  new sfWidgetFormDate($options));
 
     $this->widgetSchema->setHelp('first_name', 'Required');
     $this->setValidator('first_name', new sfValidatorString(array('required' => true)));

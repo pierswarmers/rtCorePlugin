@@ -37,7 +37,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
     $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'The two passwords must be the same.')));
 
-    $years = range(date('Y') - sfConfig::get('app_rt_user_age_year_buffer', 50), date('Y'));
+    $years = range(date('Y') - sfConfig::get('app_rt_user_age_year_buffer', 100), date('Y'));
 
     $options = array(
       'format' => '%day%/%month%/%year%',

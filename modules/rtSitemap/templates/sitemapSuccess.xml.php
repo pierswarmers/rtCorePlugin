@@ -11,7 +11,10 @@
   <url>
     <loc><?php echo url_for('rt_site_page_show', array('id' => $site_page['id'], 'slug' => $site_page['slug']), true) ?></loc>
     <changefreq>daily</changefreq>
-    <lastmod><?php echo $site_page['updated_at'] ?></lastmod>
+    <lastmod><?php
+      $dt = new DateTime($site_page['updated_at']);
+      echo $dt->format(DateTime::ISO8601);
+    ?></lastmod>
   </url>
   <?php endforeach; ?>
 <?php endif; ?>
@@ -23,18 +26,24 @@
       <url>
         <loc><?php echo url_for('rt_blog_page_show', array('id' => $blog_page['id'], 'slug' => $blog_page['slug'], 'year' => date('Y',strtotime($published_from)), 'month' => date('m',strtotime($published_from)), 'day' => date('d',strtotime($published_from))), true) ?></loc>
         <changefreq>daily</changefreq>
-        <lastmod><?php echo $blog_page['updated_at'] ?></lastmod>
+        <lastmod><?php
+          $dt = new DateTime($blog_page['updated_at']);
+          echo $dt->format(DateTime::ISO8601);
+        ?></lastmod>
       </url>
     <?php endif; ?>
   <?php endforeach; ?>
 <?php endif; ?>
 
 <?php if(isset($routes['rt_wiki_page_index'])): ?>
-  <?php foreach($wiki_pages as $_wiki_page): ?>
+  <?php foreach($wiki_pages as $wiki_page): ?>
   <url>
-    <loc><?php echo url_for('rt_wiki_page_show', array('id' => $_wiki_page['id'], 'slug' => $_wiki_page['slug']), true) ?></loc>
+    <loc><?php echo url_for('rt_wiki_page_show', array('id' => $wiki_page['id'], 'slug' => $wiki_page['slug']), true) ?></loc>
     <changefreq>daily</changefreq>
-    <lastmod><?php echo $_wiki_page['updated_at'] ?></lastmod>
+    <lastmod><?php
+      $dt = new DateTime($wiki_page['updated_at']);
+      echo $dt->format(DateTime::ISO8601);
+    ?></lastmod>
   </url>
   <?php endforeach; ?>
 <?php endif; ?>
@@ -44,7 +53,10 @@
   <url>
     <loc><?php echo url_for('rt_shop_product_show', array('id' => $shop_product['id'], 'slug' => $shop_product['slug']), true) ?></loc>
     <changefreq>daily</changefreq>
-    <lastmod><?php echo $shop_product['updated_at'] ?></lastmod>
+    <lastmod><?php
+      $dt = new DateTime($shop_product['updated_at']);
+      echo $dt->format(DateTime::ISO8601);
+    ?></lastmod>
   </url>
   <?php endforeach; ?>
 <?php endif; ?>
@@ -54,7 +66,10 @@
   <url>
     <loc><?php echo url_for('rt_shop_category_show', array('id' => $shop_category['id'], 'slug' => $shop_category['slug']), true) ?></loc>
     <changefreq>daily</changefreq>
-    <lastmod><?php echo $shop_category['updated_at'] ?></lastmod>
+    <lastmod><?php
+      $dt = new DateTime($shop_category['updated_at']);
+      echo $dt->format(DateTime::ISO8601);
+    ?></lastmod>    
   </url>
   <?php endforeach; ?>
 <?php endif; ?>

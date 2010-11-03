@@ -1,6 +1,6 @@
 index:
   enabled:     true
-  lifetime:    604800
+  lifetime:    86400
 sitemap:
   enabled:     true
-  lifetime:    604800
+  lifetime:    86400

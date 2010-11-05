@@ -11,7 +11,7 @@
         <?php echo $form; ?>
       </ul>
     </fieldset>
-    <p class="rt-form-buttons"><button type="submit"><?php echo __('Save comment') ?></button></p>
+    <p class="rt-form-tools"><button><?php echo __('Save comment') ?></button></p>
   </form>
 </div>
 <?php endif; ?>

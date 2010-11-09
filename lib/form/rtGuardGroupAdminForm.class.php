@@ -20,6 +20,5 @@ class rtGuardGroupAdminForm extends BasesfGuardGroupForm
     $this->setWidget('description', new sfWidgetFormInputText());
     $this->setValidator('name', new sfValidatorString(array('max_length' => 255, 'required' => true)));
     $this->setWidget('permissions_list', new sfWidgetFormDoctrineChoice(array('expanded' => true ,'multiple' => true, 'model' => 'sfGuardPermission')));
-    $this->setWidget('users_list', new sfWidgetFormDoctrineChoice(array('expanded' => true, 'multiple' => true, 'model' => 'sfGuardUser')));
   }
 }

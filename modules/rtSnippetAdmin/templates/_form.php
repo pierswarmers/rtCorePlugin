@@ -21,7 +21,6 @@ if($sf_user->hasAttribute('referer'))
 <form id ="rtAdminForm" action="<?php echo url_for('rtSnippetAdmin/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php echo $form->renderHiddenFields(false) ?>
 <input type="hidden" name="rt_post_save_action" value="edit" />
-<input type="hidden" name="referer" value="<?php echo ($sf_request->getParameter('referer') !== '') ? $sf_request->getParameter('referer') : ''; ?>" />
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>

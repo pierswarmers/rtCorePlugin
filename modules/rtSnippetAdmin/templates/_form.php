@@ -6,7 +6,7 @@
 <?php
 $options = array();
 $options['object'] = $form->getObject();
-if($sf_user->hasAttribute('referer'))
+if($sf_user->hasAttribute('rt-snippet-referer'))
 {
   $options['show_route_handle'] = 'admin';
 }

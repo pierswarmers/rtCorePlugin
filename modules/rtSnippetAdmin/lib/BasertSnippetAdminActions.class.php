@@ -50,6 +50,7 @@ class BasertSnippetAdminActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
+    $this->addRefererToSession($request);
     $this->form = new rtSnippetForm();
 
     $title = str_replace(array('-', '-'), ' ', $request->getParameter('collection'));
@@ -73,7 +74,16 @@ class BasertSnippetAdminActions extends sfActions
   public function executeEdit(sfWebRequest $request)
   {
     $this->forward404Unless($rt_snippet = Doctrine::getTable('rtSnippet')->find(array($request->getParameter('id'))), sprintf('Object rt_snippet does not exist (%s).', $request->getParameter('id')));
+    $this->addRefererToSession($request);
     $this->form = new rtSnippetForm($rt_snippet);
+  }
+
+  protected function addRefererToSession(sfWebRequest $request)
+  {
+    if($request->hasParameter('referer') && $request->getParameter('referer') !== '')
+    {
+      $this->getUser()->setAttribute('referer', $request->getParameter('referer'));
+    }
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -143,6 +153,12 @@ class BasertSnippetAdminActions extends sfActions
     $this->redirect('rtSnippetAdmin/edit?id='.$this->rt_snippet->getId());
   }
 
+  public function executeShow(sfWebRequest $request)
+  {
+    $this->forward404Unless($referer = $this->getUser()->hasAttribute('referer'));
+    $this->redirect($this->getUser()->getAttribute('referer'));
+  }
+
   public function getrtSnippet(sfWebRequest $request)
   {
     $this->forward404Unless($rt_snippet = Doctrine::getTable('rtSnippet')->find(array($request->getParameter('id'))), sprintf('Object rt_snippet does not exist (%s).', $request->getParameter('id')));
@@ -161,6 +177,10 @@ class BasertSnippetAdminActions extends sfActions
       if($action == 'edit')
       {
         $this->redirect('rtSnippetAdmin/edit?id='.$rt_snippet->getId());
+      }
+      elseif($action == 'show')
+      {
+        $this->redirect($this->getUser()->getAttribute('referer'));
       }
 
       $this->redirect('rtSnippetAdmin/index');

@@ -80,6 +80,11 @@ Icons and Tools
 .positive .ui-state-active .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_ffffff_256x240.png); }
 .positive .ui-state-highlight .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_4eb305_256x240.png); }
 .positive .ui-state-error .ui-icon, .positive .ui-state-error-text .ui-icon {background-image: url(../vendor/jquery/css/ui/images/ui-icons_cd0a0a_256x240.png); }
+
+.rt-admin-date-range { margin:0 }
+.rt-admin-date-range .ui-button { margin-left:5px !important; }
+.rt-admin-date-range dd { margin:0; }
+
 /*
 
 Misc. Tags

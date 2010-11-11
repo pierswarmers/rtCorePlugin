@@ -201,6 +201,20 @@ class rtGuardUserAdminActions extends sfActions
     $this->redirect('rtGuardUserAdmin/index');
   }
 
+  public function executeToggle(sfWebRequest $request)
+  {
+    $sf_guard_user = Doctrine_Core::getTable('rtGuardUser')->find(array($request->getParameter('id')));
+    if(!$sf_guard_user)
+    {
+      $this->status = 'error';
+      return sfView::SUCCESS;
+    }
+
+    $sf_guard_user->setIsActive(!$sf_guard_user->getIsActive());
+    $this->status = $sf_guard_user->getIsActive() ? 'activated' : 'deactivated';
+    $sf_guard_user->save();
+  }
+
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));

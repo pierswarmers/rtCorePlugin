@@ -9,13 +9,15 @@
 </ul>
 <script type="text/javascript">
 	$(function() {
-    $("#rtPrimaryTools .create").button({
-      icons: { primary: 'ui-icon-transfer-e-w' }
-    }).click(function(){ document.location.href='<?php echo url_for('rtGuardUserAdmin/new') ?>'; });
+      $("#rtPrimaryTools .create").button({
+        icons: { primary: 'ui-icon-transfer-e-w' }
+      }).click(function(){ document.location.href='<?php echo url_for('rtGuardUserAdmin/new') ?>'; });
 
-    $("#rtPrimaryTools .reports").button({
-      icons: { primary: 'ui-icon-transfer-e-w' }
-    }).click(function(){ document.location.href='<?php echo url_for('rtGuardUserAdmin/userReport') ?>'; });
+      $("#rtPrimaryTools .reports").button({
+        icons: { primary: 'ui-icon-transfer-e-w' }
+      }).click(function(){ document.location.href='<?php echo url_for('rtGuardUserAdmin/userReport') ?>'; });
+
+      enablePublishToggle('<?php echo url_for('rtGuardUserAdmin/toggle') ?>');
 	});
 </script>
 <?php end_slot(); ?>
@@ -37,7 +39,10 @@
     <tr>
       <td><a href="<?php echo url_for('rtGuardUserAdmin/edit?id='.$sf_guard_user->getId()) ?>"><?php echo $sf_guard_user ?></a></td>
       <td><?php echo $sf_guard_user->getEmailAddress() ?></td>
-      <td><?php echo rt_nice_boolean($sf_guard_user->getIsActive()) ?></td>
+      <td class="rt-admin-publish-toggle">
+        <?php echo rt_nice_boolean($sf_guard_user->getIsActive()) ?>
+        <div style="display:none;"><?php echo $sf_guard_user->getId() ?></div>
+      </td>
       <td><?php echo $sf_guard_user->getCreatedAt() ?></td>
       <td>
         <ul class="rt-admin-tools">

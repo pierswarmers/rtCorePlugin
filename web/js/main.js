@@ -1,3 +1,45 @@
+/*
+ *
+ *
+ */
+function enablePublishToggle(url)
+{
+    var enableTxt = 'enable';
+    var disableTxt = 'disable';
+
+    $("td.rt-admin-publish-toggle span").click(function(){
+      if($(this).hasClass('loading')) {
+        return;
+      }
+
+      $(this).removeClass('ui-icon-check');
+      $(this).removeClass('ui-icon-close');
+
+      $(this).addClass('loading');
+
+      // ajax call to toggle action
+      var commentId = $(this).next('div').html();
+      var spanElement = $(this);
+
+      $.ajax({
+        url: url,
+        data: { id: commentId },
+        success: function(data) {
+          spanElement.removeClass('loading');
+          if(data == 'activated') {
+            spanElement.addClass('ui-icon-check');
+          } else {
+            spanElement.addClass('ui-icon-close');
+          }
+        }
+      });
+    });
+}
+
+
+
+
+
 
 function enableTogglePanels()
 {

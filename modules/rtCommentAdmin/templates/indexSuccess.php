@@ -6,37 +6,7 @@
 
 <script type="text/javascript">
   $(function() {
-    var enableTxt = '<?php echo __('enable') ?>';
-    var disableTxt = '<?php echo __('disable') ?>';
-    
-    $("td.rt-toggle span").click(function(){
-      if($(this).hasClass('loading')) {
-        return;
-      }
-
-      $(this).removeClass('ui-icon-check');
-      $(this).removeClass('ui-icon-close');
-
-      $(this).addClass('loading');
-      
-      // ajax call to toggle action
-      var commentId = $(this).next('div').html();
-      var spanElement = $(this);
-
-      $.ajax({
-        url: '<?php echo url_for('rtCommentAdmin/toggle') ?>',
-        data: { id: commentId },
-        success: function(data) {
-          spanElement.removeClass('loading');
-          if(data == 'activated') {
-            spanElement.addClass('ui-icon-check');
-          } else {
-            spanElement.addClass('ui-icon-close');
-          }
-        }
-      });
-
-    });
+    enablePublishToggle('<?php echo url_for('rtCommentAdmin/toggle') ?>');
   });
 </script>
 
@@ -56,7 +26,7 @@
         <a href="<?php echo url_for('rtCommentAdmin/edit?id='.$rt_comment->getId()) ?>"><?php echo $rt_comment->getAuthorName() ?></a>:<br />
         <?php echo truncate_text(strip_tags($rt_comment->getContent()), 100) ?>
       </td>
-      <td class="rt-toggle">
+      <td class="rt-admin-publish-toggle">
         <?php echo rt_nice_boolean($rt_comment->getIsActive()) ?>
         <div style="display:none;"><?php echo $rt_comment->getId() ?></div>
       </td>

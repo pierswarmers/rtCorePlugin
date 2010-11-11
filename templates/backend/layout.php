@@ -13,6 +13,7 @@
     <?php use_stylesheet('/rtCorePlugin/vendor/jquery/css/ui/jquery.ui.css') ?>
     <?php use_stylesheet('/rtCorePlugin/css/admin.css') ?>
     <?php use_stylesheet('/rtCorePlugin/css/admin-toolbar.css') ?>
+    <?php use_javascript('/rtCorePlugin/js/main.js', 'last') ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js', 'first') ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js', 'first'); ?>
     <?php include_stylesheets() ?>

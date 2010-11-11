@@ -41,6 +41,7 @@ tr.rt-admin-tree-level-2 .rt-admin-title, span.rt-admin-tree-level-2 {padding-le
 tr.rt-admin-tree-level-3 .rt-admin-title, span.rt-admin-tree-level-3 {padding-left:78px;background-position:-48px 50%;}
 tr.rt-admin-tree-level-4 .rt-admin-title, span.rt-admin-tree-level-4 {padding-left:103px;background-position:-23px 50%;}
 tr.rt-admin-tree-level-5 .rt-admin-title, span.rt-admin-tree-level-5 {padding-left:128px;background-position:2px 50%;}
+td.rt-admin-publish-toggle span { cursor: pointer; }
 .compressed td, .compressed th {vertical-align: middle;}
 tr.batch-row td {background:#FFFFCF;}
 /*

@@ -110,7 +110,13 @@ class BasertCommentAdminActions extends sfActions
 
   public function executeToggle(sfWebRequest $request)
   {
-    $this->forward404Unless($rt_comment = Doctrine_Core::getTable('rtComment')->find(array($request->getParameter('id'))), sprintf('Object rt_comment does not exist (%s).', $request->getParameter('id')));
+    $rt_comment = Doctrine_Core::getTable('rtComment')->find(array($request->getParameter('id')));
+    if(!$rt_comment)
+    {
+      $this->status = 'error';
+      return sfView::SUCCESS;
+    }
+
     $rt_comment->setIsActive(!$rt_comment->getIsActive());
     $this->status = $rt_comment->getIsActive() ? 'activated' : 'deactivated';
     $rt_comment->save();

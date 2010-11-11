@@ -153,6 +153,21 @@ class BasertSnippetAdminActions extends sfActions
     $this->redirect('rtSnippetAdmin/edit?id='.$this->rt_snippet->getId());
   }
 
+  public function executeToggle(sfWebRequest $request)
+  {
+    $rt_snippet = Doctrine_Core::getTable('rtSnippet')->find(array($request->getParameter('id')));
+    if(!$rt_snippet)
+    {
+      $this->status = 'error';
+      return sfView::SUCCESS;
+    }
+
+    $rt_snippet->setPublished(!$rt_snippet->getPublished());
+    $this->status = $rt_snippet->getPublished() ? 'activated' : 'deactivated';
+    $rt_snippet->save();
+    $this->clearCache($rt_snippet);
+  }
+
   public function executeShow(sfWebRequest $request)
   {
     $this->forward404Unless($referer = $this->getUser()->hasAttribute('rt-snippet-referer'));

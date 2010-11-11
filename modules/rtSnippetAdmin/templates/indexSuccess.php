@@ -8,6 +8,12 @@
 
 <?php include_partial('rtAdmin/flashes') ?>
 
+<script type="text/javascript">
+  $(function() {
+    enablePublishToggle('<?php echo url_for('rtSnippetAdmin/toggle') ?>');
+  });
+</script>
+
 <table>
   <thead>
     <tr>
@@ -25,7 +31,10 @@
       <td><a href="<?php echo url_for('rtSnippetAdmin/edit?id='.$rt_snippet->getId()) ?>"><?php echo $rt_snippet->getTitle() ?></a></td>
       <td><?php echo $rt_snippet->getCollection() ?></td>
       <td><?php echo link_to_if($rt_snippet->version > 1, $rt_snippet->version, 'rtSnippetAdmin/versions?id='.$rt_snippet->getId()) ?></td>
-      <td><?php echo rt_nice_boolean($rt_snippet->getPublished()) ?></td>
+      <td class="rt-admin-publish-toggle">
+        <?php echo rt_nice_boolean($rt_snippet->getPublished()) ?>
+        <div style="display:none;"><?php echo $rt_snippet->getId() ?></div>
+      </td>
       <td><?php echo $rt_snippet->getCreatedAt() ?></td>
       <td>
         <ul class="rt-admin-tools">

@@ -13,7 +13,7 @@
     <changefreq>daily</changefreq>
     <lastmod><?php
       $dt = new DateTime($site_page['updated_at']);
-      echo $dt->format(DateTime::ISO8601);
+      echo $dt->format(DateTime::W3C);
     ?></lastmod>
   </url>
   <?php endforeach; ?>
@@ -28,7 +28,7 @@
         <changefreq>daily</changefreq>
         <lastmod><?php
           $dt = new DateTime($blog_page['updated_at']);
-          echo $dt->format(DateTime::ISO8601);
+          echo $dt->format(DateTime::W3C);
         ?></lastmod>
       </url>
     <?php endif; ?>
@@ -42,7 +42,7 @@
     <changefreq>daily</changefreq>
     <lastmod><?php
       $dt = new DateTime($wiki_page['updated_at']);
-      echo $dt->format(DateTime::ISO8601);
+      echo $dt->format(DateTime::W3C);
     ?></lastmod>
   </url>
   <?php endforeach; ?>
@@ -55,7 +55,7 @@
     <changefreq>daily</changefreq>
     <lastmod><?php
       $dt = new DateTime($shop_product['updated_at']);
-      echo $dt->format(DateTime::ISO8601);
+      echo $dt->format(DateTime::W3C);
     ?></lastmod>
   </url>
   <?php endforeach; ?>
@@ -68,7 +68,7 @@
     <changefreq>daily</changefreq>
     <lastmod><?php
       $dt = new DateTime($shop_category['updated_at']);
-      echo $dt->format(DateTime::ISO8601);
+      echo $dt->format(DateTime::W3C);
     ?></lastmod>    
   </url>
   <?php endforeach; ?>

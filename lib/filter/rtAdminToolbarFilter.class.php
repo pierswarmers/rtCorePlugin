@@ -1,5 +1,20 @@
 <?php
+/*
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+/**
+ * rtAdminToolbarFilter handles a small toolbar filter for administrators.
+ *
+ * @package    rtCorePlugin
+ * @subpackage filter
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ */
 class rtAdminToolbarFilter extends sfFilter
 {
   /**
@@ -11,13 +26,10 @@ class rtAdminToolbarFilter extends sfFilter
   {
     $filterChain->execute();
     $user = sfContext::getInstance()->getUser();
-
     $sf_format = sfContext::getInstance()->getRequest()->getParameter('sf_format');
-
-    if (
-      ($sf_format !== '' && !is_null($sf_format)) ||
-      !$user->isAuthenticated() ||
-      !$user->hasPermission(sfConfig::get('app_rt_admin_menu_credential', 'show_admin_menu')))
+    if (($sf_format !== '' && !is_null($sf_format)) ||
+        !$user->isAuthenticated() ||
+        !$user->hasPermission(sfConfig::get('app_rt_admin_menu_credential', 'show_admin_menu')))
     {
       return;
     }

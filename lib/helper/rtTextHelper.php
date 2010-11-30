@@ -166,7 +166,7 @@ function markup_galleries_in_text($matches)
   if(!isset($config['javascripts']))
   {
     $config['javascripts'] = array('/rtCorePlugin/vendor/jquery/js/jquery.min.js',
-                                   '/rtCorePlugin/js/gallery.js');
+                                   '/rtCorePlugin/js/frontend-gallery.js');
   }
 
   foreach ($config['javascripts'] as $file)
@@ -177,7 +177,7 @@ function markup_galleries_in_text($matches)
   if(!isset($config['stylesheets']))
   {
     $config['stylesheets'] = array(
-        '/rtCorePlugin/css/gallery.css'
+        '/rtCorePlugin/css/frontend-gallery.css'
     );
   }
 

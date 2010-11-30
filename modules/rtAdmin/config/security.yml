@@ -1,0 +1,5 @@
+<?php $admin_cred = sfConfig::get('app_rt_admin_menu_credential', 'show_admin_menu') . "\n" ?>
+
+clearCache:
+  is_secure: true
+  credentials: <?php echo $admin_cred ?>

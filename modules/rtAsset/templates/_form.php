@@ -2,7 +2,7 @@
 <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js') ?>
 <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js') ?>
 <?php use_javascript('/rtCorePlugin/vendor/ajaxupload/ajaxupload.js') ?>
-<?php use_javascript('/rtCorePlugin/js/main.js') ?>
+<?php use_javascript('/rtCorePlugin/js/admin-main.js') ?>
 <?php $panel_suffix = isset($panel_suffix) ? $panel_suffix : rand() ?>
 <?php $description_text = __('Description goes here...') ?>
 <div id="rt-asset-edit-window" style="display:none;"></div>

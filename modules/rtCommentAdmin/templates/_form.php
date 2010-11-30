@@ -2,7 +2,7 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<?php use_javascript('/rtCorePlugin/js/main.js') ?>
+<?php use_javascript('/rtCorePlugin/js/admin-main.js') ?>
 
 <?php slot('rt-tools') ?>
 <?php include_partial('rtAdmin/standard_modal_tools', array('show_route_handle' => 'admin', 'object' => $form->getObject()))?>

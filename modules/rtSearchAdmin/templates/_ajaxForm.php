@@ -1,4 +1,4 @@
-<?php use_javascript('/rtCorePlugin/js/main.js?id=234234') ?>
+<?php use_javascript('/rtCorePlugin/js/admin-main.js?id=234234') ?>
 <?php $rand = rand(); ?>
 <ul class="rt-markdown-tools">
   <li><a href="#" id="rtLinkPanelTrigger<?php $rand = rand(); ?>"  class="button" onclick="setReplacementToken('#<?php echo $targetId ?>');return false;" rel="#rtLinkPanel<?php $rand = rand(); ?>">Insert Link</a></li>

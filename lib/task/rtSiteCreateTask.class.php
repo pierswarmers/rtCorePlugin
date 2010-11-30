@@ -1,7 +1,7 @@
 <?php
-
 /*
  * This file is part of the steercms package.
+ * 
  * (c) digital Wranglers <steercms@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -11,7 +11,7 @@
 /**
  * rtSiteCreate provides a cli task to create new sites..
  *
- * @package    gumnut
+ * @package    Reditype
  * @subpackage task
  * @author     Piers Warmers <piers@wranglers.com.au>
  */

@@ -1,21 +1,29 @@
 <?php
 /*
- * This file is part of the gumnut package.
- * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 /**
- * BasertAdminActions handles admin actions.
+ * BasertAdminActions
  *
- * @package    gumnut
+ * @package    rtCorePlugin
  * @subpackage modules
  * @author     Piers Warmers <piers@wranglers.com.au>
  */
 class BasertAdminActions extends sfActions
 {
+  public function executeClearCache(sfWebRequest $request)
+  {
+    $sf_root_cache_dir = sfConfig::get('sf_cache_dir');
+    rtAssetToolkit::recursiveDelete($sf_root_cache_dir. DIRECTORY_SEPARATOR .'frontend');
+    $this->redirect($request->getReferer());
+  }
+  
   public function executeStateInput(sfWebRequest $request)
   {
     sfConfig::set('sf_debug', false);

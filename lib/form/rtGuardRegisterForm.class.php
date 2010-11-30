@@ -1,12 +1,19 @@
 <?php
+/*
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
- * sfGuardRegisterForm for registering new users
+ * rtGuardRegisterForm
  *
- * @package    sfDoctrineGuardPlugin
+ * @package    rtCorePlugin
  * @subpackage form
- * @author     Jonathan H. Wage <jonwage@gmail.com>
- * @version    SVN: $Id: BasesfGuardChangeUserPasswordForm.class.php 23536 2009-11-02 21:41:21Z Kris.Wallsmith $
+ * @author     Piers Warmers <piers@wranglers.com.au>
  */
 class rtGuardRegisterForm extends sfGuardRegisterForm
 {

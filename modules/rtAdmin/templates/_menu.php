@@ -5,9 +5,10 @@
     <div id="rt-admin-toolbar-menu">
       <h1>
         <span><?php echo __('RediType - A fully managed content editing and delivery system') ?></span>
-        <?php echo link_to('&times;', 'sf_guard_signout', array(), array('class' => 'rt-admin-toolbar-signout')) ?>
-        <?php // echo link_to(__('Clear Cache'), 'homepage', array(), array('class' => 'rt-admin-toolbar-clear-cache')) ?>
-        <?php echo link_to(__('Site Homepage'), 'homepage', array(), array('class' => 'rt-admin-toolbar-homepage')) ?>
+        <?php echo link_to('&times;', 'sf_guard_signout', array(), array('class' => 'rt-admin-toolbar-signout', 'title' => __('Sign out of your session'))) ?>
+        <?php echo link_to(__('Clear Cache'), '/rtAdmin/clearCache', array('class' => 'rt-admin-toolbar-clear-cache', 'title' => __('Refresh the site cache'))) ?>
+        <?php echo link_to(__('Documentation'), 'http://user.reditype.com', array('class' => 'rt-admin-toolbar-help', 'title' => __('Go to Reditype documentation'))) ?>
+        <?php echo link_to(__('Site Homepage'), 'homepage', array(), array('class' => 'rt-admin-toolbar-homepage', 'title' => __('Go to site home'))) ?>
       </h1>
       <div id="rt-admin-toolbar-search">
         <form action="<?php echo url_for('rtSearchAdmin/index') ?>" method="get">

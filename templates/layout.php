@@ -9,13 +9,13 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php use_stylesheet('/rtCorePlugin/vendor/blueprint/screen.css') ?>
     <?php use_stylesheet('/rtCorePlugin/vendor/blueprint/print.css', '', array('media' => 'print')) ?>
-    <?php use_stylesheet('/rtCorePlugin/css/admin-print.css', '', array('media' => 'print')) ?>
     <?php use_stylesheet('/rtCorePlugin/vendor/jquery/css/ui/jquery.ui.css') ?>
-    <?php use_stylesheet('/rtCorePlugin/css/admin.css') ?>
+    <?php use_stylesheet('/rtCorePlugin/css/admin-main.css') ?>
     <?php use_stylesheet('/rtCorePlugin/css/admin-toolbar.css') ?>
-    <?php use_javascript('/rtCorePlugin/js/main.js', 'last') ?>
+    <?php use_stylesheet('/rtCorePlugin/css/admin-print.css', '', array('media' => 'print')) ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js', 'first') ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js', 'first'); ?>
+    <?php use_javascript('/rtCorePlugin/js/admin-main.js', 'last') ?>
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>

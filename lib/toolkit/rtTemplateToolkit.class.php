@@ -1,8 +1,8 @@
 <?php
-
 /*
- * This file is part of the steercms package.
- * (c) digital Wranglers <steercms@wranglers.com.au>
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,12 +13,15 @@
  *
  * Note: "mode" is used to reference the frontend / backend profile types for the templates.
  *
- * @package    gumnut
+ * @package    rtCorePlugin
  * @subpackage toolkit
  * @author     Piers Warmers <piers@wranglers.com.au>
  */
 class rtTemplateToolkit
 {
+  const MODE_BACKEND  = 'backend';
+  const MODE_FRONTEND = 'frontend';
+
   /**
    * Set the template directory to the rtCorePlugin template
    */
@@ -33,22 +36,11 @@ class rtTemplateToolkit
    * @param string $mode should be either frontend or backend
    * @return string
    */
-  static public function getrtPluginTemplateDir($mode = 'frontend')
+  static public function getrtPluginTemplateDir($mode = self::MODE_FRONTEND)
   {
-    if(!sfConfig::has('app_rt_template_dir') || $mode == 'backend')
-    {
-      return sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'rtCorePlugin'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$mode;
-    }
-    else
-    {
-      $base = sfConfig::get('sf_root_dir').sfConfig::get('app_rt_template_dir');
-      $location = $base.DIRECTORY_SEPARATOR.rtSiteToolkit::getCurrentDomain();
-      if(rtSiteToolkit::isMultiSiteEnabled() && (is_dir($location) || is_link($location)))
-      {
-        return $location;
-      }
-      return $base;
-    }
+    return sfConfig::get('sf_plugins_dir') .
+        DIRECTORY_SEPARATOR . 'rtCorePlugin' .
+        DIRECTORY_SEPARATOR . 'templates';
   }
 
   /**
@@ -66,7 +58,7 @@ class rtTemplateToolkit
    */
   static public function setFrontendTemplateDir()
   {
-    self::setTemplateForMode('frontend');
+    self::setTemplateForMode(self::MODE_FRONTEND);
   }
 
   /**
@@ -74,7 +66,7 @@ class rtTemplateToolkit
    */
   static public function setBackendTemplateDir()
   {
-    self::setTemplateForMode('backend');
+    self::setTemplateForMode(self::MODE_BACKEND);
   }
 
   /**
@@ -89,17 +81,14 @@ class rtTemplateToolkit
    */
   static public function setTemplateForMode($mode)
   {
-    $dir = '';
-    
-    if(sfConfig::has('app_rt_template_dir_'.$mode))
+    if($mode === self::MODE_BACKEND)
     {
-      $dir = sfConfig::get('app_rt_template_dir_'.$mode);
-    }
-    else
-    {
-      $dir = self::getrtPluginTemplateDir($mode);
+      return  self::setTemplateDir(self::getrtPluginTemplateDir($mode));
     }
 
-    self::setTemplateDir($dir);
+    if($mode === self::MODE_FRONTEND && sfConfig::has('app_rt_template_dir'))
+    {
+      return self::setTemplateDir(sfConfig::get('sf_root_dir') . sfConfig::get('app_rt_template_dir'));
+    }
   }
 }

@@ -1,12 +1,19 @@
 <?php
+/*
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
- * PluginrtCommentReport form.
+ * PluginrtCommentReportFormFilter
  *
- * @package    ##PROJECT_NAME##
- * @subpackage filter
- * @author     ##AUTHOR_NAME##
- * @version    SVN: $Id: sfDoctrineFormFilterPluginTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ * @package    rtCorePlugin
+ * @subpackage form
+ * @author     Piers Warmers <piers@wranglers.com.au>
  */
 abstract class PluginrtCommentReportFormFilter extends BasertCommentReportFormFilter
 {

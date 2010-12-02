@@ -17,7 +17,7 @@
       </li>
     </ul>
   <p class="rt-form-tools">
-    <button><?php echo __('Sign in', null, 'sf_guard') ?></button> 
+    <button type="submit"><?php echo __('Sign in', null, 'sf_guard') ?></button> 
     <?php $routes = $sf_context->getRouting()->getRoutes() ?>
     <?php if (isset($routes['sf_guard_forgot_password'])): ?>
       <a href="<?php echo url_for('@sf_guard_forgot_password') ?>"><?php echo __('Forgot your password?', null, 'sf_guard') ?></a>

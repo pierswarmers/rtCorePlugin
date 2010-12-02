@@ -92,5 +92,5 @@
     <?php include_partial('address_form', array('form' => $form['shipping_address'])); ?>
   </fieldset>
     
-  <p class="rt-form-tools"><button><?php echo __('Save Changes') ?></button></p>
+  <p class="rt-form-tools"><button type="submit"><?php echo __('Save Changes') ?></button></p>
 </form>

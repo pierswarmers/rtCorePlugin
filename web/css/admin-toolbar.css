@@ -15,7 +15,8 @@ div#rt-admin-toolbar h1 a.rt-admin-toolbar-signout {background:url(../images/ico
 div#rt-admin-toolbar h1 a:hover {background-position: 0px -26px;}
 div#rt-admin-toolbar{text-align:left;z-index:8000;position:fixed;top:0;left:0;width:30px;height:100%;background:url(../images/bg-admin.png) 100% 0 repeat-y;}
 div#rt-admin-toolbar.show, div#rt-admin-container div#rt-admin-toolbar{width:225px;}
-div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar ul, div#rt-admin-toolbar-search{padding:0 10px;border:0!important;margin-bottom:10px;}
+div#rt-admin-toolbar h1, div#rt-admin-toolbar ul, div#rt-admin-toolbar-search{padding:0 10px;border:0!important;margin-bottom:10px;}
+div#rt-admin-toolbar h2 {border:0!important;margin:0 10px 10px;padding:5px 0;  border-bottom:1px solid #222 !important; }
 div#rt-admin-toolbar ul{padding-left:20px;}
 div#rt-admin-toolbar li{background:none;}
 div#rt-admin-toolbar-search form{padding-left:25px;height:22px;background:url(../images/bg-admin-search.png);}

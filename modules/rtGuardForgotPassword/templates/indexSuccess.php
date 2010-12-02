@@ -12,7 +12,7 @@
     </ul>
   </fieldset>
   <p class="rt-form-tools">
-    <button><?php echo __('Reset password', null, 'sf_guard') ?></button>
+    <button type="submit"><?php echo __('Reset password', null, 'sf_guard') ?></button>
      <?php echo __('If you already know your password, you can') ?> <?php echo link_to(__('sign in here', null, 'sf_guard'), '@sf_guard_signin') ?>.
   </p>
 </form>

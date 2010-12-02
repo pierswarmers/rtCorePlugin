@@ -9,7 +9,7 @@
  */
 
 /**
- * rtTypeString provides an object for handling enhanced strinf in Reditype. Typically
+ * rtTypeString provides an object for handling enhanced string in Reditype. Typically
  * these strings require additional formatting using Markdown etc...
  *
  * Example:
@@ -280,17 +280,7 @@ class rtTypeString
 EOS;
       
       return $string;
-      
-      
-
     }
-    
-    
-    
-    
-  
-    
-
 
     return '<small class="asst-link-error">[asset:' . $filename . ']?</small>';
   }

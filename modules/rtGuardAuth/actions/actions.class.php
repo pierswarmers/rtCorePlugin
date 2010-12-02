@@ -54,7 +54,7 @@ class rtGuardAuthActions extends BasesfGuardAuthActions
       }
       else
       {
-        $this->getUser()->setFlash('error', 'Sign in failed, please check your details and try again!');
+        $this->getUser()->setFlash('error', 'Sign in failed, please check your details and try again!', false);
       }
     }
     else

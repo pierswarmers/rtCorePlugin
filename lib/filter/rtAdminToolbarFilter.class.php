@@ -25,8 +25,8 @@ class rtAdminToolbarFilter extends sfFilter
   public function execute(sfFilterChain $filterChain)
   {
     $filterChain->execute();
-    $user = sfContext::getInstance()->getUser();
-    $sf_format = sfContext::getInstance()->getRequest()->getParameter('sf_format');
+    $user = $this->getContext()->getUser();
+    $sf_format = $this->getContext()->getRequest()->getParameter('sf_format');
     if (($sf_format !== '' && !is_null($sf_format)) ||
         !$user->isAuthenticated() ||
         !$user->hasPermission(sfConfig::get('app_rt_admin_menu_credential', 'show_admin_menu')))

@@ -1,19 +1,11 @@
 <?php
-
 /*
- * This file is part of the gumnut package.
- * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- */
-
-/**
- * rtFormHelper defines some base helpers to construct gumnut specific forms.
- *
- * @package    gumnut
- * @subpackage helper
- * @author     Piers Warmers <piers@wranglers.com.au>
  */
 
 /**
@@ -22,10 +14,13 @@
  * sfWidgetFormTextarea
  * sfWidgetFormInput
  * sfWidgetFormInputCheckbox
- *
- * @see rtMarkdown::toHTML()
- * @param strinf $markdown
- * @return string
+ * 
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      sfFormField $widget
+ * @param      array $options
+ * @return     string
  */
 function render_form_row(sfFormField $widget, $options = array())
 {

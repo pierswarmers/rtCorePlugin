@@ -1,14 +1,21 @@
 <?php
+/*
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 require_once(dirname(__FILE__).'/../../../../sfDoctrineGuardPlugin/modules/sfGuardForgotPassword/lib/BasesfGuardForgotPasswordActions.class.php');
 
 /**
- * sfGuardForgotPassword actions.
- * 
- * @package    sfGuardForgotPasswordPlugin
- * @subpackage sfGuardForgotPassword
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 12534 2008-11-01 13:38:27Z Kris.Wallsmith $
+ * rtGuardForgotPasswordActions
+ *
+ * @package    rtCorePlugin
+ * @subpackage modules
+ * @author     Piers Warmers <piers@wranglers.com.au>
  */
 class rtGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
 {
@@ -28,11 +35,14 @@ class rtGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
       $this->form->bind($request->getParameter($this->form->getName()));
       if ($this->form->isValid())
       {
-        $this->user = $this->form->user;
-        $this->_deleteOldUserForgotPasswordRecords();
+        $this->user = Doctrine_Core::getTable('sfGuardUser')
+          ->retrieveByUsernameOrEmailAddress($this->form->getValue('email_address'));
+
+        Doctrine_Core::getTable('sfGuardForgotPassword')
+          ->deleteByUser($this->user);
 
         $forgotPassword = new sfGuardForgotPassword();
-        $forgotPassword->user_id = $this->form->user->id;
+        $forgotPassword->user_id = $this->user->id;
         $forgotPassword->unique_key = md5(rand() + time());
         $forgotPassword->expires_at = new Doctrine_Expression('NOW()');
         $forgotPassword->save();
@@ -40,7 +50,8 @@ class rtGuardForgotPasswordActions extends BasesfGuardForgotPasswordActions
         $this->notifySendRequest($this->user, $forgotPassword);
 
         $this->getUser()->setFlash('notice', 'Check your e-mail! You should receive something shortly!');
-        $this->redirect('@sf_guard_signin');
+
+        $this->redirect(sfConfig::get('app_sf_guard_plugin_password_request_url', '@sf_guard_signin'));
       } else {
         $this->getUser()->setFlash('error', 'Invalid e-mail address!');
       }

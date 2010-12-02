@@ -26,6 +26,11 @@ if($asset->isImage())
   $open = '![';
   $close = sprintf('](asset:%s%s)', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_image_link_suffix', '|right|200,400'));
 }
+elseif($asset->isSwf())
+{
+  $open = '![';
+  $close = sprintf('](asset:%s%s)', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_swf_link_suffix', '|500,400'));
+}
 
 ?>
   <span class="delete" onclick="deleteAsset('<?php echo $asset->getId() ?>')">&times;</span>

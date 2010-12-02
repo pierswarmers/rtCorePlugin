@@ -1,21 +1,22 @@
 <?php
-
 /*
- * This file is part of the gumnut package.
- * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 /**
- * rtSocialNetworkingHelper defines some integration helpers for some common social networking tools.
+ * Return a badge
  *
- * @package    gumnut
+ * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      array $options
+ * @return     string
  */
-
 function get_social_networking_badge($options = null)
 {
   if(sfConfig::get('app_rt_social_networking_service') === 'tweetmeme')
@@ -43,9 +44,12 @@ function get_social_networking_badge($options = null)
  * Returns the AddThis integration code snippet.
  *
  * See: http://www.addthis.com
- * 
- * @param string $username
- * @return string
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      array $options
+ * @return     string
  */
 function get_addthis_badge($options = null)
 {
@@ -68,12 +72,17 @@ EOS;
   return $string;
 }
 
+
 /**
  * Returns the ShareThis integration code snippet.
  *
  * See: http://www.sharethis.com
  *
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      array $options
+ * @return     string
  */
 function get_sharethis_badge($options = null)
 {
@@ -107,7 +116,11 @@ EOS;
  * 
  * See: http://www.tweetmeme.com
  *
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      array $options
+ * @return     string
  */
 function get_tweetmeme_badge($options = null)
 {

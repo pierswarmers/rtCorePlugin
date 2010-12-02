@@ -1,26 +1,21 @@
 <?php
-
 /*
- * This file is part of the gumnut package.
- * (c) 2009-2010 Piers Warmers <piers@wranglers.com.au>
+ * This file is part of the Reditype package.
+ *
+ * (c) 2009-2010 digital Wranglers <info@wranglers.com.au>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 /**
- * rtAdminHelper defines some base helpers used in admin.
- *
- * @package    gumnut
- * @subpackage helper
- * @author     Piers Warmers <piers@wranglers.com.au>
- */
-
-/**
  * Displays a pretty boolean.
  *
- * @param boolean $boolean_value
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      boolean $boolean_value
+ * @return     string
  */
 function rt_nice_boolean($boolean_value = false, $yes = 'yes', $no = 'no')
 {
@@ -30,8 +25,11 @@ function rt_nice_boolean($boolean_value = false, $yes = 'yes', $no = 'no')
 /**
  * Displays a pretty delete button.
  *
- * @param string $target
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      string $target
+ * @return     string
  */
 function rt_button_delete($target)
 {
@@ -41,8 +39,11 @@ function rt_button_delete($target)
 /**
  * Displays a pretty delete button.
  *
- * @param string $target
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      string $target
+ * @return     string
  */
 function rt_button_undelete($target)
 {
@@ -52,8 +53,11 @@ function rt_button_undelete($target)
 /**
  * Displays a pretty edit button.
  *
- * @param string $target
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      string $target
+ * @return     string
  */
 function rt_button_edit($target)
 {
@@ -63,8 +67,11 @@ function rt_button_edit($target)
 /**
  * Displays a pretty boolean button.
  *
- * @param string $target
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      string $target
+ * @return     string
  */
 function rt_button_boolean($target,$title = 'enable')
 {
@@ -74,8 +81,11 @@ function rt_button_boolean($target,$title = 'enable')
 /**
  * Displays a pretty show button.
  *
- * @param string $target
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      string $target
+ * @return     string
  */
 function rt_button_show($target)
 {
@@ -85,10 +95,13 @@ function rt_button_show($target)
 /**
  * Displays a pretty button using jQuery UI.
  *
- * @param string $label
- * @param string $target
- * @param string $icon
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      string $label
+ * @param      string $target
+ * @param      string $icon
+ * @return     string
  */
 function rt_ui_button($label, $target, $icon, $options = array())
 {
@@ -100,10 +113,13 @@ function rt_ui_button($label, $target, $icon, $options = array())
 /**
  * Displays a tree administration panel.
  *
- * @param string $model
- * @param string $field
- * @param string $root
- * @return string
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @param      string $model
+ * @param      string $field
+ * @param      string $root
+ * @return     string
  */
 function get_tree_manager($model, $field, $root = 0)
 {
@@ -117,11 +133,7 @@ function get_tree_manager($model, $field, $root = 0)
   sfContext::getInstance()->getResponse()->addJavascript('/rtCorePlugin/vendor/jsTree/lib/jquery.cookie.js');
   sfContext::getInstance()->getResponse()->addJavascript('/rtCorePlugin/vendor/jsTree/jquery.tree.js');
   sfContext::getInstance()->getResponse()->addJavascript('/rtCorePlugin/vendor/jsTree/plugins/jquery.tree.cookie.js');
-
-//  if (sfConfig::get('app_sfJqueryTree_withContextMenu'))
-//  {
-    sfContext::getInstance()->getResponse()->addJavascript('/rtCorePlugin/vendor/jsTree/plugins/jquery.tree.contextmenu.js');
-//  }
+  sfContext::getInstance()->getResponse()->addJavascript('/rtCorePlugin/vendor/jsTree/plugins/jquery.tree.contextmenu.js');
 
   return get_component('rtTreeAdmin', 'manager', array('model' => $model, 'field' => $field, 'root' => $root));
 }

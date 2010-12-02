@@ -28,7 +28,7 @@
 /**
  * BasertTreeAdminComponents.
  *
- * @package    gumnut
+ * @package    rtCorePlugin
  * @subpackage modules
  * @author     Piers Warmers <piers@wranglers.com.au>
  */

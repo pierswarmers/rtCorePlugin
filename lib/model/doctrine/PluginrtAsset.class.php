@@ -18,7 +18,7 @@
 abstract class PluginrtAsset extends BasertAsset
 {
   /**
-   * Is this asset an web image.
+   * Is this asset a web image.
    *
    * @return boolean
    */
@@ -26,11 +26,22 @@ abstract class PluginrtAsset extends BasertAsset
   {
     $ext = rtAssetToolkit::getExtension($this->getOriginalFilename());
 
-    if(in_array($ext, sfConfig::get('app_rt_web_image_extensions', array('gif','jpg','png'))))
+    if(in_array($ext, sfConfig::get('app_rt_web_image_extensions', array('gif','jpg','jpeg','png'))))
     {
       return true;
     }
     return false;
+  }
+  
+  /**
+   * Is this asset a flash file.
+   *
+   * @return boolean
+   */
+  public function isSwf()
+  {
+    return rtAssetToolkit::getExtension($this->getOriginalFilename()) === 'swf';
+
   }
 
   public function getSystemPath()

@@ -1,8 +1,8 @@
 secure:
   is_secure: false
 
-sirtin:
+signin:
   is_secure: false
 
-sirtout:
+signout:
   is_secure: false

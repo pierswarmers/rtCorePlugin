@@ -88,4 +88,25 @@ abstract class PluginrtAsset extends BasertAsset
 
     return $object;
   }
+
+  /**
+   * Enhance the defult deletion to include removal of any static files.
+   * 
+   * @param Doctrine_Connection $conn
+   */
+  public function delete(Doctrine_Connection $conn = null)
+  {
+    unlink($this->getSystemPath());
+
+    $target = sfConfig::get('sf_web_dir') . sfConfig::get('app_asset_thumbnail_dir', '/uploads/_thumbnail_cache');
+
+    $thumbs = sfFinder::type('file')->name($this->getFilename())->in($target);
+
+    foreach ($thumbs as $thumb)
+    {
+      unlink($thumb);
+    }
+
+    parent::delete($conn);
+  }
 }

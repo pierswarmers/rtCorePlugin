@@ -544,6 +544,47 @@ class rtAssetToolkit
       $thumbnail->save($target, $options['targetMime']);
     }
 
-    return $options['dir'] . $size_store_dir . $sub_web_dir;
+    $cdn_tag = self::getCdnTagFilename();
+
+    $cdn = '';
+
+    if(file_exists($cdn_tag) && sfConfig::has('app_rt_cdn_host'))
+    {
+      if(filectime($cdn_tag) > filectime($target))
+      {
+        $cdn = sfConfig::get('app_rt_cdn_host');
+      }
+    }
+
+    return $cdn . $options['dir'] . $size_store_dir . $sub_web_dir;
+  }
+
+  /**
+   * Returns the CDN host after comparing temestamps between a given file and
+   * the CDN syncronisation tag file.
+   *
+   * @param string $file Absolute path of file to compare timestamp
+   */
+  private function getCdnHost($file)
+  {
+    $tag = self::getCdnTagFilename();
+    
+    if(!file_exists($tag) || !sfConfig::has('app_rt_cdn_host'))
+    {
+      return '';
+    }
+    
+    return filectime($tag) > filectime($file) ? sfConfig::get('app_rt_cdn_host') : '';
+  }
+
+
+  /**
+   * Returns the CDN syncronisation file locatin.
+   * 
+   * @return string
+   */
+  public static function getCdnTagFilename()
+  {
+    return sfConfig::get('sf_data_dir') . '/.sync_cdn.txt';
   }
 }

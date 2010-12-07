@@ -164,6 +164,8 @@ EOF;
 
     file_put_contents($tag, time());
 
-    chmod($tag, 0777);
+    chmod($tag, 0775);
+    chown($tag, fileowner(sfConfig::get('sf_data_dir')));
+    chgrp($tag, filegroup(sfConfig::get('sf_data_dir')));
   }
 }

@@ -164,6 +164,6 @@ EOF;
 
     file_put_contents($tag, time());
 
-    chmod($tag, '0777');
+    chmod($tag, 0777);
   }
 }

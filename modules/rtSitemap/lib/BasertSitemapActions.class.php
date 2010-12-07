@@ -112,6 +112,12 @@ class BasertSitemapActions extends sfActions
    */
   protected function getQuery($string)
   {
+    $modules = sfConfig::get('sf_enabled_modules');
+    
+    if(!in_array($string, $modules))
+    {
+      return false;
+    }
     $query = Doctrine::getTable($string)->addPublishedQuery();
     $query = Doctrine::getTable($string)->addSiteQuery($query);
     $query->andWhere('page.searchable = ?', true);

@@ -29,7 +29,7 @@ class rtCdnDeployTask extends sfProjectDeployTask
 //
     $this->addOptions(array(
       new sfCommandOption('go', null, sfCommandOption::PARAMETER_NONE, 'Do the deployment'),
-//      new sfCommandOption('rsync-dir', null, sfCommandOption::PARAMETER_REQUIRED, 'The directory where to look for rsync*.txt files', 'config'),
+      new sfCommandOption('rsync-dir', null, sfCommandOption::PARAMETER_REQUIRED, 'The directory where to look for rsync*.txt files', 'config'),
       new sfCommandOption('rsync-options', null, sfCommandOption::PARAMETER_OPTIONAL, 'To options to pass to the rsync executable', '-azC --force --delete --progress'),
     ));
 
@@ -155,8 +155,6 @@ EOF;
     $this->getFilesystem()->execute($command, $options['trace'] ? array($this, 'logOutput') : null, array($this, 'logErrors'));
 
     $this->clearBuffers();
-
-    $env = $arguments['server'];
 
     $tag = rtAssetToolkit::getCdnTagFilename();
 

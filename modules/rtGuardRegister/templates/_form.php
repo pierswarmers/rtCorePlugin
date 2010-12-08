@@ -8,7 +8,7 @@
     </ul>
   </fieldset>
   <p class="rt-form-tools">
-    <button type="submit"><?php echo __('Register', null, 'sf_guard') ?></button>
-     <?php echo __('If you already have an account, you can') ?> <?php echo link_to(__('sign in here', null, 'sf_guard'), '@sf_guard_signin') ?>.
+    <button type="submit"><?php echo __('Register', null, 'sf_guard') ?></button> 
+    <?php echo __('Or, you can') ?> <?php echo link_to(__('sign in here', null, 'sf_guard'), '@sf_guard_signin') ?>.
   </p>
 </form>

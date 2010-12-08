@@ -2,19 +2,7 @@
 <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
   <?php echo $form->renderHiddenFields() ?>
     <ul class="rt-form-schema">
-      <li class="rt-form-row"><?php echo $form['username']->renderLabel() ?>
-        <div class="rt-form-field">
-          <?php echo $form['username'] ?>
-          <small class="rt-help"><?php echo __('Eg: jenny@example.com') ?></small>
-        </div>
-      </li>
-      <li class="rt-form-row"><?php echo $form['password']->renderLabel() ?><div class="rt-form-field"><?php echo $form['password'] ?></div></li>
-      <li class="rt-form-row"><?php echo $form['remember']->renderLabel() ?>
-        <div class="rt-form-field">
-          <?php echo $form['remember'] ?>
-          <small class="rt-help"><?php echo __('Not for use on public or shared computers') ?></small>
-        </div>
-      </li>
+      <?php echo $form; ?>
     </ul>
   <p class="rt-form-tools">
     <button type="submit"><?php echo __('Sign in', null, 'sf_guard') ?></button> 

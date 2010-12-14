@@ -12,7 +12,7 @@
  * rtContactForm
  *
  * @package    rtCorePlugin
- * @subpackage forms
+ * @subpackage form
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
  */

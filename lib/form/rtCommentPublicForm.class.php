@@ -47,7 +47,7 @@ class rtCommentPublicForm extends PluginrtCommentForm
     $this->disableCSRFProtection();
 
     // Optionally configured ReCAPTCHA widget and validator.
-    if(sfConfig::get('app_rt_comment_recaptcha_enabled', false))
+    if(sfConfig::has('app_recaptcha_public_key'))
     {
       $this->widgetSchema['captcha'] = new sfWidgetFormReCaptcha(array(
         'public_key' => sfConfig::get('app_recaptcha_public_key'),

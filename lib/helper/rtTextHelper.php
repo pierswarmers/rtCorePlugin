@@ -17,7 +17,7 @@
  * @param string $string
  * @return string
  */
-function markdown_to_html_safe($string)
+function markdown_to_html_safe($string, $object = null)
 {
   $rt_string = new rtTypeString(strip_tags($string), array('object' => $object));
   return $rt_string->transform();

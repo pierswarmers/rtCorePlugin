@@ -16,9 +16,8 @@
   </div>
 <script type="text/javascript">
   $(function() {
-    $("a.rt-admin-edit-tools-trigger").click(function(){
-      $("a.rt-admin-edit-tools-trigger").attr("href", $(this).attr('href') + '?rt-snippet-referer=' + window.location);
-    })
+//    $(".rt-admin-edit-tools-panel-small a.rt-admin-edit-tools-trigger").attr("href", $(this).attr('href') + '123');
+//    $(".rt-admin-edit-tools-panel-small a.rt-admin-edit-tools-trigger").attr("href", $(this).attr('href') + '?rt-snippet-referer=' + encodeURI(window.location));
   });
 </script>
 <?php endif; ?>

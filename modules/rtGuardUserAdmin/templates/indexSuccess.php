@@ -20,6 +20,19 @@
       enablePublishToggle('<?php echo url_for('rtGuardUserAdmin/toggle') ?>');
 	});
 </script>
+<h2><?php echo __('Users Summary') ?></h2>
+<dl class="rt-admin-summary-panel clearfix">
+  <dt class="rt-admin-primary"><?php echo __('Total users') ?></dt>
+  <dd class="rt-admin-primary"><?php echo $stats['total']['count'] ?></dd>
+  <dt><?php echo __('Users added this month') ?></dt>
+  <dd><?php echo $stats['month_current']['count'] ?></dd>
+  <dt><?php echo __('Super admin users') ?></dt>
+  <dd><?php echo $stats['total_admin']['count'] ?></dd>
+  <dt><?php echo __('Active users') ?></dt>
+  <dd><?php echo $stats['total_active']['count'] ?></dd>
+  <dt><?php echo __('Unused users') ?></dt>
+  <dd><?php echo $stats['total_unused']['count'] ?></dd>
+</dl>
 <?php end_slot(); ?>
 
 <?php include_partial('rtAdmin/flashes') ?>

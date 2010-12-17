@@ -180,7 +180,6 @@ class rtGuardUserAdminActions extends sfActions
     return $stats;
   }
 
-
   private function getCountPerPage(sfWebRequest $request)
   {
     $count = sfConfig::get('app_rt_admin_pagination_limit', 50);

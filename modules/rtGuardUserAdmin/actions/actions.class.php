@@ -168,13 +168,9 @@ class rtGuardUserAdminActions extends sfActions
     // Create array
     $stats = array();
     $stats['total']         = $result_users_total[0] != '' ? $result_users_total[0] : 0;
-
     $stats['total_active']  = $result_users_total_active[0] != '' ? $result_users_total_active[0] : 0;
-
     $stats['total_admin']   = $result_users_total_admin[0] != '' ? $result_users_total_admin[0] : 0;
-
     $stats['total_unused']  = $result_users_total_unused[0] != '' ? $result_users_total_unused[0] : 0;
-
     $stats['month_current'] = $result_users_added_current_month[0] != '' ? $result_users_added_current_month[0] : 0;
 
     return $stats;

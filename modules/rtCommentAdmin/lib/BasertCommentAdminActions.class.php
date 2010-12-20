@@ -31,6 +31,26 @@ class BasertCommentAdminActions extends sfActions
     $this->pager->setQuery($query);
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
+
+    $this->stats = $this->stats();
+  }
+
+  private function stats()
+  {
+    // SQL queries
+    $con = Doctrine_Manager::getInstance()->getCurrentConnection();
+
+    $result_comments_total            = $con->fetchAssoc("select count(id) as count from rt_comment");
+    $result_comments_total_enabled    = $con->fetchAssoc("select count(id) as count from rt_comment where is_active = 1");
+    $result_comments_total_disabled   = $con->fetchAssoc("select count(id) as count from rt_comment where is_active = 0");
+
+    // Create array
+    $stats = array();
+    $stats['total']           = $result_comments_total[0] != '' ? $result_comments_total[0] : 0;
+    $stats['total_enabled']   = $result_comments_total_enabled[0] != '' ? $result_comments_total_enabled[0] : 0;
+    $stats['total_disabled']  = $result_comments_total_disabled[0] != '' ? $result_comments_total_disabled[0] : 0;
+
+    return $stats;
   }
 
   protected function getCountPerPage(sfWebRequest $request)

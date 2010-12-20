@@ -2,6 +2,18 @@
 
 <h1><?php echo __('Listing Comments') ?></h1>
 
+<?php slot('rt-tools') ?>
+<h2><?php echo __('Comments Summary') ?></h2>
+<dl class="rt-admin-summary-panel clearfix">
+  <dt class="rt-admin-primary"><?php echo __('Total') ?></dt>
+  <dd class="rt-admin-primary"><?php echo $stats['total']['count'] ?></dd>
+  <dt><?php echo __('Enabled') ?></dt>
+  <dd><?php echo $stats['total_enabled']['count'] ?></dd>
+  <dt><?php echo __('Disabled') ?></dt>
+  <dd><?php echo $stats['total_disabled']['count'] ?></dd>
+</dl>
+<?php end_slot(); ?>
+
 <?php include_partial('rtAdmin/flashes') ?>
 
 <script type="text/javascript">

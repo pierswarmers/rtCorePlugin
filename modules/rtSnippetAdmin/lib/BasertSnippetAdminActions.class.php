@@ -36,6 +36,27 @@ class BasertSnippetAdminActions extends sfActions
     $this->pager->setQuery($query);
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
+
+    $this->stats = $this->stats();
+  }
+
+  private function stats()
+  {
+    // Dates
+    $date_now         = date("Y-m-d H:i:s");
+
+    // SQL queries
+    $con = Doctrine_Manager::getInstance()->getCurrentConnection();
+
+    $result_snippets_total               = $con->fetchAssoc("select count(id) as count from rt_snippet");
+    $result_snippets_total_published     = $con->fetchAssoc("select count(id) as count from rt_snippet where published = 1 and (published_from <= '".$date_now."' OR published_from IS NULL) and (published_to > '".$date_now."' OR published_to IS NULL)");
+
+    // Create array
+    $stats = array();
+    $stats['total']            = $result_snippets_total[0] != '' ? $result_snippets_total[0] : 0;
+    $stats['total_published']  = $result_snippets_total_published[0] != '' ? $result_snippets_total_published[0] : 0;
+
+    return $stats;
   }
 
   private function getCountPerPage(sfWebRequest $request)

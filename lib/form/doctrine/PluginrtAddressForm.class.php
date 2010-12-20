@@ -115,4 +115,51 @@ abstract class PluginrtAddressForm extends BasertAddressForm
       $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
     }
   }
+
+  /**
+   * Renders the widget schema associated with this form.
+   *
+   * @param  array  $attributes  An array of HTML attributes
+   *
+   * @return string The rendered widget schema
+   */
+  public function render($attributes = array())
+  {
+    return $this->getCountryEnhancement() . $this->getFormFieldSchema()->render($attributes);
+  }
+
+
+  public function getCountryEnhancement()
+  {
+    $form_name = $this->getName();
+
+    return "
+
+<script type=\"text/javascript\">
+  $(function() {
+    $('#". $form_name ."_country').change(function() {
+
+      var holder =  $('#". $form_name ."_state').parent();
+
+      holder.html('<span class=\"loading\">Loading states...</span>');
+      $('#". $form_name ."_state').remove();
+      $.ajax({
+        type: 'POST',
+        url: '/rtAdmin/stateInput',
+        data: ({
+          country : $(this).find('option:selected').attr('value'),
+          id      : '". $form_name ."_state',
+          name    : '". $form_name ."[state]'
+        }),
+        dataType: 'html',
+        success: function(data) {
+          holder.html(data);
+        }
+      });
+    });
+  });
+</script>
+
+";
+  }
 }

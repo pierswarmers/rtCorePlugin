@@ -33,7 +33,9 @@ class rtAddressValidator extends sfValidatorBase
       {
         $errorSchema->addError(new sfValidatorError($this, 'required'), 'town');
       }
-      if(($values['country'] == 'AU' || $values['country'] == 'US') && $this->isEmpty($values['state']))
+      $widget = new rtWidgetFormSelectRegion(array('country' => $values['country']));
+      // Only validate if country has regions
+      if(count($widget->getRegions()) > 0 && $this->isEmpty($values['state']))
       {
         $errorSchema->addError(new sfValidatorError($this, 'required'), 'state');
       }

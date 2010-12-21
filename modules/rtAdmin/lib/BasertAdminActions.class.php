@@ -32,15 +32,7 @@ class BasertAdminActions extends sfActions
     $this->name    = $request->getParameter('name');
     $this->country = $request->getParameter('country');
 
-    if($this->country == 'AU')
-    {
-      $widget = new rtWidgetFormSelectAUState();
-      $this->options = $widget->getStates();
-    }
-    elseif($this->country == 'US')
-    {
-      $widget = new sfWidgetFormSelectUSState();
-      $this->options = $widget->getStates();
-    }
+    $widget = new rtWidgetFormSelectRegion(array('add_empty' => '--', 'country' => $this->country));
+    $this->options = $widget->getRegions();
   }
 }

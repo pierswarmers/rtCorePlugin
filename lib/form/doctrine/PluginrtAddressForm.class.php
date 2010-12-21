@@ -39,12 +39,7 @@ abstract class PluginrtAddressForm extends BasertAddressForm
       throw new InvalidArgumentException('You must provide a parent object.');
     }
 
-    // Avert your eyes - nasty hack to remove regions from I18N country choices.
-    // 
-    // TODO: find better hack or at the very least, move this logic to a widget.
-    //
-    // start hack >>>
-    // $countries = new sfWidgetFormI18nChoiceCountry(array('add_empty' => '--'));
+    // start countries >>>
     $c = new sfCultureInfo(sfContext::getInstance()->getUser()->getCulture());
     $countries = $c->getCountries();
 
@@ -60,23 +55,13 @@ abstract class PluginrtAddressForm extends BasertAddressForm
 
     $countries = array('' => '--') + $countries;
     $this->setWidget('country', new sfWidgetFormSelect(array('choices' => $countries)));
-    // <<< end hack
+    // <<< end countries
 
-    if(!$this->isNew())
-    {
-//      if($this->getObject()->getCountry() == 'AU')
-//      {
-//        $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
-//      }
-//      elseif($this->getObject()->getCountry() == 'US')
-//      {
-//        $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
-//      }
-//      $this->setStateWidget($this->getObject()->getCountry());
-    }
 
+
+    $this->setWidget('state',        new rtWidgetFormSelectRegion(array('add_empty' => '--', 'country' => $this->getObject()->getCountry())));
     $this->setWidget('instructions', new sfWidgetFormInput());
-    $this->setWidget('model', new sfWidgetFormInputHidden());
+    $this->setWidget('model',        new sfWidgetFormInputHidden());
 
     $this->widgetSchema->moveField('country', 'before', 'state');
 
@@ -104,18 +89,6 @@ abstract class PluginrtAddressForm extends BasertAddressForm
     $this->widgetSchema->setHelp('phone', 'Please include your area code.');
   }
 
-  public function setStateWidget($country)
-  {
-    if($country == 'AU')
-    {
-      $this->setWidget('state', new rtWidgetFormSelectAUState(array('add_empty' => '--')));
-    }
-    elseif($country == 'US')
-    {
-      $this->setWidget('state', new sfWidgetFormSelectUSState(array('add_empty' => '--')));
-    }
-  }
-
   /**
    * Renders the widget schema associated with this form.
    *
@@ -128,6 +101,11 @@ abstract class PluginrtAddressForm extends BasertAddressForm
     return $this->getCountryEnhancement() . $this->getFormFieldSchema()->render($attributes);
   }
 
+  public function bind(array $taintedValues = null, array $taintedFiles = null)
+  {
+    parent::bind($taintedValues, $taintedFiles);
+    $this->setWidget('state', new rtWidgetFormSelectRegion(array('add_empty' => '--', 'country' => $taintedValues['country'])));
+  }
 
   public function getCountryEnhancement()
   {

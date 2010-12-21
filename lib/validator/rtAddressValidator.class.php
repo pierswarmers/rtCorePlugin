@@ -55,7 +55,7 @@ class rtAddressValidator extends sfValidatorBase
         }
         if($this->isEmpty($values['last_name']))
         {
-          $errorSchema->addError(new sfValidatorError($this, 'required'), 'first_name');
+          $errorSchema->addError(new sfValidatorError($this, 'required'), 'last_name');
         }
       }
     }

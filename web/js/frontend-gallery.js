@@ -57,4 +57,16 @@ $(function(){
       });
     }
   });
+
+  /*
+   * Handle the Colorbox (http://colorpowered.com/colorbox/) intereaction for
+   * the image gallery on products.
+   */
+  $(".rt-shop-product-primary-image a").colorbox({ preloading:false });
+  $(".rt-shop-product-image-thumbs div").click(function(){
+    $(".rt-shop-product-primary-image a#" + $(this)
+    .children()
+    .children('img').attr('class')).css("display","inline")
+    .siblings('a').css("display","none");
+  });
 });

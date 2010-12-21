@@ -409,18 +409,18 @@ EOS;
 
         if($asset->isImage())
         {
-          $img_preview_height = isset($config['img_preview']['max_height']) ? $config['img_preview']['max_height'] : 100;
-          $img_preview_height_width = isset($config['img_preview']['max_width']) ? $config['img_preview']['max_width'] : 400;
+          $img_preview_height = isset($config['markdown_preview']['max_height']) ? $config['markdown_preview']['max_height'] : 100;
+          $img_preview_width = isset($config['markdown_preview']['max_width']) ? $config['markdown_preview']['max_width'] : 400;
 
-          $img_full_height = isset($config['img_full']['max_height']) ? $config['img_full']['max_height'] : 600;
-          $img_full_height_width = isset($config['img_full']['max_width']) ? $config['img_full']['max_width'] : 1000;
+          $img_full_height = isset($config['markdown_full']['max_height']) ? $config['markdown_full']['max_height'] : 600;
+          $img_full_width = isset($config['markdown_full']['max_width']) ? $config['markdown_full']['max_width'] : 1000;
 
-          $thumb_location_web = rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => $img_preview_height, 'maxWidth' => $img_preview_height_width));
+          $thumb_location_web = rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), array('maxHeight' => $img_preview_height, 'maxWidth' => $img_preview_width));
           $thumb_location_sys = sfConfig::get('sf_web_dir') . $thumb_location_web;
 
           $title = $asset->getTitle() ? $asset->getTitle() : '';
 
-          $resize_to = array('maxHeight' => $img_full_height, 'maxWidth' => $img_full_height_width);
+          $resize_to = array('maxHeight' => $img_full_height, 'maxWidth' => $img_full_width);
 
           $info = '';
 

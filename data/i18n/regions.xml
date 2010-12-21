@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <countries>
   <country iso2="AF">
     <state>Badakhshan</state>
@@ -221,7 +221,6 @@
     <state>Western Australia</state>
     <state>Northern Territory</state>
     <state>Australian Capital Territory</state>
-    <state>AOL</state>
   </country>
   <country iso2="AT">
     <state>Burgenland</state>
@@ -501,7 +500,6 @@
     <state>Distrito Federal</state>
     <state>Paro</state>
     <state>Pernambuco</state>
-    <state>AOL</state>
   </country>
   <country iso2="IO"/>
   <country iso2="VG"/>
@@ -1267,7 +1265,6 @@
     <state>Sachsen-Anhalt</state>
     <state>Thuringen</state>
     <state>Berlin</state>
-    <state>AOL</state>
   </country>
   <country iso2="GH">
     <state>Greater Accra</state>
@@ -1789,7 +1786,6 @@
     <state>Yamaguchi</state>
     <state>Yamanashi</state>
     <state>Okinawa</state>
-    <state>AOL</state>
   </country>
   <country iso2="JO">
     <state>Al Balqa'</state>
@@ -3869,7 +3865,6 @@
   </country>
   <country iso2="GB">
     <state>United Kingdom</state>
-    <state>AOL</state>
     <state>Wales</state>
     <state>Scotland</state>
     <state>Northern Ireland</state>
@@ -3927,7 +3922,6 @@
     <state>Wisconsin</state>
     <state>Wyoming</state>
     <state>Vermont</state>
-    <state>AOL</state>
     <state>WebTV</state>
   </country>
   <country iso2="UM"/>

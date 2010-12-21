@@ -65,27 +65,24 @@ abstract class PluginrtAddressForm extends BasertAddressForm
 
     $this->widgetSchema->moveField('country', 'before', 'state');
 
-    if($this->getOption('is_optional', false))
-    {
-      $this->setValidators(array(
-        'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-        'type'       => new sfValidatorChoice(array('choices' => array(0 => 'billing', 1 => 'shipping'), 'required' => false)),
-        'care_of'    => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-        'address_1'  => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-        'address_2'  => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-        'town'       => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-        'state'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-        'postcode'   => new sfValidatorString(array('max_length' => 10, 'required' => false)),
-        'country'    => new sfValidatorString(array('max_length' => 20, 'required' => false)),
-        'model'      => new sfValidatorString(array('max_length' => 20, 'required' => false)),
-        'instructions'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-        'first_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
-        'last_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
-        'phone'        => new sfValidatorString(array('max_length' => 20, 'required' => false))
-      ));
+    $this->setValidators(array(
+      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'type'       => new sfValidatorChoice(array('choices' => array(0 => 'billing', 1 => 'shipping'), 'required' => false)),
+      'care_of'    => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'address_1'  => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'address_2'  => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'town'       => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'state'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'postcode'   => new sfValidatorString(array('max_length' => 10, 'required' => false)),
+      'country'    => new sfValidatorString(array('max_length' => 20, 'required' => false)),
+      'model'      => new sfValidatorString(array('max_length' => 20, 'required' => false)),
+      'instructions'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'first_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'last_name'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'phone'        => new sfValidatorString(array('max_length' => 20, 'required' => false))
+    ));
 
-      $this->validatorSchema->setPostValidator(new rtAddressValidator(array('use_names' => $this->getOption('use_names', false))));
-    }
+    $this->validatorSchema->setPostValidator(new rtAddressValidator(array('use_names' => $this->getOption('use_names', false))));
     $this->widgetSchema->setHelp('phone', 'Please include your area code.');
   }
 

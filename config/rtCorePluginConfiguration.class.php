@@ -24,7 +24,7 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
    */
   public function initialize()
   {
-    rtTemplateToolkit::setBackendTemplateDir();
+    //rtTemplateToolkit::setBackendTemplateDir();
 
     if(sfConfig::get('sf_app') === 'frontend')
     {

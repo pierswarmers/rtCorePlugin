@@ -38,9 +38,24 @@ class rtTemplateToolkit
    */
   static public function getrtPluginTemplateDir($mode = self::MODE_FRONTEND)
   {
-    return sfConfig::get('sf_plugins_dir') .
-        DIRECTORY_SEPARATOR . 'rtCorePlugin' .
-        DIRECTORY_SEPARATOR . 'templates';
+    if($mode == 'backend')
+    {
+      return sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'rtCorePlugin'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$mode;
+    }
+    elseif (!sfConfig::has('app_rt_template_dir'))
+    {
+      return sfConfig::get('sf_app_template_dir');
+    }
+    else
+    {
+      $base = sfConfig::get('sf_root_dir').sfConfig::get('app_rt_template_dir');
+      $location = $base.DIRECTORY_SEPARATOR.rtSiteToolkit::getCurrentDomain();
+      if(rtSiteToolkit::isMultiSiteEnabled() && (is_dir($location) || is_link($location)))
+      {
+        return $location;
+      }
+      return $base;
+    }
   }
 
   /**
@@ -81,14 +96,25 @@ class rtTemplateToolkit
    */
   static public function setTemplateForMode($mode)
   {
-    if($mode === self::MODE_BACKEND)
+    if(sfConfig::has('app_rt_template_dir_'.$mode))
     {
-      return  self::setTemplateDir(self::getrtPluginTemplateDir($mode));
+      $dir = sfConfig::get('app_rt_template_dir_'.$mode);
+    }
+    else
+    {
+      $dir = self::getrtPluginTemplateDir($mode);
     }
 
-    if($mode === self::MODE_FRONTEND && sfConfig::has('app_rt_template_dir'))
-    {
-      return self::setTemplateDir(sfConfig::get('sf_root_dir') . sfConfig::get('app_rt_template_dir'));
-    }
+    self::setTemplateDir($dir);
+//
+//    if($mode === self::MODE_BACKEND)
+//    {
+//      return  self::setTemplateDir(self::getrtPluginTemplateDir($mode));
+//    }
+//
+//    if($mode === self::MODE_FRONTEND && sfConfig::has('app_rt_template_dir'))
+//    {
+//      return self::setTemplateDir(sfConfig::get('sf_root_dir') . sfConfig::get('app_rt_template_dir'));
+//    }
   }
 }

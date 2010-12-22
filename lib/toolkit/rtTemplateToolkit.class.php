@@ -40,7 +40,7 @@ class rtTemplateToolkit
   {
     if($mode == 'backend')
     {
-      return sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'rtCorePlugin'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.$mode;
+      return sfConfig::get('sf_plugins_dir').DIRECTORY_SEPARATOR.'rtCorePlugin'.DIRECTORY_SEPARATOR.'templates';
     }
     elseif (!sfConfig::has('app_rt_template_dir'))
     {

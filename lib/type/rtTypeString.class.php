@@ -230,7 +230,7 @@ class rtTypeString
       '/\[(gallery):([A-Za-z0-9.\-_,]+)\]/i'                                            => '_markupGalleriesInText',
       '/\[docs\]/i'                                                                     => '_markupDocsInText',
       '/\[(docs):([A-Za-z0-9.\-_,]+)\]/i'                                               => '_markupDocsInText',
-      '/\[([A-Za-z0-9 \-_]+)\]/i'                                                       => '_markupGenericsInText',
+      '/!\[([A-Za-z0-9 \-_]+)\]/i'                                                       => '_markupGenericsInText',
       '/\[\/\]/i'                                                                       => '_markupClosuresInText'
     );
 

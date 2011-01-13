@@ -41,7 +41,16 @@ abstract class PluginrtAsset extends BasertAsset
   public function isSwf()
   {
     return rtAssetToolkit::getExtension($this->getOriginalFilename()) === 'swf';
+  }
 
+  /**
+   * Returns the files extension: pdf or png etc...
+   * 
+   * @return string
+   */
+  public function getExtension()
+  {
+    return rtAssetToolkit::getExtension($this->getOriginalFilename());
   }
 
   public function getSystemPath()

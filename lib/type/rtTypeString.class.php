@@ -416,7 +416,7 @@ EOS;
     {
       $rand = rand();
 
-      $string .= '<ul class="rt-gallery">'."\n";
+      $string .= '<div class="rt-gallery-holder"><ul class="rt-gallery">'."\n";
       foreach($assets as $asset)
       {
 
@@ -457,7 +457,7 @@ EOS;
                      );
         }
       }
-      $string .= "</ul>\n";
+      $string .= "</ul>\n</div>\n";
 
     }
 
@@ -515,7 +515,7 @@ EOS;
 
     if(count($assets) > 0)
     {
-      $string .= '<ul class="rt-docs">';
+      $string .= '<div class="rt-docs-holder"><ul class="rt-docs">';
       foreach($assets as $asset)
       {
         if($asset->isImage())
@@ -523,22 +523,23 @@ EOS;
           continue;
         }
         
-        $description = '';
+        $title = trim($asset->getTitle()) !== '' ? $asset->getTitle() : $asset->getOriginalFilename();
 
+        $description = '';
+        
         if(trim($asset->getDescription()) !== '')
         {
           $description = rtMarkdownToolkit::transformBase($asset->getDescription());
         }
-        else
-        {
-          
-        }
-        $string .= sprintf('<li><p>%s</p>%s</li>',
-                     link_to(trim($asset->getTitle()) !== '' ? $asset->getTitle() : $asset->getOriginalFilename(),$asset->getWebPath()),
+        $string .= sprintf(
+                     '<li class="rt-docs-%s"><p class="rt-docs-title">%s%s</p>%s</li>',
+                     $asset->getExtension(),
+                     link_to($title,$asset->getWebPath()),
+                     sprintf(' <span>(%s)</span>', rtAssetToolkit::getFormattedBytes($asset->getFilesize())),
                      $description
                    );
       }
-      $string .= '</ul>';
+      $string .= "\n</ul>\n</div>\n";
     }
 
     return $string;

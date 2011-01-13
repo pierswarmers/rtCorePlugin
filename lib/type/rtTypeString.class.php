@@ -472,7 +472,7 @@ EOS;
    */
   protected function _markupGenericsInText($matches)
   {
-    return sprintf('<div class="%s" markdown=1>', $matches[1]);
+    return sprintf('<div class="%s" markdown=1><div class="rt-generic-inner" markdown=1>', $matches[1]);
   }
 
   /**
@@ -483,7 +483,7 @@ EOS;
    */
   protected function _markupClosuresInText($matches)
   {
-    return '</div>';
+    return '</div></div>';
   }
 
   /**

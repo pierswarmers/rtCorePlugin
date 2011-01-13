@@ -70,7 +70,9 @@ rtMarkdownSettings = {
         {name:'Gallery', key:"G", openWith:'[gallery]'},
         {name:'Docs', key:"D", openWith:'[docs]'},
         {separator:'---------------'},
-        {name:'Separator', openWith:'\n////\n'}
+        {name:'Separator', openWith:'\n////\n'},
+        {name:'Shout', openWith:'[shout]\n\n', closeWith:'\n\n[/]'},
+        {name:'Kicker', openWith:'[kicker]\n\n', closeWith:'\n\n[/]'}
     ]
 }
 

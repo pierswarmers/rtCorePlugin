@@ -224,7 +224,8 @@ class rtTypeString
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([0-9]+),([0-9]+)\)/i'                   => '_markupImagesInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\)/i'                    => '_markupImagesInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i'                                      => '_markupImagesInText',
-      '/\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i'                                       => '_markupLinksInText',
+      '/\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i'                                       => '_markupAssetLinksInText',
+      '/\[(\w.+)\]\(([A-Za-z0-9:\=?&\/.\-_]+)\)/i'                                      => '_markupBasicLinksInText',
       '/\[gallery\]/i'                                                                  => '_markupGalleriesInText',
       '/\[(gallery):([A-Za-z0-9.\-_,]+)\]/i'                                            => '_markupGalleriesInText',
       '/\[docs\]/i'                                                                     => '_markupDocsInText',
@@ -337,7 +338,7 @@ EOS;
    * @param array $matches
    * @return string
    */
-  protected function _markupLinksInText($matches)
+  protected function _markupAssetLinksInText($matches)
   {
     $asset = $this->_options['object']->getAssetByName($matches[2]);
     if($asset)
@@ -345,6 +346,17 @@ EOS;
       return link_to1($matches[1], $asset->getWebPath());
     }
     return '<small class="asst-link-error">[asset:' . $matches[2] . ']?</small>';
+  }
+
+  /**
+   * Replace occurances of markdown link tag with html link tag pointing at attached asset.
+   *
+   * @param array $matches
+   * @return string
+   */
+  protected function _markupBasicLinksInText($matches)
+  {
+    return link_to1($matches[1], $matches[2]);
   }
 
   /**
@@ -512,9 +524,14 @@ EOS;
         }
         
         $description = '';
-        if($asset->getDescription() !== '')
+
+        if(trim($asset->getDescription()) !== '')
         {
           $description = rtMarkdownToolkit::transformBase($asset->getDescription());
+        }
+        else
+        {
+          
         }
         $string .= sprintf('<li><p>%s</p>%s</li>',
                      link_to(trim($asset->getTitle()) !== '' ? $asset->getTitle() : $asset->getOriginalFilename(),$asset->getWebPath()),

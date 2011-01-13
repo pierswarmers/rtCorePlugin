@@ -82,7 +82,7 @@ class rtTypeString
       $string = htmlentities($string, ENT_QUOTES, 'UTF-8');
     }
     
-    $string = $this->transformAssetMarkup($string);
+    $string = $this->transformExtendedMarkdown($string);
     $string = $this->transformMarkdown($string);
     $string = $this->transformGeshi($string);
 
@@ -97,7 +97,7 @@ class rtTypeString
    */
   protected function getSection($string, $section = 'all')
   {
-    if($section === 'all')
+    if($section === 'all' || ($section !== 'head' && $section !== 'body'))
     {
       return str_replace(sfConfig::get('app_rt_content_section_delimiter', '////'), '', $string);;
     }
@@ -106,16 +106,15 @@ class rtTypeString
     
     if($section === 'head')
     {
-      return $section[0];
+      return $sections[0];
     }
-    
-    if($section === 'body' && isset($section[1]))
+    elseif($section === 'body' && isset($section[1]))
     {
-      return $section[1];
+      return $sections[1];
     }
     else
     {
-      return $section[0];
+      return implode($sections);
     }
   }
   
@@ -212,7 +211,7 @@ class rtTypeString
    * @param string $string
    * @return string
    */
-  protected function transformAssetMarkup($string) 
+  protected function transformExtendedMarkdown($string)
   {
     if(!$this->_options['object'])
     {
@@ -229,7 +228,9 @@ class rtTypeString
       '/\[gallery\]/i'                                                                  => '_markupGalleriesInText',
       '/\[(gallery):([A-Za-z0-9.\-_,]+)\]/i'                                            => '_markupGalleriesInText',
       '/\[docs\]/i'                                                                     => '_markupDocsInText',
-      '/\[(docs):([A-Za-z0-9.\-_,]+)\]/i'                                               => '_markupDocsInText'
+      '/\[(docs):([A-Za-z0-9.\-_,]+)\]/i'                                               => '_markupDocsInText',
+      '/\[([A-Za-z0-9 \-_]+)\]/i'                                                       => '_markupGenericsInText',
+      '/\[\/\]/i'                                                                       => '_markupClosuresInText'
     );
 
     foreach($patterns as $pattern => $callback_function)
@@ -450,7 +451,29 @@ EOS;
 
     return $string;
   }
-  
+
+  /**
+   * Replace occurances of generic tags with div tag with class set to match value.
+   *
+   * @param array $matches
+   * @return string
+   */
+  protected function _markupGenericsInText($matches)
+  {
+    return sprintf('<div class="%s" markdown=1>', $matches[1]);
+  }
+
+  /**
+   * Replace occurances of generic closure tags with div closing tag.
+   *
+   * @param array $matches
+   * @return string
+   */
+  protected function _markupClosuresInText($matches)
+  {
+    return '</div>';
+  }
+
   /**
    * Replace occurances of docs tag with list of attached assets.
    *

@@ -48,7 +48,7 @@
   Section: Gallery
 
 */
-.rt-gallery { list-style:none;margin-left:0; }
+.rt-gallery { list-style:none;margin-left:0; padding-left:0; }
 .rt-gallery div { display: none; }
 .rt-gallery li { padding:0 10px 0 0; margin:0; display: inline; }
 .qtip h3{ margin: 0; font-size: 16px; }

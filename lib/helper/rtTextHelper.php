@@ -34,6 +34,7 @@ function markdown_to_html_safe($string, $object = null)
  */
 function markdown_to_html($string, $object = null, $summary = false)
 {
-  $rt_string = new rtTypeString($string, array('object' => $object));
+  $section = $summary ? 'head' : 'all';
+  $rt_string = new rtTypeString($string, array('object' => $object, 'section' => $section));
   return $rt_string->transform();
 }

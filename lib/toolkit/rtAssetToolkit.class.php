@@ -408,6 +408,7 @@ class rtAssetToolkit
       'application/vnd.oasis.opendocument.spreadsheet',
       'application/vnd.oasis.opendocument.presentation',
       'application/vnd.oasis.opendocument.graphics',
+      'application/vnd.ms-office',
       'application/vnd.ms-excel',
       'application/vnd.ms-powerpoint',
       'application/vnd.mozilla.xul+xml',

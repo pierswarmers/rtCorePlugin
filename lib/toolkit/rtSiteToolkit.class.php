@@ -113,8 +113,6 @@ class rtSiteToolkit
     }
   }
 
-
-
   /**
    * Note: Deprecated in favour of rtSiteToolkit::checkSiteReference()
    *
@@ -132,14 +130,17 @@ class rtSiteToolkit
       $route = $object->getTable()->getTableName() . '_show';
     }
 
-    if(!rtSiteToolkit::isMultiSiteEnabled() || !$object->rtSite || is_null($object->rtSite->getDomain()))
+    $protocol = $context->getRequest()->isSecure() ? 'https://' : 'http://';
+
+    $domain = rtSiteToolkit::getCurrentDomain();
+    
+    if(rtSiteToolkit::isMultiSiteEnabled() && $object->rtSite && !is_null($object->rtSite->getDomain()))
     {
-      $context->getController()->redirect($context->getRouting()->generate($route,$object));
+      $domain = $object->rtSite->getDomain();
     }
 
-    $source = $context->getRequest()->isSecure() ? 'https://' : 'http://';
-    $source .= $object->rtSite->getDomain();
-    $source .= $context->getRouting()->generate($route,$object);
-    $context->getController()->redirect($source);
+    $route = $context->getRouting()->generate($route,$object);
+
+    $context->getController()->redirect($protocol . $domain . $route);
   }
 }

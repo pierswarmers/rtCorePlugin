@@ -1,7 +1,7 @@
 <?php use_helper('I18N', 'Date', 'rtText', 'rtGravatar') ?>
 <?php if(sfConfig::get('app_rt_comment_active', true)): ?>
 <div class="rt-comment-list">
-  <h3><?php echo count($comments) . ' ' .  __('responses to') . '"' . $title . '"' ?></h3>
+  <h3><?php echo count($comments) . ' ' .  __('responses to') . ' "' . $title . '"' ?></h3>
   <ul class="rt-comment-list">
     <?php foreach($comments as $comment): ?>
     <li id="rt-comment-<?php echo $comment->getId() ?>">

@@ -17,6 +17,81 @@
  */
 class rtGuardUserAdminActions extends sfActions
 {
+  private $_export_user_fieldnames = 'id,first_name,last_name,email_address,username,is_super_admin,is_active,last_login,date_of_birth,company,url,created_at,updated_at';
+
+  /**
+   * Return a list of table fieldnames (user and address tables only)
+   *
+   * @return array
+   */
+  private function getUserAddressFieldnameList()
+  {
+    $user_fieldnames    = $this->_export_user_fieldnames;
+    $address_fieldnames = Doctrine::getTable('rtAddress')->getFieldNames();
+    $keys               = array();
+    //$keys               = array_merge($keys, explode(',',$user_fieldnames));
+
+    // Add user prefix
+    $temp_key           = array();
+    foreach(explode(',',$user_fieldnames) as $key => $value)
+    {
+      $temp_key[]       = 'u_'.$value;
+    }
+    $keys               = array_merge($keys, $temp_key);
+
+    // Add billing address prefix
+    $temp_key           = array();
+    foreach($address_fieldnames as $key => $value)
+    {
+      $temp_key[]       = 'billing_a_'.$value;
+    }
+    $keys               = array_merge($keys, $temp_key);
+
+    // Add shipping address prefix
+    $temp_key           = array();
+    foreach($address_fieldnames as $key => $value)
+    {
+      $temp_key[]       = 'shipping_a_'.$value;
+    }
+    $keys               = array_merge($keys, $temp_key);
+    
+    return $keys;
+  }
+
+  /**
+   * Return address array with empty values
+   * 
+   * @param string $prefix (e.g. billing or shipping)
+   * @return array
+   */
+  private function getPlaceholderExportAddress($prefix)
+  {
+    // Get all fieldnames
+    $address_fieldnames = Doctrine::getTable('rtAddress')->getFieldNames();
+
+    // Adde prefix to fieldnames
+    $fieldnames = array();
+    foreach($address_fieldnames as $key => $value)
+    {
+      $fieldnames[$prefix.'_a_'.$value] = " ";
+    }
+
+    return $fieldnames;
+  }
+
+  /**
+   * Return clean values for use in CSV export
+   *
+   * @param string $value
+   * @return string
+   */
+  private function cleanExportValue($value)
+  {
+    $value = str_replace(',', '', $value);
+    $value = preg_replace('/[^@.+:\/a-zA-Z0-9_ -]/s', '', $value);
+    return $value;
+  }
+
   /**
    * Create user report
    *
@@ -26,73 +101,139 @@ class rtGuardUserAdminActions extends sfActions
    */
   public function executeUserReport(sfWebRequest $request)
   {
-    $fields = 'u.id,u.first_name,u.last_name,u.email_address,u.username,u.is_active,u.is_super_admin,u.last_login,u.date_of_birth,u.company,u.url,u.created_at,u.updated_at';
-    $fieldnames = preg_replace('/[\$.]/', '_', $fields);
-    $this->key_order = explode(',', $fieldnames);
+    // Get fieldnames from tables
+    $this->keys = $this->getUserAddressFieldnameList();
+
+    // Users
     $q = Doctrine_Query::create()->from('rtGuardUser u');
-    $q->select($fields)
-      ->orderBy('u.created_at, u.last_name');
+    $q->select($this->_export_user_fieldnames);
+    $q->orderBy('u.created_at, u.last_name');
     $users = $q->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
-    $this->users = $users;
 
-    // Prepare user data for xml and json
-    if($this->getRequest()->getParameter('sf_format') === 'xml' || $this->getRequest()->getParameter('sf_format') === 'json')
+    // Addresses for users
+    $query = Doctrine_Query::create()->from('rtAddress a');
+    $query->select('a.*')
+          ->andWhere('a.model = ?', 'rtGuardUser');
+    $user_addresses = $query->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+
+    $clean_users     = array();
+    $clean_addresses = array();
+
+    foreach($users as $user)
     {
-      $query = Doctrine_Query::create()->from('rtAddress a');
-      $query->select('a.*')
-        ->andWhere('a.model = ?', 'rtGuardUser');
-      $user_addresses = $query->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+      $clean_users[$user['u_id']] = $user;
+    }
 
-      $clean_users = array();
-      $clean_addresses = array();
+    foreach($user_addresses as $address)
+    {
+      $clean_addresses[$address['a_model_id']][] = $address;
+    }
 
-      foreach($this->users as $user)
+    $users_with_addresses = array();
+    foreach($clean_users as $ukey => $user)
+    {
+      // Clean values to prevent export errors
+      foreach($user as $key => $value)
       {
-        $clean_users[$user['u_id']] = $user;
+        $users_with_addresses[$ukey][$key] = $this->cleanExportValue($value);
       }
-      foreach($user_addresses as $address)
+      if(isset($clean_addresses[$ukey]))
       {
-        $clean_addresses[$address['a_model_id']][] = $address;
-      }
-
-      $users_with_addresses = array();
-      foreach($clean_users as $ukey => $user)
-      {
-        $users_with_addresses[$ukey] = $user;
-        if(isset($clean_addresses[$ukey]))
+        foreach($clean_addresses[$ukey] as $key => $address)
         {
-          foreach($clean_addresses[$ukey] as $akey => $address)
+          // Clean values to prevent export errors
+          foreach($address as $key => $value)
           {
-            $users_with_addresses[$ukey]['u_addresses'][$address['a_type']] = $address;
+            $users_with_addresses[$ukey]['u_addresses'][$address['a_type']][$key] = $this->cleanExportValue($value);
           }
         }
       }
-      $this->users = $users_with_addresses;
     }
+    $this->users = $users_with_addresses;
     
     // CSV header
     if($this->getRequest()->getParameter('sf_format') === 'csv')
-    {
-      // Clean first and last name
-      $this->users = array();
-      foreach($users as $key => $user)
+    { 
+      $this->values = array();
+      $i=0;
+      foreach($users_with_addresses as $user)
       {
-        $this->users[$key] = $user;
-        $this->users[$key]['u_first_name'] = preg_replace('/[^a-zA-Z_ -]/s', '', $user['u_first_name']);
-        $this->users[$key]['u_last_name'] = preg_replace('/[^a-zA-Z_ -]/s', '', $user['u_last_name']);
+        // Go through the user data values
+        foreach($user as $key => $value)
+        {
+          if($key !== 'u_addresses')
+          {
+            $this->values[$i][$key]  = (!is_null($value) && $value !== '') ? $this->cleanExportValue($value) : " ";
+          }
+        }
+
+        // Check if user has address/addresses and act accordingly
+        if(array_key_exists('u_addresses', $user))
+        {
+          if(array_key_exists('shipping',$user['u_addresses']) && array_key_exists('billing',$user['u_addresses']))
+          {
+            // User has shipping and billing address
+            foreach($user['u_addresses'] as $key => $value)
+            {
+              // Address values
+              foreach($user['u_addresses']['billing'] as $key => $value)
+              {
+                $key   = 'billing_' . $key;
+                $this->values[$i][$key]  = (!is_null($value) && $value !== '') ? $value : " ";
+              }
+              foreach($user['u_addresses']['shipping'] as $key => $value)
+              {
+                $key   = 'shipping_' . $key;
+                $this->values[$i][$key]  = (!is_null($value) && $value !== '') ? $value : " ";
+              }
+            }
+          }
+          elseif(array_key_exists('shipping',$user['u_addresses']))
+          {
+            // Use dummy billing address with spaces as values
+            $this->values[$i] =  array_merge($this->values[$i],$this->getPlaceholderExportAddress('billing'));
+            // User has shipping address only
+            foreach($user['u_addresses']['shipping'] as $key => $value)
+            {
+              $key   = 'shipping_' . $key;
+              $this->values[$i][$key]  = (!is_null($value) && $value !== '') ? $value : " ";
+            }
+          }
+          else
+          {
+            // User has billing address only
+            foreach($user['u_addresses']['billing'] as $key => $value)
+            {
+              $key   = 'billing_' . $key;
+              $this->values[$i][$key]  = (!is_null($value) && $value !== '') ? $value : " ";
+            }
+            // Use dummy billing address with spaces as values
+            $this->values[$i] = array_merge($this->values[$i],$this->getPlaceholderExportAddress('shipping'));
+          }
+
+        }
+        else
+        {
+          // User has no billing address, use dummy address with spaces as values
+          $this->values[$i] =  array_merge($this->values[$i],$this->getPlaceholderExportAddress('billing'));
+          
+          // User has no shipping address, use dummy address with spaces as values
+          $this->values[$i] =  array_merge($this->values[$i],$this->getPlaceholderExportAddress('shipping'));
+        }
+        $i++;
       }
-      
+
       $response = $this->getResponse();
       $response->setHttpHeader('Last-Modified', date('r'));
       $response->setContentType("application/octet-stream");
       $response->setHttpHeader('Cache-Control','no-store, no-cache');
       if (strstr($_SERVER['HTTP_USER_AGENT'], "MSIE"))
       {
-        $response->setHttpHeader('Content-Disposition','inline; filename="order_report.csv"');
+        $response->setHttpHeader('Content-Disposition','inline; filename="user_report.csv"');
       }
       else
       {
-        $response->setHttpHeader('Content-Disposition','attachment; filename="order_report.csv"');
+        $response->setHttpHeader('Content-Disposition','attachment; filename="user_report.csv"');
       }
 
       $this->setLayout(false);

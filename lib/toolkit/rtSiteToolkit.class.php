@@ -143,4 +143,11 @@ class rtSiteToolkit
 
     $context->getController()->redirect($protocol . $domain . $route);
   }
+
+  public static function getRequestUri(array $source = null)
+  {
+    if ( $source === null ) $source = $_SERVER;
+    
+    return $source['REQUEST_URI'];
+  }
 }

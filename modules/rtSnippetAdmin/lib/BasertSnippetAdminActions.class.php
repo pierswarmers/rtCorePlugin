@@ -192,6 +192,7 @@ class BasertSnippetAdminActions extends sfActions
 
   public function executeShow(sfWebRequest $request)
   {
+    $this->redirectIf($this->getUser()->hasAttribute('rt-snippet-referer'), $condition, '/');
     $this->forward404Unless($this->getUser()->hasAttribute('rt-snippet-referer'));
     $this->redirect($this->getUser()->getAttribute('rt-snippet-referer'));
   }

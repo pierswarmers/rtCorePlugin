@@ -217,7 +217,12 @@ class BasertSnippetAdminActions extends sfActions
       }
       elseif($action == 'show')
       {
-        $this->redirect($this->getUser()->getAttribute('rt-snippet-referer'));
+        $target = $this->getUser()->getAttribute('rt-snippet-referer');
+        if(is_null($target))
+        {
+          $target = '/';
+        }
+        $this->redirect($target);
       }
 
       $this->redirect('rtSnippetAdmin/index');

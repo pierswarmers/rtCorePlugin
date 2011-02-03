@@ -222,7 +222,7 @@ class BasertSnippetAdminActions extends sfActions
         {
           $target = '/';
         }
-        $this->redirect();
+        $this->redirect($target);
       }
 
       $this->redirect('rtSnippetAdmin/index');

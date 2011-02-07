@@ -45,6 +45,22 @@ class PluginrtGuardUserTable extends sfGuardUserTable
   }
 
   /**
+   * Return a query with users the hold a certain permission
+   *
+   * @param  String $permission
+   * @param  Doctrine_Query  $query  an optional query object
+   * @return Doctrine_Query
+   */
+  public function getUsersArrayByPermissionQuery($permission, Doctrine_Query $q = null)
+  {
+    $q = $this->getQuery($q);
+    $q->leftJoin('u.Permissions p');
+    $q->andWhere('p.name = ?',$permission);
+    $q->andWhere('u.is_active = ?',true);
+    return $q;
+  }
+
+  /**
    * Returns a Doctrine_Query object.
    *
    * @param Doctrine_Query $q

@@ -106,6 +106,10 @@ class BasertSnippetAdminActions extends sfActions
     {
       $this->getUser()->setAttribute('rt-snippet-referer', $request->getParameter('rt-snippet-referer'));
     }
+    else
+    {
+      $this->removeRefererFromSession();
+    }
   }
 
   public function executeUpdate(sfWebRequest $request)
@@ -190,11 +194,20 @@ class BasertSnippetAdminActions extends sfActions
     $this->clearCache($rt_snippet);
   }
 
+  private function removeRefererFromSession()
+  {
+    $this->getUser()->getAttributeHolder()->remove('rt-snippet-referer');
+  }
+
   public function executeShow(sfWebRequest $request)
   {
-    $this->redirectIf($this->getUser()->hasAttribute('rt-snippet-referer'), $condition, '/');
-    $this->forward404Unless($this->getUser()->hasAttribute('rt-snippet-referer'));
-    $this->redirect($this->getUser()->getAttribute('rt-snippet-referer'));
+    $target = $this->getUser()->getAttribute('rt-snippet-referer');
+
+    $this->removeRefererFromSession();
+
+    $this->redirectIf(!is_null($target), $target);
+
+    $this->redirect('/');
   }
 
   public function getrtSnippet(sfWebRequest $request)
@@ -218,12 +231,7 @@ class BasertSnippetAdminActions extends sfActions
       }
       elseif($action == 'show')
       {
-        $target = $this->getUser()->getAttribute('rt-snippet-referer');
-        if(is_null($target))
-        {
-          $target = '/';
-        }
-        $this->redirect($target);
+        $this->forward('rtSnippetAdmin', 'show');
       }
 
       $this->redirect('rtSnippetAdmin/index');

@@ -2,8 +2,6 @@
 
 use_helper('I18N', 'rtText');
 
-$sf_user->getAttributeHolder()->remove('rt-snippet-referer');
-
 $class = isset($class) ? $class : 'rt-admin-edit-tools-panel-small';
 
 $options =array(

@@ -35,7 +35,7 @@ class rtSiteToolkit
    * @param array $source the array source to retrieve URL from, defalt is $_SERVER
    * @return string
    */
-  public static function getCurrentDomain(array $source = null)
+  public static function getCurrentDomain(array $source = null, $include_protocol = false)
   {
     if ( $source === null ) $source = $_SERVER;
 
@@ -52,6 +52,12 @@ class rtSiteToolkit
       {
         $domain .= ":{$source['SERVER_PORT']}";
       }
+    }
+
+    if($include_protocol)
+    {
+      $protocol = explode('/', $source['SERVER_PROTOCOL']);
+      $domain = strtolower($protocol[0]) . '://' . $domain;
     }
 
     return self::cleanDomainString($domain);

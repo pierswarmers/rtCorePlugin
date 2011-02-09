@@ -35,7 +35,7 @@ class rtResponseToolkit
     
     $data['og:title'] = $rt_page->getTitle();
     $data['og:type'] = self::getTypeFromObject($rt_page);
-    $data['og:url'] = sfContext::getInstance()->getRouting()->generate('rt_shop_product_show', $rt_page, true);
+    $data['og:url'] = str_replace('frontend_dev.php/', '', rtSiteToolkit::getCurrentDomain(null, true) . rtSiteToolkit::getRequestUri());
     if($rt_page->getPrimaryImage())
     {
       $img_path = rtAssetToolkit::getThumbnailPath($rt_page->getPrimaryImage()->getSystemPath(), array('maxHeight' => 400, 'maxWidth' => 400));

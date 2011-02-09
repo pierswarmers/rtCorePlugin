@@ -75,5 +75,6 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
     $routing->prependRoute('rt_comment_enable',             new sfRoute('/comment/enable',                array('module' => 'rtCommentAdmin', 'action' => 'enable')));
     $routing->prependRoute('rt_contact',                    new sfRoute('/contact',                       array('module' => 'rtContact', 'action' => 'contact')));
     $routing->prependRoute('rt_contact_confirmation',       new sfRoute('/contact/confirmation',          array('module' => 'rtContact', 'action' => 'confirmation')));
+    $routing->prependRoute('rt_social_email',               new sfRoute('/social/:model/:model_id',       array('module' => 'rtSocial', 'action' => 'email')));
   }
 }

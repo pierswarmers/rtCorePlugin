@@ -148,3 +148,14 @@ EOS;
   return $string;
 }
 
+/**
+ * Returns the share by email code snippet
+ * 
+ * @param Array $options
+ * @return Mixed
+ */
+function get_share_badge($object,$options = null)
+{
+  $object = $object->getRawValue() ? $object->getRawValue() : $object;
+  return link_to('Share', url_for('rt_social_email',array('model' => get_class($object),'model_id' => $object->getId())));
+}

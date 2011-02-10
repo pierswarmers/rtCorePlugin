@@ -222,20 +222,13 @@ class rtGuardUserAdminActions extends sfActions
         }
         $i++;
       }
+    }
 
-      $response = $this->getResponse();
-      $response->setHttpHeader('Last-Modified', date('r'));
-      $response->setContentType("application/octet-stream");
-      $response->setHttpHeader('Cache-Control','no-store, no-cache');
-      if (strstr($_SERVER['HTTP_USER_AGENT'], "MSIE"))
-      {
-        $response->setHttpHeader('Content-Disposition','inline; filename="user_report.csv"');
-      }
-      else
-      {
-        $response->setHttpHeader('Content-Disposition','attachment; filename="user_report.csv"');
-      }
-
+    // Set order report headers for export files
+    if(in_array($this->getRequest()->getParameter('sf_format'), array('csv','xml','json')))
+    {
+      // Report filename: user_report_[year|month|day].[csv/xml/json]
+      $this->setReportHeader($this->getRequest()->getParameter('sf_format'), 'user_report_'.date('Ymd'));
       $this->setLayout(false);
     }
 
@@ -247,6 +240,31 @@ class rtGuardUserAdminActions extends sfActions
     $this->pager->setQuery($q);
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
+  }
+
+  /**
+   * Set headers for csv, xml and json exports
+   *
+   * @param String $sf_format
+   */
+  protected function setReportHeader($sf_format, $filename = 'user_report')
+  {
+    $response = $this->getResponse();
+    // Format switch
+    switch ($sf_format) {
+      case 'csv':
+        $response->setHttpHeader('Last-Modified', date('r'));
+        $response->setContentType("application/octet-stream");
+        $response->setHttpHeader('Cache-Control','no-store, no-cache');
+        $response->setHttpHeader('Content-Disposition','attachment; filename="'.$filename.'.csv"');
+        break;
+      case 'xml':
+        $response->setHttpHeader('Content-Disposition','attachment; filename="'.$filename.'.xml"');
+        break;
+      case 'json':
+        $response->setHttpHeader('Content-Disposition','attachment; filename="'.$filename.'.json"');
+        break;
+    }
   }
 
   /**

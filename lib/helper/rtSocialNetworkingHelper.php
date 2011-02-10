@@ -56,7 +56,9 @@ function get_addthis_badge($options = null)
   $string = '';
   $username = sfConfig::get('app_rt_social_networking_service_username');
   $option_string = '';
-  
+
+  use_dynamic_javascript('http://s7.addthis.com/js/250/addthis_widget.js#username=$username');
+
   if(!is_null($options))
   {
     $options['url'] = isset($options['url']) ? $options['url'] : '';
@@ -66,7 +68,7 @@ function get_addthis_badge($options = null)
   }
 
   $string = <<< EOS
-<a class="addthis_button" $option_string href="http://www.addthis.com/bookmark.php?v=250&amp;username=$username"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0; float:left; margin-right:10px;"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=$username"></script>
+<a class="addthis_button" $option_string href="http://www.addthis.com/bookmark.php?v=250&amp;username=$username">Share</a>
 EOS;
 
   return $string;
@@ -87,7 +89,7 @@ EOS;
 function get_sharethis_badge($options = null)
 {
   $string = '';
-  $username = sfConfig::get('app_rt_social_networking_service_username');
+  $username = sfConfig::get('app_rt_social_networking_service_username','');
   $option_string = '';
   use_javascript('http://w.sharethis.com/button/sharethis.js#publisher='.$username);
   
@@ -151,11 +153,88 @@ EOS;
 /**
  * Returns the share by email code snippet
  * 
- * @param Array $options
+ * @param  Array $options
  * @return Mixed
  */
-function get_share_badge($object,$options = null)
+function get_share_badge($object)
 {
-  $object = $object->getRawValue() ? $object->getRawValue() : $object;
-  return link_to('Share', url_for('rt_social_email',array('model' => get_class($object),'model_id' => $object->getId())));
+  $enabled = sfConfig::get('app_rt_share_email',true);
+  if($enabled)
+  {
+    $object = $object->getRawValue() ? $object->getRawValue() : $object;
+
+    // Tags
+    $div_start = '<div id="share-button">';
+    $div_end   = '</div>';
+
+    $link  = link_to('Share', url_for('rt_social_email',array('model' => get_class($object),'model_id' => $object->getId())));
+    $share = $div_start.$link.$div_end;
+
+    return $share;
+  }
+  return;
+}
+
+/**
+ * Return Facebook:Like code snippet
+ *
+ * @see    http://developers.facebook.com/docs/reference/plugins/like
+ * @return Mixed
+ */
+function get_facebook_like_badge()
+{
+  $enabled = sfConfig::get('app_rt_share_facebook_like',true);
+  if($enabled)
+  {
+    // Facebook like parameters
+    $fb_script_url  = 'http://connect.facebook.net/en_US/all.js#xfbml=1';  // Facebook like script URL
+    $fb_layout      = 'button_count';                                      // Parameters: standard, button_count or box_count
+    $fb_faces       = 'false';                                             // True or false
+    $fb_width       = '100';
+    $fb_colorscheme = 'light';                                             // Parameters: light or dark
+
+    // Site specific parameters
+    $site_url      = rtSiteToolkit::getCurrentDomain(null, true) . rtSiteToolkit::getRequestUri();   // Page URL
+
+    // Tags
+    $script_start   = sprintf('<script src="%s">',$fb_script_url);
+    $script_end     = '</script>';
+    $fb_tag_start   = sprintf('<fb:like href="%s" layout="%s" show_faces="%s" width="%s" colorscheme="%s">',$site_url,$fb_layout,$fb_faces,$fb_width,$fb_colorscheme);
+    $fb_tag_end     = '</fb:like>';
+
+    return $script_start.$script_end.$fb_tag_start.$fb_tag_end;
+  }
+  return;
+}
+
+/**
+ * Return Twitter:Tweet code snippet
+ *
+ * @see    http://twitter.com/about/resources/tweetbutton
+ * @return Mixed
+ */
+function get_tweet_badge()
+{
+  $enabled = sfConfig::get('app_rt_share_tweet',true);
+  if($enabled)
+  {
+    // Twitter url parameters
+    $twitter_url           = 'http://twitter.com/share';     // Twitter share URL
+    $twitter_widget_js_url = 'http://platform.twitter.com/widgets.js';
+
+    // Site url and configuration parameters
+    $data_url      = rtSiteToolkit::getCurrentDomain(null, true) . rtSiteToolkit::getRequestUri();   // Page URL
+    $data_count    = 'horizontal';                   // Parameters: none, vertical or horizontal
+    $tweet_text    = 'Tweet';
+    $link_class    = 'twitter-share-button';
+
+    // Tags
+    $script_start  = sprintf('<script type="text/javascript" src="%s">',$twitter_widget_js_url);
+    $script_end    = '</script>';
+    $link_start    = sprintf('<a href="%s" class="%s" data-url="%s" data-count="%s">',$twitter_url,$link_class,$data_url,$data_count);
+    $link_end      = '</a>';
+
+    return $link_start.$tweet_text.$link_end.$script_start.$script_end;
+  }
+  return;
 }

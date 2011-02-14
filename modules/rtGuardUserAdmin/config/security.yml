@@ -1,5 +1,8 @@
 <?php $admin_cred = sfConfig::get('app_rt_user_admin_credential', 'admin_user') . "\n" ?>
 
+downloadReport:
+  is_secure: false
+
 all:
   is_secure: true
   credentials: <?php echo $admin_cred ?>

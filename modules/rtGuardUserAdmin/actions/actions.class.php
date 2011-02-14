@@ -110,47 +110,10 @@ class rtGuardUserAdminActions extends sfActions
     $q->orderBy('u.created_at, u.last_name');
     $users = $q->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
 
-    // Addresses for users
-    $query = Doctrine_Query::create()->from('rtAddress a');
-    $query->select('a.*')
-          ->andWhere('a.model = ?', 'rtGuardUser');
-    $user_addresses = $query->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
-
-    $clean_users     = array();
-    $clean_addresses = array();
-
-    foreach($users as $user)
-    {
-      $clean_users[$user['u_id']] = $user;
-    }
-
-    foreach($user_addresses as $address)
-    {
-      $clean_addresses[$address['a_model_id']][] = $address;
-    }
-
-    $users_with_addresses = array();
-    foreach($clean_users as $ukey => $user)
-    {
-      // Clean values to prevent export errors
-      foreach($user as $key => $value)
-      {
-        $users_with_addresses[$ukey][$key] = $this->cleanExportValue($value);
-      }
-      if(isset($clean_addresses[$ukey]))
-      {
-        foreach($clean_addresses[$ukey] as $key => $address)
-        {
-          // Clean values to prevent export errors
-          foreach($address as $key => $value)
-          {
-            $users_with_addresses[$ukey]['u_addresses'][$address['a_type']][$key] = $this->cleanExportValue($value);
-          }
-        }
-      }
-    }
+    // Users with addresses as array
+    $users_with_addresses = $this->getUsersWithAddressesArray($users);
     $this->users = $users_with_addresses;
-    
+
     // CSV header
     if($this->getRequest()->getParameter('sf_format') === 'csv')
     { 
@@ -243,6 +206,57 @@ class rtGuardUserAdminActions extends sfActions
   }
 
   /**
+   * Return array of users combined with billing and shipping addresses
+   *
+   * @param Doctrine_Collection $users
+   * @return Array
+   */
+  protected function getUsersWithAddressesArray($users)
+  {
+    // Addresses for users
+    $query = Doctrine_Query::create()->from('rtAddress a');
+    $query->select('a.*')
+          ->andWhere('a.model = ?', 'rtGuardUser');
+
+    $user_addresses = $query->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+
+    $clean_users     = array();
+    $clean_addresses = array();
+
+    foreach($users as $user)
+    {
+      $clean_users[$user['u_id']] = $user;
+    }
+
+    foreach($user_addresses as $address)
+    {
+      $clean_addresses[$address['a_model_id']][] = $address;
+    }
+
+    $users_with_addresses = array();
+    foreach($clean_users as $ukey => $user)
+    {
+      // Clean values to prevent export errors
+      foreach($user as $key => $value)
+      {
+        $users_with_addresses[$ukey][$key] = $this->cleanExportValue($value);
+      }
+      if(isset($clean_addresses[$ukey]))
+      {
+        foreach($clean_addresses[$ukey] as $key => $address)
+        {
+          // Clean values to prevent export errors
+          foreach($address as $key => $value)
+          {
+            $users_with_addresses[$ukey]['u_addresses'][$address['a_type']][$key] = $this->cleanExportValue($value);
+          }
+        }
+      }
+    }
+    return $users_with_addresses;
+  }
+
+  /**
    * Set headers for csv, xml and json exports
    *
    * @param String $sf_format
@@ -264,6 +278,52 @@ class rtGuardUserAdminActions extends sfActions
       case 'json':
         $response->setHttpHeader('Content-Disposition','attachment; filename="'.$filename.'.json"');
         break;
+    }
+  }
+
+  /**
+   * API: Return XML or JSON stream of users
+   *
+   * @param sfWebRequest $request
+   * @return Mixed
+   */
+  public function executeDownloadReport(sfWebRequest $request)
+  {
+    $response = $this->getResponse();
+
+    // 403 - Access denied
+    if(!rtApiToolkit::grantApiAccess($request->getParameter('auth')))
+    {
+      $response->setHeaderOnly(true);
+      $response->setStatusCode(403);
+      return sfView::NONE;
+    }
+
+    // Users
+    $q = Doctrine_Query::create()->from('rtGuardUser u');
+    $q->select($this->_export_user_fieldnames);
+
+    // With from date
+    if($request->hasParameter('date_from') && $request->getParameter('date_from') !== '')
+    {
+      $q->andWhere('u.created_at >= ?', urldecode($request->getParameter('date_from')));
+    }
+
+    // With to date
+    if($request->hasParameter('date_to') && $request->getParameter('date_to') !== '')
+    {
+      $q->andWhere('u.created_at <= ?', urldecode($request->getParameter('date_to')));
+    }
+
+    $q->orderBy('u.created_at, u.last_name');
+    $users = $q->execute(array(), Doctrine_Core::HYDRATE_SCALAR);
+
+    // Users with addresses as array
+    $this->users = $this->getUsersWithAddressesArray($users);
+
+    if(in_array($this->getRequest()->getParameter('sf_format'), array('xml','json')))
+    {
+      $this->setLayout(false);
     }
   }
 

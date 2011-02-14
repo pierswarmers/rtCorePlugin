@@ -76,5 +76,8 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
     $routing->prependRoute('rt_contact',                    new sfRoute('/contact',                       array('module' => 'rtContact', 'action' => 'contact')));
     $routing->prependRoute('rt_contact_confirmation',       new sfRoute('/contact/confirmation',          array('module' => 'rtContact', 'action' => 'confirmation')));
     $routing->prependRoute('rt_social_email',               new sfRoute('/social/:model/:model_id',       array('module' => 'rtSocial', 'action' => 'email')));
+
+    // API routes
+    $routing->prependRoute('rt_guard_user_report_stream',   new sfRoute('/api/users/get/user_report.:sf_format/*', array('module' => 'rtGuardUserAdmin', 'action' => 'downloadReport')));
   }
 }

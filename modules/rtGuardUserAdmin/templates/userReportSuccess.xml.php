@@ -3,7 +3,7 @@
 <userReport xmlns="http://www.reditype.com">
   <?php foreach($users as $user): ?>
     <user>
-      <?php foreach ($users[1] as $key => $value): ?>
+      <?php foreach ($user as $key => $value): ?>
         <?php if ($key !== 'u_addresses'): ?>
           <<?php echo $key ?>><?php echo $value ?></<?php echo $key ?>>
         <?php endif; ?>

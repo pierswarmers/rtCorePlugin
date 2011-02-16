@@ -26,6 +26,11 @@ if($asset->isImage())
   $open = '![';
   $close = sprintf('](asset:%s%s)', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_image_link_suffix', '|right|200,400'));
 }
+elseif($asset->getExtension() == 'html')
+{
+  $open = '![';
+  $close = sprintf('](asset:%s)', $asset->getOriginalFilename());
+}
 elseif($asset->isSwf())
 {
   $open = '![';

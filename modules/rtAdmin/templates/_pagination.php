@@ -27,12 +27,6 @@ if($sf_request->hasParameter('show_more'))
     <li class="rt-pager-previous<?php echo $pager->getPage() == $pager->getFirstPage() ? ' here' : '' ?>">
       <a href="<?php echo '?page='.$pager->getPreviousPage().$params ?>"><?php echo $arrows_enabled ? $arrows_lft : '' ?> <?php echo __($titles_previous) ?></a>
     </li>
-    <li class="rt-pager-last<?php echo $pager->getPage() == $pager->getLastPage() ? ' here' : '' ?>">
-      <a href="<?php echo '?page='.$pager->getLastPage().$params ?>"><?php echo __($titles_last) ?> <?php echo $arrows_enabled ? $arrows_rgt.$arrows_rgt : '' ?></a>
-    </li>
-    <li class="rt-pager-next<?php echo $pager->getPage() == $pager->getLastPage() ? ' here' : '' ?>">
-      <a href="<?php echo '?page='.$pager->getNextPage().$params ?>"><?php echo __($titles_next) ?> <?php echo $arrows_enabled ? $arrows_rgt : '' ?></a>
-    </li>
     <li class="rt-pages">
       <ul>
         <?php
@@ -45,8 +39,14 @@ if($sf_request->hasParameter('show_more'))
             <a href="<?php echo '?page='.$page.$params ?>"><?php echo $page ?></a>
           </li>
         <?php endforeach; ?>
-          <li class="last"><a href="<?php echo '?page='.$pager->getPage() . ($sf_request->hasParameter('show_more') ? '' : $params.'&show_more=') ?>"><?php echo $sf_request->hasParameter('show_more') ? __('show less') : __('show more') ?></a></li>
+          <li class="show-more"><a href="<?php echo '?page='.$pager->getPage() . ($sf_request->hasParameter('show_more') ? '' : $params.'&show_more=') ?>"><?php echo $sf_request->hasParameter('show_more') ? __('show less') : __('show more') ?></a></li>
       </ul>
+    </li>
+    <li class="rt-pager-last<?php echo $pager->getPage() == $pager->getLastPage() ? ' here' : '' ?>">
+      <a href="<?php echo '?page='.$pager->getLastPage().$params ?>"><?php echo __($titles_last) ?> <?php echo $arrows_enabled ? $arrows_rgt.$arrows_rgt : '' ?></a>
+    </li>
+    <li class="rt-pager-next<?php echo $pager->getPage() == $pager->getLastPage() ? ' here' : '' ?>">
+      <a href="<?php echo '?page='.$pager->getNextPage().$params ?>"><?php echo __($titles_next) ?> <?php echo $arrows_enabled ? $arrows_rgt : '' ?></a>
     </li>
   </ul>
   <?php if($info_enabled): ?>

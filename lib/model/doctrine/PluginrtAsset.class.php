@@ -48,8 +48,13 @@ abstract class PluginrtAsset extends BasertAsset
    * 
    * @return string
    */
-  public function getExtension()
+  public function getExtension($force_to_lowercase = true)
   {
+    if($force_to_lowercase)
+    {
+      return strtolower(rtAssetToolkit::getExtension($this->getOriginalFilename()));
+    }
+    
     return rtAssetToolkit::getExtension($this->getOriginalFilename());
   }
 

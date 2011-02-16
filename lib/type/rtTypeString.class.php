@@ -220,6 +220,7 @@ class rtTypeString
     
     $patterns = array(
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+).swf\|([0-9]+),([0-9]+)\)/i'               => '_markupSwfInText',
+      '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+).html\)/i'                                 => '_markupHtmlInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\|([0-9]+),([0-9]+)\)/i' => '_markupImagesInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([0-9]+),([0-9]+)\)/i'                   => '_markupImagesInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\)/i'                    => '_markupImagesInText',
@@ -282,6 +283,28 @@ class rtTypeString
 EOS;
       
       return $string;
+    }
+
+    return '<small class="asst-link-error">[asset:' . $filename . ']?</small>';
+  }
+
+
+  /**
+   * Replace occurances of markdown swf tag with html swf embed tag pointing at attached asset.
+   *
+   * @param array $matches
+   * @return string
+   */
+  protected function _markupHtmlInText($matches)
+  {
+    //$alt = $matches[1];
+    $filename = $matches[2] . '.html';
+
+    $asset = $this->_options['object']->getAssetByName($filename);
+
+    if($asset && strtolower($asset->getExtension()) == 'html')
+    {
+      return file_get_contents($asset->getSystemPath());
     }
 
     return '<small class="asst-link-error">[asset:' . $filename . ']?</small>';

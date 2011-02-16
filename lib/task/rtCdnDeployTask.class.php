@@ -69,7 +69,7 @@ not deployed:
   /log/*|INFO]
 
 You can specify the options passed to the rsync executable, using the
-[rsync-options|INFO] option (defaults are [-azC --force --delete --progress|INFO]):
+[rsync-options|INFO] option (defaults are [-LazC --force --delete --progress|INFO]):
 
   [./symfony project:deploy --go --rsync-options=-avz|INFO]
 EOF;
@@ -150,7 +150,7 @@ EOF;
 
     $web_dir = sfConfig::get('sf_web_dir') . '/';
 
-    $command = "rsync $dryRun $parameters -e -L $ssh $web_dir $user$host:$dir";
+    $command = "rsync $dryRun $parameters -e $ssh $web_dir $user$host:$dir";
 
     $this->getFilesystem()->execute($command, $options['trace'] ? array($this, 'logOutput') : null, array($this, 'logErrors'));
 

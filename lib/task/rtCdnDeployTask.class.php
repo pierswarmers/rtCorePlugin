@@ -150,7 +150,7 @@ EOF;
 
     $web_dir = sfConfig::get('sf_web_dir') . '/';
 
-    $command = "rsync $dryRun $parameters -e $ssh $web_dir $user$host:$dir";
+    $command = "rsync $dryRun $parameters -e -L $ssh $web_dir $user$host:$dir";
 
     $this->getFilesystem()->execute($command, $options['trace'] ? array($this, 'logOutput') : null, array($this, 'logErrors'));
 

@@ -13,4 +13,10 @@
     <label  for="rt-asset-edit-filename"><?php echo __('Filename') ?>:</label><br />
     <input class="text" type="text" name="filename" id="rt-asset-edit-filename" value="<?php echo $asset->getOriginalFilename() ?>" />
   </p>
+  <?php if($asset->isTextEditable()) { ?>
+  <p>
+    <label for="rt-asset-edit-content"><?php echo __('File Content') ?>:</label><br />
+    <textarea name="content" id="rt-asset-edit-content"><?php echo $asset->getFileContent() ?></textarea>
+  </p>
+  <?php } ?>
 </form>

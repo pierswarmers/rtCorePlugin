@@ -80,6 +80,10 @@ class BasertAssetActions extends sfActions
     $asset->setTitle($request->getParameter('title'));
     $asset->setDescription($request->getParameter('description'));
     $asset->setOriginalFilename($request->getParameter('filename'));
+    if($asset->isTextEditable())
+    {
+      $asset->setFileContent($request->getParameter('content'));
+    }
     //$asset->setCopyright($request->getParameter('copyright'));
     //$asset->setAuthor($request->getParameter('author'));
     $asset->save();

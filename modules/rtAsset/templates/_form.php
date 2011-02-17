@@ -63,7 +63,8 @@ $(document).ready(function() {
                                     id : dialog.find('input[name=id]').val(),
                                     title : dialog.find('input[name=title]').val(),
                                     description : dialog.find('textarea[name=description]').val(),
-                                    filename : dialog.find('input[name=filename]').val()
+                                    filename : dialog.find('input[name=filename]').val(),
+                                    content : dialog.find('textarea[name=content]').val()
                                   }),
                                   dataType: "html",
                                   success: function(msg){

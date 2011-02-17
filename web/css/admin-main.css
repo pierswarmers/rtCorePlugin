@@ -229,4 +229,4 @@ td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #9
 .ui-dialog .ui-dialog-content { padding: 1em 1em 0; }
 .ui-dialog input, .ui-dialog textarea  { width:500px; }
 .ui-dialog textarea  { height:40px; }
-.ui-dialog p  { margin-bottom:10px; }
+.ui-dialog p  { margin-bottom:5px; }

@@ -104,6 +104,37 @@ abstract class PluginrtAsset extends BasertAsset
   }
 
   /**
+   * Retrieve the files content.
+   *
+   * @return string
+   */
+  public function getFileContent()
+  {
+    return file_get_contents($this->getSystemPath());
+  }
+
+  /**
+   * Retrieve the files content.
+   *
+   * @param strinf $string
+   * @return string
+   */
+  public function setFileContent($content)
+  {
+    return file_put_contents($this->getSystemPath(), $content);
+  }
+
+  /**
+   * Is a file editable as text.
+   *
+   * @return boolean
+   */
+  public function isTextEditable()
+  {
+    return in_array($this->getExtension(), array('txt', 'html', 'htm', 'xhtml', 'xml', 'yml', 'json', 'css', 'rst'));
+  }
+
+  /**
    * Enhance the defult deletion to include removal of any static files.
    * 
    * @param Doctrine_Connection $conn

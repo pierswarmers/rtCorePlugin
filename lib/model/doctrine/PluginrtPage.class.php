@@ -15,6 +15,7 @@
  * @subpackage model
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @method integer   getId()         Returns the objects id
  */
 abstract class PluginrtPage extends BasertPage
 {

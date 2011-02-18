@@ -80,9 +80,11 @@ class BasertAssetActions extends sfActions
     $asset->setTitle($request->getParameter('title'));
     $asset->setDescription($request->getParameter('description'));
     $asset->setOriginalFilename($request->getParameter('filename'));
+    
     if($asset->isTextEditable())
     {
       $asset->setFileContent($request->getParameter('content'));
+      $asset->setFilesize(filesize($asset->getSystemPath()));
     }
     //$asset->setCopyright($request->getParameter('copyright'));
     //$asset->setAuthor($request->getParameter('author'));
@@ -184,6 +186,50 @@ class BasertAssetActions extends sfActions
     $this->error = $error;
     return sfView::ERROR;
   }
+
+
+  /**
+   * Execute a file upload, communicating the success or failure via an ajax response.
+   *
+   * Note: This response is set as plain/text since application/json responses were causing
+   * issues. When calling this action, please use:
+   *
+   * <code>
+   * url_for('@rt_asset_upload?sf_format=json')
+   * </code>
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeCreate(sfWebRequest $request)
+  {
+    $this->setLayout(false);
+    sfConfig::set('sf_web_debug', false);
+
+    $this->setTemplate('upload');
+
+    $object = Doctrine::getTable($request->getParameter('model'))->findOneById($request->getParameter('model_id'));
+
+
+    if(!$request->hasParameter('model_id') || !$request->hasParameter('model'))
+    {
+      $this->error = 'Model or Model ID were not sent with request.';
+      return sfView::ERROR;
+    }
+
+    $asset = new rtAsset();
+    $asset->setOriginalFilename('snippet.html');
+    $asset->setFilename(sha1($asset->getOriginalFilename().rand(11111, 99999)).'.'.$asset->getExtension());
+    $asset->setMimeType('text/html');
+    $asset->setModelId($request->getParameter('model_id'));
+    $asset->setModel($request->getParameter('model'));
+    $asset->setPosition(count($object->getAssets()) + 1);
+    $asset->setFileContent('<!-- your HTML here -->');
+    $asset->setFilesize(filesize($asset->getSystemPath()));
+    $asset->save();
+    $this->asset = $asset;
+    return sfView::SUCCESS;
+  }
+
 
   /**
    * Returns a form object.

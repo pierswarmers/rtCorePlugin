@@ -117,11 +117,10 @@ abstract class PluginrtAsset extends BasertAsset
    * Retrieve the files content.
    *
    * @param strinf $string
-   * @return string
    */
   public function setFileContent($content)
   {
-    return file_put_contents($this->getSystemPath(), $content);
+     rtAssetToolkit::putContents($this->getSystemPath(), $content);
   }
 
   /**

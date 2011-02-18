@@ -68,6 +68,7 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
     $routing->prependRoute('rt_search',                     new sfRoute('/search',                        array('module' => 'rtSearch', 'action' => 'index')));
     $routing->prependRoute('rt_search_ajax',                new sfRoute('/search.:sf_format',             array('module' => 'rtSearchAdmin', 'action' => 'ajaxSearch')));
     $routing->prependRoute('rt_asset_upload',               new sfRoute('/asset/upload',                  array('module' => 'rtAsset', 'action' => 'upload')));
+    $routing->prependRoute('rt_asset_create',               new sfRoute('/asset/create',                  array('module' => 'rtAsset', 'action' => 'create')));
     $routing->prependRoute('rt_asset_request',              new sfRoute('/uploads/private/:filename',     array('module' => 'rtAsset', 'action' => 'delivery')));
     $routing->prependRoute('rt_asset_reorder',              new sfRoute('/asset/reorder.:sf_format',      array('module' => 'rtAsset', 'action' => 'reorder')));
     $routing->prependRoute('rt_asset_delete',               new sfRoute('/asset/delete.:sf_format',       array('module' => 'rtAsset', 'action' => 'delete')));

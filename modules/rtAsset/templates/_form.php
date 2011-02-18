@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var $object rtPage
+ * @var $form sfForm
+ * @var $sf_data sfOutputEscaperArrayDecorator
+ */
+?>
 <?php use_helper('I18N', 'Text') ?>
 <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js') ?>
 <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js') ?>
@@ -17,7 +24,8 @@
       <?php endforeach; ?>
     </ul>
     <p>
-      <button id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload a file') ?></button>
+      <button id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload') ?></button>
+      <button id="createButton<?php echo $panel_suffix ?>"><?php echo __('.html') ?></button>
       <span id="rtCoreUploadPanelMessage<?php echo $panel_suffix ?>"></span>
     </p>
     <?php endif; ?>
@@ -29,13 +37,30 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+  var message = $('#rtCoreUploadPanelMessage<?php echo $panel_suffix ?>');
   $('#uploadImageButton<?php echo $panel_suffix ?>').button({
     icons: { primary: 'ui-icon-transfer-e-w' }
   });
 
+  $('#createButton<?php echo $panel_suffix ?>').button({
+    icons: { primary: 'ui-icon-plus' }
+  }).click(function(){
+
+    $.get('<?php echo url_for('@rt_asset_create') ?>',
+      {
+        'model_id'   : '<?php echo $object->getId() ?>',
+        'model'      : '<?php echo get_class($sf_data->getRaw('object')) ?>'
+      },
+      function(data) {
+      $("#rtCoreUploadPanel<?php echo $panel_suffix ?>").append(data);
+      message.text('<?php echo __('Done') ?>').fadeOut(4000);
+    });
+
+  });
+
   editAsset = function(assetId, assetOriginalFilename)
   {
-    
+
     var url = '<?php echo url_for('rtAsset/edit') ?>';
     var dialog = $('<div style="display:hidden" title="<?php echo __('Editing') ?>: ' + assetOriginalFilename + '"></div>').appendTo('body');
 
@@ -118,9 +143,8 @@ $(document).ready(function() {
       }
     );
 	});
-  var button = $('#uploadImageButton<?php echo $panel_suffix ?>');
-  var message = $('#rtCoreUploadPanelMessage<?php echo $panel_suffix ?>');
-  new AjaxUpload(button,{
+
+  new AjaxUpload($('#uploadImageButton<?php echo $panel_suffix ?>'),{
     action: '<?php echo url_for('@rt_asset_upload') ?>',
     name: 'rt_asset[filename]',
     data: {
@@ -136,9 +160,10 @@ $(document).ready(function() {
     onComplete: function(file, response){
       this.enable();
       $("#rtCoreUploadPanel<?php echo $panel_suffix ?>").append(response);
-      message.text('<?php echo __('Upload complete') ?>').fadeOut(4000);
+      message.text('<?php echo __('Done') ?>').fadeOut(4000);
     }
   });
+
 });
 </script>
 <?php endif; ?>

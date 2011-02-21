@@ -40,15 +40,26 @@ class BasertSearchAdminActions extends sfActions
 
   public function executeAjaxSearch(sfWebRequest $request)
   {
-    $query = Doctrine::getTable('rtIndex')->getBasePublicSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
+    if($request->hasParameter('models'))
+    {
+      $query = Doctrine::getTable('rtIndex')->getStandardSearchComponentInQuery(
+                 $request->getParameter('q',''),
+                 $this->getUser()->getCulture(),
+                 Doctrine::getTable('rtIndex')->getModelTypeRestrictionQuery(explode(',',$request->getParameter('models')))
+      );
+    }
+    else
+    {
+      $query = Doctrine::getTable('rtIndex')->getBasePublicSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
+    }
+
+    $this->logMessage('{testing}' . $request->getParameter('q','')  , 'notice');
+    
     $query->limit(100);
     $rt_indexes = $query->execute();
 
     $routes = $this->getContext()->getRouting()->getRoutes();
 
-    // sfContext::getInstance()->getController()->genUrl($internal_uri, false);
-    // link_to_if(isset($routes[Doctrine_Inflector::tableize($rt_index->getCleanModel()).'_show']),$rt_index->getObject()->getTitle(), Doctrine_Inflector::tableize($rt_index->getCleanModel()).'_show', $rt_index->getObject())
-    
     $items = array();
 
     foreach($rt_indexes as $rt_index)
@@ -63,10 +74,16 @@ class BasertSearchAdminActions extends sfActions
         $url = str_replace('/frontend_dev.php', '', $url);
       }
 
-      $items[] = array(
-        'title' => $rt_index->getObject()->getTitle(),
+      $object = $rt_index->getObject();
+
+      $item = array(
+        'title' => $object->getTitle(),
         'link' => $url
       );
+
+      $item['placeholder'] = ($object instanceof rtSnippet) ? '!['.$object->getTitle() . '](snippet:'.$object->getCollection().')' : '';
+
+      $items[] = $item;
 
     }
 

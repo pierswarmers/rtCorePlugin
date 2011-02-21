@@ -219,6 +219,7 @@ class rtTypeString
     }
     
     $patterns = array(
+      '/!\[(\w.+)\]\(snippet:([A-Za-z0-9.\-_]+)\)/i'                                    => '_markupSnippetInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+).swf\|([0-9]+),([0-9]+)\)/i'               => '_markupSwfInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+).html\)/i'                                 => '_markupHtmlInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\|([0-9]+),([0-9]+)\)/i' => '_markupImagesInText',
@@ -297,7 +298,6 @@ EOS;
    */
   protected function _markupHtmlInText($matches)
   {
-    //$alt = $matches[1];
     $filename = $matches[2] . '.html';
 
     $asset = $this->_options['object']->getAssetByName($filename);
@@ -308,6 +308,45 @@ EOS;
     }
 
     return '<small class="asst-link-error">[asset:' . $filename . ']?</small>';
+  }
+
+
+  /**
+   * Replace occurances of markdown snippet includes with the snippet content.
+   *
+   * @param array $matches
+   * @return string
+   */
+  protected function _markupSnippetInText($matches)
+  {
+    $collection = $matches[2];
+
+    $snippet = Doctrine::getTable('rtSnippet')->findOneByCollection($collection);
+
+    if(!$snippet)
+    {
+      return '<small class="asst-link-error">[snippet:' . $collection . ']?</small>';
+    }
+
+    // check for cicular references
+    $o_collection = '';
+
+    try
+    {
+      $o_collection = $this->_options['object']->getCollection();
+
+      if($o_collection == $collection)
+      {
+        return 'Circular reference found!';
+      }
+    } catch (Exception $e)
+    {
+      // do nothing, just pass on.
+    }
+
+    $text = new rtTypeString($snippet->getContent(), array('object' => $snippet));
+
+    return $text->transform();
   }
   
   /**

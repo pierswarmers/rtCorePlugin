@@ -73,18 +73,24 @@ function enableLinkPanel(inputId, buttonId, updatePanel, updateUrl, targetTextFi
  */
 function triggerLinkPanelLookup(inputId, updatePanel, updateUrl)
 {
-  $.ajax({
-    url: updateUrl,
-    dataType: 'json',
-    data: {q : $(inputId).attr('value')},
-    success: function(data) {
-      $(updatePanel).show();
-      $(updatePanel).html('');
-      $.each(data.items, function(index, value) {
-        $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'[\',closeWith:\']('+value.link+')\',placeHolder:\''+value.title+'\' }); $(\'.rt-modal-panel\').dialog(\'close\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
-      });
-    }
-  });
+    $.ajax({
+        url: updateUrl,
+        dataType: 'json',
+        data: {q : $(inputId).attr('value')},
+        success: function(data) {
+            $(updatePanel).show();
+            $(updatePanel).html('');
+            $.each(data.items, function(index, value) {
+                if(value.placeholder == ''){
+                    $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'[\',closeWith:\']('+value.link+')\',placeHolder:\''+value.title+'\' }); $(\'.rt-modal-panel\').dialog(\'close\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+                }
+                else
+                {
+                    $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'\',placeHolder:\''+value.placeholder+'\' }); $(\'.rt-modal-panel\').dialog(\'close\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+                }
+            });
+        }
+    });
 }
 
 /*

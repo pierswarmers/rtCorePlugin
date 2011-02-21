@@ -80,9 +80,10 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
     $rand = rand();
     $id = $attributes['id'];
     $uri = sfContext::getInstance()->getController()->genUrl('@rt_search_ajax?sf_format=json');
+    $uri_snippet = sfContext::getInstance()->getController()->genUrl('@rt_search_ajax?models=rtSnippet&sf_format=json');
 
     $js = sprintf(<<<EOF
-<div id="rtLinkPanel$rand" class="rt-modal-panel $id rtLinkPanel"  title="Create a new link">
+<div id="rtLinkPanel$rand" class="rt-modal-panel $id-link rtLinkPanel"  title="Create a new link">
 
   <fieldset><legend>Build your own link to any URL</legend>
   <p class="inline-text-form-row inline-text-form-row-simple">
@@ -94,9 +95,19 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
   <fieldset style="margin-bottom:none;"><legend>Or, find an existing page to link to</legend>
   <p class="inline-text-form-row"><strong>Enter search Terms:</strong>
       <input type="text" name="q" id="rtLinkPanelQuery$rand" value="" />
-      <button type="submit" class="rtLinkPanelSearchButton" id="rtLinkPanelId$rand">Search</button>
+      <button type="submit" class="rtPanelSearchButton" id="rtLinkPanelId$rand">Search</button>
   </p>
   <ul id="rtLinkPanelResults$rand" class="inner-panel results-panel">&nbsp;</ul>
+  </fieldset>
+</div>
+
+<div id="rtSnippetPanel$rand" class="rt-modal-panel $id-snippet rtSnippetPanel"  title="Create a snippet include">
+  <fieldset style="margin-bottom:none;"><legend>Find a snippet to include in your content</legend>
+  <p class="inline-text-form-row"><strong>Enter search Terms:</strong>
+      <input type="text" name="q" id="rtSnippetPanelQuery$rand" value="" />
+      <button type="submit" class="rtPanelSearchButton" id="rtSnippetPanelId$rand">Search</button>
+  </p>
+  <ul id="rtSnippetPanelResults$rand" class="inner-panel results-panel">&nbsp;</ul>
   </fieldset>
 </div>
 
@@ -115,7 +126,7 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
       return false;
     });
 
-    $('.rtLinkPanelSearchButton').button({
+    $('.rtPanelSearchButton').button({
       icons: {
         primary: 'ui-icon-search'
       }
@@ -126,6 +137,14 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
       '#rtLinkPanelId$rand',
       '#rtLinkPanelResults$rand',
       '$uri',
+      '#$id'
+    );
+    
+    enableLinkPanel(
+      '#rtSnippetPanelQuery$rand',
+      '#rtSnippetPanelId$rand',
+      '#rtSnippetPanelResults$rand',
+      '$uri_snippet',
       '#$id'
     );
 

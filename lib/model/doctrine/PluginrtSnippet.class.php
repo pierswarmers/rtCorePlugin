@@ -18,5 +18,8 @@
  */
 abstract class PluginrtSnippet extends BasertSnippet
 {
-
+  public function getTypeNice()
+  {
+    return 'Snippet';
+  }
 }

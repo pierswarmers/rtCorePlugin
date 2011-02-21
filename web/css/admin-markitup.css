@@ -181,12 +181,15 @@ body {
 	background-image:url(../images/buttons/application_view_list.png);
 }
 .markItUpHeader .markItUpButton13 a {
-	background-image:url(../images/buttons/application_split.png);
+	background-image:url(../images/buttons/application_get.png);
 }
 .markItUpHeader .markItUpButton14 a {
-	background-image:url(../images/buttons/application_shout1.png);
+	background-image:url(../images/buttons/application_split.png);
 }
 .markItUpHeader .markItUpButton15 a {
+	background-image:url(../images/buttons/application_shout1.png);
+}
+.markItUpHeader .markItUpButton16 a {
 	background-image:url(../images/buttons/application_shout2.png);
 }
 

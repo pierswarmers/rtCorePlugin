@@ -143,11 +143,23 @@ class PluginrtIndexTable extends Doctrine_Table
    */
   public function getPublicModelsQuery(Doctrine_Query $query = null)
   {
+    $public_models = sfConfig::get('app_rt_search_public_models', array('rtShopProduct','rtShopCategory','rtBlogPage', 'rtSitePage', 'rtWikiPage'));
+    return $this->getModelTypeRestrictionQuery($public_models , $query);
+  }
+
+  /**
+   * Return a query with restricted model conditions.
+   * @param array $models
+   * @param Doctrine_Query|null $query
+   * @return Doctrine_Query
+   */
+  public function getModelTypeRestrictionQuery(array $models, Doctrine_Query $query = null)
+  {
     $query = $this->getQuery($query);
-    $query->andWhereIn('i.model', sfConfig::get('app_rt_search_public_models', array('rtShopProduct','rtShopCategory','rtBlogPage', 'rtSitePage', 'rtWikiPage')));
+    $query->andWhereIn('i.model', $models);
     return $query;
   }
-  
+
   /**
    * Add a search query based on a set of keyword values.
    *

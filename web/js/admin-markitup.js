@@ -53,7 +53,7 @@ rtMarkdownSettings = {
             afterInsert:function(h) {
                 $('.' + $(h.textarea).attr('id') + '-snippet').dialog({
                     resizable: false,
-                    height:400,
+                    height:280,
                     width: 550,
                     modal: true,
                     buttons: { }

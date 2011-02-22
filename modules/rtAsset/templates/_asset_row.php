@@ -18,23 +18,23 @@
   </div>
 <?php
 
-$open = '[';
-$close = sprintf('](asset:%s)', $asset->getOriginalFilename());
+$open = '\n[';
+$close = sprintf('](asset:%s)\n', $asset->getOriginalFilename());
 
 if($asset->isImage())
 {
-  $open = '![';
-  $close = sprintf('](asset:%s%s)', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_image_link_suffix', '|right|200,400'));
+  $open = '\n![';
+  $close = sprintf('](asset:%s%s)\n', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_image_link_suffix', '|right|200,400'));
 }
 elseif($asset->getExtension() == 'html')
 {
-  $open = '![';
-  $close = sprintf('](asset:%s)', $asset->getOriginalFilename());
+  $open = '\n![';
+  $close = sprintf('](asset:%s)\n', $asset->getOriginalFilename());
 }
 elseif($asset->isSwf())
 {
-  $open = '![';
-  $close = sprintf('](asset:%s%s)', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_swf_link_suffix', '|500,400'));
+  $open = '\n![';
+  $close = sprintf('](asset:%s%s)\n', $asset->getOriginalFilename(), sfConfig::get('app_rt_asset_swf_link_suffix', '|500,400'));
 }
 
 ?>

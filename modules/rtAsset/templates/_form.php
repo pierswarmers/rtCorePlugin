@@ -14,7 +14,7 @@
 <?php $description_text = __('Description goes here...') ?>
 <div id="rt-asset-edit-window" style="display:none;"></div>
 <fieldset class="rt-core-upload">
-  <legend><?php echo __('Attached Files') ?></legend>
+  <legend><?php echo __('Attached Assets') ?></legend>
   <?php if($object->isNew()): ?>
   <p><?php echo __('Please create page before adding assets.'); ?></p>
   <?php else: ?>

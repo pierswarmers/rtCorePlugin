@@ -217,7 +217,7 @@ class BasertAssetActions extends sfActions
     }
 
     $asset = new rtAsset();
-    $asset->setOriginalFilename('snippet.html');
+    $asset->setOriginalFilename('segment.html');
     $asset->setFilename(sha1($asset->getOriginalFilename().rand(11111, 99999)).'.'.$asset->getExtension());
     $asset->setMimeType('text/html');
     $asset->setModelId($request->getParameter('model_id'));

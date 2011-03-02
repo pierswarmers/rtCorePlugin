@@ -82,11 +82,11 @@ function triggerLinkPanelLookup(inputId, updatePanel, updateUrl)
             $(updatePanel).html('');
             $.each(data.items, function(index, value) {
                 if(value.placeholder == ''){
-                    $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'[\',closeWith:\']('+value.link+')\',placeHolder:\''+value.title+'\' }); $(\'.rt-modal-panel\').dialog(\'close\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+                  $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'[\',closeWith:\']('+value.link+')\',placeHolder:\''+value.title.replace(/\'/g, "&rsquo;")+'\' }); $(\'.rt-modal-panel\').dialog(\'close\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
                 }
                 else
                 {
-                    $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'\',placeHolder:\''+value.placeholder+'\' }); $(\'.rt-modal-panel\').dialog(\'close\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
+                  $('<li><a href="#" class="close" onclick="$.markItUp({openWith: \'\',placeHolder:\''+value.placeholder+'\' }); $(\'.rt-modal-panel\').dialog(\'close\'); return false;">'+value.title+'</a></li>').appendTo(updatePanel);
                 }
             });
         }

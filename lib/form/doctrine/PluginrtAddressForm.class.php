@@ -23,7 +23,9 @@ abstract class PluginrtAddressForm extends BasertAddressForm
 
     $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
 
-    $object = $this->getOption('object');
+    // Variables
+    $is_optional = (!is_null($this->getOption('is_optional'))) ? $this->getOption('is_optional') : true;
+    $object      = $this->getOption('object');
 
     $this->setWidget('type', new sfWidgetFormInputHidden());
 
@@ -57,8 +59,6 @@ abstract class PluginrtAddressForm extends BasertAddressForm
     $this->setWidget('country', new sfWidgetFormSelect(array('choices' => $countries)));
     // <<< end countries
 
-
-
     $this->setWidget('state',        new rtWidgetFormSelectRegion(array('add_empty' => '--', 'country' => $this->getObject()->getCountry())));
     $this->setWidget('instructions', new sfWidgetFormInput());
     $this->setWidget('model',        new sfWidgetFormInputHidden());
@@ -82,7 +82,7 @@ abstract class PluginrtAddressForm extends BasertAddressForm
       'phone'        => new sfValidatorString(array('max_length' => 20, 'required' => false))
     ));
 
-    $this->validatorSchema->setPostValidator(new rtAddressValidator(array('use_names' => $this->getOption('use_names', false))));
+    $this->validatorSchema->setPostValidator(new rtAddressValidator(array('use_names' => $this->getOption('use_names', false), 'is_optional' => $is_optional)));
     $this->widgetSchema->setHelp('phone', 'Please include your area code.');
   }
 

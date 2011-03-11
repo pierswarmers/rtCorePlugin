@@ -28,8 +28,8 @@ function rt_get_snippet($name)
  * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
- * @param  string $name
- * @return string
+ * @param      string $name
+ * @return     string
  */
 function rt_get_global_snippet($name)
 {
@@ -42,8 +42,8 @@ function rt_get_global_snippet($name)
  * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
- * @param  string $name
- * @return string
+ * @param      string $name
+ * @return     string
  */
 function rt_get_module_snippet_for_module($name)
 {
@@ -57,8 +57,8 @@ function rt_get_module_snippet_for_module($name)
  * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
- * @param  string $name
- * @return string
+ * @param      string $name
+ * @return     string
  */
 function rt_get_snippet_for_action($name)
 {
@@ -67,3 +67,154 @@ function rt_get_snippet_for_action($name)
   return rt_get_snippet($name);
 }
 
+/**
+ * Include a search form with and input field and an button
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @return     string
+ */
+function rt_get_search_form()
+{
+  return include_partial('rtSearch/form', array('form' => new rtSearchForm()));
+}
+
+/**
+ * Include a tag cloud
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @return     string
+ */
+function rt_get_tag_cloud()
+{
+  return include_component('rtTag', 'cloud');
+}
+
+/**
+ * Include a list of the latest blog posts (news)
+ * Default $number is 5
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @param      integer $number Number of posts shown
+ * @return     string
+ */
+function rt_get_blog_latest($number = 5)
+{
+  return include_component('rtBlogPage', 'latest', array('limit' => $number));
+}
+
+/**
+ * Include a list of archived blog posts
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @return     string
+ */
+function rt_get_blog_archive()
+{
+  return include_component('rtBlogPage', 'archive');
+}
+
+/**
+ * Include a site navigation
+ * $contextual Decides if the navigation reacts to the current URI or not.
+ *             Defaults to false, so that reacts to URI.
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @param      boolean $contextual True or false. If false, current URI alters the navigation
+ * @return     string
+ */
+function rt_get_nav_full($contextual = false)
+{
+  $options = array('render_full' => $contextual);
+
+  $nav = include_component('rtSitePage', 'navigation', array('options' => $options));
+
+  return $nav;
+}
+
+/**
+ * Include a site navigation: First level elements only
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @return     string
+ */
+function rt_get_nav_primary()
+{
+  $options = array('render_full' => true,
+                   'limit_upper' => 1);
+
+  $nav = include_component('rtSitePage', 'navigation', array('options' => $options));
+  
+  return $nav;
+}
+
+/**
+ * Include a site navigation: Second level elements only
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @return     string
+ */
+function rt_get_nav_secondary()
+{
+  $options = array('render_full' => false,
+                   'include_root' => false,
+                   'limit_lower' => 2,
+                   'limit_upper' => 2);
+
+  $nav = include_component('rtSitePage', 'navigation', array('options' => $options));
+
+  return $nav;
+}
+
+/**
+ * Include a site navigation: Defined range of levels
+ *
+ * If only $lover defined then everthing of that level and lower is shown
+ * If $lower and $upper are defined then only the items in that range are shown
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @param      integer $lower Min. lower level to display
+ * @param      boolean $contextual True or false. If false, current URI alters the navigation
+ * @param      integer $upper Max. upper level to display
+ * @return     string
+ */
+function rt_get_nav_range($lower, $contextual = false, $upper = null)
+{
+  $options = array('render_full' => $contextual,
+                   'include_root' => ($lower <= 1) ? true : false,
+                   'limit_lower' => $lower,
+                   'limit_upper' => $upper);
+
+  // Unset upper if not used
+  if(is_null($upper))
+  {
+    unset($options['limit_upper']);
+  }
+
+  $nav = include_component('rtSitePage', 'navigation', array('options' => $options));
+
+  return $nav;
+}

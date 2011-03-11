@@ -137,9 +137,9 @@ function rt_get_blog_archive()
  * @param      boolean $contextual True or false. If false, current URI alters the navigation
  * @return     string
  */
-function rt_get_nav_full($contextual = false)
+function rt_get_nav_full($contextual = true)
 {
-  $options = array('render_full' => $contextual);
+  $options = array('render_full' => !$contextual);
 
   $nav = include_component('rtSitePage', 'navigation', array('options' => $options));
 

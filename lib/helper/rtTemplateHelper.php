@@ -134,7 +134,7 @@ function rt_get_blog_archive()
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
- * @param      boolean $contextual True or false. If false, current URI alters the navigation
+ * @param      boolean $contextual True or false. If true, current URI alters the navigation
  * @return     string
  */
 function rt_get_nav_full($contextual = true)
@@ -197,13 +197,13 @@ function rt_get_nav_secondary()
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
  * @param      integer $lower Min. lower level to display
- * @param      boolean $contextual True or false. If false, current URI alters the navigation
+ * @param      boolean $contextual True or false. If true, current URI alters the navigation
  * @param      integer $upper Max. upper level to display
  * @return     string
  */
-function rt_get_nav_range($lower, $contextual = false, $upper = null)
+function rt_get_nav_range($lower, $contextual = true, $upper = null)
 {
-  $options = array('render_full' => $contextual,
+  $options = array('render_full' => !$contextual,
                    'include_root' => ($lower <= 1) ? true : false,
                    'limit_lower' => $lower,
                    'limit_upper' => $upper);

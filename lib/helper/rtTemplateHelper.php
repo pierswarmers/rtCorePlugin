@@ -14,12 +14,13 @@
  * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
- * @param  string $name
- * @return string
+ * @param      string $name     Collection and cache name
+ * @param      string $default  Default text
+ * @return     string
  */
-function rt_get_snippet($name)
+function rt_get_snippet($name, $default = '')
 {
-  return include_component('rtSnippet','snippetPanel', array('collection' => $name,'sf_cache_key' => $name));
+  return include_component('rtSnippet','snippetPanel', array('collection' => $name, 'sf_cache_key' => $name, 'default' => $default));
 }
 
 /**
@@ -28,12 +29,13 @@ function rt_get_snippet($name)
  * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
- * @param      string $name
+ * @param      string $name     Collection and cache name
+ * @param      string $default  Default text
  * @return     string
  */
-function rt_get_global_snippet($name)
+function rt_get_global_snippet($name, $default = '')
 {
-  return rt_get_snippet($name);
+  return rt_get_snippet($name, $default);
 }
 
 /**
@@ -42,13 +44,14 @@ function rt_get_global_snippet($name)
  * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
- * @param      string $name
+ * @param      string $name     Collection and cache name
+ * @param      string $default  Default text
  * @return     string
  */
-function rt_get_module_snippet_for_module($name)
+function rt_get_module_snippet_for_module($name, $default = '')
 {
   $name .= '-' . sfContext::getInstance()->getRequest()->getParameter('module');
-  return rt_get_snippet($name);
+  return rt_get_snippet($name, $default);
 }
 
 /**
@@ -57,14 +60,15 @@ function rt_get_module_snippet_for_module($name)
  * @package    Reditype
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
- * @param      string $name
+ * @param      string $name     Collection and cache name
+ * @param      string $default  Default text
  * @return     string
  */
-function rt_get_snippet_for_action($name)
+function rt_get_snippet_for_action($name, $default = '')
 {
   $name .= '-' . sfContext::getInstance()->getRequest()->getParameter('module');
   $name .= '-' . sfContext::getInstance()->getRequest()->getParameter('action');
-  return rt_get_snippet($name);
+  return rt_get_snippet($name, $default);
 }
 
 /**

@@ -9,6 +9,22 @@
  */
 
 /**
+ * Return status if string is empty
+ * Can be used for snippets, partials, components, etc.
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @param      string $string String to check
+ * @return     boolean
+ */
+function rt_is_string_empty($string)
+{
+  return in_array(trim(strip_tags($string)), array('', 'Edit', null));
+}
+
+/**
  * Include a snippet by a given $name value - this will be global.
  *
  * @package    Reditype

@@ -199,8 +199,8 @@ function get_facebook_like_badge()
     // Tags
     $script_start   = sprintf('<script src="%s">',$fb_script_url);
     $script_end     = '</script>';
-    $fb_tag_start   = sprintf('<fb:like href="%s" layout="%s" show_faces="%s" width="%s" colorscheme="%s">',$site_url,$fb_layout,$fb_faces,$fb_width,$fb_colorscheme);
-    $fb_tag_end     = '</fb:like>';
+    $fb_tag_start   = sprintf('<span id="fb-root"><fb:like href="%s" layout="%s" show_faces="%s" width="%s" colorscheme="%s">',$site_url,$fb_layout,$fb_faces,$fb_width,$fb_colorscheme);
+    $fb_tag_end     = '</fb:like></span>';
 
     return $script_start.$script_end.$fb_tag_start.$fb_tag_end;
   }

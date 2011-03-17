@@ -199,7 +199,7 @@ function get_facebook_like_badge()
     // Tags
     $script_start   = sprintf('<script src="%s">',$fb_script_url);
     $script_end     = '</script>';
-    $fb_tag_start   = sprintf('<span id="fb-root"><fb:like href="%s" layout="%s" show_faces="%s" width="%s" colorscheme="%s">',$site_url,$fb_layout,$fb_faces,$fb_width,$fb_colorscheme);
+    $fb_tag_start   = sprintf('<span id="fb-root"><fb:like style="display:block;" href="%s" layout="%s" show_faces="%s" width="%s" colorscheme="%s">',$site_url,$fb_layout,$fb_faces,$fb_width,$fb_colorscheme);
     $fb_tag_end     = '</fb:like></span>';
 
     return $script_start.$script_end.$fb_tag_start.$fb_tag_end;
@@ -231,10 +231,10 @@ function get_tweet_badge()
     // Tags
     $script_start  = sprintf('<script type="text/javascript" src="%s">',$twitter_widget_js_url);
     $script_end    = '</script>';
-    $link_start    = sprintf('<a href="%s" class="%s" data-url="%s" data-count="%s">',$twitter_url,$link_class,$data_url,$data_count);
+    $link_start    = sprintf('<a href="%s" class="%s" style="display:block;" data-url="%s" data-count="%s">',$twitter_url,$link_class,urldecode($data_url),$data_count);
     $link_end      = '</a>';
 
-    return $link_start.$tweet_text.$link_end.$script_start.$script_end;
+    return $script_start.$script_end.$link_start.$tweet_text.$link_end;
   }
   return;
 }

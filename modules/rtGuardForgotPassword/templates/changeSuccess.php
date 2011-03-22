@@ -12,5 +12,5 @@
       <li class="rt-form-row"><?php echo $form['password_again']->renderLabel() ?><div class="rt-form-field"><?php echo $form['password_again'] ?></div></li>
     </ul>
   </fieldset>
-  <p class="rt-form-tools"><button><?php echo __('Change', null, 'sf_guard') ?></button></p>
+  <p class="rt-form-tools"><button type="submit"><?php echo __('Change', null, 'sf_guard') ?></button></p>
 </form>

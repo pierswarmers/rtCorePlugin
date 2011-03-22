@@ -11,6 +11,12 @@
     margin: 0 0 10px 0;
   }
 
+  blockquote {
+    background: #efefef;
+    border-left: 3px solid #CCCCCC;
+    padding: 10px;
+  }
+
   ul {
     margin: 0 0 10px 0;
     padding: 0 0 0 30px;

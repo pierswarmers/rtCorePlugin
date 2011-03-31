@@ -60,6 +60,19 @@ class rtGuardRegisterForm extends sfGuardRegisterForm
         new sfValidatorDoctrineUnique(array('model' => 'sfGuardUser', 'column' => array('username')), array('invalid' => 'That username is already taken.')),
       ))
     );
+
+    // Optionally configured ReCAPTCHA widget and validator.
+    if(sfConfig::has('app_recaptcha_public_key'))
+    {
+      $this->widgetSchema['captcha'] = new sfWidgetFormReCaptcha(array(
+        'public_key' => sfConfig::get('app_recaptcha_public_key'),
+        'theme' => sfConfig::get('app_recaptcha_theme', 'clean')
+      ));
+      $this->validatorSchema['captcha'] = new sfValidatorReCaptcha(array(
+        'private_key' => sfConfig::get('app_recaptcha_private_key')
+      ), array('captcha' => 'The captcha you entered didn\'t pass validation, please try again.'));
+      $this->widgetSchema->setLabel('content', 'Your Comment');
+    }
   }
 
   public function getModelName()

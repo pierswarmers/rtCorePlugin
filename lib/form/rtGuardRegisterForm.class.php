@@ -71,7 +71,6 @@ class rtGuardRegisterForm extends sfGuardRegisterForm
       $this->validatorSchema['captcha'] = new sfValidatorReCaptcha(array(
         'private_key' => sfConfig::get('app_recaptcha_private_key')
       ), array('captcha' => 'The captcha you entered didn\'t pass validation, please try again.'));
-      $this->widgetSchema->setLabel('content', 'Your Comment');
     }
   }
 

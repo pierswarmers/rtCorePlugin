@@ -48,7 +48,7 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
     {
       $request_params = $request->getParameter($this->form->getName());
 
-      if(sfConfig::get('app_rt_register_recaptcha_enabled', false))
+      if(sfConfig::get('app_rt_registration_recaptcha_enabled', false))
       {
         $captcha = array(
           'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),

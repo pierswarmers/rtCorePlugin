@@ -444,7 +444,10 @@ class rtGuardUserAdminActions extends sfActions
     $request->checkCSRFProtection();
 
     $this->forward404Unless($sf_guard_user = Doctrine::getTable('rtGuardUser')->find(array($request->getParameter('id'))), sprintf('Object rt_guard_user does not exist (%s).', $request->getParameter('id')));
+
     $sf_guard_user->delete();
+
+    $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.delete_object', array('object' => $sf_guard_user)));
 
     $this->redirect('rtGuardUserAdmin/index');
   }
@@ -469,6 +472,8 @@ class rtGuardUserAdminActions extends sfActions
     if ($form->isValid())
     {
       $sf_guard_user = $form->save();
+      
+      $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.save_object', array('object' => $sf_guard_user)));
 
       $action = $request->getParameter('rt_post_save_action', 'index');
 
@@ -480,5 +485,13 @@ class rtGuardUserAdminActions extends sfActions
       $this->redirect('rtGuardUserAdmin/index');
     }
     $this->getUser()->setFlash('default_error', true, false);
+  }
+
+  /**
+   * @return sfEventDispatcher
+   */
+  protected function getDispatcher(sfWebRequest $request)
+  {
+    return ProjectConfiguration::getActive()->getEventDispatcher(array('request' => $request));
   }
 }

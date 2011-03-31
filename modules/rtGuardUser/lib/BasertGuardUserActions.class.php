@@ -67,6 +67,8 @@ class BasertGuardUserActions extends sfActions
     {
       $sf_guard_user = $form->save();
 
+      $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.save_object', array('object' => $sf_guard_user)));
+
       $action = $request->getParameter('rt_post_save_action', 'index');
 
       $this->getUser()->setFlash('notice', 'Your account has been updated.');
@@ -85,5 +87,13 @@ class BasertGuardUserActions extends sfActions
   protected function getForm(sfGuardUser $rt_guard_user)
   {
     return new rtGuardUserPublicForm($rt_guard_user);
+  }
+
+  /**
+   * @return sfEventDispatcher
+   */
+  protected function getDispatcher(sfWebRequest $request)
+  {
+    return ProjectConfiguration::getActive()->getEventDispatcher(array('request' => $request));
   }
 }

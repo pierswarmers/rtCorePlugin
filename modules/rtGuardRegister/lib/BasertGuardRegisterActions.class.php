@@ -58,6 +58,9 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
         }
         
         $user = $this->form->save();
+
+        $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.save_object', array('object' => $user)));
+
         $this->getUser()->signIn($user);
         $this->getUser()->setFlash('notice', 'You are registered and signed in!');
         $this->getUser()->setAttribute('registration_success', true);
@@ -157,5 +160,13 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
   protected function getAdminEmail()
   {
     return sfConfig::get('app_rt_registration_admin_email', sfConfig::get('app_rt_admin_email'));
+  }
+
+  /**
+   * @return sfEventDispatcher
+   */
+  protected function getDispatcher(sfWebRequest $request)
+  {
+    return ProjectConfiguration::getActive()->getEventDispatcher(array('request' => $request));
   }
 }

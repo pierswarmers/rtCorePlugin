@@ -54,8 +54,6 @@ class rtGuardRegisterForm extends sfGuardRegisterForm
     $this->widgetSchema->setHelp('url', 'Must start with: http:// or https://');
     $this->setValidator('url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Please enter a valid website address.')));
 
-
-
     $this->validatorSchema->setPostValidator(
       new sfValidatorAnd(array(
         new sfValidatorDoctrineUnique(array('model' => 'sfGuardUser', 'column' => array('email_address')), array('invalid' => 'That email address is already taken.')),

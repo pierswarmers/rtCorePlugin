@@ -46,7 +46,19 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
 
     if ($request->isMethod('post'))
     {
-      $this->form->bind($request->getParameter($this->form->getName()));
+      $request_params = $request->getParameter($this->form->getName());
+
+      if(sfConfig::get('app_rt_comment_recaptcha_enabled', false))
+      {
+        $captcha = array(
+          'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
+          'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
+        );
+        $request_params['captcha'] = $captcha;
+      }
+
+      $this->form->bind($request_params);
+      
       if ($this->form->isValid())
       {
         if(sfConfig::get('app_rt_registration_is_administered', true))
@@ -58,9 +70,6 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
         }
         
         $user = $this->form->save();
-
-        $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.save_object', array('object' => $user)));
-
         $this->getUser()->signIn($user);
         $this->getUser()->setFlash('notice', 'You are registered and signed in!');
         $this->getUser()->setAttribute('registration_success', true);
@@ -160,13 +169,5 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
   protected function getAdminEmail()
   {
     return sfConfig::get('app_rt_registration_admin_email', sfConfig::get('app_rt_admin_email'));
-  }
-
-  /**
-   * @return sfEventDispatcher
-   */
-  protected function getDispatcher(sfWebRequest $request)
-  {
-    return ProjectConfiguration::getActive()->getEventDispatcher(array('request' => $request));
   }
 }

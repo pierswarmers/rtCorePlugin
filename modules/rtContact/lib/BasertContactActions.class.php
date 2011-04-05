@@ -40,18 +40,7 @@ class BasertContactActions extends sfActions
 
     if($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT))
     {
-      $request_params = $request->getParameter($this->form->getName());
-
-      if(sfConfig::has('app_recaptcha_public_key'))
-      {
-        $captcha = array(
-          'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
-          'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
-        );
-        $request_params['captcha'] = $captcha;
-      }
-
-      $this->form->bind($request_params);
+      $this->form->bind($request->getParameter($this->form->getName()));
 
       if($this->form->isValid())
       {

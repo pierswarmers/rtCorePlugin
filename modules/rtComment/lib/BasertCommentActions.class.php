@@ -55,18 +55,7 @@ class BasertCommentActions extends sfActions
 
     if($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT))
     {
-      $request_params = $request->getParameter($form->getName());
-
-      if(sfConfig::get('app_rt_comment_recaptcha_enabled', false))
-      {
-        $captcha = array(
-          'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
-          'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
-        );
-        $request_params['captcha'] = $captcha;
-      }
-
-      $form->bind($request_params);
+      $form->bind($request->getParameter($form->getName()));
 
       if($form->isValid())
       {

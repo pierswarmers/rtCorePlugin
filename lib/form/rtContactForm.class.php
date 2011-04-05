@@ -28,18 +28,6 @@ class rtContactForm extends sfForm
     $this->widgetSchema['phone']    = new sfWidgetFormInput(array(), array());
     $this->widgetSchema['comments'] = new sfWidgetFormTextarea(array(),array());
 
-    // Optionally configured ReCAPTCHA widget and validator.
-    if(sfConfig::has('app_recaptcha_public_key'))
-    {
-      $this->widgetSchema['captcha'] = new sfWidgetFormReCaptcha(array(
-        'public_key' => sfConfig::get('app_recaptcha_public_key'),
-        'theme' => sfConfig::get('app_recaptcha_theme', 'clean')
-      ));
-      $this->validatorSchema['captcha'] = new sfValidatorReCaptcha(array(
-        'private_key' => sfConfig::get('app_recaptcha_private_key')
-      ), array('captcha' => 'The captcha you entered didn\'t pass validation, please try again.'));
-    }
-
     // Labels
     $this->widgetSchema->setLabel('name',"Name:");
     $this->widgetSchema->setLabel('email',"Email Address:");
@@ -55,6 +43,21 @@ class rtContactForm extends sfForm
     $this->setValidator('email', new sfValidatorEmail(array('required' => true),array('required' => 'Please provide a valid email address')));
     $this->setValidator('phone', new sfValidatorString(array('required' => false)));
     $this->setValidator('comments', new sfValidatorString(array('required' => false)));
+
+    // Optionally configured Captcha widget and validator.
+    if(sfConfig::get('app_rt_captcha_enabled', true))
+    {
+      $this->widgetSchema['captcha'] = new rtWidgetFormCaptcha();
+      $this->widgetSchema->setLabel('captcha', 'Are you human');
+      $this->setValidator('captcha', new rtValidatorCaptcha(array('required' => true), array('required' => 'The captcha is required, please try again.','invalid' => 'The captcha you entered didn\'t pass validation, please try again.')));
+    }
+
+    // Optionally configured Honeypot widget and validator.
+    if(sfConfig::get('app_rt_honeypot_enabled', true))
+    {
+      $this->widgetSchema['special_name'] = new rtWidgetFormHoneypot();
+      $this->setValidator('special_name', new rtValidatorHoneypot(array('required' => false),array()));
+    }
 
     $this->widgetSchema->setNameFormat('bd_basic_form[%s]');
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

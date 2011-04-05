@@ -57,6 +57,11 @@ class rtWidgetFormCaptcha extends sfWidgetForm
     $captcha_passphrase[] = array('Which is a colour: bird, house or orange','orange','');
     $captcha_passphrase[] = array('Which is a colour: car, pink or horse','pink','');
     $captcha_passphrase[] = array('Which is a colour: yellow, fork or dog','yellow','');
+    $captcha_passphrase[] = array('What comes next in this series: a, b, c , d ...','e','');
+    $captcha_passphrase[] = array('Cars drive on','road,roads,street,streets,lane,highway','');
+    $captcha_passphrase[] = array('Fish live in','water,sea,seas,ocean,oceans,river,rivers,tank,tanks,fish tank','');
+    $captcha_passphrase[] = array('Cows and horses like eating','grass','');
+    $captcha_passphrase[] = array('Which is bigger, a mouse or an elephant','elephant,elephants','');
 
     // Use default questions when not overwritten in configuration
     $captcha_passphrase = sfConfig::get('app_rt_captcha_passphrase_options', $captcha_passphrase);

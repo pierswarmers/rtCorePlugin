@@ -46,7 +46,7 @@ class BasertCommentActions extends sfActions
 
   /**
    * Display comment form incase of validation issues
-   *
+   *  
    * @param sfWebRequest $request
    */
   public function executeCreate(sfWebRequest $request)

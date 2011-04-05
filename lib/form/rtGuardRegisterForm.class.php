@@ -69,11 +69,11 @@ class rtGuardRegisterForm extends sfGuardRegisterForm
       $this->setValidator('captcha', new rtValidatorCaptcha(array('required' => true), array('required' => 'The captcha is required, please try again.','invalid' => 'The captcha you entered didn\'t pass validation, please try again.')));
     }
 
-    // Optionally configured ReCAPTCHA widget and validator.
+    // Optionally configured Honeypot widget and validator.
     if(sfConfig::get('app_rt_honeypot_enabled', true))
     {
-      //$this->widgetSchema['special_name'] = new sfWidgetFormInputHidden();
-      //$this->setValidator('special_name', new sfValidatorString(array('required' => false, 'max_length' => 0)));
+      $this->widgetSchema['special_name'] = new rtWidgetFormHoneypot();
+      $this->setValidator('special_name', new rtValidatorHoneypot(array('required' => false),array()));
     }
   }
 

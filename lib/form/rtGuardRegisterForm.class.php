@@ -61,16 +61,19 @@ class rtGuardRegisterForm extends sfGuardRegisterForm
       ))
     );
 
-    // Optionally configured ReCAPTCHA widget and validator.
-    if(sfConfig::has('app_recaptcha_public_key'))
+    // Optionally configured Captcha widget and validator.
+    if(sfConfig::get('app_rt_captcha_enabled', true))
     {
-      $this->widgetSchema['captcha'] = new sfWidgetFormReCaptcha(array(
-        'public_key' => sfConfig::get('app_recaptcha_public_key'),
-        'theme' => sfConfig::get('app_recaptcha_theme', 'clean')
-      ));
-      $this->validatorSchema['captcha'] = new sfValidatorReCaptcha(array(
-        'private_key' => sfConfig::get('app_recaptcha_private_key')
-      ), array('captcha' => 'The captcha you entered didn\'t pass validation, please try again.'));
+      $this->widgetSchema['captcha'] = new rtWidgetFormCaptcha();
+      $this->widgetSchema->setLabel('captcha', 'Are you human');
+      $this->setValidator('captcha', new rtValidatorCaptcha(array('required' => true), array('required' => 'The captcha is required, please try again.','invalid' => 'The captcha you entered didn\'t pass validation, please try again.')));
+    }
+
+    // Optionally configured ReCAPTCHA widget and validator.
+    if(sfConfig::get('app_rt_honeypot_enabled', true))
+    {
+      //$this->widgetSchema['special_name'] = new sfWidgetFormInputHidden();
+      //$this->setValidator('special_name', new sfValidatorString(array('required' => false, 'max_length' => 0)));
     }
   }
 

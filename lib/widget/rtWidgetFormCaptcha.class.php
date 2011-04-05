@@ -43,19 +43,23 @@ class rtWidgetFormCaptcha extends sfWidgetForm
   {
     // Default questions, captcha_passphrase_options not configured
     $captcha_passphrase   = array();
-    $captcha_passphrase[] = array('1 + 4 =', '5,five','');
-    $captcha_passphrase[] = array('1 + 2 =','3,three','');
-    $captcha_passphrase[] = array('6 - 2 =','4,four','');
-    $captcha_passphrase[] = array('4 &divide; 2 =','2,two','');
+    $captcha_passphrase[] = array('What is 1 + 4', '5,five','');
+    $captcha_passphrase[] = array('What is 1 + 2','3,three','');
+    $captcha_passphrase[] = array('What is 6 - 2','4,four','');
+    $captcha_passphrase[] = array('What is 4 &divide; 2','2,two','');
     $captcha_passphrase[] = array('','monday','is the first day of the working week.');
     $captcha_passphrase[] = array('Which do you prefer: blue, green or red','blue,green,red','');
     $captcha_passphrase[] = array('How many days in a week','7,seven','');
     $captcha_passphrase[] = array('What color is the sky: blue, red or orange','blue','');
-    $captcha_passphrase[] = array('Is ice hot or cold?','cold','');
-    $captcha_passphrase[] = array('Which of these is a colour: boat, bank or purple','purple','');
+    $captcha_passphrase[] = array('Is ice hot or cold','cold','');
+    $captcha_passphrase[] = array('What is the opposite of cold','hot,warm','');
+    $captcha_passphrase[] = array('Which is a colour: boat, bank or purple','purple','');
+    $captcha_passphrase[] = array('Which is a colour: bird, house or orange','orange','');
+    $captcha_passphrase[] = array('Which is a colour: car, pink or horse','pink','');
+    $captcha_passphrase[] = array('Which is a colour: yellow, fork or dog','yellow','');
 
     // Use default questions when not overwritten in configuration
-    $captcha_passphrase = (sfConfig::has('app_rt_captcha_passphrase_options')) ? sfConfig::get('app_rt_captcha_passphrase_options') : $captcha_passphrase;
+    $captcha_passphrase = sfConfig::get('app_rt_captcha_passphrase_options', $captcha_passphrase);
 
     $this->addRequiredOption('captcha_passphrase');
     $this->setOption('captcha_passphrase', $captcha_passphrase);

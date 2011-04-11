@@ -231,3 +231,12 @@ td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #9
 .ui-dialog input, .ui-dialog textarea  { width:500px; }
 .ui-dialog textarea  { height:40px; }
 .ui-dialog p  { margin-bottom:5px; }
+/*
+
+Order Graphs
+
+*/
+#rt-admin-content .graph-totals, #rt-admin-content .graph-averages {height:440px;width:370px;margin:0;padding:0;display:inline-block;}
+#rt-admin-content .graph-totals h2, #rt-admin-content .graph-averages h2 {border-top:none !important;}
+#rt-admin-content .graph-totals {float:left;}
+#rt-admin-content .graph-averages {float:right;}

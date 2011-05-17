@@ -11,6 +11,8 @@ rtAddress:
   columns:
     model_id:     integer
     model:        string(100)
+    longitude:    { type: decimal(18), scale: 8 }
+    latitude:     { type: decimal(18), scale: 8 }
     first_name:   { type: string(100), notblank: true }
     last_name:    { type: string(100), notblank: true }
     type:         { type: enum, values: [billing, shipping], default: billing }

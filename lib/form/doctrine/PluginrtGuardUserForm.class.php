@@ -97,7 +97,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
       {
         $address = $this->getValue($name);
 
-        if (!isset($address['address_1']))
+        if (!isset($address['address_1']) || $address['address_1'] === '')
         {
           unset($forms[$name]);
         }

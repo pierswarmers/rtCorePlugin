@@ -17,5 +17,28 @@
  */
 abstract class PluginrtAddress extends BasertAddress
 {
+  public function save(Doctrine_Connection $conn = null)
+  {
+    if(sfConfig::get('app_rt_address_geo_coords_enabled', false))
+    {
+      $coords = GoogleMaps::getCoords(
+        array(
+             $this->address_1,
+             $this->address_2,
+             $this->town,
+             $this->state,
+             $this->country,
+             $this->postcode
+        )
+      );
 
+      if(is_array($coords))
+      {
+        $this->setLatitude($coords['latitude']);
+        $this->setLongitude($coords['longitude']);
+      }
+    }
+    
+    parent::save($conn);
+  }
 }

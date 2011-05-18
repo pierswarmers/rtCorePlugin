@@ -11,6 +11,16 @@
 /**
  * rtGuardUserPublicForm
  *
+ * Intended for usage by individuals wanting to change their account details, this form is a stripped down version
+ * of it's administration alternative rtGuardUserForm.
+ *
+ * There is also a couple of extended configuration available to alter it's mode:
+ *
+ * `app_rt_account_profile_is_simple` can be set to either: true or false
+ * `app_rt_account_address_is_simple` can be set to either: true or false
+ * 
+ * Both settings default to simple mode.
+ *
  * @package    rtCorePlugin
  * @subpackage form
  * @author     Piers Warmers <piers@wranglers.com.au>
@@ -30,30 +40,28 @@ class rtGuardUserPublicForm extends rtGuardUserForm
       $this['permissions_list']
     );
 
+    if($this->isProfileModeSimple())
+    {
+      unset($this['url'], $this['date_of_birth']);
+    }
+    else
+    {
+      $this->widgetSchema->setLabel('url', 'Website');
+      $this->widgetSchema->setHelp('url', 'Must start with: http:// or https://');
+      $this->setValidator('url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Please enter a valid website address.')));
+    }
 
     $this->widgetSchema->setHelp('first_name', 'Required');
     $this->setValidator('first_name', new sfValidatorString(array('required' => true)));
     $this->widgetSchema->setHelp('last_name', 'Required');
     $this->setValidator('last_name', new sfValidatorString(array('required' => true)));
 
-
     $this->widgetSchema->setHelp('email_address', 'Required');
     $this->widgetSchema->setHelp('username', 'Required');
-
 
     $this->widgetSchema->setHelp('password', 'Must be at least 6 characters long');
     $this->setValidator('password', new sfValidatorString(array('required' => false, 'min_length' => 6)));
     $this->widgetSchema->setHelp('password_again', 'Once again, just to be sure');
-
-
-    $this->widgetSchema->setHelp('url', 'Must start with: http:// or https://');
-    $this->setValidator('url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Please enter a valid website address.')));
-
-    $this->widgetSchema->setLabel('url', 'Website');
-    $this->widgetSchema->setHelp('url', 'Must start with: http:// or https://');
-    $this->setValidator('url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Please enter a valid website address.')));
-
-
 
     $this->validatorSchema->setPostValidator(
       new sfValidatorAnd(array(
@@ -61,6 +69,53 @@ class rtGuardUserPublicForm extends rtGuardUserForm
         new sfValidatorDoctrineUnique(array('model' => 'sfGuardUser', 'column' => array('username')), array('invalid' => 'That username is already taken.')),
       ))
     );
+  }
+
+  /**
+   * Return an instanciated address form.
+   *
+   * @param rtAddress $address
+   * @param array $options
+   * @return rtAddressForm
+   */
+  protected function getAddressForm(rtAddress $address, $options = array())
+  {
+    return new rtAddressPublicForm($address, $options);
+  }
+
+  /**
+   * Is the form configured in
+   *
+   * @return bool
+   */
+  public function isProfileModeSimple()
+  {
+    return sfConfig::get('app_rt_account_profile_is_simple', true);
+  }
+
+  /**
+   * Is the form configured in
+   *
+   * @return bool
+   */
+  public function isAddressModeSimple()
+  {
+    return sfConfig::get('app_rt_account_address_is_simple', true);
+  }
+
+  /**
+   * Set the address forms.
+   *
+   * @return void
+   */
+  protected function setEmbeddedForms()
+  {
+    $this->setEmbeddedAddressForm('billing_address', 'billing');
+
+    if(!$this->isAddressModeSimple())
+    {
+      $this->setEmbeddedAddressForm('shipping_address', 'shipping');
+    }
   }
 }
 ?>

@@ -18,11 +18,11 @@
 class sfWidgetFormSchemaFormatterRtList extends sfWidgetFormSchemaFormatter
 {
   protected
-      $rowFormat                 = '<li class="rt-form-row">%label%<div class="rt-form-field">%error%%field%%help%%hidden_fields%</div></li>',
+      $rowFormat                 = "  <li class=\"rt-form-row\">\n%label%<div class=\"rt-form-field\">%error%%field%%help%%hidden_fields%</div></li>\n",
       $helpFormat                = '<small class="rt-help">%help%</small>',
       $errorRowFormat            = '<dt class="rt-error-global">Errors:</dt><dd>%errors%</dd>',
       $errorListFormatInARow     = '<ul class="rt-error-list">%errors%</ul>',
       $errorRowFormatInARow      = '<li>%error%</li>',
       $namedErrorRowFormatInARow = '<li>%name%: %error%</li>',
-      $decoratorFormat           = '<ul class=123>\n  %content%</ul>';
+      $decoratorFormat           = "<ul class=\"rt-form-schema\">\n%content%\n</ul>";
 }

@@ -11,6 +11,12 @@
 /**
  * PluginrtGuardUserForm
  *
+ * The following form manages the user profile administration. That is to say, it includes both sfDoctrineGuard and
+ * address components to provide a single point of managment.
+ *
+ * It's base intention is for usage in an administration context, thus has a fairly verbose set of fields. It is extended
+ * by it's public version rtGuardUserPublicForm.
+ *
  * @package    rtCorePlugin
  * @subpackage form
  * @author     Piers Warmers <piers@wranglers.com.au>
@@ -59,34 +65,65 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
     $this->setWidget('groups_list', new sfWidgetFormDoctrineChoice(array('expanded' => true ,'multiple' => true, 'model' => 'sfGuardGroup')));
     $this->setWidget('permissions_list', new sfWidgetFormDoctrineChoice(array('expanded' => true, 'multiple' => true, 'model' => 'sfGuardPermission')));
 
-    $billing_address = new rtAddress;
-    $billing_address->setType('billing');
-    $billing_address->setModel('rtGuardUser');
+    $this->setEmbeddedForms();
+  }
 
-    $shipping_address = new rtAddress;
-    $shipping_address->setType('shipping');
-    $shipping_address->setModel('rtGuardUser');
+  /**
+   * Set the address forms.
+   * 
+   * @return void
+   */
+  protected function setEmbeddedForms()
+  {
+    $this->setEmbeddedAddressForm('billing_address', 'billing');
+    $this->setEmbeddedAddressForm('shipping_address', 'shipping');
+  }
+
+  /**
+   * Embed a single address form.
+   * 
+   * @param  string $name
+   * @param  string $type
+   * @return void
+   */
+  protected function setEmbeddedAddressForm($name, $type)
+  {
+    $address = new rtAddress;
+    $address->setType($type);
+    $address->setModel('rtGuardUser');
 
     if(!$this->isNew())
     {
-      $tmp_address_1 = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'shipping');
-      if($tmp_address_1)
+      $tmp_address = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), $type);
+      if($tmp_address)
       {
-        $shipping_address = $tmp_address_1;
+        $address = $tmp_address;
       }
-      $tmp_address_2 = Doctrine::getTable('rtAddress')->getAddressForObjectAndType($this->getObject(), 'billing');
-      if($tmp_address_2)
-      {
-        $billing_address = $tmp_address_2;
-      }
-      $billing_address->setModelId($this->object->getId());
-      $shipping_address->setModelId($this->object->getId());
+      $address->setModelId($this->object->getId());
     }
 
-    $this->embedForm('billing_address', new rtAddressForm($billing_address, array('object' => $this->object, 'is_optional' => true)));
-    $this->embedForm('shipping_address', new rtAddressForm($shipping_address, array('object' => $this->object, 'is_optional' => true)));
+    $this->embedForm($name, $this->getAddressForm($address, array('object' => $this->object, 'is_optional' => true)));
   }
 
+  /**
+   * Return an instanciated address form.
+   * 
+   * @param rtAddress $address
+   * @param array $options
+   * @return rtAddressForm
+   */
+  protected function getAddressForm(rtAddress $address, $options = array())
+  {
+    return new rtAddressForm($address, $options);
+  }
+
+  /**
+   * Save the embedded forms but removing empty addresses.
+   * 
+   * @param $con
+   * @param $forms
+   * @return mixed
+   */
   public function saveEmbeddedForms($con = null, $forms = null)
   {
     if (null === $forms)

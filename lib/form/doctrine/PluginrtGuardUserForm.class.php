@@ -129,9 +129,14 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
     if (null === $forms)
     {
       $forms = $this->embeddedForms;
-
+      
       foreach(array('billing_address', 'shipping_address') as $name)
       {
+        if(isset($forms[$name]))
+        {
+          $forms[$name]->object->setModelId($this->object->getId());
+        }
+        
         $address = $this->getValue($name);
 
         if (!isset($address['address_1']) || $address['address_1'] === '')

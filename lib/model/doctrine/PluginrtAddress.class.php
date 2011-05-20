@@ -37,6 +37,11 @@ abstract class PluginrtAddress extends BasertAddress
         $this->setLatitude($coords['latitude']);
         $this->setLongitude($coords['longitude']);
       }
+      else
+      {
+        $this->setLatitude(0.0);
+        $this->setLongitude(0.0);
+      }
     }
     
     parent::save($conn);

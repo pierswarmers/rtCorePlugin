@@ -101,6 +101,43 @@ class PluginrtAddressTable extends Doctrine_Table
   }
 
   /**
+   * Return query for addresses in defined radius
+   * 
+   * @param type $lat    Latitude
+   * @param type $long   Longitude
+   * @param type $radius Distance from current location in kilometres
+   * @param Doctrine_Query $q
+   * @return Doctrine_Query
+   */
+  public function getAddressesByDistanceQuery($lat, $long, $radius, Doctrine_Query $q = null)
+  {
+    $q = $this->getQuery($q);
+    $q->select('*,(((acos(sin(('.$lat.'*PI()/180)) * sin((address.latitude*PI()/180))+cos(('.$lat.'*PI()/180))  * cos((address.latitude*PI()/180)) * cos((('.$long.'-address.longitude)*PI()/180))))*180/PI())*60*1.1515*1.609344) as distance');
+    $q->andWhere('address.latitude != 0 AND address.latitude IS NOT NULL');
+    $q->andWhere('address.longitude != 0 AND address.longitude IS NOT NULL');
+    $q->having('distance <= '.$radius);
+    $q->groupBy('address.model_id, address.model');
+    $q->orderBy('distance ASC');
+    return $q;    
+  }
+  
+  /**
+   * Return list of closest addresses
+   * 
+   * @param type $lat    Latitude
+   * @param type $long   Longitude
+   * @param type $radius Distance from current location in kilometres
+   * @param Doctrine_Query $q
+   * @return Doctrine_Collection
+   */
+  public function getClosestAddressesByDistance($lat, $long, $radius, Doctrine_Query $q = null)
+  {
+    $q = $this->getQuery($q);
+    $q = $this->getAddressesByDistanceQuery($lat, $long, $radius, $q);
+    return $q->execute();     
+  }
+  
+  /**
    * Returns a Doctrine_Query object.
    *
    * @param Doctrine_Query $q

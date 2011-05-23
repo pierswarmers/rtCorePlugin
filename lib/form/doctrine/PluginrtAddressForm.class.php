@@ -43,8 +43,6 @@ abstract class PluginrtAddressForm extends BasertAddressForm
 
     $this->setWidget('country', new rtWidgetFormSelectCountry());
 
-    var_dump($this->getParent()->getValues()); exit;
-
     $this->setWidget('state',        new rtWidgetFormSelectRegion(array('add_empty' => '--', 'country' => $this->getObject()->getCountry())));
     $this->setWidget('instructions', new sfWidgetFormInput());
     $this->setWidget('model',        new sfWidgetFormInputHidden());

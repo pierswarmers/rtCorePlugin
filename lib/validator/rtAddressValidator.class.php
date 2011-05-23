@@ -88,6 +88,11 @@ class rtAddressValidator extends sfValidatorBase
     {
       $errorSchema->addError(new sfValidatorError($this, 'required'), 'postcode');
     }
+    if(!sfConfig::get('app_rt_account_phone_is_optional', true) && $this->isEmpty($values['phone']))
+    {
+      $errorSchema->addError(new sfValidatorError($this, 'required'), 'phone');
+    }
+
     if($this->getOption('use_names'))
     {
       if($this->isEmpty($values['first_name']))

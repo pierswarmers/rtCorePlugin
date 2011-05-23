@@ -30,12 +30,14 @@
     </ul>
   </fieldset>
 
+  <?php if(isset($form['billing_address'])): ?>
   <fieldset>
     <legend><?php echo $form->isAddressModeSimple() ? 'Address Information' : __('Billing Address Information') ?></legend>
     <?php echo $form['billing_address']->render() ?>
   </fieldset>
+  <?php endif; ?>
 
-  <?php if(!$form->isAddressModeSimple()): ?>
+  <?php if(isset($form['shipping_address']) && !$form->isAddressModeSimple()): ?>
   <fieldset>
     <legend><?php echo __('Shipping Address Information') ?></legend>
     <?php echo $form['shipping_address'] ?>

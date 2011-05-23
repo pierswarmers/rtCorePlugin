@@ -84,10 +84,14 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
    * 
    * @param  string $name
    * @param  string $type
+   * @param  array  $options
    * @return void
    */
-  protected function setEmbeddedAddressForm($name, $type)
+  protected function setEmbeddedAddressForm($name, $type, $options = array())
   {
+    $options['object'] = isset($options['object']) ? $options['object'] : $this->object;
+    $options['is_optional'] = isset($options['is_optional']) ? $options['is_optional'] : sfConfig::get('app_rt_account_address_is_optional_for_' . $type, true);;
+
     $address = new rtAddress;
     $address->setType($type);
     $address->setModel('rtGuardUser');
@@ -102,7 +106,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
       $address->setModelId($this->object->getId());
     }
 
-    $this->embedForm($name, $this->getAddressForm($address, array('object' => $this->object, 'is_optional' => true)));
+    $this->embedForm($name, $this->getAddressForm($address, $options));
   }
 
   /**

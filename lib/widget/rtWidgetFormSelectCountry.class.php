@@ -129,14 +129,11 @@ class rtWidgetFormSelectCountry extends sfWidgetFormSelect
 
     $route = sfContext::getInstance()->getController()->genUrl('rtAdmin/stateInput');
 
-  
-
     $js = <<<EOS
 
 <script type="text/javascript">
   $(function() {
     $('#$country_id').change(function() {
-
       var holder =  $('#$state_id').parent();
 
       holder.html('<span class="loading">Loading states...</span>');

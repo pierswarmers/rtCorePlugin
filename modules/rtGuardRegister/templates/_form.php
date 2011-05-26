@@ -25,6 +25,7 @@
 
       <?php if(!$form->isProfileModeSimple()): ?>
       <?php echo $form['date_of_birth']->renderRow() ?>
+      <?php echo $form['company']->renderRow() ?>
       <?php echo $form['url']->renderRow() ?>
       <?php endif; ?>
     </ul>

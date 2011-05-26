@@ -84,6 +84,13 @@
           </td>
         </tr>
         <tr>
+          <th><?php echo $form['company']->renderLabel() ?></th>
+          <td>
+            <?php echo $form['company']->renderError() ?>
+            <?php echo $form['company'] ?>
+          </td>
+        </tr>
+        <tr>
           <th><?php echo $form['url']->renderLabel() ?></th>
           <td>
             <?php echo $form['url']->renderError() ?>

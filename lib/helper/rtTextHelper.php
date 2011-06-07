@@ -11,10 +11,10 @@
 /**
  * Converts a markdown string (tags removed) into HTML
  *
- * @package    Reditype
+ * @package Reditype
  * @subpackage helper
- * @author     Piers Warmers <piers@wranglers.com.au>
  * @param string $string
+ * @param rtPage $object
  * @return string
  */
 function markdown_to_html_safe($string, $object = null)
@@ -26,10 +26,11 @@ function markdown_to_html_safe($string, $object = null)
 /**
  * Converts a markdown string into HTML
  *
- * @package    Reditype
+ * @package Reditype
  * @subpackage helper
- * @author     Piers Warmers <piers@wranglers.com.au>
  * @param string $string
+ * @param rtPage $object
+ * @param bool $summary
  * @return string
  */
 function markdown_to_html($string, $object = null, $summary = false)

@@ -36,9 +36,9 @@ class rtTypeString
   private $_options = array();
   
   /**
-   * Requires the string to be instanciated
-   * 
-   * @param type $string 
+   * @throws sfException
+   * @param  string $string
+   * @param array $options
    */
   public function __construct($string, $options = array()) 
   {
@@ -91,9 +91,10 @@ class rtTypeString
   
   /**
    * Returns the appropriate section of the text block.
-   * 
-   * @param string $string 
-   * @return string
+   *
+   * @param  $string
+   * @param string $section
+   * @return mixed|string
    */
   protected function getSection($string, $section = 'all')
   {
@@ -183,9 +184,10 @@ class rtTypeString
   
   /**
    * Transforms a given block into HTML using Geshi syntax highlighting.
-   * 
-   * @param string $string
-   * @return string
+   *
+   * @param  $matches
+   * @param string $default
+   * @return mixed|string
    */
   protected function transformGeshiBlock($matches, $default = '')
   {
@@ -227,7 +229,7 @@ class rtTypeString
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\|([a-zA-Z0-9_-]+)\)/i'                    => '_markupImagesInText',
       '/!\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i'                                      => '_markupImagesInText',
       '/\[(\w.+)\]\(asset:([A-Za-z0-9.\-_]+)\)/i'                                       => '_markupAssetLinksInText',
-      '/\[(\w.+)\]\(([A-Za-z0-9:\=?&\/.\-_]+)\)/i'                                      => '_markupBasicLinksInText',
+      //'/\[(\w.+)\]\(([A-Za-z0-9:\=?&\/.\-_]+)\)/i'                                      => '_markupBasicLinksInText',
       '/\[gallery\]/i'                                                                  => '_markupGalleriesInText',
       '/\[(gallery):([A-Za-z0-9.\-_,]+)\]/i'                                            => '_markupGalleriesInText',
       '/\[docs\]/i'                                                                     => '_markupDocsInText',

@@ -10,17 +10,22 @@ $options =array(
 );
 
 ?>
-<?php if ($snippets): ?>
-  <div class="rt-snippet rt-show rt-primary-container rt-admin-edit-tools-panel <?php echo $class ?>">
-    <?php if($snippets->count()): ?>
-      <?php foreach($snippets as $snippet): ?>
-        <?php echo link_to(__('Edit'), 'rtSnippetAdmin/edit?id='.$snippet->getId(), $options) ?>
-        <?php echo markdown_to_html($snippet->getContent(), $snippet); ?>
-      <?php endforeach; ?>
-    <?php else: ?>
-      <?php $options['query_string'] .= '&collection='.$collection ?>
-      <?php echo link_to(__('Edit'), 'rtSnippetAdmin/new',$options) ?>
-      <?php echo isset($default) ? markdown_to_html($default) : ''  ?>
-    <?php endif; ?>
+
+<?php if ($snippets && $snippets->count()): ?>
+
+  <div class="rt-snippet <?php echo $class ?>">
+    <?php foreach($snippets as $snippet): ?>
+    <div class="rt-admin-tools"><?php echo link_to(__('Edit Snippet'), 'rtSnippetAdmin/edit?id='.$snippet->getId(), $options) ?></div>
+    <?php echo markdown_to_html($snippet->getContent(), $snippet); ?>
+    <?php endforeach; ?>
   </div>
+
+<?php else: ?>
+
+  <div class="rt-snippet <?php echo $class ?>  <?php echo isset($default) && $default !== '' ? '' : 'rt-admin-tools'  ?>">
+      <?php $options['query_string'] .= '&collection='.$collection ?>
+      <div class="rt-admin-tools"><?php echo link_to(__('Edit Snippet'), 'rtSnippetAdmin/new',$options) ?></div>
+      <?php echo isset($default) ? markdown_to_html($default) : ''  ?>
+  </div>
+
 <?php endif; ?>

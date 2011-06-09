@@ -45,5 +45,5 @@
   </fieldset>
   <?php endif; ?>
 
-  <p class="rt-form-tools"><button type="submit"><?php echo __('Save Changes') ?></button></p>
+  <p class="rt-section-tools-submit"><button type="submit"><?php echo __('Save Changes') ?></button></p>
 </form>

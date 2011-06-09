@@ -30,8 +30,5 @@ div#rt-admin-toolbar.show div#rt-admin-toolbar-handle{background-position:0 -50p
 div#rt-admin-toolbar-handle:hover{background-position:0 -25px;}
 div#rt-admin-toolbar.show div#rt-admin-toolbar-handle:hover{background-position:0 -75px;}
 .rt-admin-edit-tools-panel-left .rt-admin-edit-tools-trigger {left:0!important;}
-.rt-admin-edit-tools-panel-small .rt-admin-edit-tools-trigger {padding:0!important;height:20px!important;width:20px!important;background:url(../images/icon-admin-edit-snippet.png) 0 20px;text-indent:-10000px!important;}
-.rt-admin-edit-tools-trigger:hover {text-decoration:none;color:#fff!important;}
-.rt-admin-edit-tools-panel-small .rt-admin-edit-tools-trigger:hover {background-position: 0 0}
 .highlight {background:#FFFFCF;min-height:20px;}
 .rt-admin-edit-tools-panel {padding-bottom:1px;zoom:1;}

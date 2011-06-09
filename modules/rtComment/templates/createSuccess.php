@@ -1,5 +1,15 @@
-<?php use_helper('I18N', 'rtForm') ?>
-<?php use_stylesheets_for_form($form) ?>
-<?php use_javascripts_for_form($form) ?>
+<?php
+
+/** @var rtCommentForm $form */
+
+use_helper('I18N', 'rtForm');
+use_stylesheets_for_form($form);
+use_javascripts_for_form($form)
+
+?>
 <?php slot('rt-title', __('Comments')) ?>
-<?php include_component('rtComment', 'form', array('form' => $form)) ?>
+<div class="rt-section rt-comment">
+  <div class="rt-section-content">
+    <?php include_component('rtComment', 'form', array('form' => $form)) ?>
+  </div>
+</div>

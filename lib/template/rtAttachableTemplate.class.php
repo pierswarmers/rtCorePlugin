@@ -114,13 +114,17 @@ class rtAttachableTemplate extends Doctrine_Template
   /**
    * Return an asset for a given name.
    *
-   * @return Doctrine_Record
+   * @param  $name
+   * @param string $pattern Allows for preg_match compatible pattern.
+   * @return bool|rtAsset
    */
-  public function getAssetByName($string)
+  public function getAssetByName($name, $pattern = '/^%NAME%$/')
   {
+    $pattern = str_replace('%NAME%', $name, $pattern);
+    
     foreach($this->getAssets() as $asset)
     {
-      if($asset->getOriginalFilename() === trim($string))
+      if(preg_match($pattern, $asset->getOriginalFilename()))
       {
         return $asset;
       }
@@ -130,6 +134,8 @@ class rtAttachableTemplate extends Doctrine_Template
 
   /**
    * Fetch an collection of assets attached to this object.
+   * 
+   * @return array
    */
   public function getAssets()
   {
@@ -147,6 +153,7 @@ class rtAttachableTemplate extends Doctrine_Template
   /**
    * Get and/or set the parameter holder.
    * 
+   * @param  $object
    * @return sfNamespacedParameterHolder
    */
   private function getAssetsHolder($object)

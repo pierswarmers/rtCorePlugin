@@ -506,9 +506,11 @@ class rtAssetToolkit
 
   /**
    * Return the path a a valid thumbnail.
-   *
-   * @param string $file_path
+   * 
+   * @static
+   * @param  $file_path
    * @param array $options
+   * @return string
    */
   public static function getThumbnailPath($file_path, $options = array())
   {
@@ -565,6 +567,7 @@ class rtAssetToolkit
    * the CDN syncronisation tag file.
    *
    * @param string $file Absolute path of file to compare timestamp
+   * @return string
    */
   private function getCdnHost($file)
   {

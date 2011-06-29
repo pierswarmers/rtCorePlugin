@@ -1,0 +1,30 @@
+#
+# Categories
+# ==========
+#
+# Describes the data captured for category data which can be attached to any model.
+#
+rtCategory:
+  actAs:
+    Sluggable:
+      fields:      [title]
+      canUpdate:   false    
+    Timestampable: ~
+  columns:
+    title:            { type: string(255) }
+    position:         { type: integer }
+    menu_title:       { type: string(255) }
+    display_in_menu:  { type: boolean, default: 1 }
+
+rtCategoryToObject:
+  columns:
+    # Glue fields
+    category_id:      { type: integer }
+    model_id:         { type: integer }
+    model:            { type: string(100) }
+    # Additionals fields
+    site_id:          { type: integer }
+    position:         { type: integer }
+  relations:
+    rtCategory:       { onDelete: CASCADE, local: category_id, foreign: id } 
+  

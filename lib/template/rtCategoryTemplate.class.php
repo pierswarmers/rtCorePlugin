@@ -43,7 +43,7 @@ class rtCategoryTemplate extends Doctrine_Template
   }
 
   /**
-   * Fetch an collection of comments attached to this object.
+   * Fetch an collection of categories attached to this object.
    *
    * @return array
    */
@@ -51,13 +51,13 @@ class rtCategoryTemplate extends Doctrine_Template
   {
     $holder = $this->getCategoriesHolder($this->getInvoker());
 
-    if (!isset($holder) || !$holder->hasNamespace('saved_comments'))
+    if (!isset($holder) || !$holder->hasNamespace('saved_categories'))
     {
       $comments = Doctrine::getTable('rtCategory')->getCategoriesForObject($this->getInvoker());
       $holder->add($comments, 'saved_categories');
     }
 
-    return $holder->getAll('saved_comments');
+    return $holder->getAll('saved_categories');
   }
   
   /**

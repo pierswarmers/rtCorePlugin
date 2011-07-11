@@ -32,24 +32,37 @@
   </div>
 
   <div class="rt-section-content">
-    <ul>
+    <ul class="rt-comments-list">
       <?php foreach($comments as $comment): ?>
-      <li class="clearfix" id="comment-<?php echo $comment->getId() ?>">
-        <?php echo gravatar_for($comment->getAuthorEmail(), sfConfig::get('app_rt_gravatar_size_medium', 64), sfConfig::get('app_rt_gravatar_default', 'mm'), sfConfig::get('app_rt_gravatar_rating', 'g')) ?>
-        <div>
-          <cite>
-            <?php echo link_to_if(trim($comment->getAuthorWebsite()) !== '', $comment->getAuthorName(), $comment->getAuthorWebsite()) ?> 
-          </cite>
-          <small class="rt-metas">
-                    <?php echo __('Left On') ?> <a href="#comment-<?php echo $comment->getId() ?>" title=""><?php echo format_date($comment->getCreatedAt(), 'D', $sf_user->getCulture()) ?></a>
-                    <span class="rating"><?php if($rating_enabled): ?><?php include_partial('rtComment/rating', array('rating_value' => $comment->getRating(), 'show_items' => array('graph'))) ?><?php endif; ?></span>
-          </small>
-          <?php echo markdown_to_html_safe($comment->getContent()) ?>
-        </div>
-      </li>
+        <li class="clearfix" id="comment-<?php echo $comment->getId() ?>">
+          <?php echo gravatar_for($comment->getAuthorEmail(), sfConfig::get('app_rt_gravatar_size_medium', 64), sfConfig::get('app_rt_gravatar_default', 'mm'), sfConfig::get('app_rt_gravatar_rating', 'g')) ?>
+          <div>
+            <cite>
+              <?php echo link_to_if(trim($comment->getAuthorWebsite()) !== '', $comment->getAuthorName(), $comment->getAuthorWebsite()) ?> 
+            </cite>
+            <small class="rt-metas">
+              <?php echo __('Left On') ?> <a href="#comment-<?php echo $comment->getId() ?>" title=""><?php echo format_date($comment->getCreatedAt(), 'D', $sf_user->getCulture()) ?></a>
+              <span class="rating"><?php if($rating_enabled): ?><?php include_partial('rtComment/rating', array('rating_value' => $comment->getRating(), 'show_items' => array('graph'))) ?><?php endif; ?></span>
+            </small>
+            <?php echo markdown_to_html_safe($comment->getContent()) ?>
+          </div>
+        </li>
       <?php endforeach; ?>
     </ul>
-  <div>
+    <p class="rt-comment-tools"><a href="" target="_self"><span><?php echo __('Show more comments') ?></span><span style="display: none"><?php echo __('Show less comments') ?></span></a></p>
+  </div>
+    
+<script type="text/javascript">
+  $(function(){
+    $('.rt-comments .rt-comments-list li:gt(1)').hide();
+    $('.rt-comment-tools a').click(function(){
+      event.preventDefault();    
+      $(this).find('span').toggle();
+      $('.rt-comments .rt-comments-list li:gt(1)').toggle();
+    });
+  });  
+</script>    
+    
 <?php endif; ?>
 
 <?php if(sfConfig::get('app_rt_comment_active', true)): ?>

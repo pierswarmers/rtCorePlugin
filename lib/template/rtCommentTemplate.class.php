@@ -58,6 +58,21 @@ class rtCommentTemplate extends Doctrine_Template
     return $holder->getAll('saved_comments');
   }
 
+  /*
+   * Get average rating value
+   */
+  public function getOverallRating()
+  {
+    $comments = $this->getComments();
+    $rating   = 0;
+    foreach($comments as $comment)
+    {
+      $rating += $comment->getRating();
+    }
+    $rating = $rating / count($this->getComments());
+    return round($rating,1);
+  }
+  
   /**
    * Get and/or set the parameter holder.
    *

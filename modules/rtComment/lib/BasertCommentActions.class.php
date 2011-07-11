@@ -50,8 +50,9 @@ class BasertCommentActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeCreate(sfWebRequest $request)
-  {
-    $form = $this->getForm();
+  { 
+    $this->rating_enabled = $request->hasParameter('rating_enabled') ? $request->getParameter('rating_enabled') : false;
+    $form = $this->getForm($this->rating_enabled);
 
     if($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT))
     {
@@ -123,8 +124,12 @@ class BasertCommentActions extends sfActions
   /**
    * @return rtCommentForm
    */
-  protected function getForm()
+  protected function getForm($rating_enabled = false)
   {
+    if($rating_enabled)
+    {
+      return new rtCommentRatingPublicForm(new rtComment);
+    }
     return new rtCommentPublicForm(new rtComment);
   }
 }

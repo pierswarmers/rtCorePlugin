@@ -36,14 +36,17 @@ class BasertCommentComponents extends sfComponents
 
   public function executePanel(sfWebRequest $request)
   {
-    $this->comments = Doctrine::getTable('rtComment')->getCommentsForModelAndId($this->model,$this->model_id);
-
+    $this->parent_object  = Doctrine::getTable($this->model)->find($this->model_id);
+    $this->comments       = Doctrine::getTable('rtComment')->getCommentsForModelAndId($this->model,$this->model_id);
+    $this->rating_enabled = isset($this->rating_enabled) ? $this->rating_enabled : false;
+    
     if(!isset($this->form))
     {
+      $comment_form = $this->rating_enabled ? 'rtCommentRatingPublicForm' : 'rtCommentPublicForm';
       $comment = new rtComment;
       $comment->setModel($this->model);
       $comment->setModelId($this->model_id);
-      $this->form = new rtCommentPublicForm($comment, array());
+      $this->form = new $comment_form($comment, array());
     }
   }
 }

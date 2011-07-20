@@ -15,5 +15,5 @@
       <?php echo $form; ?>
     </ul>
   </fieldset>
-  <p class="rt-form-tools"><button><?php echo __('Submit Details') ?></button></p>
+  <p class="rt-form-tools"><button type="submit"><?php echo __('Submit Details') ?></button></p>
 </form>

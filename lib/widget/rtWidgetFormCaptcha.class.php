@@ -90,6 +90,6 @@ class rtWidgetFormCaptcha extends sfWidgetForm
     $field  = $this->renderTag('input', array_merge(array('type' => 'text', 'name' => $name, 'value' => '', 'autocomplete' => 'off'), $attributes));
     $suffix = $display[0][2];
 
-    return sprintf('<div class="rt-captcha">%s %s %s</div>',$prefix,$field,$suffix);
+    return sprintf('<div class="rt-captcha"><span class="prefix">%s</span> %s <span class="suffix">%s</span></div>',$prefix,$field,$suffix);
   }
 }

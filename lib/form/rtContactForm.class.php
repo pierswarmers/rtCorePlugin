@@ -34,10 +34,6 @@ class rtContactForm extends sfForm
     $this->widgetSchema->setLabel('phone',"Phone Number:");
     $this->widgetSchema->setLabel('comments',"Comment:");
 
-    // Help texts
-    $this->widgetSchema->setHelp('name',"Required");
-    $this->widgetSchema->setHelp('email',"Required");
-
     // Validators
     $this->setValidator('name', new sfValidatorString(array('required' => true),array('required' => 'Please provide a name')));
     $this->setValidator('email', new sfValidatorEmail(array('required' => true),array('required' => 'Please provide a valid email address')));

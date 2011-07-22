@@ -15,16 +15,16 @@ $options =array(
 
   <div class="rt-snippet <?php echo $class ?>">
     <?php foreach($snippets as $snippet): ?>
-    <div class="rt-admin-tools"><?php echo link_to(__('Edit Snippet'), 'rtSnippetAdmin/edit?id='.$snippet->getId(), $options) ?></div>
+    <!--RTAS <div class="rt-admin-tools"><?php echo link_to(__('Edit Snippet'), 'rtSnippetAdmin/edit?id='.$snippet->getId(), $options) ?></div> RTAS-->
     <?php echo markdown_to_html($snippet->getContent(), $snippet); ?>
     <?php endforeach; ?>
   </div>
 
 <?php else: ?>
 
-  <div class="rt-snippet <?php echo $class ?>  <?php echo isset($default) && $default !== '' ? '' : 'rt-admin-tools'  ?>">
+  <div class="rt-snippet <?php echo $class ?>">
       <?php $options['query_string'] .= '&collection='.$collection ?>
-      <div class="rt-admin-tools"><?php echo link_to(__('Edit Snippet'), 'rtSnippetAdmin/new',$options) ?></div>
+      <!--RTAS <div class="rt-admin-tools"><?php echo link_to(__('Edit Snippet'), 'rtSnippetAdmin/new',$options) ?></div> RTAS-->
       <?php echo isset($default) ? markdown_to_html($default) : ''  ?>
   </div>
 

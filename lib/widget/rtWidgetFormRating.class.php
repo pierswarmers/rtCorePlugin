@@ -75,7 +75,7 @@ class rtWidgetFormRating extends sfWidgetFormChoice
 			range: "min",
 			value: select[ 0 ].selectedIndex + 1,
 			slide: function( event, ui ) {
-              $("#ratingSelection").html(ui.value - 1);
+              $("#ratingSelection").html((ui.value - 1) / 2);
               select[ 0 ].selectedIndex = ui.value - 1;
 			}
 		});
@@ -86,6 +86,6 @@ class rtWidgetFormRating extends sfWidgetFormChoice
 	</script>
 EOS;
     
-    return '0/10 '. parent::render($name, $value, $attributes, $errors) . ' <span id="ratingSelection">10</span>/10' . $script;
+    return '0/5 '. parent::render($name, $value, $attributes, $errors) . ' <span id="ratingSelection">5</span>/5' . $script;
   }
 }

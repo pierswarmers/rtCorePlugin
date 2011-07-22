@@ -28,17 +28,17 @@ class rtCommentRatingPublicForm extends PluginrtCommentForm
 
     // Widgets
     $this->setWidget('model_id', new sfWidgetFormInputHidden);
-    $options = sfConfig::get('app_rt_comment_rating_increments', array('0' => '0/10',
-                                                                       '0.1' => '1/10',
-                                                                       '0.2' => '2/10',
-                                                                       '0.3' => '3/10',
-                                                                       '0.4' => '4/10',
-                                                                       '0.5' => '5/10',
-                                                                       '0.6' => '6/10',
-                                                                       '0.7' => '7/10',
-                                                                       '0.8' => '8/10',
-                                                                       '0.9' => '9/10',
-                                                                       '1.0' => '10/10'));
+    $options = sfConfig::get('app_rt_comment_rating_increments', array('0' => '0/5',
+                                                                       '0.1' => '0.5/5',
+                                                                       '0.2' => '1/5',
+                                                                       '0.3' => '1.5/5',
+                                                                       '0.4' => '2/5',
+                                                                       '0.5' => '2.5/5',
+                                                                       '0.6' => '3/5',
+                                                                       '0.7' => '3.5/5',
+                                                                       '0.8' => '4/5',
+                                                                       '0.9' => '4.5/5',
+                                                                       '1.0' => '5/5'));
     
     $class = sfConfig::get('app_rt_comment_rating_widget', 'rtWidgetFormRating');
     

@@ -34,6 +34,11 @@ class rtAdminToolbarFilter extends sfFilter
       return;
     }
 
+    $response = $this->getContext()->getResponse();
+
+    // Enable admin tools...
+    $response->setContent(str_replace(array('<!--RTAS', 'RTAS-->'), '', $response->getContent()));
+
     if (function_exists('use_helper'))
     {
       $css = '<link rel="stylesheet" type="text/css" media="screen" href="/rtCorePlugin/css/admin-toolbar.css" />';
@@ -42,7 +47,6 @@ class rtAdminToolbarFilter extends sfFilter
       use_helper('Partial', 'I18N');
       
       $toolbar = get_component('rtAdmin', 'menu');
-      $response = $this->getContext()->getResponse();
       $response->setContent(str_ireplace('<!--rt-admin-holder-->', $toolbar,$response->getContent()));
       $response->setContent(str_ireplace('</head>', $css.'</head>',$response->getContent()));
 

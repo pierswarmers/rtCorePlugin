@@ -30,5 +30,5 @@ function gravatar_for( $email, $s = 80, $d = 'mm', $r = 'g', $atts = array() ) {
 	$url .= md5( strtolower( trim( $email ) ) );
 	$url .= "?s=$s&d=$d&r=$r";
 
-	return image_tag($url, array('height' => $s, 'width' => $s));
+	return image_tag($url, array('height' => $s, 'width' => $s, 'class' => 'rt-avatar'));
 }

@@ -186,6 +186,24 @@ function rt_get_nav_primary()
 }
 
 /**
+ * Include a site navigation: Zero and first elements only
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @return     string
+ */
+function rt_get_nav_dropdown(array $options = array())
+{
+  $options['include_root'] = key_exists('include_root', $options) ? $options['include_root'] : true;
+  
+  $nav = include_component('rtSitePage', 'navigationDropdown', array('options' => $options));
+  
+  return $nav;  
+}
+
+/**
  * Include a site navigation: Second level elements only
  *
  * @package    Reditype

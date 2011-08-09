@@ -7,7 +7,7 @@
 <?php if(sfConfig::get('app_rt_comment_active', true) && count($comments) > 0): ?>
 
   <div class="rt-section-header">
-    <h2><?php echo count($comments) . ' ' .  (count($comments) > 1 ? __('Person Has Commented') : __('People Have Commented')) ?>
+    <h2><?php echo count($comments) . ' ' .  (count($comments) == 1 ? __('Person Has Commented') : __('People Have Commented')) ?>
     <?php if($rating_enabled): ?>
       <?php include_partial('rtComment/rating', array('rating_value' => $parent_object->getOverallRating(), 'show_items' => array('text','graph'))) ?>
     <?php endif; ?>

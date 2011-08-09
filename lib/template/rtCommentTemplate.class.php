@@ -37,6 +37,11 @@ class rtCommentTemplate extends Doctrine_Template
     }
   }
 
+  /**
+   * Set the listners.
+   * 
+   * @return void
+   */
   public function setTableDefinition()
   {
     $this->addListener(new rtCommentListener($this->_options));
@@ -44,6 +49,8 @@ class rtCommentTemplate extends Doctrine_Template
 
   /**
    * Fetch an collection of comments attached to this object.
+   * 
+   * @return Doctrine_Collection
    */
   public function getComments()
   {
@@ -58,24 +65,39 @@ class rtCommentTemplate extends Doctrine_Template
     return $holder->getAll('saved_comments');
   }
 
-  /*
+  /**
    * Get average rating value
+   *
+   * @return float
    */
   public function getOverallRating()
   {
-    $comments = $this->getComments();
-    $rating   = 0;
-    foreach($comments as $comment)
+    if($this->getNumberOfComments() === 0)
+    {
+      return 0;
+    }
+
+    $rating = 0;
+
+    foreach($this->getComments() as $comment)
     {
       $rating += $comment->getRating();
     }
-    $rating = $rating / count($this->getComments());
-    return round($rating,1);
+
+    return round($rating / $this->getNumberOfComments(), 1);
+  }
+
+  /**
+   * @return int
+   */
+  public function getNumberOfComments()
+  {
+    return count($this->getComments());
   }
   
   /**
    * Get and/or set the parameter holder.
-   *
+   * @param $object
    * @return sfNamespacedParameterHolder
    */
   private function getCommentsHolder($object)

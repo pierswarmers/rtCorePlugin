@@ -7,7 +7,7 @@
 <?php if(sfConfig::get('app_rt_comment_active', true) && count($comments) > 0): ?>
 
   <div class="rt-section-header">
-    <h2><?php echo count($comments) . ' ' .  __('People Have Left a Comment') ?>
+    <h2><?php echo count($comments) . ' ' .  (count($comments) > 1 ? __('Person Has Commented') : __('People Have Commented')) ?>
     <?php if($rating_enabled): ?>
       <?php include_partial('rtComment/rating', array('rating_value' => $parent_object->getOverallRating(), 'show_items' => array('text','graph'))) ?>
     <?php endif; ?>
@@ -24,7 +24,7 @@
               <?php echo link_to_if(trim($comment->getAuthorWebsite()) !== '', $comment->getAuthorName(), $comment->getAuthorWebsite()) ?> <?php echo __('said') ?>
               ( <a href="#comment-<?php echo $comment->getId() ?>" title=""><?php echo format_date($comment->getCreatedAt(), 'D', $sf_user->getCulture()) ?></a>)
               <?php if($rating_enabled): ?>
-                <span class="rating">, <?php echo __('Rating') ?>: <?php include_partial('rtComment/rating', array('rating_value' => $comment->getRating(), 'show_items' => array('graph'))) ?></span>
+                <span class="rating"> <?php include_partial('rtComment/rating', array('rating_value' => $comment->getRating(), 'show_items' => array('graph'))) ?></span>
               <?php endif; ?>
             </cite>
             <?php echo markdown_to_html_safe($comment->getContent()) ?>

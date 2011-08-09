@@ -192,9 +192,10 @@ function rt_get_nav_primary()
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @param array $options
  * @return     string
  */
-function rt_get_nav_dropdown(array $options = array())
+function rt_get_nav_dropdown($options = array())
 {
   $options['include_root'] = key_exists('include_root', $options) ? $options['include_root'] : true;
   

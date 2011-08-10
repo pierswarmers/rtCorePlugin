@@ -50,7 +50,7 @@ class rtWidgetFormRating extends sfWidgetFormChoice
    */
   public function getStylesheets()
   {
-    return array('/rtCorePlugin/vendor/jquery/css/ui/jquery.ui.css' => 'screen');
+    //return array('/rtCorePlugin/vendor/jquery/css/ui/jquery.ui.css' => 'screen');
   }
 
   /**

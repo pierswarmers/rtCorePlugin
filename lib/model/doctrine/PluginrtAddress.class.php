@@ -17,6 +17,8 @@
  */
 abstract class PluginrtAddress extends BasertAddress
 {
+  protected $_object;
+  
   public function save(Doctrine_Connection $conn = null)
   {
     if(sfConfig::get('app_rt_address_geo_coords_enabled', false))
@@ -45,5 +47,15 @@ abstract class PluginrtAddress extends BasertAddress
     }
     
     parent::save($conn);
+  }
+  
+  public function getObject()
+  {
+    if(is_null($this->_object))
+    {
+      $this->_object = Doctrine::getTable($this->getModel())->findOneById($this->getModelId());
+    }
+    
+    return $this->_object;
   }
 }

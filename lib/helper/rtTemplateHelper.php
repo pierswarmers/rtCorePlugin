@@ -173,12 +173,14 @@ function rt_get_nav_full($contextual = true)
  * @subpackage helper
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @param      array $options
  * @return     string
  */
-function rt_get_nav_primary()
+function rt_get_nav_primary($options =array())
 {
-  $options = array('render_full' => true,
-                   'limit_upper' => 1);
+  $options['include_root'] = key_exists('include_root', $options) ? $options['include_root'] : true;
+  $options['render_full'] = key_exists('render_full', $options) ? $options['render_full'] : true;
+  $options['limit_upper'] = key_exists('limit_upper', $options) ? $options['limit_upper'] : 1;
 
   $nav = include_component('rtSitePage', 'navigation', array('options' => $options));
   
@@ -202,6 +204,25 @@ function rt_get_nav_dropdown($options = array())
   $nav = include_component('rtSitePage', 'navigationDropdown', array('options' => $options));
   
   return $nav;  
+}
+
+/**
+ * Include a site navigation
+ *
+ * @package    Reditype
+ * @subpackage helper
+ * @author     Piers Warmers <piers@wranglers.com.au>
+ * @author     Konny Zurcher <konny@wranglers.com.au>
+ * @param array $options
+ * @return     string
+ */
+function rt_get_nav($options = array())
+{
+  $options['include_root'] = key_exists('include_root', $options) ? $options['include_root'] : true;
+
+  $nav = include_component('rtSitePage', 'navigation', array('options' => $options));
+
+  return $nav;
 }
 
 /**

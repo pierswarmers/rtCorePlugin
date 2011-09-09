@@ -23,8 +23,8 @@ class rtCampaignMonitorSubscriber
   private $_log;
   private $_response_code;
   private $_response_message;
-  private $_list_id;
-  private $_api_key;
+//  private $_list_id;
+//  private $_api_key;
   private $_wrap;
   private $_options;
 
@@ -36,27 +36,25 @@ class rtCampaignMonitorSubscriber
   public function __construct($options = array())
   {
     $options['resubscribe'] = isset($options['resubscribe']) ? $options['resubscribe'] : true;
+    $options['api_key']     = isset($options['api_key']) ? $options['api_key'] : sfConfig::get('app_campaignmonitor_api_key');
+    $options['list_id']     = isset($options['list_id']) ? $options['list_id'] : sfConfig::get('app_campaignmonitor_list_id');
 
     // Check for API key
-    if(!sfConfig::has('app_campaignmonitor_api_key'))
+    if(is_null($options['api_key']))
     {
       throw new sfException('Campaignmonitor API key is not set or is empty. Please check.');
     }
 
     // Check for list ID
-    if(!sfConfig::has('app_campaignmonitor_list_id'))
+    if(is_null($options['list_id']))
     {
       throw new sfException('Campaignmonitor list is not set or is empty. Please check.');
     }
 
     $this->_options = $options;
 
-    // API key and list ID
-    $this->_api_key = sfConfig::get('app_campaignmonitor_api_key');
-    $this->_list_id = sfConfig::get('app_campaignmonitor_list_id');
-
     // Instanciate wrapper
-    $this->_wrap = new CS_REST_Subscribers($this->_list_id, $this->_api_key);
+    $this->_wrap = new CS_REST_Subscribers($this->_options['list_id'], $this->_options['api_key']);
   }
 
   /**

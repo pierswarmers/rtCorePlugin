@@ -105,7 +105,7 @@ function rt_button_show($target)
  */
 function rt_ui_button($label, $target, $icon, $options = array())
 {
-  $options['class'] = 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon';
+  $options['class'] = 'new ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary';
   $content = sprintf('<span class="ui-button-icon-primary ui-icon ui-icon-%s"></span><span class="ui-button-text">%s</span>', $icon, $label);
   return link_to($content, $target, $options);
 }

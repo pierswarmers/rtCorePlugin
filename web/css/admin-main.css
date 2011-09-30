@@ -120,7 +120,7 @@ label{}
 p img.right, p img.left{margin-top:0.5em;}
 iframe{margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}
-.markItUpContainer textarea{width:530px;}
+.markItUpContainer textarea{ width:100%; border: 0; padding:0; display:inline-block; outline:none; }
 /*
 
 Simple Feedback
@@ -224,10 +224,7 @@ div.rt-admin-break span { background:#FFF; padding:0 0.5em; }
 jQuery UI
 
 */
-.ui-dialog .ui-widget-header { background:#CCC; }
 .ui-dialog .ui-button{text-shadow: 0 !important; outline:none;color:#555 ;font-weight:bold;-moz-box-shadow:0;-webkit-box-shadow:none !important;padding-top:0px !important;padding-bottom:0px !important;}
-td .ui-button {-moz-box-shadow:none;-webkit-box-shadow:none;border: 1px solid #999;}
-.ui-dialog .ui-dialog-content { padding: 1em 1em 0; }
 .ui-dialog input, .ui-dialog textarea  { width:500px; }
 .ui-dialog textarea  { height:40px; }
 .ui-dialog p  { margin-bottom:5px; }

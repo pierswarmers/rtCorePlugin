@@ -17,7 +17,7 @@ rtComment:
     author_website:    { type: string(255), extra: link }
     content:           { type: string }
     moderator_note:    { type: string }
-    rating:            { type: float, default: 1.00 }
+    rating:            { type: float }
   relations:
     sfGuardUser:
       alias: User

@@ -38,11 +38,13 @@ class rtCommentRatingPublicForm extends PluginrtCommentForm
                                                                        '0.7' => '3.5/5',
                                                                        '0.8' => '4/5',
                                                                        '0.9' => '4.5/5',
-                                                                       '1.0' => '5/5'));
+                                                                       '1' => '5/5'));
     
     $class = sfConfig::get('app_rt_comment_rating_widget', 'rtWidgetFormRating');
-    
+
     $this->setWidget('rating', new $class(array('choices' => $options)));
+
+    $this->setDefault('rating', '1');
     
     // Validators
     $this->setValidator('model',          new sfValidatorChoice( array('required' => true,   'choices' => sfConfig::get('app_rt_comment_models', array('rtBlogPage')))));

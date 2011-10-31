@@ -60,7 +60,7 @@ class BasertCommentActions extends sfActions
 
       if($form->isValid())
       {
-        if(sfConfig::get('app_rt_comment_moderation', false) && !$this->getUser()->isAuthenticated())
+        if(sfConfig::get('app_rt_comment_moderation', false))
         {
           $form->save();
           $this->notifyAdministrator($form->getObject());

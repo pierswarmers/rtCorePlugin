@@ -20,6 +20,8 @@ class rtWidgetFormSelectRegion extends sfWidgetFormSelect
 {
   /**
    * @see sfWidget
+   * @param array $options
+   * @param array $attributes
    */
   public function __construct($options = array(), $attributes = array())
   {
@@ -30,13 +32,15 @@ class rtWidgetFormSelectRegion extends sfWidgetFormSelect
 
   /**
    * @see sfWidget
+   * @param array $options
+   * @param array $attributes
+   *
    */
   protected function configure($options = array(), $attributes = array())
   {
-    $country = (isset($options['country']) && $options['country'] != '') ? $options['country'] : sfConfig::get('app_rt_default_country','AU');
 
     $this->addOption('add_empty', false);
-    $this->addOption('country', $country);
+    $this->addOption('country', '');
 
     parent::configure($options, $attributes);
   }

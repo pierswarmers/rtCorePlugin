@@ -41,9 +41,11 @@ abstract class PluginrtAddressForm extends BasertAddressForm
       throw new InvalidArgumentException('You must provide a parent object.');
     }
 
-    $this->setWidget('country', new rtWidgetFormSelectCountry());
+    $country = !is_null($this->getObject()->getCountry()) ? $this->getObject()->getCountry() : sfConfig::get('rt_region', '');
 
-    $this->setWidget('state',        new rtWidgetFormSelectRegion(array('add_empty' => '--', 'country' => $this->getObject()->getCountry())));
+    $this->setWidget('country', new rtWidgetFormSelectCountry());
+    $this->setDefault('country', $country);
+    $this->setWidget('state',        new rtWidgetFormSelectRegion(array('add_empty' => '--', 'country' => $country)));
     $this->setWidget('instructions', new sfWidgetFormInput());
     $this->setWidget('model',        new sfWidgetFormInputHidden());
 

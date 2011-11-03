@@ -43,13 +43,6 @@
       </tr>
 
       <tr>
-        <th><?php echo $form['password_again']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['password_again']->renderError() ?>
-          <?php echo $form['password_again'] ?>
-        </td>
-      </tr>
-      <tr>
         <th><?php echo $form['is_active']->renderLabel() ?></th>
         <td>
           <?php echo $form['is_active']->renderError() ?>

@@ -73,7 +73,7 @@ class rtCommentRatingPublicForm extends PluginrtCommentForm
     {
       $this->widgetSchema['captcha'] = new rtWidgetFormCaptcha();
       $this->widgetSchema->setLabel('captcha', 'Are you human');
-      $this->setValidator('captcha', new rtValidatorCaptcha(array('required' => true), array('required' => 'The captcha is required, please try again.','invalid' => 'The captcha you entered didn\'t pass validation, please try again.')));
+      $this->setValidator('captcha', new rtValidatorCaptcha(array('required' => true), array('required' => 'This question is required, please try again.','invalid' => 'The answer you entered didn\'t pass validation, please try again.')));
     }
 
     // Optionally configured Honeypot widget and validator.

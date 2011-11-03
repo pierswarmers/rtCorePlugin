@@ -43,12 +43,8 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
     $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
     $this->validatorSchema['password']->setOption('required', false);
-    $this->widgetSchema['password_again'] = new sfWidgetFormInputPassword();
-    $this->validatorSchema['password_again'] = clone $this->validatorSchema['password'];
 
-    $this->widgetSchema->moveField('password_again', 'after', 'password');
 
-    $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'The two passwords must be the same.')));
 
     $years = range(date('Y') - sfConfig::get('app_rt_user_age_year_buffer', 100), date('Y'));
 
@@ -61,7 +57,6 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
     $this->setValidator('url', new sfValidatorUrl(array('required' => false)));
     $this->setWidget('date_of_birth',  new sfWidgetFormDate($options));
     $this->widgetSchema['password'] = new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off'));
-    $this->widgetSchema['password_again'] = new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off'));
     $this->setWidget('groups_list', new sfWidgetFormDoctrineChoice(array('expanded' => true ,'multiple' => true, 'model' => 'sfGuardGroup')));
     $this->setWidget('permissions_list', new sfWidgetFormDoctrineChoice(array('expanded' => true, 'multiple' => true, 'model' => 'sfGuardPermission')));
 
@@ -70,7 +65,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
   /**
    * Set the address forms.
-   * 
+   *
    * @return void
    */
   protected function setEmbeddedForms()
@@ -81,7 +76,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
   /**
    * Embed a single address form.
-   * 
+   *
    * @param  string $name
    * @param  string $type
    * @param  array  $options
@@ -111,7 +106,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
   /**
    * Return an instanciated address form.
-   * 
+   *
    * @param rtAddress $address
    * @param array $options
    * @return rtAddressForm
@@ -123,7 +118,7 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
 
   /**
    * Save the embedded forms but removing empty addresses.
-   * 
+   *
    * @param $con
    * @param $forms
    * @return mixed
@@ -133,14 +128,14 @@ abstract class PluginrtGuardUserForm extends BasertGuardUserForm
     if (null === $forms)
     {
       $forms = $this->embeddedForms;
-      
+
       foreach(array('billing_address', 'shipping_address') as $name)
       {
         if(isset($forms[$name]))
         {
           $forms[$name]->object->setModelId($this->object->getId());
         }
-        
+
         $address = $this->getValue($name);
 
         if (!isset($address['address_1']) || $address['address_1'] === '')

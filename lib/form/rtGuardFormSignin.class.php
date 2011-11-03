@@ -23,13 +23,14 @@ class rtGuardFormSignin extends sfGuardFormSignin
 
     $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
 
-    $this->widgetSchema['username']->setLabel('Username');
+    $this->widgetSchema['username']->setLabel('Your email address');
+    $this->widgetSchema['password']->setLabel('Your password');
     
     $this->widgetSchema->setHelp('remember', 'Not for use on public or shared computers');
 
     if (sfConfig::get('app_sf_guard_plugin_allow_login_with_email', true))
     {
-      $this->widgetSchema->setHelp( 'username',   'Eg: jenny@example.com or jenny123');
+//      $this->widgetSchema->setHelp( 'username',   'Eg: jenny@example.com or jenny123');
     }
   }
 }

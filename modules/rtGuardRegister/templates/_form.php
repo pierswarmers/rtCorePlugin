@@ -6,44 +6,56 @@
 
   <?php echo $form->renderHiddenFields() ?>
 
-  <fieldset>
-  <legend><?php echo __('Login Information') ?></legend>
-    <ul class="rt-form-schema">
-      <?php echo $form['email_address']->renderRow() ?>
-      <?php echo $form['username']->renderRow() ?>
-      <?php echo $form['password']->renderRow() ?>
-      <?php echo $form['password_again']->renderRow() ?>
-    </ul>
-  </fieldset>
+  <?php
 
-  <fieldset>
-  <legend><?php echo __('Profile Information') ?></legend>
-    <ul class="rt-form-schema">
-      <li class="rt-form-row">
-      <?php echo $form['first_name']->renderRow() ?>
-      <?php echo $form['last_name']->renderRow() ?>
+  // Personal Information
 
-      <?php if(!$form->isProfileModeSimple()): ?>
-      <?php echo $form['date_of_birth']->renderRow() ?>
-      <?php echo $form['company']->renderRow() ?>
-      <?php echo $form['url']->renderRow() ?>
-      <?php endif; ?>
-    </ul>
-  </fieldset>
+  if(isset($form['first_name']) || isset($form['last_name']) || isset($form['date_of_birth'])): ?>
 
-  <?php if(isset($form['billing_address'])): ?>
-  <fieldset>
-    <legend><?php echo $form->isAddressModeSimple() ? 'Address Information' : __('Billing Address Information') ?></legend>
-    <?php echo $form['billing_address']->render() ?>
-  </fieldset>
+    <fieldset>
+      <legend><?php echo __('Personal Information') ?></legend>
+      <ul class="rt-form-schema">
+        <?php foreach(array('first_name', 'last_name', 'date_of_birth') as $field): ?>
+        <?php if(isset($form[$field])) { echo $form[$field]->renderRow(); } ?>
+        <?php endforeach; ?>
+      </ul>
+    </fieldset>
   <?php endif; ?>
 
-  <?php if(isset($form['shipping_address']) && !$form->isAddressModeSimple()): ?>
-  <fieldset>
-    <legend><?php echo __('Shipping Address Information') ?></legend>
-    <?php echo $form['shipping_address'] ?>
-  </fieldset>
+  <?php
+
+  // Account Access Information
+
+  if(isset($form['email_address']) || isset($form['password']) || isset($form['password_again'])): ?>
+
+    <fieldset>
+      <legend><?php echo __('Account Information') ?></legend>
+      <ul class="rt-form-schema">
+        <?php foreach(array('email_address', 'password', 'password_again') as $field): ?>
+        <?php if(isset($form[$field])) { echo $form[$field]->renderRow(); } ?>
+        <?php endforeach; ?>
+      </ul>
+    </fieldset>
   <?php endif; ?>
 
-  <p class="rt-section-tools-submit"><button type="submit"><?php echo __('Save Changes') ?></button></p>
+  <?php
+
+  // Captcha
+
+  if(isset($form['captcha'])): ?>
+
+    <fieldset>
+      <legend><?php echo __('One more thing') ?>...</legend>
+      <ul class="rt-form-schema">
+        <?php echo $form['captcha']->renderRow() ?>
+      </ul>
+    </fieldset>
+  <?php endif; ?>
+
+
+
+  <p class="rt-section-tools-submit">
+    <button type="submit"><?php echo __('Register') ?></button>
+    <?php echo __('Or, you can') ?> <?php echo link_to(__('sign in here', null, 'sf_guard'), '@sf_guard_signin') ?>.
+  </p>
 </form>

@@ -18,7 +18,7 @@
  *
  * `app_rt_account_profile_is_simple` can be set to either: true or false
  * `app_rt_account_address_is_simple` can be set to either: true or false
- * 
+ *
  * Both settings default to simple mode.
  *
  * @package    rtCorePlugin
@@ -34,10 +34,11 @@ class rtGuardUserPublicForm extends rtGuardUserForm
     $this->getWidgetSchema()->setFormFormatterName(sfConfig::get('app_rt_public_form_formatter_name', 'RtList'));
 
     unset(
-      $this['is_active'],
-      $this['is_super_admin'],
-      $this['groups_list'],
-      $this['permissions_list']
+    $this['username'],
+    $this['is_active'],
+    $this['is_super_admin'],
+    $this['groups_list'],
+    $this['permissions_list']
     );
 
     if($this->isProfileModeSimple())
@@ -51,22 +52,23 @@ class rtGuardUserPublicForm extends rtGuardUserForm
       $this->setValidator('url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Please enter a valid website address.')));
     }
 
-    $this->widgetSchema->setHelp('first_name', 'Required');
+    $this->widgetSchema->setHelp('first_name', '');
     $this->setValidator('first_name', new sfValidatorString(array('required' => true)));
-    $this->widgetSchema->setHelp('last_name', 'Required');
+    $this->widgetSchema->setHelp('last_name', '');
     $this->setValidator('last_name', new sfValidatorString(array('required' => true)));
 
-    $this->widgetSchema->setHelp('email_address', 'Required');
-    $this->widgetSchema->setHelp('username', 'Required');
+    $this->widgetSchema->setHelp('email_address', '');
+//    $this->widgetSchema->setHelp('username', 'Required');
 
-    $this->widgetSchema->setHelp('password', 'Must be at least 6 characters long');
-    $this->setValidator('password', new sfValidatorString(array('required' => false, 'min_length' => 6)));
+    $this->widgetSchema->setHelp('password', '');
+    $this->setValidator('password', new sfValidatorString(array('required' => false, 'min_length' => 6), array('min_length' => 'Your entered password is too short (%min_length% characters min).')));
+
     $this->widgetSchema->setHelp('password_again', 'Once again, just to be sure');
 
     $this->validatorSchema->setPostValidator(
       new sfValidatorAnd(array(
         new sfValidatorDoctrineUnique(array('model' => 'sfGuardUser', 'column' => array('email_address')), array('invalid' => 'That email address is already taken.')),
-        new sfValidatorDoctrineUnique(array('model' => 'sfGuardUser', 'column' => array('username')), array('invalid' => 'That username is already taken.')),
+//        new sfValidatorDoctrineUnique(array('model' => 'sfGuardUser', 'column' => array('username')), array('invalid' => 'That username is already taken.')),
       ))
     );
   }

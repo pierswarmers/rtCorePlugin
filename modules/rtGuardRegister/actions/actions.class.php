@@ -19,4 +19,9 @@ require_once(dirname(__FILE__).'/../lib/BasertGuardRegisterActions.class.php');
  */
 class rtGuardRegisterActions extends BasertGuardRegisterActions
 {
+
+  public function executeIndex($df)
+  {
+    exit;
+  }
 }

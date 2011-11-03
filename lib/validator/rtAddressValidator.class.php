@@ -22,7 +22,7 @@ class rtAddressValidator extends sfValidatorBase
   {
     $this->addOption('use_names', false);
     $this->addOption('is_optional', true);
-    $not_blank = array('address_1', 'town', 'country', 'postcode');
+    $not_blank = array('address_1', 'town', 'postcode');
     if($options['use_names'])
     {
       $not_blank = array_merge($not_blank, array('first_name', 'last_name'));

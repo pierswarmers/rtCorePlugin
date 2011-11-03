@@ -19,7 +19,7 @@ require_once(dirname(__FILE__).'/../../../../sfDoctrineGuardPlugin/modules/sfGua
  */
 class BasertGuardRegisterActions extends BasesfGuardRegisterActions
 {
-  private $_rt_shop_cart_manager;
+  protected $_rt_shop_cart_manager;
   
   public function preExecute()
   {
@@ -33,21 +33,23 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
    * the way registration is handled.
    *
    * @param sfWebRequest $request
+   * @return void
    */
   public function executeIndex(sfWebRequest $request)
   {
+    //exit;
     if ($this->getUser()->isAuthenticated())
     {
       $this->getUser()->setFlash('notice', 'You are already registered and signed in!');
       $this->redirect('@homepage');
     }
 
-    $this->form = new rtGuardRegisterForm();
+    $this->form = $this->getRegistrationForm();
 
     if ($request->isMethod('post'))
     {
       $this->form->bind($request->getParameter($this->form->getName()));
-      
+
       if ($this->form->isValid())
       {
         if(sfConfig::get('app_rt_registration_is_administered', true))
@@ -58,14 +60,14 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
           $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.save_object', array('object' => $user)));
           $this->redirect('@sf_guard_register_success');
         }
-        
+
         $user = $this->form->save();
         $this->getUser()->signIn($user);
         $this->getUser()->setFlash('notice', 'You are registered and signed in!');
         $this->getUser()->setAttribute('registration_success', true);
         $this->notifyUser($user, $this->form->getValue('password'));
         $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.save_object', array('object' => $user)));
-        
+
         $signinUrl = sfConfig::get('app_sf_guard_plugin_success_register_url', $this->getUser()->getReferer($request->getReferer()));
 
         return $this->redirect('' != $signinUrl ? $signinUrl : '@homepage');
@@ -163,10 +165,24 @@ class BasertGuardRegisterActions extends BasesfGuardRegisterActions
   }
 
   /**
+   * @param sfWebRequest $request
    * @return sfEventDispatcher
    */
   protected function getDispatcher(sfWebRequest $request)
   {
     return ProjectConfiguration::getActive()->getEventDispatcher(array('request' => $request));
+  }
+
+
+  /**
+   * Return the form object.
+   *
+   * @return rtGuardRegisterForm
+   */
+  protected function getRegistrationForm()
+  {
+    $class = sfConfig::get('app_rt_registration_form_class', 'rtGuardRegisterStandardForm');
+
+    return new $class();
   }
 }

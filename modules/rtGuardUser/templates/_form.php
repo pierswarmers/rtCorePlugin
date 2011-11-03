@@ -3,33 +3,41 @@
 <?php use_javascripts_for_form($form) ?>
 
 <form action="<?php echo url_for('rtGuardUser/update') ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
-  
+
   <?php echo $form->renderHiddenFields() ?>
 
-  <fieldset>
-  <legend><?php echo __('Login Information') ?></legend>
-    <ul class="rt-form-schema">
-      <?php echo $form['email_address']->renderRow() ?>
-      <?php echo $form['username']->renderRow() ?>
-      <?php echo $form['password']->renderRow() ?>
-      <?php echo $form['password_again']->renderRow() ?>
-    </ul>
-  </fieldset>
+  <?php
 
-  <fieldset>
-  <legend><?php echo __('Profile Information') ?></legend>
-    <ul class="rt-form-schema">
-      <li class="rt-form-row">
-      <?php echo $form['first_name']->renderRow() ?>
-      <?php echo $form['last_name']->renderRow() ?>
+  // Personal Information
 
-      <?php if(!$form->isProfileModeSimple()): ?>
-      <?php echo $form['date_of_birth']->renderRow() ?>
-      <?php echo $form['company']->renderRow() ?>
-      <?php echo $form['url']->renderRow() ?>
-      <?php endif; ?>
-    </ul>
-  </fieldset>
+  if(isset($form['first_name']) || isset($form['last_name']) || isset($form['date_of_birth'])): ?>
+
+    <fieldset>
+      <legend><?php echo __('Personal Information') ?></legend>
+      <ul class="rt-form-schema">
+        <?php foreach(array('first_name', 'last_name', 'date_of_birth') as $field): ?>
+        <?php if(isset($form[$field])) { echo $form[$field]->renderRow(); } ?>
+        <?php endforeach; ?>
+      </ul>
+    </fieldset>
+    <?php endif; ?>
+
+  <?php
+
+  // Account Access Information
+
+  if(isset($form['email_address']) || isset($form['password']) || isset($form['password_again'])): ?>
+
+    <fieldset>
+      <legend><?php echo __('Account Information') ?></legend>
+      <ul class="rt-form-schema">
+        <?php foreach(array('email_address', 'password', 'password_again') as $field): ?>
+        <?php if(isset($form[$field])) { echo $form[$field]->renderRow(); } ?>
+        <?php endforeach; ?>
+      </ul>
+    </fieldset>
+    <?php endif; ?>
+
 
   <?php if(isset($form['billing_address'])): ?>
   <fieldset>

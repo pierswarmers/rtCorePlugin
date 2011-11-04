@@ -43,7 +43,7 @@ class rtGuardUserPublicForm extends rtGuardUserForm
 
     if($this->isProfileModeSimple())
     {
-      unset($this['url'], $this['date_of_birth']);
+      //unset($this['url'], $this['date_of_birth']);
     }
     else
     {

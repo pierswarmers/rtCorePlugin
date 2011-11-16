@@ -16,8 +16,20 @@
           </form>
         <td>
           <ul class="rt-admin-tools">
-            <li><button type="submit" onclick="$('#<?php echo strtolower($model);?>_root_create').submit()" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon"><span class="ui-button-icon-primary ui-icon ui-icon-plus"></span><span class="ui-button-text"><?php echo __('Create new root page');?></span></button></li>
+            <li><button type="submit" id="createTree" ><?php echo __('Create new root page');?></button></li>
           </ul>
+
+        <script type="text/javascript">
+
+
+          $(document).ready(function(){
+
+            $('#createTree').button({ icons: { primary: 'ui-icon-plus' } }).click(function(){
+              $('#<?php echo strtolower($model);?>_root_create').submit();
+            });
+
+          });
+        </script>
         </td>
       </tr>
     </tfoot>

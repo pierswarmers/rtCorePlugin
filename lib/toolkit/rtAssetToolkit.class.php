@@ -402,6 +402,9 @@ class rtAssetToolkit
       'video/ogg',
       'video/quicktime',
       'video/x-ms-wmv',
+      // ePub
+      'application/epub+zip',
+      'application/octet-stream',
       // vnd
       'application/msword',
       'application/vnd.oasis.opendocument.text',
@@ -482,6 +485,7 @@ class rtAssetToolkit
       'mp3' => 'music',
       'mpeg' => 'music',
       // other
+      'epub' => 'epub',
       'php' => 'php',
       'c' => 'c',
       'h' => 'h',

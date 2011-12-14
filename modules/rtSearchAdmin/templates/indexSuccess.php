@@ -60,3 +60,5 @@
     </table>
   <?php endif; ?>
 <?php endif; ?>
+
+<?php include_partial('rtAdmin/pagination', array('pager' => $pager)); ?>

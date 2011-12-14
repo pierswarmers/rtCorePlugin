@@ -101,7 +101,7 @@ class BasertSearchAdminActions extends sfActions
 
       $form->setDefault('q', $request->getParameter('q', ''));
       $query = Doctrine::getTable('rtIndex')->getBaseSearchQuery($request->getParameter('q'), $this->getUser()->getCulture());
-      $pager = new sfDoctrinePager('rtIndex');
+      $pager = new sfDoctrinePager('rtIndex', 50);
       $pager->setPage($this->getPage($request));
       $pager->setQuery($query);
       $pager->init();

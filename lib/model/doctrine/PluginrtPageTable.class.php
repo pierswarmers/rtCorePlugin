@@ -40,7 +40,7 @@ class PluginrtPageTable extends Doctrine_Table
   public function findAllPages(Doctrine_Query $query = null)
   {
     $query = $this->addSiteQuery($query);
-    return $this->execute();
+    return $query->execute();
   }
 
   /**

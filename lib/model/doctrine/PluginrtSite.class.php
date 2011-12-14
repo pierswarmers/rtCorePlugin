@@ -22,4 +22,9 @@ abstract class PluginrtSite extends BasertSite
   {
     return $this->domain;
   }
+
+  public function getTypeNice()
+  {
+    return 'Site';
+  }
 }

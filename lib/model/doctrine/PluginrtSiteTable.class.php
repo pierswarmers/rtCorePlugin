@@ -18,13 +18,29 @@
  */
 class PluginrtSiteTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object PluginrtSiteTable
-     */
-    public static function getInstance()
+  /**
+   * Return a query object, creting a new one if needed.
+   *
+   * @param Doctrine_Query $query
+   * @return Doctrine_Query
+   */
+  public function getQuery(Doctrine_Query $query = null)
+  {
+    if(is_null($query))
     {
-        return Doctrine_Core::getTable('PluginrtSite');
+      $query = parent::createQuery('site');
     }
+
+    return $query;
+  }
+
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object PluginrtSiteTable
+   */
+  public static function getInstance()
+  {
+    return Doctrine_Core::getTable('PluginrtSite');
+  }
 }

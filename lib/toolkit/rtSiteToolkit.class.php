@@ -19,14 +19,23 @@ class rtSiteToolkit
 {
   /**
    * Simply runs a check on the multi-site configuration setting.
-   * 
+   *
    * @return boolean
    */
   public static function isMultiSiteEnabled()
   {
     return sfConfig::get('app_rt_enable_multi_site', false);
   }
-  
+
+  /**
+   * @static
+   * @return rtSite
+   */
+  public static function getCurrentSite()
+  {
+    return Doctrine::getTable('rtSite')->findOneBy('Domain', self::getCurrentDomain());
+  }
+
   /**
    * Return the domain and port as a string. For example: www.my-domain.com:8080
    *
@@ -66,7 +75,7 @@ class rtSiteToolkit
   /**
    * Cleans the domain string of "www" subdomains as these are concidered to be the same as the
    * bas domain without "www".
-   * 
+   *
    * @param string $string
    */
   public static function cleanDomainString($string)
@@ -93,7 +102,7 @@ class rtSiteToolkit
       $route = $object->getTable()->getTableName() . '_show';
       $route = $context->getRouting()->generate($route,$object);
     }
-    
+
     if(!$object->rtSite || is_null($object->rtSite->getDomain()))
     {
       if($redirect_always)
@@ -102,7 +111,7 @@ class rtSiteToolkit
       }
       exit;
     }
-    
+
     if($object->rtSite->getDomain() !== self::getCurrentDomain())
     {
       $source = $context->getRequest()->isSecure() ? 'https://' : 'http://';
@@ -111,7 +120,7 @@ class rtSiteToolkit
       $context->getController()->redirect($source);
       exit;
     }
-    
+
     if($redirect_always)
     {
       $context->getController()->redirect($route);
@@ -130,7 +139,7 @@ class rtSiteToolkit
   public static function siteRedirect(sfDoctrineRecord $object, $route = null)
   {
     $context = sfContext::getInstance();
-    
+
     if(is_null($route))
     {
       $route = $object->getTable()->getTableName() . '_show';
@@ -139,7 +148,7 @@ class rtSiteToolkit
     $protocol = $context->getRequest()->isSecure() ? 'https://' : 'http://';
 
     $domain = rtSiteToolkit::getCurrentDomain();
-    
+
     if(rtSiteToolkit::isMultiSiteEnabled() && $object->rtSite && !is_null($object->rtSite->getDomain()))
     {
       $domain = $object->rtSite->getDomain();
@@ -153,7 +162,7 @@ class rtSiteToolkit
   public static function getRequestUri(array $source = null)
   {
     if ( $source === null ) $source = $_SERVER;
-    
+
     return $source['REQUEST_URI'];
   }
 }

@@ -34,7 +34,11 @@ abstract class PluginrtPageForm extends BasertPageForm
     }
     // set the widgets
     $this->setWidget('title',       new sfWidgetFormInputText(array(), array('class' => 'title')));
-    $this->setWidget('content',     new rtWidgetFormTextareaMarkdown(array(), array()));
+
+
+
+
+    $this->setWidget('content',     $this->getWidgetFormTextarea());
     $this->setWidget('tags',        new sfWidgetFormInput(array(), array('class' => 'tag-input')));
     $this->setWidget('description', new sfWidgetFormInputText(array(), array()));
 
@@ -77,4 +81,12 @@ abstract class PluginrtPageForm extends BasertPageForm
 
     return $this;
   }
+
+  protected function getWidgetFormTextarea($options = array(), $attributes = array())
+  {
+    $class = sfConfig::get('app_rt_widget_form_textarea_class', 'rtWidgetFormTextareaMarkdown');
+
+    return new $class($options, $attributes);
+  }
+
 }

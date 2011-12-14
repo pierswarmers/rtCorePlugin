@@ -6,4 +6,5 @@
   <li><?php echo link_to(__('Snippets'), 'rtSnippetAdmin/index') ?></li>
   <li><?php echo link_to(__('Comments'), 'rtCommentAdmin/index') ?></li>
   <li><?php echo link_to(__('Categories'), 'rtCategoryAdmin/index') ?></li>
+  <li><?php echo link_to(__('Sites'), 'rtSiteAdmin/index') ?></li>
 </ul>

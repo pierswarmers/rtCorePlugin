@@ -1,8 +1,36 @@
 rtSite:
+  actAs:
+    rtAttachableTemplate: ~
+    Timestampable: {}
+
   columns:
-    title:          string(255)
-    domain:         string(255)
-    reference_key:            string(30)
+
+    title:            string(255)
+    domain:           string(255)
+    reference_key:    string(30)
+
+    content:          string
+    published:        { type: boolean, default: true }
+
+    ga_code:          string(255)
+    ga_domain:        string(255)
+
+    facebook_url:     string(255)
+    flickr_url:       string(255)
+    youtube_url:      string(255)
+    devour_url:       string(255)
+    twitter_url:      string(255)
+    tumblr_url:       string(255)
+
+#    region:           { type: string(5), default: "AU" }
+#    currency:         { type: string(5), default: "AUD" }
+#    default_timezone: { type: string(30), default: "Australia/Sydney" }
+
+    email_signature:  { type: string, default: "Many thanks, The Team" }
+    email_address:    string(255)
+
+    category:         string(255)
+
   indexes:
     domain:
       fields: [domain]

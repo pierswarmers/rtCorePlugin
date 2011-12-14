@@ -20,7 +20,7 @@ abstract class PluginrtSite extends BasertSite
 {
   public function __toString()
   {
-    return $this->domain;
+    return $this->title;
   }
 
   public function getTypeNice()

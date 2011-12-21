@@ -28,8 +28,6 @@ if($sf_user->hasAttribute('rt-site-referer'))
     <tbody>
     <?php echo $form->renderGlobalErrors() ?>
     <?php echo render_form_row($form['title']); ?>
-    <?php echo render_form_row($form['reference_key']); ?>
-    <?php echo render_form_row($form['domain']); ?>
     <?php echo render_form_row($form['content']); ?>
     </tbody>
   </table>
@@ -67,5 +65,16 @@ if($sf_user->hasAttribute('rt-site-referer'))
       </tbody>
     </table>
   </div>
+
+  <div class="rt-admin-toggle-panel">
+    <h2><?php echo __('Advanced') ?></h2>
+    <table class="rt-admin-toggle-panel-content">
+      <tbody>
+      <?php echo render_form_row($form['reference_key']); ?>
+      <?php echo render_form_row($form['domain']); ?>
+      </tbody>
+    </table>
+  </div>
+
 
 </form>

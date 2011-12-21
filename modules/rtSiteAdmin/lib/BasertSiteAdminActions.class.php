@@ -73,7 +73,7 @@ class BasertSiteAdminActions extends sfActions
   public function executeNew(sfWebRequest $request)
   {
     $this->addRefererToSession($request);
-    $this->form = new rtSiteForm();
+    $this->form = $this->getForm();
 
     $title = str_replace(array('-', '-'), ' ', $request->getParameter('collection'));
     $title = ucwords($title);
@@ -86,7 +86,7 @@ class BasertSiteAdminActions extends sfActions
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new rtSiteForm();
+    $this->form = $this->getForm();
 
     $this->processForm($request, $this->form);
 
@@ -97,7 +97,7 @@ class BasertSiteAdminActions extends sfActions
   {
     $this->forward404Unless($rt_site = Doctrine::getTable('rtSite')->find(array($request->getParameter('id'))), sprintf('Object rt_site does not exist (%s).', $request->getParameter('id')));
     $this->addRefererToSession($request);
-    $this->form = new rtSiteForm($rt_site);
+    $this->form = $this->getForm($rt_site);
   }
 
   protected function addRefererToSession(sfWebRequest $request)
@@ -253,5 +253,18 @@ class BasertSiteAdminActions extends sfActions
         $cache->remove('@sf_cache_partial?module=rtSite&action=_sitePanel&sf_cache_key=*');
       }
     }
+  }
+
+  /**
+   * @param $rt_site
+   * @return rtSiteForm
+   */
+  private function getForm($rt_site = null)
+  {
+    if(!is_null($rt_site)) {
+      return new rtSiteForm($rt_site);
+    }
+
+    return new rtSiteForm();
   }
 }

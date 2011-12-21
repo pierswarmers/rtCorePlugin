@@ -116,7 +116,7 @@ class BasertSiteAdminActions extends sfActions
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
     $this->forward404Unless($rt_site = Doctrine::getTable('rtSite')->find(array($request->getParameter('id'))), sprintf('Object rt_site does not exist (%s).', $request->getParameter('id')));
-    $this->form = new rtSiteForm($rt_site);
+    $this->form = $this->getForm($rt_site);
 
     $this->processForm($request, $this->form);
 
@@ -259,7 +259,7 @@ class BasertSiteAdminActions extends sfActions
    * @param $rt_site
    * @return rtSiteForm
    */
-  private function getForm($rt_site = null)
+  protected function getForm($rt_site = null)
   {
     if(!is_null($rt_site)) {
       return new rtSiteForm($rt_site);

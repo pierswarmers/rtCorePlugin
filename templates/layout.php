@@ -14,7 +14,6 @@
     <?php use_stylesheet('/rtCorePlugin/css/admin-toolbar.css') ?>
     <?php use_stylesheet('/rtCorePlugin/css/admin-print.css', '', array('media' => 'print')) ?>
     <?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js', 'first') ?>
-    <?php //use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.ui.min.js', 'first'); ?>
     <?php use_javascript('/rtCorePlugin/js/admin-main.js', 'last') ?>
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>

@@ -39,7 +39,6 @@ class rtWidgetFormTextareaCKEditor extends sfWidgetFormTextarea
   {
     return array(
       '/rtCorePlugin/vendor/jquery/js/jquery.min.js',
-//      '/rtCorePlugin/vendor/jquery/js/jquery.tools.min.js',
       '/rtCorePlugin/js/admin-main.js',
       'http://localhost:8088/ckeditor/ckeditor.js',
       'http://localhost:8088/ckeditor/adapters/jquery.js'

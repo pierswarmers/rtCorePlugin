@@ -39,7 +39,6 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
   {
     return array(
       '/rtCorePlugin/vendor/jquery/js/jquery.min.js',
-      '/rtCorePlugin/vendor/jquery/js/jquery.tools.min.js',
       '/rtCorePlugin/js/admin-main.js',
       '/rtCorePlugin/vendor/markitup/jquery.markitup.pack.js',
       '/rtCorePlugin/js/admin-markitup.js'

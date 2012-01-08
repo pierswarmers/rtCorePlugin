@@ -40,7 +40,7 @@ class BasertSiteAdminActions extends sfActions
     $this->stats = $this->stats();
   }
 
-  private function stats()
+  protected function stats()
   {
     // Dates
     $date_now         = date("Y-m-d H:i:s");
@@ -59,7 +59,7 @@ class BasertSiteAdminActions extends sfActions
     return $stats;
   }
 
-  private function getCountPerPage(sfWebRequest $request)
+  protected function getCountPerPage(sfWebRequest $request)
   {
     $count = sfConfig::get('app_rt_admin_pagination_limit', 50);
     if($request->hasParameter('show_more'))

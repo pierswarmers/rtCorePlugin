@@ -5,6 +5,8 @@
 <?php echo __('Oops! Page not found') ?>
 <?php end_slot(); ?>
 
+<div class="rt-section-content">
+
 <p><strong><?php echo __('Did you type the URL?') ?></strong></p>
 
 <p>
@@ -55,3 +57,4 @@
   <li class=""><?php echo link_to(__('Go to Homepage'), '@homepage') ?></li>
   <li class=""><?php echo link_to(__('Try searching for the page you\'re after'), '@rt_search') ?></li>
 </ul>
+</div>

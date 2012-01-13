@@ -39,6 +39,11 @@ body {
   border-left:0;
   border-right:0;
 }
+
+.smallEditor .markItUpEditor {
+    height:100px;
+}
+
 .markItUpPreviewFrame	{
 	overflow:auto;
 	background-color:#FFFFFF;

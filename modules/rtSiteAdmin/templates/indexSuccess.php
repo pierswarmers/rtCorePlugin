@@ -33,19 +33,19 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($pager->getResults() as $rt_site): ?>
+    <?php foreach ($pager->getResults() as $k_site): ?>
     <tr>
-      <td><a href="<?php echo url_for('rtSiteAdmin/edit?id='.$rt_site->getId()) ?>"><?php echo $rt_site->getDomain() ?></a></td>
+      <td><a href="<?php echo url_for('rtSiteAdmin/edit?id='.$k_site->getId()) ?>"><?php echo $k_site->getDomain() ?></a></td>
 
       <td class="rt-admin-publish-toggle">
-        <?php echo rt_nice_boolean($rt_site->getPublished()) ?>
-        <div style="display:none;"><?php echo $rt_site->getId() ?></div>
+        <?php echo rt_nice_boolean($k_site->getPublished()) ?>
+        <div style="display:none;"><?php echo $k_site->getId() ?></div>
       </td>
-      <td><?php echo $rt_site->getCreatedAt() ?></td>
+      <td><?php echo $k_site->getCreatedAt() ?></td>
       <td>
         <ul class="rt-admin-tools">
-          <li><?php echo rt_button_edit('rtSiteAdmin/edit?id='.$rt_site->getId()) ?></li>
-          <li><?php echo rt_button_delete('rtSiteAdmin/delete?id='.$rt_site->getId()) ?></li>
+          <li><?php echo rt_button_edit('rtSiteAdmin/edit?id='.$k_site->getId()) ?></li>
+          <li><?php echo rt_button_delete('rtSiteAdmin/delete?id='.$k_site->getId()) ?></li>
         </ul>
       </td>
     </tr>

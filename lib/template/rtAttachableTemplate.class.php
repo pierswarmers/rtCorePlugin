@@ -132,6 +132,26 @@ class rtAttachableTemplate extends Doctrine_Template
     return false;
   }
 
+
+    /**
+     * Return assets for a given extension.
+     *
+     * @param  $extension
+     * @return bool|array
+     */
+    public function getAssetsByExtension($extension)
+    {
+      $extension = strtolower($extension);
+      $assets    = array();
+      foreach($this->getAssets() as $asset) {
+        if($asset->getExtension() === $extension) {
+          $assets[] = $asset;
+        }
+      }
+
+      return count($assets > 0) ? $assets: false;
+    }
+
   /**
    * Fetch an collection of assets attached to this object.
    * 

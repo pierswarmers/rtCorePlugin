@@ -133,7 +133,7 @@ class rtIndexToolkit
   static public function stemWordsInArray($words, $lang)
   {
     $class_name = self::getIndexCleanerClass($lang);
-    
+
     foreach($words as $i => $word)
     {
       if(strlen($word) > 2)

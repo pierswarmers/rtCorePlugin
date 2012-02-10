@@ -34,7 +34,8 @@ class rtAssetUploadForm extends PluginrtAssetForm
       'model'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'filename'   => new sfValidatorFile(array(
       'path' => sfConfig::get('sf_upload_dir'),
-      'mime_types' => $this->getAllowedMimeTypes()
+      'mime_types' => $this->getAllowedMimeTypes(),
+      'mime_type_guessers' => array('guessFromFileinfo')
     )),
     ));
 

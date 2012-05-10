@@ -371,6 +371,7 @@ class rtAssetToolkit
       'application/postscript',
       // audio
       'audio/basic',
+      'audio/mp3',
       'audio/mp4',
       'audio/mpeg',
       'audio/ogg',

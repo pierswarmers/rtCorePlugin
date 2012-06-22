@@ -376,6 +376,7 @@ class rtAssetToolkit
       'audio/mpeg',
       'audio/ogg',
       'audio/vorbis',
+      'audio/x-m4a',
       'audio/x-ms-wma',
       'audio/vnd.rn-realaudio',
       'audio/vnd.wave',

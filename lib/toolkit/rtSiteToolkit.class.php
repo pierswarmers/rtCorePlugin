@@ -80,8 +80,7 @@ class rtSiteToolkit
    */
   public static function cleanDomainString($string)
   {
-    if(substr($string, 0, 4) === 'www.')
-    {
+    if (sfConfig::get('app_rt_domain_clean_www', false) && substr($string, 0, 4) === 'www.') {
       $string = substr($string, 4);
     }
 

@@ -91,7 +91,7 @@ class rtIndexToolkit
     {
       return $class_name;
     }
-    return false;
+    return 'rtIndexCleanerEn';
   }
 
   /**

@@ -8,6 +8,10 @@ body {
 .markItUp  {
   border:1px solid #ccc;
 }
+
+.markItUp .markItUp {
+    border:0;
+    }
 .markItUp * {
 	margin:0px; padding:0px;
 	outline:none;
@@ -40,6 +44,8 @@ body {
   border-right:0;
 }
 
+.markItUpContainer textarea{ width:94%; border: 0; padding:3%; display:inline-block; outline:none; font-size:1.2em; }
+
 .smallEditor .markItUpEditor {
     height:100px;
 }
@@ -55,6 +61,15 @@ body {
 	height:25px;
 	background:#efefef;
 }
+
+/*.markItUpContainer .markItUpContainer .markItUpHeader {*/
+    /*display:none;*/
+    /*}*/
+
+/*.markItUpContainer .markItUpContainer .markItUpHeader {*/
+    /*display:none;*/
+    /*}*/
+
 .markItUpFooter {
 	height:10px;
 	background:#efefef;
@@ -197,6 +212,9 @@ body {
 .markItUpHeader .markItUpButton16 a {
 	background-image:url(../images/buttons/application_shout2.png);
 }
+.markItUp .preview a {
+    background-image:url(../images/tick.png);
+    }
 
 
 

@@ -27,7 +27,9 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
    */
   protected function configure($options = array(), $attributes = array())
   {
-    $this->addOption('config', '');
+      $this->addOption('config', '');
+      $this->addOption('object_id', null);
+      $this->addOption('object_class', null);
   }
 
   /**
@@ -120,7 +122,9 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
     });
 
     $('.rtLinkPanelInsertButton').click(function(){
-      $.markItUp({openWith: '[',closeWith:']('+ $("#linkUrl$rand").val() +')',placeHolder:''+ $("#linkText$rand").attr('value') +'' });
+    $.markItUp( { openWith: '[', closeWith:']('+ $("#linkUrl$rand").val() +')',placeHolder:''+ $("#linkText$rand").attr('value') +'' });
+
+
       $('.rt-modal-panel').dialog('close');
       return false;
     });
@@ -147,14 +151,27 @@ class rtWidgetFormTextareaMarkdown extends sfWidgetFormTextarea
       '#$id'
     );
 
+    rtMarkdownSettings['previewParserPath'] = rtMarkdownSettings['previewParserPath'] + "%s%s";
+
+
     $('#%s').markItUp(rtMarkdownSettings);
+
+    $('#%s').children('.markItUp').markItUpRemove();
+
+//    $('.markItUp').children('.markItUp').markItUpRemove();
+
   });
 </script>
 EOF
     ,
-      $attributes['id']
+        is_null($this->getOption('object_id')) ? '' : '?object_id=' . $this->getOption('object_id'),
+        is_null($this->getOption('object_class')) ? '' : '&object_class=' . $this->getOption('object_class'),
+        $attributes['id'],
+        $attributes['id']
     );
-    
+
+
+
     return $js.$textarea;
   }
 }

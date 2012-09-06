@@ -105,7 +105,7 @@ input[type="file"] {border:0;}
 option{border-width:0;}
 .rt-admin-toggle-panel h2:hover, input:focus{border-color:#555 !important;}
 input[type=text], input[type=password]{-moz-border-radius:5px;-webkit-border-radius:5px;}
-td input[type=text], th input[type=text], input[type=password]{width:95%}
+td input[type=text], th input[type=text], input[type=password], td textarea{width:95%}
 .compressed td input[type=text], .compressed th input[type=text] {width:45px;}
 .compressed td {padding-right:3px;}
 table, thead th, td{border:1px solid #ccc;}
@@ -115,12 +115,11 @@ form thead th, form td{vertical-align:top;}
 table{border-bottom:0;border-right:0;}
 thead th, tbody th, tfoot th {background:#efefef;}
 tbody th {vertical-align: top;padding-top:10px;width:150px;border-bottom:1px solid #CCC;}
-textarea{font-family:'andale mono', 'lucida console', monospace;font-size:1.1em;}
+textarea,  td textarea{font-family:'andale mono', 'lucida console', monospace;font-size:1.1em;}
 label{}
 p img.right, p img.left{margin-top:0.5em;}
 iframe{margin-bottom:1.5em;}
 .deleted{text-decoration:line-through;}
-.markItUpContainer textarea{ width:100%; border: 0; padding:0; display:inline-block; outline:none; }
 /*
 
 Simple Feedback

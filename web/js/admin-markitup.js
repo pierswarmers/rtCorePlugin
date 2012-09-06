@@ -6,7 +6,7 @@
 // ----------------------------------------------------------------------------
 rtMarkdownSettings = {
     nameSpace:          'markdown',
-    previewParserPath:  '~/sets/markdown/preview.php',
+    previewParserPath:  '/rtPreviewAdmin',
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},
     markupSet: [
         {name:'Second Level Heading', key:"2", placeHolder:'Your title here...', closeWith:function(markItUp) {return miu.markdownTitle(markItUp, '-')}},
@@ -63,7 +63,9 @@ rtMarkdownSettings = {
         {separator:'---------------'},
         {name:'Separator', openWith:'\n////\n'},
         {name:'Shout', openWith:'![shout]\n\n', closeWith:'\n\n[/]'},
-        {name:'Kicker', openWith:'![kicker]\n\n', closeWith:'\n\n[/]'}
+        {name:'Kicker', openWith:'![kicker]\n\n', closeWith:'\n\n[/]'},
+        {separator:'---------------'},
+        {name:'Preview', className:'preview', key:"P",  call:'preview'}
     ]
 }
 

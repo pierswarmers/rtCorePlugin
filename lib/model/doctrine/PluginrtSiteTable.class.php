@@ -18,29 +18,55 @@
  */
 class PluginrtSiteTable extends Doctrine_Table
 {
-  /**
-   * Return a query object, creting a new one if needed.
-   *
-   * @param Doctrine_Query $query
-   * @return Doctrine_Query
-   */
-  public function getQuery(Doctrine_Query $query = null)
-  {
-    if(is_null($query))
+    /**
+     * Return all published sites.
+     *
+     * @param Doctrine_Query $query
+     * @return Doctrine_Collection
+     */
+    public function findAllPublished(Doctrine_Query $query = null)
     {
-      $query = parent::createQuery('site');
+        $query = $this->addPublishedQuery($query);
+
+        return $query->execute();
     }
 
-    return $query;
-  }
+    /**
+     * Adds a check for sites which have been published.
+     *
+     * @param Doctrine_Query $query
+     * @return Doctrine_Query
+     */
+    public function addPublishedQuery(Doctrine_Query $query = null)
+    {
+        $query = $this->getQuery($query);
+        $query->andWhere('site.published = 1');
 
-  /**
-   * Returns an instance of this class.
-   *
-   * @return object PluginrtSiteTable
-   */
-  public static function getInstance()
-  {
-    return Doctrine_Core::getTable('PluginrtSite');
-  }
+        return $query;
+    }
+
+    /**
+     * Return a query object, creting a new one if needed.
+     *
+     * @param Doctrine_Query $query
+     * @return Doctrine_Query
+     */
+    public function getQuery(Doctrine_Query $query = null)
+    {
+        if (is_null($query)) {
+            $query = parent::createQuery('site');
+        }
+
+        return $query;
+    }
+
+    /**
+     * Returns an instance of this class.
+     *
+     * @return object PluginrtSiteTable
+     */
+    public static function getInstance()
+    {
+        return Doctrine_Core::getTable('PluginrtSite');
+    }
 }

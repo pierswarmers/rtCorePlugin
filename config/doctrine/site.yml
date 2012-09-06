@@ -12,6 +12,16 @@ rtSite:
     content:          string
     published:        { type: boolean, default: true }
 
+    position:               { type: integer }
+    public_url:             string(255)
+    target_link:            string(255)
+    content_summery:        string
+    email_contact_address:  string(255)
+    email_contact_response: { type: string(255),default: "Many thanks, we will be in contact shortly." }
+    email_booking_address:  string(255)
+    email_booking_response: { type: string(255),default: "Many thanks, we will be in contact shortly." }
+    html_suffix:      string
+
     ga_code:          string(255)
     ga_domain:        string(255)
 
@@ -21,6 +31,8 @@ rtSite:
     devour_url:       string(255)
     twitter_url:      string(255)
     tumblr_url:       string(255)
+
+    html_snippet_suffix: string
 
 #    region:           { type: string(5), default: "AU" }
 #    currency:         { type: string(5), default: "AUD" }

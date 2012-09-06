@@ -49,7 +49,16 @@ class rtTemplateToolkit
     else
     {
       $base = sfConfig::get('sf_root_dir').sfConfig::get('app_rt_template_dir');
-      $location = $base.DIRECTORY_SEPARATOR.rtSiteToolkit::getCurrentDomain();
+
+      $site = rtSiteToolkit::getCurrentSite();
+
+      $reference_key = '';
+
+      if($site) {
+          $reference_key = $site->getReferenceKey();
+      }
+
+      $location = $base.DIRECTORY_SEPARATOR.$reference_key;
 
       if(rtSiteToolkit::isMultiSiteEnabled() && (is_dir($location) || is_link($location)))
       {

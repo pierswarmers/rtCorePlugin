@@ -32,11 +32,9 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
           array($this, 'listenToRoutingLoadConfigurationFrontend'));
     }
 
-    if(sfConfig::has('app_rt_default_timezone'))
-    {
-      sfConfig::set('sf_default_timezone',
-          sfConfig::get('app_rt_default_timezone'));
-    }
+    date_default_timezone_set("Australia/Sydney");
+
+    sfConfig::set('sf_default_timezone', sfConfig::get('app_rt_default_timezone', 'Australia/Sydney'));
   }
 
   /**

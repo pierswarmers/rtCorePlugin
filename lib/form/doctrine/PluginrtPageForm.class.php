@@ -84,6 +84,9 @@ abstract class PluginrtPageForm extends BasertPageForm
 
   protected function getWidgetFormTextarea($options = array(), $attributes = array())
   {
+    $options['object_id'] = $this->isNew() ? null : $this->getObject()->getId();
+    $options['object_class'] = $this->isNew() ? null : get_class($this->getObject());
+
     $class = sfConfig::get('app_rt_widget_form_textarea_class', 'rtWidgetFormTextareaMarkdown');
 
     return new $class($options, $attributes);

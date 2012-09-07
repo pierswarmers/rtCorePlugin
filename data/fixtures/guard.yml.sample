@@ -22,6 +22,7 @@ sfGuardGroup:
       - Permission_admin_shop_voucher
       - Permission_admin_comment
       - Permission_admin_category
+      - Permission_admin_site_config
 
 sfGuardPermission:
 
@@ -84,3 +85,6 @@ sfGuardPermission:
   Permission_admin_category:
       name:           admin_category
       description:    Administrator for categories
+  Permission_admin_site_config:
+      name:           admin_site_config
+      description:    Administrator permission for site configuration, i.e. for multi-site setups.

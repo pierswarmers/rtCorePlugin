@@ -1,4 +1,4 @@
-<?php $admin_cred = sfConfig::get('app_rt_site_admin_credential', 'admin_site') . "\n" ?>
+<?php $admin_cred = sfConfig::get('app_rt_site_admin_credential', 'admin_site_config') . "\n" ?>
 
 all:
   is_secure: true

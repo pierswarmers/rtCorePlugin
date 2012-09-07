@@ -24,6 +24,7 @@ class rtSiteToolkit
    */
   public static function isMultiSiteEnabled()
   {
+      return true;
     return sfConfig::get('app_rt_enable_multi_site', false);
   }
 

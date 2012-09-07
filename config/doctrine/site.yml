@@ -29,6 +29,7 @@ rtSite:
     facebook_url:     string(255)
     flickr_url:       string(255)
     youtube_url:      string(255)
+    google_plus_url:  string(255)
     devour_url:       string(255)
     twitter_url:      string(255)
     tumblr_url:       string(255)

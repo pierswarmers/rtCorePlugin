@@ -75,6 +75,7 @@ if($sf_user->hasAttribute('rt-site-referer'))
             <tbody>
             <?php echo render_form_row($form['facebook_url']); ?>
             <?php echo render_form_row($form['twitter_url']); ?>
+            <?php echo render_form_row($form['google_plus_url']); ?>
             <?php echo render_form_row($form['youtube_url']); ?>
             </tbody>
         </table>

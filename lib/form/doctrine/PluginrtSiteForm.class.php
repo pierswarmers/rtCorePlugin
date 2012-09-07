@@ -34,6 +34,7 @@ abstract class PluginrtSiteForm extends BasertSiteForm
                 'facebook_url',
                 'twitter_url',
                 'youtube_url',
+                'google_plus_url',
                 'email_signature',
                 'public_url',
                 'position',
@@ -62,13 +63,16 @@ abstract class PluginrtSiteForm extends BasertSiteForm
         $this->widgetSchema->setLabel('email_booking_response','Response');
 
         $this->widgetSchema->setLabel('facebook_url','Facebook URL');
-        $this->setValidator('facebook_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. http://example.com')));
+        $this->setValidator('facebook_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://www.facebook.com/...')));
 
         $this->widgetSchema->setLabel('twitter_url','Twitter URL');
-        $this->setValidator('twitter_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. http://example.com')));
+        $this->setValidator('twitter_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://twitter.com/...')));
+
+        $this->widgetSchema->setLabel('google_plus_url','Google+ URL');
+        $this->setValidator('google_plus_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://plus.google.com/b/...')));
 
         $this->widgetSchema->setLabel('youtube_url','YouTube URL');
-        $this->setValidator('youtube_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. http://example.com')));
+        $this->setValidator('youtube_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. http://www.youtube.com/user/...')));
 
         $this->setWidget('html_snippet_suffix', new sfWidgetFormTextarea());
         $this->widgetSchema->setLabel('html_snippet_suffix','Included HTML');

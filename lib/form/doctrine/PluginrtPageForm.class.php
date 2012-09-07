@@ -72,11 +72,11 @@ abstract class PluginrtPageForm extends BasertPageForm
 
     if(rtSiteToolkit::isMultiSiteEnabled())
     {
-//      $rt_site = Doctrine::getTable('rtSite')->findOneByDomain(rtSiteToolkit::getCurrentDomain());
-//      if($rt_site && $this->isNew())
-//      {
-//        $this->setDefault('site_id', $rt_site->getId());
-//      }
+      $rt_site = Doctrine::getTable('rtSite')->findOneByDomain(rtSiteToolkit::getCurrentDomain());
+      if($rt_site && $this->isNew())
+      {
+        $this->setDefault('site_id', $rt_site->getId());
+      }
     }
 
     return $this;

@@ -20,9 +20,9 @@ abstract class PluginrtSiteForm extends BasertSiteForm
     /**
      * @see rtSiteForm
      */
-    public function configure()
+    public function setup()
     {
-        parent::configure();
+        parent::setup();
 
         $this->useFields(array(
                 'title',
@@ -35,7 +35,6 @@ abstract class PluginrtSiteForm extends BasertSiteForm
                 'twitter_url',
                 'youtube_url',
                 'email_signature',
-                'type',
                 'public_url',
                 'position',
                 'content_summery',

@@ -74,7 +74,7 @@ function render_form_row(sfFormField $widget, $options = array())
       '<tr class="%1$s standard"><th><label for="%2$s">%3$s</label></th><td>%4$s %5$s <div class="help">%6$s</div>%7$s</tr>',
       $options['class'], // 1
       $widget->renderId(), // 2
-      $widget->renderLabelName() . get_class($widget->getWidget()), // 3
+      $widget->renderLabelName(), // 3
       $widget->hasError() ? '<span class="error">' . $widget->renderError() . '</span>' : '', // 4
       $widget->render(), // 5
       $help, // 6

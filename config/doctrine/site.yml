@@ -2,6 +2,7 @@ rtSite:
   actAs:
     rtAttachableTemplate: ~
     Timestampable: {}
+    rtAddressableTemplate: ~
 
   columns:
 

@@ -56,7 +56,7 @@ function render_form_row(sfFormField $widget, $options = array())
       $widget->renderId() // 6
     );
   }
-  elseif(get_class($widget->getWidget()) === 'sfWidgetFormChoice')
+  elseif(in_array(get_class($widget->getWidget()), array('sfWidgetFormChoice', 'sfWidgetFormDate', 'sfWidgetFormDateTime')))
   {
     $html = sprintf(
       '<tr class="%1$s checkbox"><th><label>%2$s</label></th><td>%4$s <div class="help">%5$s</div> %3$s</td></tr>',

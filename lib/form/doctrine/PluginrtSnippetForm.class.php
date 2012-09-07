@@ -39,7 +39,41 @@ abstract class PluginrtSnippetForm extends BasertSnippetForm
       $this->setValidator('site_id', new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('rtSite'), 'required' => true), array('required' => 'Please select a site for this item to be attached to.')));
     }
     
-    $this->setWidget('content',     new rtWidgetFormTextareaMarkdown(array(), array()));
+    $this->setWidget('content', $this->getWidgetFormTextarea());
 
   }
+
+    /**
+     * Extends the default handling to include logic to handle
+     *
+     * @param array $defaults An array of default values
+     *
+     * @return sfForm The current form instance
+     */
+    public function setDefaults($defaults)
+    {
+        parent::setDefaults($defaults);
+
+        if(rtSiteToolkit::isMultiSiteEnabled())
+        {
+            $rt_site = Doctrine::getTable('rtSite')->findOneByDomain(rtSiteToolkit::getCurrentDomain());
+            if($rt_site && $this->isNew())
+            {
+                $this->setDefault('site_id', $rt_site->getId());
+            }
+        }
+
+        return $this;
+    }
+
+    protected function getWidgetFormTextarea($options = array(), $attributes = array())
+    {
+        $options['object_id'] = $this->isNew() ? null : $this->getObject()->getId();
+        $options['object_class'] = $this->isNew() ? null : get_class($this->getObject());
+
+        $class = sfConfig::get('app_rt_widget_form_textarea_class', 'rtWidgetFormTextareaMarkdown');
+
+        return new $class($options, $attributes);
+    }
+
 }

@@ -38,15 +38,13 @@ function render_form_row(sfFormField $widget, $options = array())
     $content = ob_get_contents();
     ob_end_clean();
   }
-  
-  $is_checkbox = get_class($widget->getWidget()) === 'sfWidgetFormInputCheckbox';
 
   $html = '';
 
   $widget->renderHelp();
   $help = $widget->getParent()->getWidget()->getHelp($widget->getName());
-  
-  if($is_checkbox)
+
+  if(get_class($widget->getWidget()) === 'sfWidgetFormInputCheckbox')
   {
     $html = sprintf(
       '<tr class="%1$s checkbox"><th><label for="%6$s">%2$s</label></th><td>%4$s <div class="help">%5$s</div> %3$s</td></tr>',
@@ -58,6 +56,17 @@ function render_form_row(sfFormField $widget, $options = array())
       $widget->renderId() // 6
     );
   }
+  elseif(get_class($widget->getWidget()) === 'sfWidgetFormChoice')
+  {
+    $html = sprintf(
+      '<tr class="%1$s checkbox"><th><label>%2$s</label></th><td>%4$s <div class="help">%5$s</div> %3$s</td></tr>',
+      $options['class'], // 1
+      $widget->renderLabelName(),  // 2
+      $widget->hasError() ? $widget->renderError() : '',  // 3
+      $widget->render(), // 4
+      $help // 5
+    );
+  }
   else
   {
     
@@ -65,7 +74,7 @@ function render_form_row(sfFormField $widget, $options = array())
       '<tr class="%1$s standard"><th><label for="%2$s">%3$s</label></th><td>%4$s %5$s <div class="help">%6$s</div>%7$s</tr>',
       $options['class'], // 1
       $widget->renderId(), // 2
-      $widget->renderLabelName(), // 3
+      $widget->renderLabelName() . get_class($widget->getWidget()), // 3
       $widget->hasError() ? '<span class="error">' . $widget->renderError() . '</span>' : '', // 4
       $widget->render(), // 5
       $help, // 6

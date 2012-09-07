@@ -106,10 +106,10 @@ class BasertSnippetAdminActions extends sfActions
     {
       $this->getUser()->setAttribute('rt-snippet-referer', $request->getParameter('rt-snippet-referer'));
     }
-    else
-    {
-      $this->removeRefererFromSession();
-    }
+//    else
+//    {
+//      $this->removeRefererFromSession();
+//    }
   }
 
   public function executeUpdate(sfWebRequest $request)

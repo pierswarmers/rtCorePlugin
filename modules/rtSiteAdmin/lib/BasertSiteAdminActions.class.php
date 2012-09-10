@@ -193,7 +193,7 @@ class BasertSiteAdminActions extends sfActions
     $this->clearCache($rt_site);
   }
 
-  private function removeRefererFromSession()
+  protected function removeRefererFromSession()
   {
     $this->getUser()->getAttributeHolder()->remove('rt-site-referer');
   }

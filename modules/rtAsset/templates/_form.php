@@ -73,7 +73,8 @@ $(document).ready(function() {
                 dialog.html(responseText);
                       dialog.dialog({
                         resizable: false,
-                        height:400,
+                        position: ['centre','centre'],
+                        height:500,
                         width: 550,
                         modal: true,
                         buttons: {
@@ -88,12 +89,21 @@ $(document).ready(function() {
                                     id : dialog.find('input[name=id]').val(),
                                     title : dialog.find('input[name=title]').val(),
                                     description : dialog.find('textarea[name=description]').val(),
+                                    target_url : dialog.find('input[name=target_url]').val(),
                                     filename : dialog.find('input[name=filename]').val(),
                                     content : dialog.find('textarea[name=content]').val()
                                   }),
                                   dataType: "html",
                                   success: function(msg){
                                     dialog.dialog('destroy');
+
+                                      $.ajax({
+                                          url: '<?php echo url_for('rtAsset/list?class='.get_class($sf_data->getRaw('object')).'&id='.$object->getId()) ?>',
+                                          success: function(data) {
+                                              $('#rtCoreUploadPanel<?php echo $panel_suffix ?>').html(data);
+                                          }
+                                      });
+
                                   }
                                }
                             );

@@ -23,7 +23,7 @@ class BasertDefaultActions extends sfActions
     rtTemplateToolkit::setFrontendTemplateDir();
     parent::preExecute();
   }
-  
+
   public function executeError404(sfWebRequest $request)
   {
 
@@ -43,7 +43,7 @@ class BasertDefaultActions extends sfActions
         $title = sfContext::getInstance()->getI18N()->__($title);
         $message = sfContext::getInstance()->getI18N()->__($message);
       }
-      
+
       $message = sprintf('%s: %s', $message, $request->getGetParameter('url'));
 
       $referer_message = '';

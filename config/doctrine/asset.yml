@@ -7,6 +7,7 @@ rtAsset:
     model_id:          integer
     model:             string(100)
     title:             string(100)
+    target_url:        string(255)
     description:       string
     author:            string(255)
     copyright:         string(255)

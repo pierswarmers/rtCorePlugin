@@ -278,3 +278,18 @@ function rt_get_nav_range($lower, $contextual = true, $upper = null)
 
   return $nav;
 }
+
+function rt_thumbnail($object, $width = 250, $height = 1000, $options = array())
+{
+    try {
+        $image = $object->getPrimaryImage();
+    } catch (Exception $e) {
+        return '';
+    }
+
+    if(!$image){
+        return '';
+    }
+
+    return image_tag(rtAssetToolkit::getThumbnailPath($image->getSystemPath(), array('maxHeight' => $width, 'maxWidth' => $height)), $options);
+}

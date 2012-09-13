@@ -1,4 +1,4 @@
-<?php use_helper('I18N') ?>
+<?php use_helper('I18N', 'rtForm', 'rtTemplate'); ?>
 
 <?php slot('rt-title') ?>
 <?php echo __('Message Sent') ?>

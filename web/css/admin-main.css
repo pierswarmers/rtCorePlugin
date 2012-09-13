@@ -138,6 +138,7 @@ Attachment Panel
 .rt-core-upload p, .rt-core-upload ul{border:none;margin:0;padding:0;}
 #rt-admin-tools fieldset p{}
 .rt-core-upload ul{position:relative;height:200px;overflow:auto;border-top:1px solid #CCC;border-bottom:1px solid #CCC;padding:5px 0; margin-bottom:5px;}
+.rt-core-upload ul{position:relative;height:200px;overflow:auto;border-top:1px solid #CCC;border-bottom:1px solid #CCC;padding:5px 0; margin-bottom:5px;}
 .rt-core-upload-panel{list-style:none;}
 .rt-core-upload-panel li{margin-bottom:5px;border-width:1px!important;}
 .rt-core-upload-panel form{display:none;}
@@ -151,6 +152,7 @@ Attachment Panel
 .rt-core-upload-item .delete, .rt-core-upload-item .insert{text-align:center;width:20px;height:19px;line-height:19px;position:absolute;right:0;z-index:1000;cursor:pointer;color:#333;background:rgb(170,170,170);}
 .rt-core-upload-item .delete{top:0;}
 .rt-core-upload-item .insert{bottom:0;background-color:rgb(170,170,170);background-image:url(../images/link.png);background-position:50% 50%;background-repeat:no-repeat;}
+#rtAdminForm .rt-core-upload-item .insert { display: none; }
 /*
 
 Modal Panels

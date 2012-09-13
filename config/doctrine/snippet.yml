@@ -14,6 +14,7 @@ rtSnippet:
     title:            string(255)
     content:          string
     collection:       string(255)
+    mode:             { type: enum, values: [standard, gallery], default: standard }
     position:         integer
     published:        { type: boolean, default: 1 }
     published_from:   timestamp

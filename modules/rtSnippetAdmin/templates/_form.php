@@ -15,7 +15,9 @@ if($sf_user->hasAttribute('rt-snippet-referer'))
 <?php end_slot(); ?>
 
 <?php slot('rt-side') ?>
+<?php if ($form->getObject()->getMode() === 'standard'): ?>
 <?php include_component('rtAsset', 'form', array('object' => $form->getObject())) ?>
+<?php endif; ?>
 <?php end_slot(); ?>
 
 <form id ="rtAdminForm" action="<?php echo url_for('rtSnippetAdmin/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
@@ -27,7 +29,17 @@ if($sf_user->hasAttribute('rt-snippet-referer'))
   <table>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
+      <?php if ($form->getObject()->getMode() === 'standard'): ?>
         <?php echo render_form_row($form['content']); ?>
+      <?php else: ?>
+      <tr>
+          <th>Gallery</th>
+          <td>
+            <?php include_component('rtAsset', 'form', array('object' => $form->getObject())) ?>
+          </td>
+      </tr>
+      <?php endif; ?>
+      <?php echo render_form_row($form['mode']); ?>
     </tbody>
   </table>
 

@@ -23,6 +23,12 @@ abstract class PluginrtSnippetForm extends BasertSnippetForm
 
     unset($this['version'], $this['created_at'], $this['updated_at']);
 
+    if ($this->getObject()->getMode() !== 'standard') {
+        unset($this['content']);
+    } else {
+        $this->setWidget('content', $this->getWidgetFormTextarea());
+    }
+
     $this->widgetSchema->setHelp('collection', 'The collection decides where this snippet should be displayed.');
     $this->widgetSchema->setHelp('position', 'Optional position value to set the order for collections of snippets.');
 
@@ -38,9 +44,6 @@ abstract class PluginrtSnippetForm extends BasertSnippetForm
     {
       $this->setValidator('site_id', new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('rtSite'), 'required' => true), array('required' => 'Please select a site for this item to be attached to.')));
     }
-    
-    $this->setWidget('content', $this->getWidgetFormTextarea());
-
   }
 
     /**

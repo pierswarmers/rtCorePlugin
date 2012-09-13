@@ -24,8 +24,8 @@
       <?php endforeach; ?>
     </ul>
     <p>
-      <button id="uploadImageButton<?php echo $panel_suffix ?>"><?php echo __('Upload') ?></button>
-      <button id="createButton<?php echo $panel_suffix ?>"><?php echo __('.html') ?></button>
+      <button id="uploadImageButton<?php echo $panel_suffix ?>" class="upload"><?php echo __('Upload') ?></button>
+      <button id="createButton<?php echo $panel_suffix ?>" class="html"><?php echo __('.html') ?></button>
       <span id="rtCoreUploadPanelMessage<?php echo $panel_suffix ?>"></span>
     </p>
     <?php endif; ?>
@@ -57,6 +57,8 @@ $(document).ready(function() {
     });
 
   });
+
+  $('#rtAdminForm button.html').hide();
 
   editAsset = function(assetId, assetOriginalFilename)
   {

@@ -50,10 +50,12 @@ function markdown_to_html($string, $object = null, $summary = false)
  * @param bool $summary
  * @return string
  */
-function editable_section($string, $object = null, $options = array())
+function editable_section($string, $object = null, $summary = false)
 {
-    $options['summary'] = isset($options['summary']) ? $options['summary'] : false;
+    return editable_link($object) . markdown_to_html($string, $object, $summary);
+}
 
+function editable_link($object) {
     $link = '';
 
     if($object) {
@@ -71,7 +73,7 @@ function editable_section($string, $object = null, $options = array())
         $link .= link_to('Edit Page', $admin_class.'Admin/edit?id='.$object->getId(), array('class' => 'rt-admin-edit-tools-trigger'));
         $link .= '</div>';
         $link .= 'RTAS-->';
-    }
 
-    return $link . markdown_to_html($string, $object, $options['summary']);
+        return $link;
+    }
 }

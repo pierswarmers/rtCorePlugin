@@ -20,7 +20,7 @@ class PluginrtPageTable extends Doctrine_Table
 {
   /**
    * Return all published pages.
-   * 
+   *
    * @param Doctrine_Query $query
    * @return Doctrine_Collection
    */
@@ -30,7 +30,7 @@ class PluginrtPageTable extends Doctrine_Table
     $query = $this->addSiteQuery($query);
     return $query->execute();
   }
-  
+
   /**
    * Return all pages pages which aren't deleted.
    *
@@ -55,7 +55,7 @@ class PluginrtPageTable extends Doctrine_Table
     $query = $this->addPublishedQuery($query);
     return $this->findOneById($id);
   }
-  
+
   /**
    * Adds a check for pages which have been published.
    *
@@ -70,7 +70,7 @@ class PluginrtPageTable extends Doctrine_Table
     $query->andWhere('page.published = 1');
     return $query;
   }
-  
+
   /**
    * Adds a check for pages which belong to the current domain/site.
    *
@@ -82,13 +82,13 @@ class PluginrtPageTable extends Doctrine_Table
   public function addSiteQuery(Doctrine_Query $query = null)
   {
     $query = $this->getQuery($query);
-    
+
     if(rtSiteToolkit::isMultiSiteEnabled())
     {
       $query->leftJoin('page.rtSite site')
             ->andWhere('site.domain = ?', rtSiteToolkit::getCurrentDomain());
     }
-    
+
     return $query;
   }
 

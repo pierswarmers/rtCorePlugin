@@ -4,6 +4,7 @@ rtPage:
     Sluggable:
       fields:      [title]
       canUpdate:   false
+      unique:      false
     rtAttachableTemplate: ~
     rtCommentTemplate: ~
     rtSearchTemplate:

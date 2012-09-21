@@ -244,6 +244,8 @@ class BasertSnippetAdminActions extends sfActions
     
     if ($cache)
     {
+      $cache->remove('rtSite/index');
+
       if(!is_null($rt_snippet))
       {
         $cache->remove('@sf_cache_partial?module=rtSnippet&action=_snippetPanel&sf_cache_key='.$rt_snippet->getCollection());

@@ -20,6 +20,7 @@ rtPage:
     site_id:          integer
     title:            string(255)
     content:          string
+    mode:             { type: enum, values: [standard, gallery, promote-primary-image], default: standard }
     description:      string
     profile:          string(255)
     published:        { type: boolean, default: 1 }

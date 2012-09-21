@@ -19,84 +19,80 @@
  */
 abstract class PluginrtPage extends BasertPage
 {
-  public function construct()
-  {
-    parent::construct();
+    const MODE_STANDARD = 'gallery';
+    const MODE_PROMOTE_PRIMARY_IMAGE = 'promote-primary-image';
+    const MODE_GALLERY = 'gallery';
 
-    if($this->isNew())
+    public function construct()
     {
-      $this->setPublishedFrom(date('Y-m-d H:i:s'));
-    }
-  }
+        parent::construct();
 
-  /**
-   * Undelete a soft deleted object.
-   *
-   * @param Doctrine_Connection $conn
-   * @return void
-   */
-  public function undelete(Doctrine_Connection $conn = null)
-  {
-    $this->setDeletedAt(null);
-    parent::save($conn);
-  }
-
-  /**
-   * Extends the base published check to include date range settings.
-   *
-   * @return  boolean
-   */
-  public function isPublished()
-  {
-    $published = $this->getPublished();
-
-    if($published)
-    {
-      $published = $this->isPublishedNow();
+        if ($this->isNew()) {
+            $this->setPublishedFrom(date('Y-m-d H:i:s'));
+        }
     }
 
-    return $published;
-  }
-
-  /**
-   * Checks if a the published from and to dates are true for "now".
-   * 
-   * @return boolean
-   */
-  public function isPublishedNow()
-  {
-    $from_ok = false;
-
-    if ( is_null($this->getPublishedFrom()) || $this->getPublishedFrom() === '')
+    /**
+     * Undelete a soft deleted object.
+     *
+     * @param Doctrine_Connection $conn
+     * @return void
+     */
+    public function undelete(Doctrine_Connection $conn = null)
     {
-      $from_ok = true;
-    }
-    else
-    {
-      $from_ok = time() > strtotime( $this->getPublishedFrom() ) ? true : false;
+        $this->setDeletedAt(null);
+        parent::save($conn);
     }
 
-    $to_ok = false;
-
-    if ( is_null($this->getPublishedTo()) || $this->getPublishedTo() === '')
+    /**
+     * Extends the base published check to include date range settings.
+     *
+     * @return  boolean
+     */
+    public function isPublished()
     {
-      $to_ok = true;
+        $published = $this->getPublished();
+
+        if ($published) {
+            $published = $this->isPublishedNow();
+        }
+
+        return $published;
     }
-    else
+
+    /**
+     * Checks if a the published from and to dates are true for "now".
+     *
+     * @return boolean
+     */
+    public function isPublishedNow()
     {
-      $to_ok = time() < strtotime( $this->getPublishedTo() ) ? true : false;
+        $from_ok = false;
+
+        if (is_null($this->getPublishedFrom()) || $this->getPublishedFrom() === '') {
+            $from_ok = true;
+        } else {
+            $from_ok = time() > strtotime($this->getPublishedFrom()) ? true : false;
+        }
+
+        $to_ok = false;
+
+        if (is_null($this->getPublishedTo()) || $this->getPublishedTo() === '') {
+            $to_ok = true;
+        } else {
+            $to_ok = time() < strtotime($this->getPublishedTo()) ? true : false;
+        }
+
+        return ($from_ok && $to_ok);
     }
 
-    return ($from_ok && $to_ok);
-  }
-
-  /**
-   * Return all attached string, imploded into a comma separated string.
-   * 
-   * @return string
-   */
-  public function getTagsAsString()
-  {
-    return implode(', ', $this->getTags());
-  }
+    /**
+     * Return all attached string, imploded into a comma separated string.
+     *
+     * @return string
+     */
+    public function getTagsAsString()
+    {
+        return implode(', ', $this->getTags());
+    }
 }

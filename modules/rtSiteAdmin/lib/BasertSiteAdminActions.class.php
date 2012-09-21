@@ -221,7 +221,7 @@ class BasertSiteAdminActions extends sfActions
     if ($form->isValid())
     {
       $rt_site = $form->save();
-      //$this->clearCache($rt_site);
+      $this->clearCache($rt_site);
       $action = $request->getParameter('rt_post_save_action', 'index');
       
       if($action == 'edit')
@@ -239,19 +239,11 @@ class BasertSiteAdminActions extends sfActions
 
   public function clearCache($rt_site = null)
   {
-    return;
     $cache = $this->getContext()->getViewCacheManager();
-    
+
     if ($cache)
     {
-      if(!is_null($rt_site))
-      {
-        $cache->remove('@sf_cache_partial?module=rtSite&action=_sitePanel&sf_cache_key='.$rt_site->getCollection());
-      }
-      else
-      {
-        $cache->remove('@sf_cache_partial?module=rtSite&action=_sitePanel&sf_cache_key=*');
-      }
+      $cache->remove('rtSite/index');
     }
   }
 

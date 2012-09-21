@@ -30,7 +30,7 @@ class rtWidgetFormJQueryDateTime extends sfWidgetFormInput
 <script>
     $(function(){
 
-        $('#$id').datetimepicker({dateFormat: "yy/mm/dd", timeFormat: 'hh:mm'});
+        $('#$id').datetimepicker({dateFormat: "yy/mm/dd", timeFormat: 'hh:mm', stepMinute: 5});
 
     });
 </script>

@@ -34,6 +34,7 @@ abstract class PluginrtSiteForm extends BasertSiteForm
                 'facebook_url',
                 'twitter_url',
                 'youtube_url',
+                'tumblr_url',
                 'google_plus_url',
                 'email_signature',
                 'public_url',
@@ -70,6 +71,9 @@ abstract class PluginrtSiteForm extends BasertSiteForm
 
         $this->widgetSchema->setLabel('google_plus_url','Google+ URL');
         $this->setValidator('google_plus_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://plus.google.com/b/...')));
+
+        $this->widgetSchema->setLabel('tumblr_url','Tumblr URL');
+        $this->setValidator('tumblr_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://plus.google.com/b/...')));
 
         $this->widgetSchema->setLabel('youtube_url','YouTube URL');
         $this->setValidator('youtube_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. http://www.youtube.com/user/...')));

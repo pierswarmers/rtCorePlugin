@@ -17,6 +17,8 @@
  */
 class rtSiteToolkit
 {
+  const CURRENT_SITE_KEY = 'rt_current_site';
+
   /**
    * Simply runs a check on the multi-site configuration setting.
    *
@@ -34,7 +36,15 @@ class rtSiteToolkit
    */
   public static function getCurrentSite()
   {
-    return Doctrine::getTable('rtSite')->findOneBy('Domain', self::getCurrentDomain());
+      $c = sfContext::getInstance();
+      if(!$c->has(self::CURRENT_SITE_KEY)) {
+          $rt_site = Doctrine::getTable('rtSite')->findOneBy('Domain', self::getCurrentDomain());
+          if(!$rt_site) {
+              return false;
+          }
+          $c->set(self::CURRENT_SITE_KEY, $rt_site);
+      }
+      return $c->get(self::CURRENT_SITE_KEY);
   }
 
   /**

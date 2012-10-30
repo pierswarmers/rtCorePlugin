@@ -34,9 +34,11 @@ function rt_is_string_empty($string)
  * @param      string $default  Default text
  * @return     string
  */
-function rt_get_snippet($name, $default = '')
+function rt_get_snippet($name, $default = '', $options = array())
 {
-  return include_component('rtSnippet','snippetPanel', array('collection' => $name, 'sf_cache_key' => $name, 'default' => $default));
+  $options = array_merge($options, array('collection' => $name, 'sf_cache_key' => $name, 'default' => $default));
+
+  return include_component('rtSnippet','snippetPanel', $options);
 }
 
 /**

@@ -503,7 +503,7 @@ class rtGuardUserAdminActions extends sfActions
     if(!$user) {
         $user = new rtGuardUser();
     }
-    return new rtGuardUserForm($user);
+    return new $class($user);
   }
 
 }

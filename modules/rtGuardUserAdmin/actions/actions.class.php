@@ -54,13 +54,13 @@ class rtGuardUserAdminActions extends sfActions
       $temp_key[]       = 'shipping_a_'.$value;
     }
     $keys               = array_merge($keys, $temp_key);
-    
+
     return $keys;
   }
 
   /**
    * Return address array with empty values
-   * 
+   *
    * @param string $prefix (e.g. billing or shipping)
    * @return array
    */
@@ -116,7 +116,7 @@ class rtGuardUserAdminActions extends sfActions
 
     // CSV header
     if($this->getRequest()->getParameter('sf_format') === 'csv')
-    { 
+    {
       $this->values = array();
       $i=0;
       foreach($users_with_addresses as $user)
@@ -179,7 +179,7 @@ class rtGuardUserAdminActions extends sfActions
         {
           // User has no billing address, use dummy address with spaces as values
           $this->values[$i] =  array_merge($this->values[$i],$this->getPlaceholderExportAddress('billing'));
-          
+
           // User has no shipping address, use dummy address with spaces as values
           $this->values[$i] =  array_merge($this->values[$i],$this->getPlaceholderExportAddress('shipping'));
         }
@@ -408,14 +408,14 @@ class rtGuardUserAdminActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new rtGuardUserForm();
+    $this->form = $this->getUserForm();
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new rtGuardUserForm(new rtGuardUser());
+    $this->form = $this->getUserForm();
 
     $this->processForm($request, $this->form);
 
@@ -425,14 +425,15 @@ class rtGuardUserAdminActions extends sfActions
   public function executeEdit(sfWebRequest $request)
   {
     $this->forward404Unless($sf_guard_user = Doctrine::getTable('rtGuardUser')->find(array($request->getParameter('id'))), sprintf('Object rt_guard_user does not exist (%s).', $request->getParameter('id')));
-    $this->form = new rtGuardUserForm($sf_guard_user);
+
+    $this->form = $this->getUserForm($sf_guard_user);
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
     $this->forward404Unless($sf_guard_user = Doctrine::getTable('rtGuardUser')->find(array($request->getParameter('id'))), sprintf('Object rt_guard_user does not exist (%s).', $request->getParameter('id')));
-    $this->form = new rtGuardUserForm($sf_guard_user);
+    $this->form = $this->getUserForm($sf_guard_user);
 
     $this->processForm($request, $this->form);
 
@@ -472,7 +473,7 @@ class rtGuardUserAdminActions extends sfActions
     if ($form->isValid())
     {
       $sf_guard_user = $form->save();
-      
+
       $this->getDispatcher($request)->notify(new sfEvent($this, 'doctrine.admin.save_object', array('object' => $sf_guard_user)));
 
       $action = $request->getParameter('rt_post_save_action', 'index');
@@ -494,4 +495,15 @@ class rtGuardUserAdminActions extends sfActions
   {
     return ProjectConfiguration::getActive()->getEventDispatcher(array('request' => $request));
   }
+
+  protected function getUserForm($user = null)
+  {
+    $class = sfConfig::get('app_rt_admin_user_form', 'rtGuardUserForm');
+
+    if(!$user) {
+        $user = new rtGuardUser();
+    }
+    return new rtGuardUserForm($user);
+  }
+
 }

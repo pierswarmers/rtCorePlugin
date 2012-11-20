@@ -63,10 +63,10 @@ class BasertContactActions extends sfActions
         }
 
         $options = array(
-            'to'            => $site->getEmailContactAddress(),
+            'to'            => $site->getEmailBookingAddress(),
             'from'          => '',
             'subject'       => 'Contact Form Sent',
-            'confirmation'  => $site->getEmailContactResponse(),
+            'confirmation'  => $site->getEmailBookingResponse(),
             'form_class'    => 'rtBookingForm',
             'success_route' => 'rt_contact_confirmation',
             'partial_html'  => 'rtContact/email_contact_admin_html',

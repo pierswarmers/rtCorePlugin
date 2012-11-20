@@ -4,5 +4,4 @@
 <?php echo __('Booking Sent') ?>
 <?php end_slot(); ?>
 
-
-<?php echo rt_get_snippet('rt-booking-confirmation-prefix', 'Thank you for your booking, we\'ll be in touch shortly.'); ?>
+<?php echo rt_get_snippet('rt-booking-confirmation-prefix', 'Thank you for your enquiry, we\'ll be in touch shortly.'); ?>

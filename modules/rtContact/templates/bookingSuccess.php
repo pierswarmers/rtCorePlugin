@@ -20,7 +20,7 @@ use_javascripts_for_form($form);
   
   <div class="rt-section-content">
 
-    <?php rt_get_snippet('rt-booking-prefix', ''); ?>
+    <?php rt_get_snippet('rt-booking-prefix', 'Please send through your booking details. We\'ll get back to you shortly.'); ?>
 
     <form action="<?php echo url_for('rt_booking') ?>" method="post" class="rt-compact formstyle">
       <?php echo $form->renderHiddenFields() ?>
@@ -29,7 +29,7 @@ use_javascripts_for_form($form);
           <?php echo $form; ?>
         </ul>
       </fieldset>
-      <p class="rt-section-tools-submit"><button type="submit"><?php echo __('Submit your booking') ?></button></p>
+      <p class="rt-section-tools-submit"><button type="submit"><?php echo __('Submit your comment') ?></button></p>
     </form>
     
   </div>

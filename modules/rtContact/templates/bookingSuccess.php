@@ -29,7 +29,7 @@ use_javascripts_for_form($form);
           <?php echo $form; ?>
         </ul>
       </fieldset>
-      <p class="rt-section-tools-submit"><button type="submit"><?php echo __('Submit your enquiry') ?></button></p>
+      <p class="rt-section-tools-submit"><button type="submit"><?php echo __('Submit your booking') ?></button></p>
     </form>
     
   </div>

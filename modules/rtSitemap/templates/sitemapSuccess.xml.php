@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?php $routes = $sf_context->getRouting()->getRoutes() ?>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <?php if($site_pages): ?>
   <?php foreach($site_pages as $site_page): ?>

@@ -121,6 +121,6 @@ class BasertSitemapActions extends sfActions
     $query = Doctrine::getTable($string)->addPublishedQuery();
     $query = Doctrine::getTable($string)->addSiteQuery($query);
     $query->andWhere('page.searchable = ?', true);
-    return $query->fetchArray();
+    return $query->execute();
   }
 }

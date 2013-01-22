@@ -9,7 +9,7 @@
 <?php if($site_pages): ?>
   <?php foreach($site_pages as $site_page): ?>
   <url>
-    <loc><?php echo url_for('rt_site_page_show', array('id' => $site_page['id'], 'slug' => $site_page['slug']), true) ?></loc>
+    <loc><?php echo url_for('rt_site_page_show', $site_page, true) ?></loc>
     <changefreq>daily</changefreq>
     <lastmod><?php
       $dt = new DateTime($site_page['updated_at']);

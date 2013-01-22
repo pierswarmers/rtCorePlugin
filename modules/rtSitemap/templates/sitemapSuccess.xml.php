@@ -10,7 +10,15 @@
 <?php if($site_pages): ?>
   <?php foreach($site_pages as $site_page): ?>
   <url>
-    <loc><?php echo url_for('rt_site_page_show', $site_page, true) ?></loc>
+    <loc><?php
+
+        if($site_page->getNode()->isRoot()) {
+            echo url_for('homepage', array(), true);
+        } else {
+            echo url_for('rt_site_page_show', $site_page, true);
+        }
+
+        ?></loc>
     <changefreq>daily</changefreq>
     <lastmod><?php
       $dt = new DateTime($site_page['updated_at']);

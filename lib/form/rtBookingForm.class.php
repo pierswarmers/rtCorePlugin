@@ -22,7 +22,7 @@ class rtBookingForm extends rtContactForm
     {
         parent::setup();
 
-        $this->widgetSchema['arrival_date'] = new sfWidgetFormInput(array('type' => 'date'));
+        $this->widgetSchema['arrival_date'] = new sfWidgetFormInput(array('type' => 'datetime'), array('placeholder' => 'e.g. 13th of March at 2:00 PM'));
         $this->widgetSchema['number_of_people'] = new sfWidgetFormInput(array('type' => 'number'));
 
         $this->widgetSchema->setLabel('arrival_date', "Arrival Date:");

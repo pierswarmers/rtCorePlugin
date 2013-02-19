@@ -30,7 +30,8 @@ class rtResponseToolkit
     $data = array();
     $data['robots'] = $rt_page->getSearchable() ? 'index, follow' : 'NONE';
     $data['keywords'] = implode(', ', $rt_page->getTags());
-    $data['title'] = $rt_page->getTitle();
+
+    $data['title'] = $rt_page->getTitleHead() ? $rt_page->getTitleHead() : $rt_page->getTitle();
     $data['description'] = $rt_page->getDescription();
     
     $data['og:title'] = $rt_page->getTitle();

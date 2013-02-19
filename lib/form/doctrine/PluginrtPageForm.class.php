@@ -35,12 +35,13 @@ abstract class PluginrtPageForm extends BasertPageForm
     // set the widgets
     $this->setWidget('title',       new sfWidgetFormInputText(array(), array('class' => 'title')));
 
-
-
-
     $this->setWidget('content',     $this->getWidgetFormTextarea());
     $this->setWidget('tags',        new sfWidgetFormInput(array(), array('class' => 'tag-input')));
     $this->setWidget('description', new sfWidgetFormInputText(array(), array()));
+
+    $this->setWidget('title_head',       new sfWidgetFormInputText(array(), array()));
+    $this->widgetSchema->setHelp('title_head', 'A short title for the meta-data - page title will be used by default.');
+    $this->setValidator('title_head',     new sfValidatorString(array('required' => false)));
 
     // inject the tags into the default value
     $this->setDefault('tags', implode(', ', $this->getObject()->getTags()));

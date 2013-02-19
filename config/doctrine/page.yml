@@ -21,6 +21,7 @@ rtPage:
     title:            string(255)
     content:          string
     mode:             { type: enum, values: [standard, gallery, promote-primary-image], default: standard }
+    title_head:       string(255)
     description:      string
     profile:          string(255)
     published:        { type: boolean, default: 1 }

@@ -42,9 +42,9 @@ class rtResponseToolkit
       $img_path = rtAssetToolkit::getThumbnailPath($rt_page->getPrimaryImage()->getSystemPath(), array('maxHeight' => 400, 'maxWidth' => 400));
       $data['og:image'] = rtSiteToolkit::getCurrentDomain(null, true).$img_path;
     }
-    if(sfConfig::has('app_rt_title'))
+    if(rtSiteToolkit::getCurrentSite())
     {
-      $data['og:site_name'] = sfConfig::get('app_rt_title');
+      $data['og:site_name'] = rtSiteToolkit::getCurrentSite()->getTitle();
     }
     if($rt_page->getDescription() !== '')
     {

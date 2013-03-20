@@ -34,3 +34,13 @@ ALTER TABLE rt_site ADD COLUMN email_address VARCHAR(255);
 ALTER TABLE rt_site ADD COLUMN category VARCHAR(255);
 ALTER TABLE rt_site ADD COLUMN created_at DATETIME NOT NULL;
 ALTER TABLE rt_site ADD COLUMN updated_at DATETIME NOT NULL;
+
+-- Version 0.0.4 - March 19 2013
+
+ALTER TABLE rt_site ADD COLUMN sub_title VARCHAR(255);
+ALTER TABLE rt_site ADD COLUMN meta_title VARCHAR(255);
+
+ALTER TABLE rt_site CHANGE meta_title meta_title_suffix VARCHAR(255);
+ALTER TABLE rt_site ADD COLUMN meta_keywords_suffix VARCHAR(255);
+
+ALTER TABLE rt_site CHANGE meta_keywords_suffix meta_keyword_suffix VARCHAR(255);

@@ -139,7 +139,9 @@ class rtViewToolkit
      */
     public function getUri()
     {
-        return $this->cleanDevToken(rtSiteToolkit::getRequestUri());
+        $parts = explode('?', rtSiteToolkit::getRequestUri());
+
+        return $this->cleanDevToken($parts[0]);
     }
 
     /**

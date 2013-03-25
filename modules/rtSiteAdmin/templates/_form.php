@@ -3,19 +3,14 @@
 <?php use_javascripts_for_form($form) ?>
 
 <?php slot('rt-tools') ?>
-<?php
-$options = array();
-$options['object'] = $form->getObject();
-if($sf_user->hasAttribute('rt-site-referer'))
-{
-    $options['show_route_handle'] = 'admin';
-}
-?>
-<?php include_partial('rtAdmin/standard_modal_tools', $options)?>
+<?php include_partial('rtAdmin/standard_modal_tools', array('show_route_handle' => 'admin', 'object' => $form->getObject()))?>
 <?php end_slot(); ?>
 
 <?php slot('rt-side') ?>
 <?php include_component('rtAsset', 'form', array('object' => $form->getObject())) ?>
+<h2>Banner &amp; Logo</h2>
+
+<p>The banner and logo used for venues are simply attached assets. The first one in the list will be used as the banner, the second as the logo.</p>
 
 <?php end_slot(); ?>
 
@@ -23,12 +18,14 @@ if($sf_user->hasAttribute('rt-site-referer'))
     <?php echo $form->renderHiddenFields() ?>
     <input type="hidden" name="rt_post_save_action" value="edit" />
     <?php if (!$form->getObject()->isNew()): ?>
-    <input type="hidden" name="sf_method" value="put" />
+        <input type="hidden" name="sf_method" value="put" />
     <?php endif; ?>
     <table>
         <tbody>
         <?php echo $form->renderGlobalErrors() ?>
         <?php echo render_form_row($form['title']); ?>
+        <?php echo render_form_row($form['sub_title']); ?>
+        <?php echo render_form_row($form['type']); ?>
         <?php echo render_form_row($form['position']); ?>
         <?php echo render_form_row($form['public_url']); ?>
         <?php echo render_form_row($form['content']); ?>
@@ -43,6 +40,15 @@ if($sf_user->hasAttribute('rt-site-referer'))
         </table>
     </div>
 
+    <div class="rt-admin-toggle-panel smallEditor">
+        <h2><?php echo __('SEO &amp; Tracking') ?></h2>
+        <table class="rt-admin-toggle-panel-content">
+            <tbody>
+            <?php echo render_form_row($form['meta_title_suffix']); ?>
+            <?php echo render_form_row($form['meta_keyword_suffix']); ?>
+            </tbody>
+        </table>
+    </div>
 
     <div class="rt-admin-toggle-panel">
         <h2><?php echo __('Physical Address') ?></h2>
@@ -75,8 +81,6 @@ if($sf_user->hasAttribute('rt-site-referer'))
             <tbody>
             <?php echo render_form_row($form['facebook_url']); ?>
             <?php echo render_form_row($form['twitter_url']); ?>
-            <?php echo render_form_row($form['tumblr_url']); ?>
-            <?php echo render_form_row($form['google_plus_url']); ?>
             <?php echo render_form_row($form['youtube_url']); ?>
             </tbody>
         </table>

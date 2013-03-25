@@ -172,6 +172,16 @@ class rtViewToolkit
     {
         return rtSiteToolkit::getCurrentSite();
     }
+    /**
+     * Get a module token which is built from module name. The return value is encoded for
+     * URI usage and can also be used as a valid class name.
+     *
+     * @return string
+     */
+    public function getModuleToken()
+    {
+        return $this->urlize($this->tableize($this->getRequestedModuleName()));
+    }
 
     /**
      * Get an area token which is built from module and action names. The return value is encoded for
@@ -179,9 +189,19 @@ class rtViewToolkit
      *
      * @return string
      */
+    public function getModuleActionToken()
+    {
+        return $this->getModuleToken() . '-' . $this->urlize($this->tableize($this->getRequestedActionName()));
+    }
+
+    /**
+     * @deprecated
+     * @see self::getModuleActionToken()
+     * @return string
+     */
     public function getAreaToken()
     {
-        return $this->urlize($this->tableize($this->getRequestedModuleName()) . '-' . $this->tableize($this->getRequestedActionName()));
+        return $this->getModuleActionToken();
     }
 
     /**

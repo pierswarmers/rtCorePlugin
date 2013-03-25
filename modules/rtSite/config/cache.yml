@@ -1,0 +1,10 @@
+#_list:
+#  enabled:     true
+#  lifetime:    3600
+index:
+  enabled:   true
+#  with_layout: true
+
+_tumblr:
+  enabled:     true
+  lifetime:    3600

@@ -36,6 +36,8 @@ function rt_is_string_empty($string)
  */
 function rt_get_snippet($name, $default = '', $options = array())
 {
+  $options = is_array($default) ? $default : $options;
+
   $options = array_merge($options, array('collection' => $name, 'sf_cache_key' => $name, 'default' => $default));
 
   return include_component('rtSnippet','snippetPanel', $options);

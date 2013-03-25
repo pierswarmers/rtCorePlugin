@@ -435,7 +435,8 @@ EOS;
 
     if(!isset($config['javascripts']))
     {
-      $config['javascripts'] = array('/rtCorePlugin/vendor/jquery/js/jquery.min.js',
+      $config['javascripts'] = array(
+//          '/rtCorePlugin/vendor/jquery/js/jquery.min.js',
                                      '/rtCorePlugin/js/frontend-gallery.js');
     }
 
@@ -512,7 +513,7 @@ EOS;
           }
 
           $string .= sprintf(
-                       '<li><a href="%s" title="%s" rel="gallery-group-%s">%s</a><div>%s</div></li>',
+                       '<li><a href="%s" title="%s" rel="gallery-group-%s" class="th">%s</a><div>%s</div></li>',
                        rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to),
                        $title,
                        $rand,

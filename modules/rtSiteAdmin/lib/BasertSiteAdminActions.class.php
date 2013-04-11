@@ -26,7 +26,7 @@ class BasertSiteAdminActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $query = Doctrine::getTable('rtSite')->getQuery();
-    $query->orderBy('site.domain DESC');
+    $query->orderBy('site.position ASC');
 
     $this->pager = new sfDoctrinePager(
       'rtSite',

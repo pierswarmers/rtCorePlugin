@@ -27,16 +27,17 @@
   <thead>
     <tr>
       <th>Domain</th>
+      <th>Key</th>
       <th>Published</th>
-            <th>Created at</th>
-                  <th>&nbsp;</th>
+      <th>Created at</th>
+      <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($pager->getResults() as $k_site): ?>
     <tr>
       <td><a href="<?php echo url_for('rtSiteAdmin/edit?id='.$k_site->getId()) ?>"><?php echo $k_site->getDomain() ?></a></td>
-
+      <td><?php echo $k_site->getReferenceKey() ?></td>
       <td class="rt-admin-publish-toggle">
         <?php echo rt_nice_boolean($k_site->getPublished()) ?>
         <div style="display:none;"><?php echo $k_site->getId() ?></div>

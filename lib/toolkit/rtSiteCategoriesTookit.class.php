@@ -103,6 +103,7 @@ class rtSiteCategoriesToolkit {
                 "riding-schools" => "Riding Schools",
                 "specialty-schools" => "Special Schools",
                 "tutoring" => "Tutoring",
+                "research" => "Research"
             ),
             "Event Organisation" => array(
                 "wedding-planning" => "Wedding Planning",
@@ -156,15 +157,25 @@ class rtSiteCategoriesToolkit {
 
         ), "Government" => array(
 
-            "embassies" => "Consulates & Embassies",
-            "courts" => "Courts",
-            "emergency" => "Emergency Services",
             "federal-government" => "Federal Government",
-            "libraries" => "Libraries",
             "local-government" => "Local Government",
-            "political-party" => "Political Party",
-            "prison" => "Prison",
             "state-government" => "State Government",
+            "political-party" => "Political Party",
+            "embassies" => "Consulates & Embassies",
+            "attorney-general" => "Attorney General",
+            "justice" => "Justice",
+            "prison" => "Prison",
+            "police" => "Police",
+            "emergency-services" => "Emergency Services",
+            "education" => "Education",
+            "family-community-services" => "Family and Community Services",
+            "libraries" => "Libraries",
+            "finance" => "Finance and Services",
+            "health" => "Health",
+            "primary-industries" => "Primary Industries",
+            "transport" => "Transport",
+            "treasury" => "The Treasury",
+            "military-defense" => "Military & Defence",
 
         ), "Hair & Beauty" => array(
 

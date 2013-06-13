@@ -1,5 +1,4 @@
 <?php use_helper('I18N') ?>
-<?php use_javascript('/rtCorePlugin/vendor/jquery/js/jquery.min.js') ?>
 
 <?php slot('rt-title') ?>
 <?php echo __('Oops! Page not found') ?>

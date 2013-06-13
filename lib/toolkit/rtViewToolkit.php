@@ -54,6 +54,9 @@ class rtViewToolkit
 
     private function enhanceMetaKeywords()
     {
+        if(!$this->getSite()) {
+            return;
+        }
         $metas = $this->getContext()->getResponse()->getMetas();
 
         if(array_key_exists('keywords', $metas) && '' !== trim($metas['keywords'])) {

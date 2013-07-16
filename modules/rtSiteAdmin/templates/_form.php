@@ -110,6 +110,7 @@
             <tbody>
             <?php echo render_form_row($form['reference_key']); ?>
             <?php echo render_form_row($form['domain']); ?>
+            <?php echo render_form_row($form['redirects']); ?>
             </tbody>
         </table>
     </div>

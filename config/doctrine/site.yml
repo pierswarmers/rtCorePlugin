@@ -55,8 +55,8 @@ rtSite:
 
     email_signature:  { type: string, default: "Many thanks, The Team" }
     email_address:    string(255)
-
     category:         string(255)
+    redirects:        string
 
   indexes:
     domain:

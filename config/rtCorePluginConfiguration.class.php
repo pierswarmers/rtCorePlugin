@@ -33,6 +33,8 @@ class rtCorePluginConfiguration extends sfPluginConfiguration
             );
         }
 
+        $this->dispatcher->connect('controller.page_not_found', array('rtNotFoundSubscriber', 'handle'));
+
         date_default_timezone_set("Australia/Sydney");
 
         sfConfig::set('sf_default_timezone', sfConfig::get('app_rt_default_timezone', 'Australia/Sydney'));

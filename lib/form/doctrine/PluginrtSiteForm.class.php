@@ -47,7 +47,8 @@ abstract class PluginrtSiteForm extends BasertSiteForm
                 'email_contact_address',
                 'email_contact_response',
                 'email_booking_address',
-                'email_booking_response'
+                'email_booking_response',
+                'redirects'
             ));
 
         $this->widgetSchema->setLabel('meta_title_suffix','Meta Title Suffix');
@@ -97,6 +98,9 @@ abstract class PluginrtSiteForm extends BasertSiteForm
 
         $this->setWidget('html_snippet_suffix', new sfWidgetFormTextarea());
         $this->widgetSchema->setLabel('html_snippet_suffix','Included HTML');
+
+        $this->setWidget('redirects', new sfWidgetFormTextarea());
+        $this->widgetSchema->setLabel('redirects','HTTP Redirects (YAML)');
 
         // Populate position dropdown
         $query = Doctrine::getTable('rtSite')->getQuery()

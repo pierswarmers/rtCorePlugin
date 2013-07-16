@@ -46,3 +46,7 @@ ALTER TABLE rt_site ADD COLUMN meta_keywords_suffix VARCHAR(255);
 ALTER TABLE rt_site CHANGE meta_keywords_suffix meta_keyword_suffix VARCHAR(255);
 
 ALTER TABLE rt_site ADD COLUMN type VARCHAR(255);
+
+-- Version 0.0.5 - July 15 2013
+
+ALTER TABLE rt_site ADD COLUMN redirects TEXT;

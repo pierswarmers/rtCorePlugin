@@ -101,6 +101,8 @@ abstract class PluginrtSiteForm extends BasertSiteForm
 
         $this->setWidget('redirects', new sfWidgetFormTextarea());
         $this->widgetSchema->setLabel('redirects','HTTP Redirects (YAML)');
+        $this->widgetSchema->setHelp('redirects','Set of YAML formatted arrays Eg. "- /old-page.html, /new-page, 301"');
+
 
         // Populate position dropdown
         $query = Doctrine::getTable('rtSite')->getQuery()

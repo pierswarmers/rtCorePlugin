@@ -2,16 +2,6 @@
 
 class rtNotFoundSubscriber
 {
-    /**
-     * @var sfEvent
-     */
-    private $event;
-
-    /**
-     * @var sfFrontWebController
-     */
-    private $subject;
-
     static public function handle(sfEvent $event)
     {
         $handler = new rtNotFoundSubscriber();
@@ -27,25 +17,24 @@ class rtNotFoundSubscriber
             return;
         }
 
-        $this->subject = $event->getSubject();
-        $this->event = $event;
-
         try {
-            foreach(sfYaml::load($rtView->getSite()->getRedirects()) as $redirect) {
+            $conf = sfYaml::load($rtView->getSite()->getRedirects());
+
+            foreach($conf as $redirect) {
+                
+                if(count($redirect[0]) < 2) {
+                    continue;
+                }
+
                 if($redirect[0] == $rtView->getUri()) {
-                    $this->getSubject()->redirect($redirect[1], isset($redirect[2]) ? $redirect[2] : '302');
+                    $event->getSubject()->redirect(
+                        $redirect[1],
+                        isset($redirect[2]) ? $redirect[2] : '302'
+                    );
                 }
             }
         } catch (Exception $e) {
 
         }
-    }
-
-    /**
-     * @return sfFrontWebController
-     */
-    private function getSubject()
-    {
-        return $this->subject;
     }
 }

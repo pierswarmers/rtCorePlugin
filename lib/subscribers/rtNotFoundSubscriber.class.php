@@ -29,7 +29,7 @@ class rtNotFoundSubscriber
                 if($redirect[0] == $rtView->getUri()) {
                     $event->getSubject()->redirect(
                         $redirect[1],
-                        isset($redirect[2]) ? $redirect[2] : '302'
+                        isset($redirect[2]) ? $redirect[2] : '301'
                     );
                 }
             }

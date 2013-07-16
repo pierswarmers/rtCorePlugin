@@ -22,7 +22,7 @@ class rtNotFoundSubscriber
 
             foreach($conf as $redirect) {
 
-                if(count($redirect[0]) < 2) {
+                if(count($redirect) < 2) {
                     continue;
                 }
 

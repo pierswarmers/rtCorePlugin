@@ -21,7 +21,7 @@ class rtNotFoundSubscriber
             $conf = sfYaml::load($rtView->getSite()->getRedirects());
 
             foreach($conf as $redirect) {
-                
+
                 if(count($redirect[0]) < 2) {
                     continue;
                 }

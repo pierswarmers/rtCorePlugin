@@ -216,11 +216,13 @@ class rtViewToolkit
     {
         if($this->getSite()) {
 
-            if('' === $this->getResponse()->getTitle()) {
+            if('' === trim($this->getResponse()->getTitle())) {
                 return $this->getSite()->getMetaTitleSuffix();
             }
 
-            return $this->getResponse()->getTitle() . ' | ' . $this->getSite()->getMetaTitleSuffix();
+            if('' !== trim($this->getSite()->getMetaTitleSuffix())) {
+                return $this->getResponse()->getTitle() . ' | ' . $this->getSite()->getMetaTitleSuffix();
+            }
         }
 
         return $this->getResponse()->getTitle();

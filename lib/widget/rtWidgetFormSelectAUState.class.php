@@ -33,6 +33,7 @@ class rtWidgetFormSelectAUState extends sfWidgetFormSelect
   protected function configure($options = array(), $attributes = array())
   {
     $this->addOption('add_empty', false);
+    $this->addOption('full', true);
 
     parent::configure($options, $attributes);
   }
@@ -51,6 +52,16 @@ class rtWidgetFormSelectAUState extends sfWidgetFormSelect
     }
 
     $choices = array_merge($choices, self::getStates());
+
+    if(!$this->getOption('full')) {
+      $choices_new = array();
+
+      foreach($choices as $k => $v) {
+        $choices_new[$k] = $k;
+      }
+
+      $choices = $choices_new;
+    }
 
     return $choices;
   }

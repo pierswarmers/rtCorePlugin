@@ -260,6 +260,25 @@ class rtViewToolkit
     }
 
     /**
+     * Try and resolve an inner template.
+     *
+     * @param $base
+     * @return string The file location
+     */
+    public function resolveInnerLayout($base)
+    {
+        if($this->isHomepage() && file_exists($base.'/layout-homepage.php')) {
+            return $base.'/layout-homepage.php';
+        } elseif (file_exists($base . '/layout-' . $this->getModuleActionToken() . '.php')) {
+            return $base . '/layout-' . $this->getModuleActionToken() . '.php';
+        } elseif (file_exists($base . '/layout-' . $this->getModuleToken() . '.php')) {
+            return $base . '/layout-' . $this->getModuleToken() . '.php';
+        }
+
+        return $base.'/layout-default.php';
+    }
+
+    /**
      * Is this the development environment.
      *
      * @return bool

@@ -17,9 +17,24 @@
  */
 class BasertSnippetComponents extends sfComponents
 {
-  public function executeSnippetPanel(sfWebRequest $request)
-  {
-    $this->limit = isset($this->limit) ? $this->limit : 1;
-    $this->snippets = Doctrine::getTable('rtSnippet')->findAllPublishedByCollection($this->collection, $this->limit);
-  }
+    public function executeSnippetPanel(sfWebRequest $request)
+    {
+        $this->snippets = $this->getSnippets($request);
+    }
+
+    public function executeSnippetPrimaryImage(sfWebRequest $request)
+    {
+        sfConfig::set('sf_web_debug', false);
+        $this->snippets = $this->getSnippets($request);
+    }
+
+    /**
+     * @param sfWebRequest $request
+     * @return Doctrine_Collection|rtSnippet[]
+     */
+    private function getSnippets(sfWebRequest $request)
+    {
+        $this->limit = isset($this->limit) ? $this->limit : 1;
+        return Doctrine::getTable('rtSnippet')->findAllPublishedByCollection($this->collection, $this->limit);
+    }
 }

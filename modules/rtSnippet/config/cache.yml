@@ -1,3 +1,7 @@
 _snippetPanel:
   enabled:     true
   lifetime:    3600
+
+_snippetPrimaryImage:
+  enabled:     true
+  lifetime:    3600

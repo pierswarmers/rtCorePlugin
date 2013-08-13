@@ -26,23 +26,36 @@ function rt_is_string_empty($string)
 
 /**
  * Include a snippet by a given $name value - this will be global.
- * 
+ *
  * @param $name
  * @param string $default
  * @param array $options
  */
 function rt_get_snippet($name, $default = '', $options = array())
 {
-  if(is_array($default)) {
-      $options = $default;
-      $default = '';
-  }
+    if(is_array($default)) {
+        $options = $default;
+        $default = '';
+    }
 
-  $options = is_array($default) ? $default : $options;
+    $options = is_array($default) ? $default : $options;
 
-  $options = array_merge($options, array('collection' => $name, 'sf_cache_key' => $name, 'default' => $default));
+    $options = array_merge($options, array('collection' => $name, 'sf_cache_key' => $name, 'default' => $default));
 
-  include_component('rtSnippet','snippetPanel', $options);
+    include_component('rtSnippet','snippetPanel', $options);
+}
+
+/**
+ * Get the primary image of a snippet.
+ *
+ * @param $name
+ * @param int $width
+ * @param int $height
+ * @return string
+ */
+function rt_get_snippet_primary_image($name, $width = 1000, $height = 1000)
+{
+    include_component('rtSnippet','snippetPrimaryImage', array('collection' => $name, 'sf_cache_key' => $name, 'options' => array('width' => $width, 'height' => $height)));
 }
 
 /**

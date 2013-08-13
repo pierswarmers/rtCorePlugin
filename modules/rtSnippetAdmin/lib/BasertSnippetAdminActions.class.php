@@ -249,10 +249,12 @@ class BasertSnippetAdminActions extends sfActions
       if(!is_null($rt_snippet))
       {
         $cache->remove('@sf_cache_partial?module=rtSnippet&action=_snippetPanel&sf_cache_key='.$rt_snippet->getCollection());
+        $cache->remove('@sf_cache_partial?module=rtSnippet&action=_snippetPrimaryImage&sf_cache_key='.$rt_snippet->getCollection());
       }
       else
       {
         $cache->remove('@sf_cache_partial?module=rtSnippet&action=_snippetPanel&sf_cache_key=*');
+        $cache->remove('@sf_cache_partial?module=rtSnippet&action=_snippetPrimaryImage&sf_cache_key=*');
       }
     }
   }

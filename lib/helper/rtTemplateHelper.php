@@ -45,7 +45,7 @@ function rt_get_snippet($name, $default = '', $options = array())
 
   $options = array_merge($options, array('collection' => $name, 'sf_cache_key' => $name, 'default' => $default));
 
-  return include_component('rtSnippet','snippetPanel', $options);
+  include_component('rtSnippet','snippetPanel', $options);
 }
 
 /**

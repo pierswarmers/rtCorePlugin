@@ -26,13 +26,10 @@ function rt_is_string_empty($string)
 
 /**
  * Include a snippet by a given $name value - this will be global.
- *
- * @package    Reditype
- * @subpackage helper
- * @author     Piers Warmers <piers@wranglers.com.au>
- * @param      string $name     Collection and cache name
- * @param      string $default  Default text
- * @return     string
+ * 
+ * @param $name
+ * @param string $default
+ * @param array $options
  */
 function rt_get_snippet($name, $default = '', $options = array())
 {

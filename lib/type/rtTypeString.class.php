@@ -597,10 +597,10 @@ EOS;
           $description = rtMarkdownToolkit::transformBase($asset->getDescription());
         }
         $string .= sprintf(
-                     '<li class="rt-docs-%s"><p class="rt-docs-title">%s%s</p>%s</li>',
+                     '<li class="rt-docs-%s"><span class="rt-docs-title">%s%s</span>%s</li>',
                      $asset->getExtension(),
                      link_to($title,$asset->getWebPath()),
-                     sprintf(' <span>(%s)</span>', rtAssetToolkit::getFormattedBytes($asset->getFilesize())),
+                     sprintf(' <span class="rt-docs-fiesize">(%s)</span>', rtAssetToolkit::getFormattedBytes($asset->getFilesize())),
                      $description
                    );
       }

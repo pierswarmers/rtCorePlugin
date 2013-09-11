@@ -6,7 +6,7 @@
 // ----------------------------------------------------------------------------
 rtMarkdownSettings = {
     nameSpace:          'markdown',
-    previewParserPath:  '/rtPreviewAdmin',
+    previewParserPath:  '/rtPreviewAdmin/index',
     onShiftEnter:       {keepDefault:false, openWith:'\n\n'},
     markupSet: [
         {name:'Second Level Heading', key:"2", placeHolder:'Your title here...', closeWith:function(markItUp) {return miu.markdownTitle(markItUp, '-')}},

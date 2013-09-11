@@ -55,7 +55,7 @@ function editable_section($string, $object = null, $summary = false)
     return editable_link($object) . markdown_to_html($string, $object, $summary);
 }
 
-function editable_link($object) {
+function editable_link($object, $title = 'Page') {
     $link = '';
 
     if($object) {
@@ -70,7 +70,7 @@ function editable_link($object) {
 
         $link = '<!--RTAS';
         $link .= '<div class="rt-section-tools-header rt-admin-tools">';
-        $link .= link_to('Edit Page', $admin_class.'Admin/edit?id='.$object->getId(), array('class' => 'rt-admin-edit-tools-trigger'));
+        $link .= link_to('Edit ' . $title, $admin_class.'Admin/edit?id='.$object->getId(), array('class' => 'rt-admin-edit-tools-trigger'));
         $link .= '</div>';
         $link .= 'RTAS-->';
 

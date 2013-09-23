@@ -15,7 +15,7 @@ if($sf_user->hasAttribute('rt-snippet-referer'))
 <?php end_slot(); ?>
 
 <?php slot('rt-side') ?>
-<?php if ($form->getObject()->getMode() === 'standard'): ?>
+<?php if ($form->getObject()->getMode() !== 'gallery'): ?>
 <?php include_component('rtAsset', 'form', array('object' => $form->getObject())) ?>
 <?php endif; ?>
 <?php end_slot(); ?>
@@ -29,7 +29,7 @@ if($sf_user->hasAttribute('rt-snippet-referer'))
   <table>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
-      <?php if ($form->getObject()->getMode() === 'standard'): ?>
+      <?php if ($form->getObject()->getMode() !== 'gallery'): ?>
         <?php echo render_form_row($form['content']); ?>
       <?php else: ?>
       <tr>

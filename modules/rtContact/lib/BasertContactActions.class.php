@@ -16,13 +16,15 @@
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
  */
-class BasertContactActions extends sfActions
+class BasertContactActions extends rtController
 {
     /**
      * Executes an application defined process prior to execution of this sfAction object.
      */
     public function preExecute()
     {
+        parent::preExecute();
+
         sfConfig::set('app_rt_node_title', 'Contact');
         rtTemplateToolkit::setFrontendTemplateDir();
     }

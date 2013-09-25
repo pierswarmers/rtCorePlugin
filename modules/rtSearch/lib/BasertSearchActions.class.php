@@ -15,11 +15,11 @@
  * @subpackage modules
  * @author     Piers Warmers <piers@wranglers.com.au>
  */
-class BasertSearchActions extends sfActions
+class BasertSearchActions extends rtController
 {
   public function preExecute()
   {
-    parent::postExecute();
+    parent::preExecute();
     sfConfig::set('app_rt_node_title', 'Search');
   }
 

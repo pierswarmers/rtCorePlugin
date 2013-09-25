@@ -16,7 +16,7 @@
  * @author     Piers Warmers <piers@wranglers.com.au>
  * @author     Konny Zurcher <konny@wranglers.com.au>
  */
-class BasertCommentActions extends sfActions
+class BasertCommentActions extends rtController
 {
   /**
    * Executes an application defined process prior to execution of this sfAction object.
@@ -27,7 +27,9 @@ class BasertCommentActions extends sfActions
     {
       throw new sfException('Comment module can\'t be used unless configured to be active i.e. app_rt_comment_active = true');
     }
-    
+
+    parent::preExecute();
+
     sfConfig::set('app_rt_node_title', 'Comment');
     rtTemplateToolkit::setFrontendTemplateDir();
   }

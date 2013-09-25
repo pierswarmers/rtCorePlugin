@@ -42,11 +42,10 @@ class BasertCommentComponents extends sfComponents
 
         if(!isset($this->form))
         {
-            $comment_form = $this->rating_enabled ? 'rtCommentRatingPublicForm' : 'rtCommentPublicForm';
             $comment = $this->getNewComment();
             $comment->setModel($this->model);
             $comment->setModelId($this->model_id);
-            $this->form = new $comment_form($comment, array());
+            $this->form = $this->getForm($comment);
         }
     }
 
@@ -65,4 +64,10 @@ class BasertCommentComponents extends sfComponents
         return $comment;
     }
 
+
+    protected function getForm($comment)
+    {
+        $comment_form = $this->rating_enabled ? 'rtCommentRatingPublicForm' : 'rtCommentPublicForm';
+        return new $comment_form($comment, array());
+    }
 }

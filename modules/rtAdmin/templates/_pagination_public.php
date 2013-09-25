@@ -20,25 +20,6 @@ if($sf_request->hasParameter('show_more'))
 ?>
 <?php if ($pager->haveToPaginate()): ?>
 
-
-
-
-    <ul class="pagination">
-        <li class="arrow unavailable"><a href="">&laquo;</a></li>
-        <li class="current"><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
-        <li class="unavailable"><a href="">&hellip;</a></li>
-        <li><a href="">12</a></li>
-        <li><a href="">13</a></li>
-        <li class="arrow"><a href="">&raquo;</a></li>
-    </ul>
-
-
-
-
-
     <ul class="pagination">
         <li class="rt-pager-first<?php echo $pager->getPage() == $pager->getFirstPage() ? ' unavailable' : '' ?>">
             <a href="<?php echo '?page=1'.$params ?>"><?php echo $arrows_enabled ? $arrows_lft.$arrows_lft : '' ?> <?php echo __($titles_first) ?></a>

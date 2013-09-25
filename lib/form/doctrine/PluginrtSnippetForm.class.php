@@ -23,7 +23,7 @@ abstract class PluginrtSnippetForm extends BasertSnippetForm
 
     unset($this['version'], $this['created_at'], $this['updated_at']);
 
-    if ($this->getObject()->getMode() !== 'standard') {
+    if ($this->getObject()->getMode() === 'gallery') {
         unset($this['content']);
     } else {
         $this->setWidget('content', $this->getWidgetFormTextarea());

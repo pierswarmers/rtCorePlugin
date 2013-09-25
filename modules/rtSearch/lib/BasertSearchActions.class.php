@@ -28,7 +28,7 @@ class BasertSearchActions extends sfActions
     rtTemplateToolkit::setFrontendTemplateDir();
     $this->setPage($request->getParameter('page', 1));
     $form = new rtSearchForm;
-    
+
     if($request->hasParameter('q'))
     {
       //$this->number_of__results = Doctrine::getTable('rtIndex')->getNumberOfMatchedResults($request->getParameter('q'), $this->getUser()->getCulture());

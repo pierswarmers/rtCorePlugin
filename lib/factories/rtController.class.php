@@ -18,6 +18,8 @@ abstract class rtController extends sfActions
      */
     public function preExecute()
     {
+        $this->dispatcher->notify(new sfEvent($this, 'rt.controller_pre_execute'));
+
         sfConfig::set('app_rt_node_title', 'Site');
         rtTemplateToolkit::setFrontendTemplateDir();
 

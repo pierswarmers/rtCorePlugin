@@ -43,10 +43,27 @@ class BasertCommentComponents extends sfComponents
         if(!isset($this->form))
         {
             $comment_form = $this->rating_enabled ? 'rtCommentRatingPublicForm' : 'rtCommentPublicForm';
-            $comment = new rtComment;
+            $comment = $this->getNewComment();
             $comment->setModel($this->model);
             $comment->setModelId($this->model_id);
             $this->form = new $comment_form($comment, array());
         }
     }
+
+    protected function getNewComment()
+    {
+        $comment = new rtComment;
+
+        if($this->getUser()->isAuthenticated()) {
+
+            $this->getUser()->getGuardUser();
+
+            $comment->setAuthorName($this->getUser()->getGuardUser()->getFirstName() . ' ' . $this->getUser()->getGuardUser()->getLastName());
+            $comment->setAuthorEmail($this->getUser()->getGuardUser()->getEmailAddress());
+        }
+
+
+        return $comment;
+    }
+
 }

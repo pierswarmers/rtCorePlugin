@@ -62,7 +62,6 @@ class BasertCommentComponents extends sfComponents
             $comment->setAuthorEmail($this->getUser()->getGuardUser()->getEmailAddress());
         }
 
-
         return $comment;
     }
 

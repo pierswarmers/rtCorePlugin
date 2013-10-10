@@ -15,7 +15,20 @@
         if($site_page->getNode()->isRoot()) {
             echo url_for('homepage', array(), true);
         } else {
-            echo url_for('rt_site_page_show', $site_page, true);
+            if('link:' === substr($site_page['content'], 0, 5)) {
+
+                $link = trim(substr($site_page['content'], 5));
+
+                if(!strpos('://',$link)) {
+                    $link = rtSiteToolkit::getCurrentDomain(null, true) . $link;
+                }
+
+                echo $link;
+
+            } else {
+                echo url_for('rt_site_page_show', $site_page, true);
+            }
+
         }
 
         ?></loc>

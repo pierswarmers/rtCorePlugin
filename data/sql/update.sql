@@ -50,3 +50,9 @@ ALTER TABLE rt_site ADD COLUMN type VARCHAR(255);
 -- Version 0.0.5 - July 15 2013
 
 ALTER TABLE rt_site ADD COLUMN redirects TEXT;
+
+-- Version 0.0.6 - October 23 2013
+
+ALTER TABLE rt_site ADD COLUMN pinterest_url VARCHAR(255);
+ALTER TABLE rt_site ADD COLUMN intagragram_url VARCHAR(255);
+ALTER TABLE rt_site ADD COLUMN vimeo_url VARCHAR(255);

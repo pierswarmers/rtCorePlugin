@@ -24,32 +24,46 @@ abstract class PluginrtSiteForm extends BasertSiteForm
     {
         parent::setup();
 
-        $this->useFields(array(
-                'title',
-                'sub_title',
-                'type',
-                'meta_title_suffix',
-                'meta_keyword_suffix',
-                'domain',
-                'reference_key',
-                'content',
-                'published',
-                'html_snippet_suffix',
-                'facebook_url',
-                'twitter_url',
-                'youtube_url',
-                'tumblr_url',
-                'google_plus_url',
-                'email_signature',
-                'public_url',
-                'position',
-                'content_summery',
-                'email_contact_address',
-                'email_contact_response',
-                'email_booking_address',
-                'email_booking_response',
-                'redirects'
-            ));
+        $social_media_locations = array(
+            'devour_url',
+            'facebook_url',
+            'flickr_url',
+            'google_plus_url',
+            'intagragram_url',
+            'pinterest_url',
+            'tumblr_url',
+            'twitter_url',
+            'vimeo_url',
+            'youtube_url',
+        );
+
+        $this->useFields(
+            array_merge(
+                $social_media_locations,
+
+                array(
+                    'title',
+                    'sub_title',
+                    'type',
+                    'meta_title_suffix',
+                    'meta_keyword_suffix',
+                    'domain',
+                    'reference_key',
+                    'content',
+                    'published',
+                    'html_snippet_suffix',
+                    'email_signature',
+                    'public_url',
+                    'position',
+                    'content_summery',
+                    'email_contact_address',
+                    'email_contact_response',
+                    'email_booking_address',
+                    'email_booking_response',
+                    'redirects'
+                )
+            )
+        );
 
         $this->widgetSchema->setLabel('meta_title_suffix','Meta Title Suffix');
         $this->widgetSchema->setHelp('meta_title_suffix','Will be glued as a suffix to the title meta tag content. Eg. "My Page Title | meta_title_suffix"');
@@ -81,20 +95,12 @@ abstract class PluginrtSiteForm extends BasertSiteForm
         $this->widgetSchema->setLabel('email_booking_address','Email Address');
         $this->widgetSchema->setLabel('email_booking_response','Response');
 
-        $this->widgetSchema->setLabel('facebook_url','Facebook URL');
-        $this->setValidator('facebook_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://www.facebook.com/...')));
+        // Social Media
 
-        $this->widgetSchema->setLabel('twitter_url','Twitter URL');
-        $this->setValidator('twitter_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://twitter.com/...')));
-
-        $this->widgetSchema->setLabel('google_plus_url','Google+ URL');
-        $this->setValidator('google_plus_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://plus.google.com/b/...')));
-
-        $this->widgetSchema->setLabel('tumblr_url','Tumblr URL');
-        $this->setValidator('tumblr_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://plus.google.com/b/...')));
-
-        $this->widgetSchema->setLabel('youtube_url','YouTube URL');
-        $this->setValidator('youtube_url', new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. http://www.youtube.com/user/...')));
+        foreach($social_media_locations as $k => $v) {
+            $this->widgetSchema->setLabel($v, str_replace('url', 'URL', sfInflector::humanize($v)));
+            $this->setValidator($v, new sfValidatorUrl(array('required' => false), array('invalid' => 'Must be a valid URL, eg. https://www.acme.com/...')));
+        }
 
         $this->setWidget('html_snippet_suffix', new sfWidgetFormTextarea());
         $this->widgetSchema->setLabel('html_snippet_suffix','Included HTML');

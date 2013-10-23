@@ -79,8 +79,15 @@
         <h2><?php echo __('Social Media Locations') ?></h2>
         <table class="rt-admin-toggle-panel-content">
             <tbody>
+            <?php echo render_form_row($form['devour_url']); ?>
             <?php echo render_form_row($form['facebook_url']); ?>
+            <?php echo render_form_row($form['flickr_url']); ?>
+            <?php echo render_form_row($form['google_plus_url']); ?>
+            <?php echo render_form_row($form['intagragram_url']); ?>
+            <?php echo render_form_row($form['pinterest_url']); ?>
             <?php echo render_form_row($form['twitter_url']); ?>
+            <?php echo render_form_row($form['tumblr_url']); ?>
+            <?php echo render_form_row($form['vimeo_url']); ?>
             <?php echo render_form_row($form['youtube_url']); ?>
             </tbody>
         </table>

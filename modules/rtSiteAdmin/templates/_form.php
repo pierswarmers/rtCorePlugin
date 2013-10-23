@@ -8,6 +8,7 @@
 
 <?php slot('rt-side') ?>
 <?php include_component('rtAsset', 'form', array('object' => $form->getObject())) ?>
+
 <h2>Banner &amp; Logo</h2>
 
 <p>The banner and logo used for venues are simply attached assets. The first one in the list will be used as the banner, the second as the logo.</p>

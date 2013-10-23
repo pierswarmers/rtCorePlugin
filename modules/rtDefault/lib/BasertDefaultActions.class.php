@@ -57,8 +57,8 @@ class BasertDefaultActions extends BasertContactActions
         $message .= <<<EOS
 
 <p><strong>What can be done?<strong></p>
-<p>Broken links should be corrected if you have control of the referring page</p>
-<p>Pages that have been moved can have redirects configured in Site Administration > Edit > Advanced > HTTP Redirects (YAML)</p>
+<p>Broken links should be corrected if you have control of the referring page.</p>
+<p>Pages that have been moved can have redirects configured in: <em>Site Administration > Edit > Advanced > HTTP Redirects (YAML)</em>...</p>
 <p>For example:</p>
 <p style="font-family: 'Courier New', Courier, monospace; display: block; padding: 10px; border: 1px solid #ccc;">- /broken-url, /the-correct-url, 301</p>
 
@@ -73,8 +73,5 @@ EOS;
             ->addPart(strip_tags($message), 'text/plain');
 
         $this->getMailer()->send($message);
-
-
-
     }
 }

@@ -84,7 +84,7 @@
             <?php echo render_form_row($form['facebook_url']); ?>
             <?php echo render_form_row($form['flickr_url']); ?>
             <?php echo render_form_row($form['google_plus_url']); ?>
-            <?php echo render_form_row($form['intagragram_url']); ?>
+            <?php echo render_form_row($form['instagram_url']); ?>
             <?php echo render_form_row($form['pinterest_url']); ?>
             <?php echo render_form_row($form['twitter_url']); ?>
             <?php echo render_form_row($form['tumblr_url']); ?>

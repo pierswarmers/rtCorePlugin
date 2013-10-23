@@ -29,7 +29,7 @@ abstract class PluginrtSiteForm extends BasertSiteForm
             'facebook_url',
             'flickr_url',
             'google_plus_url',
-            'intagragram_url',
+            'instagram_url',
             'pinterest_url',
             'tumblr_url',
             'twitter_url',

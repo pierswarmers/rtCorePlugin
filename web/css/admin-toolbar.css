@@ -3,8 +3,8 @@
 Admin Toolbar
 
 */
-div#rt-admin-toolbar * { margin:0; padding:0; width: auto; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; }
-div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar a, div#rt-admin-toolbar ul, div#rt-admin-toolbar li, div#rt-admin-toolbar form, div#rt-admin-toolbar input {margin:0;padding:0;border:0;background:none;color:#FFF;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;text-shadow:0 -1px 1px rgba(0,0,2,0.9);font-size:12px;text-decoration:none;list-style:none;}
+div#rt-admin-toolbar *, div#rt-admin-toolbar li, div#rt-admin-toolbar h1, div#rt-admin-toolbar h2 { text-transform: none; font-weight: 400; line-height: 15px;margin:0; padding:0; width: auto; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent; }
+div#rt-admin-toolbar h1, div#rt-admin-toolbar h2, div#rt-admin-toolbar a, div#rt-admin-toolbar ul, div#rt-admin-toolbar li, div#rt-admin-toolbar form, div#rt-admin-toolbar input {margin:0;padding:0;border:0;background:none;color:#FFF;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif !important;text-shadow:0 -1px 1px rgba(0,0,2,0.9);font-size:12px;text-decoration:none;list-style:none;}
 div#rt-admin-toolbar h1, div#rt-admin-toolbar h2 {font-weight:bold;font-style:normal;}
 div#rt-admin-toolbar h1 {height:38px;background:url(../images/bg-admin-h1.png) repeat-x;}
 div#rt-admin-toolbar h1 span {background:url(../images/logos/logo_reditype_dark_font_only.png) no-repeat 0% 50%;text-indent:-10000px;width:95px;height:38px;position: absolute;top:0;left:9px;}

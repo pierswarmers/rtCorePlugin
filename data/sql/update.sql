@@ -56,3 +56,4 @@ ALTER TABLE rt_site ADD COLUMN redirects TEXT;
 ALTER TABLE rt_site ADD COLUMN pinterest_url VARCHAR(255);
 ALTER TABLE rt_site ADD COLUMN intagragram_url VARCHAR(255);
 ALTER TABLE rt_site ADD COLUMN vimeo_url VARCHAR(255);
+ALTER TABLE rt_site ADD COLUMN admin_email_address VARCHAR(255);

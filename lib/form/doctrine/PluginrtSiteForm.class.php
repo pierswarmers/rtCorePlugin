@@ -49,6 +49,7 @@ abstract class PluginrtSiteForm extends BasertSiteForm
                     'meta_keyword_suffix',
                     'domain',
                     'reference_key',
+                    'admin_email_address',
                     'content',
                     'published',
                     'html_snippet_suffix',
@@ -68,7 +69,6 @@ abstract class PluginrtSiteForm extends BasertSiteForm
         $this->widgetSchema->setLabel('meta_title_suffix','Meta Title Suffix');
         $this->widgetSchema->setHelp('meta_title_suffix','Will be glued as a suffix to the title meta tag content. Eg. "My Page Title | meta_title_suffix"');
         $this->widgetSchema['meta_title_suffix']->setAttribute('placeholder','Acme Consulting - Industry Leader for Consulting, Legal, Accounting');
-
 
         $this->widgetSchema->setLabel('meta_keyword_suffix','Meta Keyword Suffix');
         $this->widgetSchema->setHelp('meta_keyword_suffix','Will be glued as a suffix to the keywords meta tag content.');

@@ -115,6 +115,7 @@
         <h2><?php echo __('Advanced') ?></h2>
         <table class="rt-admin-toggle-panel-content">
             <tbody>
+            <?php echo render_form_row($form['admin_email_address']); ?>
             <?php echo render_form_row($form['reference_key']); ?>
             <?php echo render_form_row($form['domain']); ?>
             <?php echo render_form_row($form['redirects']); ?>

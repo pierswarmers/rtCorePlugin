@@ -18,6 +18,7 @@ rtSite:
     domain:           string(255)
     public_url:       string(255)
     reference_key:    string(30)
+    admin_email_address: string(255)
 
     content:          string
 

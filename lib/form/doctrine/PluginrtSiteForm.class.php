@@ -129,7 +129,7 @@ abstract class PluginrtSiteForm extends BasertSiteForm
             $i++;
         }
 
-        $this->setValidator('admin_email_address', new sfValidatorUrl(array('required' => true), array('invalid' => 'Must be a valid email address')));
+        $this->setValidator('admin_email_address', new sfValidatorEmail(array('required' => true), array('invalid' => 'Must be a valid email address')));
 
         $this->widgetSchema['position'] = new sfWidgetFormSelect(array('choices' => $site_positions));
 

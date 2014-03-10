@@ -2,7 +2,7 @@
 <?php $routes = $sf_context->getRouting()->getRoutes() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
+<head>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
@@ -18,13 +18,18 @@
     <?php use_javascript('/rtCorePlugin/js/admin-main.js', 'last') ?>
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
-  </head>
-  <body>
-    <div id="rt-admin-container">
-      <?php include_component('rtAdmin', 'menu') ?>
-      <div id="rt-admin-content">
+</head>
+<body>
+<div id="rt-admin-container">
+    <?php include_component('rtAdmin', 'menu') ?>
+    <div id="rt-admin-content">
         <?php echo $sf_content ?>
-      </div>
     </div>
-  </body>
+    <div id="rt-admin-tools">
+        <h1><?php echo __('Actions') ?></h1>
+        <?php echo get_slot('rt-tools'); ?>
+        <?php echo get_slot('rt-side'); ?>
+    </div>
+</div>
+</body>
 </html>

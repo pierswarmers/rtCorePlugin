@@ -4,13 +4,15 @@ require_once dirname(__FILE__).'/serialisation.php';
 require_once dirname(__FILE__).'/transport.php';
 require_once dirname(__FILE__).'/log.php';
 
-define('CS_REST_WRAPPER_VERSION', '1.0.4');
-
+define('CS_REST_WRAPPER_VERSION', '4.0.0');
+define('CS_HOST', 'api.createsend.com');
+define('CS_OAUTH_BASE_URI', 'https://'.CS_HOST.'/oauth');
+define('CS_OAUTH_TOKEN_URI', CS_OAUTH_BASE_URI.'/token');
 define('CS_REST_WEBHOOK_FORMAT_JSON', 'json');
 define('CS_REST_WEBHOOK_FORMAT_XML', 'xml');
 
 /**
- * A general result object returned from all Createsend API calls.
+ * A general result object returned from all Campaign Monitor API calls.
  * @author tobyb
  *
  */
@@ -88,7 +90,7 @@ class CS_REST_Wrapper_Base {
 
     /**
      * The default options to use for each API request.
-     * These can be overridded by passing in an array as the call_options argument
+     * These can be overridden by passing in an array as the call_options argument
      * to a single api request.
      * Valid options are:
      *
@@ -104,7 +106,19 @@ class CS_REST_Wrapper_Base {
 
     /**
      * Constructor.
-     * @param $api_key string Your api key (Ignored for get_apikey requests)
+     * @param $auth_details array Authentication details to use for API calls.
+     *        This array must take one of the following forms:
+     *        If using OAuth to authenticate:
+     *        array(
+     *          'access_token' => 'your access token',
+     *          'refresh_token' => 'your refresh token')
+     *
+     *        Or if using an API key:
+     *        array('api_key' => 'your api key')
+     *
+     *        Note that this method will continue to work in the deprecated
+     *        case when $auth_details is passed in as a string containing an
+     *        API key.
      * @param $protocol string The protocol to use for requests (http|https)
      * @param $debug_level int The level of debugging required CS_REST_LOG_NONE | CS_REST_LOG_ERROR | CS_REST_LOG_WARNING | CS_REST_LOG_VERBOSE
      * @param $host string The host to send API requests to. There is no need to change this
@@ -114,35 +128,40 @@ class CS_REST_Wrapper_Base {
      * @access public
      */
     function CS_REST_Wrapper_Base(
-        $api_key,
+        $auth_details,
         $protocol = 'https',
         $debug_level = CS_REST_LOG_NONE,
-        $host = 'api.createsend.com',
+        $host = CS_HOST,
         $log = NULL,
         $serialiser = NULL,
         $transport = NULL) {
-            
+
+        if (is_string($auth_details)) {
+            # If $auth_details is a string, assume it is an API key
+            $auth_details = array('api_key' => $auth_details);
+        }
+
         $this->_log = is_null($log) ? new CS_REST_Log($debug_level) : $log;
-            
+
         $this->_protocol = $protocol;
-        $this->_base_route = $protocol.'://'.$host.'/api/v3/';
+        $this->_base_route = $protocol.'://'.$host.'/api/v3.1/';
 
         $this->_log->log_message('Creating wrapper for '.$this->_base_route, get_class($this), CS_REST_LOG_VERBOSE);
 
         $this->_transport = is_null($transport) ?
-        @CS_REST_TransportFactory::get_available_transport($this->is_secure(), $this->_log) :
-        $transport;
+            CS_REST_TRANSPORT_get_available($this->is_secure(), $this->_log) :
+            $transport;
 
         $transport_type = method_exists($this->_transport, 'get_type') ? $this->_transport->get_type() : 'Unknown';
         $this->_log->log_message('Using '.$transport_type.' for transport', get_class($this), CS_REST_LOG_WARNING);
 
         $this->_serialiser = is_null($serialiser) ?
-            @CS_REST_SerialiserFactory::get_available_serialiser($this->_log) : $serialiser;
-            
+            CS_REST_SERIALISATION_get_available($this->_log) : $serialiser;
+
         $this->_log->log_message('Using '.$this->_serialiser->get_type().' json serialising', get_class($this), CS_REST_LOG_WARNING);
 
         $this->_default_call_options = array (
-            'credentials' => $api_key.':nopass',
+            'authdetails' => $auth_details,
             'userAgent' => 'CS_REST_Wrapper v'.CS_REST_WRAPPER_VERSION.
                 ' PHPv'.phpversion().' over '.$transport_type.' with '.$this->_serialiser->get_type(),
             'contentType' => 'application/json; charset=utf-8', 
@@ -150,6 +169,43 @@ class CS_REST_Wrapper_Base {
             'host' => $host,
             'protocol' => $protocol
         );
+    }
+
+    /**
+     * Refresh the current OAuth token using the current refresh token.
+     * @access public
+     */
+    function refresh_token() {
+        if (!isset($this->_default_call_options['authdetails']) ||
+            !isset($this->_default_call_options['authdetails']['refresh_token'])) {
+            trigger_error(
+                'Error refreshing token. There is no refresh token set on this object.',
+                E_USER_ERROR);
+            return array(NULL, NULL, NULL);
+        }
+        $body = "grant_type=refresh_token&refresh_token=".urlencode(
+            $this->_default_call_options['authdetails']['refresh_token']);
+        $options = array('contentType' => 'application/x-www-form-urlencoded');
+        $wrap = new CS_REST_Wrapper_Base(
+            NULL, 'https', CS_REST_LOG_NONE, CS_HOST, NULL,
+            new CS_REST_DoNothingSerialiser(), NULL);
+
+        $result = $wrap->post_request(CS_OAUTH_TOKEN_URI, $body, $options);
+        if ($result->was_successful()) {
+            $access_token = $result->response->access_token;
+            $expires_in = $result->response->expires_in;
+            $refresh_token = $result->response->refresh_token;
+            $this->_default_call_options['authdetails'] = array(
+                'access_token' => $access_token,
+                'refresh_token' => $refresh_token
+            );
+            return array($access_token, $expires_in, $refresh_token);
+        } else {
+            trigger_error(
+                'Error refreshing token. '.$result->response->error.': '.$result->response->error_description,
+                E_USER_ERROR);
+            return array(NULL, NULL, NULL);
+        }
     }
 
     /**
@@ -209,7 +265,7 @@ class CS_REST_Wrapper_Base {
     function _call($call_options, $method, $route, $data = NULL) {
         $call_options['route'] = $route;
         $call_options['method'] = $method;
-        
+
         if(!is_null($data)) {
             $call_options['data'] = $this->_serialiser->serialise($data);
         }

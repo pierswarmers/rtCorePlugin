@@ -12,6 +12,8 @@ define('CS_REST_CUSTOM_FIELD_TYPE_USSTATE', 'USState');
 define('CS_REST_LIST_WEBHOOK_SUBSCRIBE', 'Subscribe');
 define('CS_REST_LIST_WEBHOOK_DEACTIVATE', 'Deactivate');
 define('CS_REST_LIST_WEBHOOK_UPDATE', 'Update');
+define('CS_REST_LIST_UNSUBSCRIBE_SETTING_ALL_CLIENT_LISTS', 'AllClientLists');
+define('CS_REST_LIST_UNSUBSCRIBE_SETTING_ONLY_THIS_LIST', 'OnlyThisList');
 
 /**
  * Class to access a lists resources from the create send API.
@@ -32,7 +34,15 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
     /**
      * Constructor.
      * @param $list_id string The list id to access (Ignored for create requests)
-     * @param $api_key string Your api key (Ignored for get_apikey requests)
+     * @param $auth_details array Authentication details to use for API calls.
+     *        This array must take one of the following forms:
+     *        If using OAuth to authenticate:
+     *        array(
+     *          'access_token' => 'your access token',
+     *          'refresh_token' => 'your refresh token')
+     *
+     *        Or if using an API key:
+     *        array('api_key' => 'your api key')
      * @param $protocol string The protocol to use for requests (http|https)
      * @param $debug_level int The level of debugging required CS_REST_LOG_NONE | CS_REST_LOG_ERROR | CS_REST_LOG_WARNING | CS_REST_LOG_VERBOSE
      * @param $host string The host to send API requests to. There is no need to change this
@@ -43,7 +53,7 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      */
     function CS_REST_Lists (
     $list_id,
-    $api_key,
+    $auth_details,
     $protocol = 'https',
     $debug_level = CS_REST_LOG_NONE,
     $host = 'api.createsend.com',
@@ -51,7 +61,7 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
     $serialiser = NULL,
     $transport = NULL) {
         	
-        $this->CS_REST_Wrapper_Base($api_key, $protocol, $debug_level, $host, $log, $serialiser, $transport);
+        $this->CS_REST_Wrapper_Base($auth_details, $protocol, $debug_level, $host, $log, $serialiser, $transport);
         $this->set_list_id($list_id);
     }
 
@@ -76,6 +86,10 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *         'ConfirmedOptIn' => boolean Whether this list requires confirmation of subscription
      *         'ConfirmationSuccessPage' => string The page to redirect subscribers to when
      *             they confirm their subscription
+     *         'UnsubscribeSetting' => string Unsubscribe setting must be
+     *             CS_REST_LIST_UNSUBSCRIBE_SETTING_ALL_CLIENT_LISTS or
+     *             CS_REST_LIST_UNSUBSCRIBE_SETTING_ONLY_THIS_LIST.
+     *             See the documentation for details: http://www.campaignmonitor.com/api/lists/#creating_a_list
      *     )
      * @access public
      * @return CS_REST_Wrapper_Result A successful response will be the ID of the newly created list
@@ -96,6 +110,18 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *         'ConfirmedOptIn' => boolean Whether this list requires confirmation of subscription
      *         'ConfirmationSuccessPage' => string The page to redirect subscribers to when
      *             they confirm their subscription
+     *         'UnsubscribeSetting' => string Unsubscribe setting must be
+     *             CS_REST_LIST_UNSUBSCRIBE_SETTING_ALL_CLIENT_LISTS or
+     *             CS_REST_LIST_UNSUBSCRIBE_SETTING_ONLY_THIS_LIST.
+     *             See the documentation for details: http://www.campaignmonitor.com/api/lists/#updating_a_list
+     *         'AddUnsubscribesToSuppList' => boolean When UnsubscribeSetting
+     *             is CS_REST_LIST_UNSUBSCRIBE_SETTING_ALL_CLIENT_LISTS,
+     *             whether unsubscribes from this list should be added to the
+     *             suppression list.
+     *         'ScrubActiveWithSuppList' => boolean When UnsubscribeSetting
+     *             is CS_REST_LIST_UNSUBSCRIBE_SETTING_ALL_CLIENT_LISTS,
+     *             whether active subscribers should be scrubbed against the
+     *             suppression list.
      *     )
      * @access public
      * @return CS_REST_Wrapper_Result A successful response will be empty
@@ -119,7 +145,11 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *             CS_REST_CUSTOM_FIELD_TYPE_DATE
      *             CS_REST_CUSTOM_FIELD_TYPE_COUNTRY
      *             CS_REST_CUSTOM_FIELD_TYPE_USSTATE
-     *         'Options' => array<string> Valid options for either Multi-Optioned field data type
+     *         'Options' => array<string> Valid options for either
+     *           Multi-Optioned field data type.
+     *         'VisibleInPreferenceCenter' => boolean representing whether or
+     *           not the field should be visible in the subscriber preference
+     *           center.
      *     )
      * @access public
      * @return CS_REST_Wrapper_Result A successful response will be the 
@@ -127,6 +157,26 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      */
     function create_custom_field($custom_field_details) {
         return $this->post_request($this->_lists_base_route.'customfields.json', $custom_field_details);
+    }
+
+    /**
+     * Updates a custom field for the current list
+     * @param string $key The personalisation tag of the field to update
+     * @param array $custom_field_details The details of the new custom field.
+     *     This array should be of the form
+     *     array(
+     *         'FieldName' => string The new name for the field
+     *         'VisibleInPreferenceCenter' => boolean representing whether or
+     *           not the field should be visible in the subscriber preference
+     *           center.
+     *     )
+     * @access public
+     * @return CS_REST_Wrapper_Result A successful response will be the
+     * personalisation tag of the updated custom field
+     */
+    function update_custom_field($key, $custom_field_details) {
+        return $this->put_request($this->_lists_base_route.'customfields/'.rawurlencode($key).'.json',
+            $custom_field_details);
     }
 
     /**
@@ -175,6 +225,8 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *         'Key' => The personalisation tag of the custom field
      *         'DataType' => The data type of the custom field
      *         'FieldOptions' => Valid options for a multi-optioned custom field
+     *         'VisibleInPreferenceCenter' => Boolean representing whether or
+     *           not the field is visible in the subscriber preference center
      *     }
      * )
      */
@@ -231,10 +283,50 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *     )
      * }
      */
-    function get_active_subscribers($added_since, $page_number = NULL, 
+    function get_active_subscribers($added_since = '', $page_number = NULL, 
         $page_size = NULL, $order_field = NULL, $order_direction = NULL) {
             
         return $this->get_request_paged($this->_lists_base_route.'active.json?date='.urlencode($added_since), 
+            $page_number, $page_size, $order_field, $order_direction);
+    }
+
+    /**
+     * Gets all unconfirmed subscribers added since the given date
+     * @param string $added_since The date to start getting subscribers from
+     * @param int $page_number The page number to get
+     * @param int $page_size The number of records per page
+     * @param string $order_field The field to order the record set by ('EMAIL', 'NAME', 'DATE')
+     * @param string $order_direction The direction to order the record set ('ASC', 'DESC')
+     * @access public
+     * @return CS_REST_Wrapper_Result A successful response will be an object of the form
+     * {
+     *     'ResultsOrderedBy' => The field the results are ordered by
+     *     'OrderDirection' => The order direction
+     *     'PageNumber' => The page number for the result set
+     *     'PageSize' => The page size used
+     *     'RecordsOnThisPage' => The number of records returned
+     *     'TotalNumberOfRecords' => The total number of records available
+     *     'NumberOfPages' => The total number of pages for this collection
+     *     'Results' => array(
+     *         {
+     *             'EmailAddress' => The email address of the subscriber
+     *             'Name' => The name of the subscriber
+     *             'Date' => The date that the subscriber was added to the list
+     *             'State' => The current state of the subscriber, will be 'Unconfirmed'
+     *             'CustomFields' => array (
+     *                 {
+     *                     'Key' => The personalisation tag of the custom field
+     *                     'Value' => The value of the custom field for this subscriber
+     *                 }
+     *             )
+     *         }
+     *     )
+     * }
+     */
+    function get_unconfirmed_subscribers($added_since = '', $page_number = NULL, 
+        $page_size = NULL, $order_field = NULL, $order_direction = NULL) {
+
+        return $this->get_request_paged($this->_lists_base_route.'unconfirmed.json?date='.urlencode($added_since), 
             $page_number, $page_size, $order_field, $order_direction);
     }
 
@@ -271,7 +363,7 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *     )
      * }
      */
-    function get_bounced_subscribers($bounced_since, $page_number = NULL, 
+    function get_bounced_subscribers($bounced_since = '', $page_number = NULL, 
         $page_size = NULL, $order_field = NULL, $order_direction = NULL) {
             
         return $this->get_request_paged($this->_lists_base_route.'bounced.json?date='.urlencode($bounced_since), 
@@ -311,10 +403,50 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *     )
      * }
      */
-    function get_unsubscribed_subscribers($unsubscribed_since, $page_number = NULL, 
+    function get_unsubscribed_subscribers($unsubscribed_since = '', $page_number = NULL, 
         $page_size = NULL, $order_field = NULL, $order_direction = NULL) {
             
         return $this->get_request_paged($this->_lists_base_route.'unsubscribed.json?date='.urlencode($unsubscribed_since), 
+            $page_number, $page_size, $order_field, $order_direction);
+    }
+
+    /**
+     * Gets all subscribers who have been deleted since the given date
+     * @param string $deleted_since The date to start getting subscribers from
+     * @param int $page_number The page number to get
+     * @param int $page_size The number of records per page
+     * @param string $order_field The field to order the record set by ('EMAIL', 'NAME', 'DATE')
+     * @param string $order_direction The direction to order the record set ('ASC', 'DESC')
+     * @access public
+     * @return CS_REST_Wrapper_Result A successful response will be an object of the form
+     * {
+     *     'ResultsOrderedBy' => The field the results are ordered by
+     *     'OrderDirection' => The order direction
+     *     'PageNumber' => The page number for the result set
+     *     'PageSize' => The page size used
+     *     'RecordsOnThisPage' => The number of records returned
+     *     'TotalNumberOfRecords' => The total number of records available
+     *     'NumberOfPages' => The total number of pages for this collection
+     *     'Results' => array(
+     *         {
+     *             'EmailAddress' => The email address of the subscriber
+     *             'Name' => The name of the subscriber
+     *             'Date' => The date that the subscriber was deleted from the list
+     *             'State' => The current state of the subscriber, will be 'Deleted'
+     *             'CustomFields' => array (
+     *                 {
+     *                     'Key' => The personalisation tag of the custom field
+     *                     'Value' => The value of the custom field for this subscriber
+     *                 }
+     *             )
+     *         }
+     *     )
+     * }
+     */
+    function get_deleted_subscribers($deleted_since = '', $page_number = NULL, 
+        $page_size = NULL, $order_field = NULL, $order_direction = NULL) {
+            
+        return $this->get_request_paged($this->_lists_base_route.'deleted.json?date='.urlencode($deleted_since), 
             $page_number, $page_size, $order_field, $order_direction);
     }
 
@@ -329,6 +461,9 @@ class CS_REST_Lists extends CS_REST_Wrapper_Base {
      *     'ConfirmedOptIn' => Whether the list is Double-Opt In
      *     'ConfirmationSuccessPage' => The page which subscribers are
      *         redirected to upon confirming their subscription
+     *     'UnsubscribeSetting' => The unsubscribe setting for the list. Will
+     *         be either CS_REST_LIST_UNSUBSCRIBE_SETTING_ALL_CLIENT_LISTS or
+     *         CS_REST_LIST_UNSUBSCRIBE_SETTING_ONLY_THIS_LIST.
      * }
      */
     function get() {

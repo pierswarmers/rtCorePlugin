@@ -20,7 +20,15 @@ class CS_REST_Segments extends CS_REST_Wrapper_Base {
     /**
      * Constructor.
      * @param $segment_id string The segment id to access (Ignored for create requests)
-     * @param $api_key string Your api key (Ignored for get_apikey requests)
+     * @param $auth_details array Authentication details to use for API calls.
+     *        This array must take one of the following forms:
+     *        If using OAuth to authenticate:
+     *        array(
+     *          'access_token' => 'your access token',
+     *          'refresh_token' => 'your refresh token')
+     *
+     *        Or if using an API key:
+     *        array('api_key' => 'your api key')
      * @param $protocol string The protocol to use for requests (http|https)
      * @param $debug_level int The level of debugging required CS_REST_LOG_NONE | CS_REST_LOG_ERROR | CS_REST_LOG_WARNING | CS_REST_LOG_VERBOSE
      * @param $host string The host to send API requests to. There is no need to change this
@@ -31,7 +39,7 @@ class CS_REST_Segments extends CS_REST_Wrapper_Base {
      */
     function CS_REST_Segments (
     $segment_id,
-    $api_key,
+    $auth_details,
     $protocol = 'https',
     $debug_level = CS_REST_LOG_NONE,
     $host = 'api.createsend.com',
@@ -39,7 +47,7 @@ class CS_REST_Segments extends CS_REST_Wrapper_Base {
     $serialiser = NULL,
     $transport = NULL) {
             
-        $this->CS_REST_Wrapper_Base($api_key, $protocol, $debug_level, $host, $log, $serialiser, $transport);
+        $this->CS_REST_Wrapper_Base($auth_details, $protocol, $debug_level, $host, $log, $serialiser, $transport);
         $this->set_segment_id($segment_id);
     }
 
@@ -59,10 +67,14 @@ class CS_REST_Segments extends CS_REST_Wrapper_Base {
      *     This should be an array of the form 
      *         array(
      *             'Title' => The title of the new segment
-     *             'Rules' => array(
+     *             'RuleGroups' => array(
      *                 array(
-     *                     'Subject' => The subject of this rule
-     *                     'Clauses' => array<string> The specific clauses for this rule
+     *                     'Rules' => array(
+     *                         array(
+     *                             'RuleType' => The subject of this rule
+     *                             'Clause' => The specific clauses for this rule
+     *                         )
+     *                     )
      *                 )
      *             )
      *         )
@@ -77,11 +89,15 @@ class CS_REST_Segments extends CS_REST_Wrapper_Base {
      * @param $segment_details The new details for the segment
      *     This should be an array of the form 
      *         array(
-     *             'Title' => The new title for the segment
-     *             'Rules' => array(
+     *             'Title' => The title of the new segment
+     *             'RuleGroups' => array(
      *                 array(
-     *                     'Subject' => The subject of this rule
-     *                     'Clauses' => array<string> The specific clauses for this rule
+     *                     'Rules' => array(
+     *                         array(
+     *                             'RuleType' => The subject of this rule
+     *                             'Clause' => The specific clauses for this rule
+     *                         )
+     *                     )
      *                 )
      *             )
      *         )
@@ -96,13 +112,17 @@ class CS_REST_Segments extends CS_REST_Wrapper_Base {
      * @param $rule The rule to add to the segment
      *     This should be an array of the form
      *         array(
-     *             'Subject' => The subject of this rule
-     *             'Clauses' => array<string> The specific clauses for this rule
+     *             'Rules' => array(
+     *                 array(
+     *                     'RuleType' => The subject of this rule
+     *                     'Clause' => The specific clauses for this rule
+     *                 )
+     *             )
      *         )
      * @return CS_REST_Wrapper_Result A successful response will be empty
      */
-    function add_rule($rule) {
-        return $this->post_request($this->_segments_base_route.'/rules.json', $rule);
+    function add_rulegroup($rulegroup) {
+        return $this->post_request($this->_segments_base_route.'/rules.json', $rulegroup);
     }
     
     /**
@@ -177,7 +197,7 @@ class CS_REST_Segments extends CS_REST_Wrapper_Base {
      *     )
      * }
      */
-    function get_subscribers($subscribed_since, $page_number = NULL, 
+    function get_subscribers($subscribed_since = '', $page_number = NULL, 
         $page_size = NULL, $order_field = NULL, $order_direction = NULL) {
             
         return $this->get_request_paged($this->_segments_base_route.'/active.json?date='.urlencode($subscribed_since), 

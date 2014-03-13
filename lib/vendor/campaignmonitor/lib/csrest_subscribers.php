@@ -20,7 +20,15 @@ class CS_REST_Subscribers extends CS_REST_Wrapper_Base {
     /**
      * Constructor.
      * @param $list_id string The list id to access (Ignored for create requests)
-     * @param $api_key string Your api key (Ignored for get_apikey requests)
+     * @param $auth_details array Authentication details to use for API calls.
+     *        This array must take one of the following forms:
+     *        If using OAuth to authenticate:
+     *        array(
+     *          'access_token' => 'your access token',
+     *          'refresh_token' => 'your refresh token')
+     *
+     *        Or if using an API key:
+     *        array('api_key' => 'your api key')
      * @param $protocol string The protocol to use for requests (http|https)
      * @param $debug_level int The level of debugging required CS_REST_LOG_NONE | CS_REST_LOG_ERROR | CS_REST_LOG_WARNING | CS_REST_LOG_VERBOSE
      * @param $host string The host to send API requests to. There is no need to change this
@@ -31,7 +39,7 @@ class CS_REST_Subscribers extends CS_REST_Wrapper_Base {
      */
     function CS_REST_Subscribers (
     $list_id,
-    $api_key,
+    $auth_details,
     $protocol = 'https',
     $debug_level = CS_REST_LOG_NONE,
     $host = 'api.createsend.com',
@@ -39,7 +47,7 @@ class CS_REST_Subscribers extends CS_REST_Wrapper_Base {
     $serialiser = NULL,
     $transport = NULL) {
         	
-        $this->CS_REST_Wrapper_Base($api_key, $protocol, $debug_level, $host, $log, $serialiser, $transport);
+        $this->CS_REST_Wrapper_Base($auth_details, $protocol, $debug_level, $host, $log, $serialiser, $transport);
         $this->set_list_id($list_id);
 
     }
@@ -67,12 +75,40 @@ class CS_REST_Subscribers extends CS_REST_Wrapper_Base {
      *             )
      *         )
      *         'Resubscribe' => Whether we should resubscribe this subscriber if they already exist in the list
+     *         'RestartSubscriptionBasedAutoResponders' => Whether we should restart subscription based auto responders which are sent when the subscriber first subscribes to a list.
      *     )
      * @access public
      * @return CS_REST_Wrapper_Result A successful response will be empty
      */
     function add($subscriber) {
         return $this->post_request($this->_subscribers_base_route.'.json', $subscriber);
+    }
+
+    /**
+     * Updates an existing subscriber (email, name, state, or custom fields) in the specified list.
+	 * The update is performed even for inactive subscribers, but will return an error in the event of the
+	 * given email not existing in the list.
+	 * @param string $email The email address of the susbcriber to be updated
+     * @param array $subscriber The subscriber details to use for the update. Empty parameters will remain unchanged
+     *     This array should be of the form
+     *     array (
+     *         'EmailAddress' => The new  email address
+     *         'Name' => The name of the subscriber
+     *         'CustomFields' => array(
+     *             array(
+     *                 'Key' => The custom fields personalisation tag
+     *                 'Value' => The value for this subscriber
+	 *                 'Clear' => true/false (pass true to remove this custom field. in the case of a [multi-option, select many] field, pass an option in the 'Value' field to clear that option or leave Value blank to remove all options)
+     *             )
+     *         )
+     *         'Resubscribe' => Whether we should resubscribe this subscriber if they already exist in the list
+     *         'RestartSubscriptionBasedAutoResponders' => Whether we should restart subscription based auto responders which are sent when the subscriber first subscribes to a list.
+     *     )
+     * @access public
+     * @return CS_REST_Wrapper_Result A successful response will be empty
+     */
+    function update($email, $subscriber) {
+        return $this->put_request($this->_subscribers_base_route.'.json?email='.urlencode($email), $subscriber);
     }
 
     /**
@@ -87,11 +123,14 @@ class CS_REST_Subscribers extends CS_REST_Wrapper_Base {
      *                 array(
      *                     'Key' => The custom fields personalisation tag
      *                     'Value' => The value for this subscriber
+	 *                     'Clear' => true/false (pass true to remove this custom field. in the case of a [multi-option, select many] field, pass an option in the 'Value' field to clear that option or leave Value blank to remove all options)
      *                 )
      *             )
      *         )
      *     )
      * @param $resubscribe Whether we should resubscribe any existing subscribers
+	 * @param $queueSubscriptionBasedAutoResponders By default, subscription based auto responders do not trigger during an import. Pass a value of true to override this behaviour
+     * @param $restartSubscriptionBasedAutoResponders By default, subscription based auto responders will not be restarted
      * @access public
      * @return CS_REST_Wrapper_Result A successful response will be an object of the form
      * {
@@ -109,10 +148,12 @@ class CS_REST_Subscribers extends CS_REST_Wrapper_Base {
      * }
      *
      */
-    function import($subscribers, $resubscribe) {
+    function import($subscribers, $resubscribe, $queueSubscriptionBasedAutoResponders = false, $restartSubscriptionBasedAutoResponders = false) {
         $subscribers = array(
 		    'Resubscribe' => $resubscribe,
-		    'Subscribers' => $subscribers
+			'QueueSubscriptionBasedAutoResponders' => $queueSubscriptionBasedAutoResponders,
+		    'Subscribers' => $subscribers,
+            'RestartSubscriptionBasedAutoresponders' => $restartSubscriptionBasedAutoResponders
         );
         
         return $this->post_request($this->_subscribers_base_route.'/import.json', $subscribers);
@@ -178,5 +219,13 @@ class CS_REST_Subscribers extends CS_REST_Wrapper_Base {
         return $this->post_request($this->_subscribers_base_route.'/unsubscribe.json', $email);
     }
 
-
+    /**
+     * deletes the given subscriber from the current list
+     * @param string $email The email address to delete
+     * @access public
+     * @return CS_REST_Wrapper_Result A successful response will be empty
+     */
+    function delete($email) {
+        return $this->delete_request($this->_subscribers_base_route.'.json?email='.urlencode($email));
+    }
 }

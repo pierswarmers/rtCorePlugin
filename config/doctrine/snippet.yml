@@ -12,6 +12,8 @@ rtSnippet:
   columns:
     site_id:          integer
     title:            string(255)
+    uri:              string(255)
+    uri_target:       string(20)
     content:          string
     collection:       string(255)
     mode:             { type: enum, values: [standard, gallery, promote-primary-image], default: standard }

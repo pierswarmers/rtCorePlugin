@@ -29,6 +29,8 @@ if($sf_user->hasAttribute('rt-snippet-referer'))
   <table>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
+      <?php echo render_form_row($form['title']); ?>
+
       <?php if ($form->getObject()->getMode() !== 'gallery'): ?>
         <?php echo render_form_row($form['content']); ?>
       <?php else: ?>
@@ -40,6 +42,8 @@ if($sf_user->hasAttribute('rt-snippet-referer'))
       </tr>
       <?php endif; ?>
       <?php echo render_form_row($form['mode']); ?>
+      <?php echo render_form_row($form['uri']); ?>
+      <?php echo render_form_row($form['uri_target']); ?>
     </tbody>
   </table>
 
@@ -69,7 +73,6 @@ if($sf_user->hasAttribute('rt-snippet-referer'))
     <h2><?php echo __('Advanced Options') ?></h2>
     <table class="rt-admin-toggle-panel-content">
       <tbody>
-        <?php echo render_form_row($form['title']); ?>
         <?php echo render_form_row($form['collection']); ?>
         <?php echo render_form_row($form['position']); ?>
       </tbody>

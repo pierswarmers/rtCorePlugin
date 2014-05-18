@@ -17,34 +17,37 @@
  */
 abstract class PluginrtSnippetForm extends BasertSnippetForm
 {
-  public function setup()
-  {
-    parent::setup();
-
-    unset($this['version'], $this['created_at'], $this['updated_at']);
-
-    if ($this->getObject()->getMode() === 'gallery') {
-        unset($this['content']);
-    } else {
-        $this->setWidget('content', $this->getWidgetFormTextarea());
-    }
-
-    $this->widgetSchema->setHelp('collection', 'The collection decides where this snippet should be displayed.');
-    $this->widgetSchema->setHelp('position', 'Optional position value to set the order for collections of snippets.');
-
-    $this->setValidator('title', new sfValidatorString(array('max_length' => 255, 'required' => true)));
-    $this->setValidator('collection', new sfValidatorString(array('max_length' => 255, 'required' => true)));
-
-    if(!rtSiteToolkit::isMultiSiteEnabled())
+    public function setup()
     {
-      // Delete this widget unless we are in a multi-site installation.
-      unset($this['site_id']);
+        parent::setup();
+
+        unset($this['version'], $this['created_at'], $this['updated_at']);
+
+        if ($this->getObject()->getMode() === 'gallery') {
+            unset($this['content']);
+        } else {
+            $this->setWidget('content', $this->getWidgetFormTextarea());
+        }
+
+        $targets = array('_self', '_blank', '_parent', '_top');
+        $this->setWidget('uri_target', new sfWidgetFormSelect(array('choices' => array_combine($targets, $targets))));
+
+        $this->widgetSchema->setHelp('collection', 'The collection decides where this snippet should be displayed.');
+        $this->widgetSchema->setHelp('position', 'Optional position value to set the order for collections of snippets.');
+
+        $this->setValidator('title', new sfValidatorString(array('max_length' => 255, 'required' => true)));
+        $this->setValidator('collection', new sfValidatorString(array('max_length' => 255, 'required' => true)));
+
+        if(!rtSiteToolkit::isMultiSiteEnabled())
+        {
+            // Delete this widget unless we are in a multi-site installation.
+            unset($this['site_id']);
+        }
+        else
+        {
+            $this->setValidator('site_id', new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('rtSite'), 'required' => true), array('required' => 'Please select a site for this item to be attached to.')));
+        }
     }
-    else
-    {
-      $this->setValidator('site_id', new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('rtSite'), 'required' => true), array('required' => 'Please select a site for this item to be attached to.')));
-    }
-  }
 
     /**
      * Extends the default handling to include logic to handle

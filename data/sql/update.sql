@@ -57,3 +57,12 @@ ALTER TABLE rt_site ADD COLUMN pinterest_url VARCHAR(255);
 ALTER TABLE rt_site ADD COLUMN instagram_url VARCHAR(255);
 ALTER TABLE rt_site ADD COLUMN vimeo_url VARCHAR(255);
 ALTER TABLE rt_site ADD COLUMN admin_email_address VARCHAR(255);
+
+
+-- Version 0.0.7 - October 23 2013
+
+ALTER TABLE rt_snippet ADD COLUMN uri VARCHAR(255);
+ALTER TABLE rt_snippet_version ADD COLUMN uri VARCHAR(255);
+
+ALTER TABLE rt_snippet ADD COLUMN uri_target VARCHAR(255);
+ALTER TABLE rt_snippet_version ADD COLUMN uri_target VARCHAR(255);

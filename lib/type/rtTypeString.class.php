@@ -482,13 +482,13 @@ EOS;
     {
       $rand = rand();
 
-      $string .= '<ul class="clearing-thumbs small-block-grid-4" data-clearing>'."\n";
+      $string .= '<ul class="clearing-thumbs large-block-grid-4 small-block-grid-2" data-clearing>'."\n";
       foreach($assets as $asset)
       {
 
         if($asset->isImage())
         {
-          $img_preview_height = isset($config['markdown_preview']['max_height']) ? $config['markdown_preview']['max_height'] : 100;
+          $img_preview_height = isset($config['markdown_preview']['max_height']) ? $config['markdown_preview']['max_height'] : 150;
           $img_preview_width = isset($config['markdown_preview']['max_width']) ? $config['markdown_preview']['max_width'] : 400;
 
           $img_full_height = isset($config['markdown_full']['max_height']) ? $config['markdown_full']['max_height'] : 600;

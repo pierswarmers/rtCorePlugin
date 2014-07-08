@@ -350,7 +350,7 @@ EOS;
 
     return $text->transform();
   }
-  
+
   /**
    * Replace occurances of markdown image tag with html image tag pointing at attached asset.
    *
@@ -437,7 +437,8 @@ EOS;
     {
       $config['javascripts'] = array(
 //          '/rtCorePlugin/vendor/jquery/js/jquery.min.js',
-                                     '/rtCorePlugin/js/frontend-gallery.js');
+//                                     '/rtCorePlugin/js/frontend-gallery.js'
+      );
     }
 
     foreach ($config['javascripts'] as $file)
@@ -448,7 +449,7 @@ EOS;
     if(!isset($config['stylesheets']))
     {
       $config['stylesheets'] = array(
-          '/rtCorePlugin/css/frontend-gallery.css'
+//          '/rtCorePlugin/css/frontend-gallery.css'
       );
     }
 
@@ -481,7 +482,7 @@ EOS;
     {
       $rand = rand();
 
-      $string .= '<div class="rt-gallery-holder"><ul class="rt-gallery">'."\n";
+      $string .= '<ul class="clearing-thumbs small-block-grid-4" data-clearing>'."\n";
       foreach($assets as $asset)
       {
 
@@ -513,7 +514,7 @@ EOS;
           }
 
           $string .= sprintf(
-                       '<li><a href="%s" title="%s" rel="gallery-group-%s" class="th">%s</a><div>%s</div></li>',
+                       '<li><a href="%s" data-caption="%s" rel="gallery-group-%s" class="th">%s</a><div>%s</div></li>',
                        rtAssetToolkit::getThumbnailPath($asset->getSystemPath(), $resize_to),
                        $title,
                        $rand,
@@ -522,7 +523,7 @@ EOS;
                      );
         }
       }
-      $string .= "</ul>\n</div>\n";
+      $string .= "</ul>\n";
 
     }
 

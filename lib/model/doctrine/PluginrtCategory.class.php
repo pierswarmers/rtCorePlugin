@@ -12,5 +12,7 @@
  */
 abstract class PluginrtCategory extends BasertCategory
 {
-
+    public function __toString() {
+        return $this->getTitle();
+    }
 }

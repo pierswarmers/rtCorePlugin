@@ -35,6 +35,7 @@ abstract class PluginrtSiteForm extends BasertSiteForm
             'twitter_url',
             'vimeo_url',
             'youtube_url',
+            'linkedin_url',
         );
 
         $this->useFields(

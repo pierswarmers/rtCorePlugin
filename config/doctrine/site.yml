@@ -48,7 +48,8 @@ rtSite:
     twitter_url:      string(255)
     tumblr_url:       string(255)
     pinterest_url:    string(255)
-    instagram_url:  string(255)
+    instagram_url:    string(255)
+    linkedin_url:     string(255)
     vimeo_url:        string(255)
 
     html_snippet_suffix: string

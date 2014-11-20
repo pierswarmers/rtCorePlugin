@@ -67,3 +67,7 @@ rtSite:
     domain:
       fields: [domain]
       sorting: DESC
+
+  options:
+    collate:   utf8_unicode_ci
+    charset:   utf8

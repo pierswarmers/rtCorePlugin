@@ -124,3 +124,4 @@ ALTER TABLE rt_asset ADD COLUMN target_url VARCHAR(255);
 -- Version 0.0.9 - November 20 2014
 
 ALTER TABLE rt_site ADD COLUMN linkedin_url VARCHAR(255);
+alter table rt_site convert to character set utf8 collate utf8_unicode_ci;

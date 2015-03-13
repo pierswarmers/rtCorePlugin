@@ -50,7 +50,7 @@ class rtWidgetFormCaptcha extends sfWidgetForm
     $captcha_passphrase[] = array('','monday','is the first day of the working week.');
     $captcha_passphrase[] = array('Which do you prefer: blue, green or red','blue,green,red','');
     $captcha_passphrase[] = array('How many days in a week','7,seven','');
-    $captcha_passphrase[] = array('What color is the sky: blue, red or orange','blue','');
+    $captcha_passphrase[] = array('What color is the sky: blue or green','blue','');
     $captcha_passphrase[] = array('Is ice hot or cold','cold','');
     $captcha_passphrase[] = array('What is the opposite of cold','hot,warm','');
     $captcha_passphrase[] = array('Which is a colour: boat, bank or purple','purple','');
@@ -60,7 +60,7 @@ class rtWidgetFormCaptcha extends sfWidgetForm
     $captcha_passphrase[] = array('What comes next in this series: a, b, c , d ...','e','');
     $captcha_passphrase[] = array('Cars drive on','road,roads,street,streets,lane,highway','');
     $captcha_passphrase[] = array('Fish live in','water,sea,seas,ocean,oceans,river,rivers,tank,tanks,fish tank','');
-    $captcha_passphrase[] = array('Cows and horses like eating','grass','');
+    $captcha_passphrase[] = array('Cows and horses like eating','grass,hay,straw,plants,oates','');
     $captcha_passphrase[] = array('Which is bigger, a mouse or an elephant','elephant,elephants','');
 
     // Use default questions when not overwritten in configuration
